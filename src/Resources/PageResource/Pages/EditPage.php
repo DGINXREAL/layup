@@ -114,15 +114,33 @@ class EditPage extends EditRecord
         $this->syncContent();
     }
 
-    public function deleteRow(string $rowId): void
+    public function confirmDeleteRow(string $rowId): void
     {
-        $this->pageContent['rows'] = collect($this->pageContent['rows'])
-            ->reject(fn ($row) => $row['id'] === $rowId)
-            ->values()
-            ->all();
+        $this->editingRowId = $rowId;
+        $this->mountAction('deleteRowAction');
+    }
 
-        $this->record->update(['content' => $this->pageContent]);
-        $this->syncContent();
+    public function deleteRowAction(): Action
+    {
+        return Action::make('deleteRowAction')
+            ->label('Delete Row')
+            ->color('danger')
+            ->requiresConfirmation()
+            ->modalHeading('Delete Row')
+            ->modalDescription('Are you sure you want to delete this row and all its contents?')
+            ->action(function () {
+                $this->refreshContent();
+                $this->pageContent['rows'] = collect($this->pageContent['rows'])
+                    ->reject(fn ($row) => $row['id'] === $this->editingRowId)
+                    ->values()
+                    ->all();
+
+                $this->record->update(['content' => $this->pageContent]);
+                $this->syncContent();
+                $this->editingRowId = null;
+
+                Notification::make()->title('Row deleted')->success()->duration(2000)->send();
+            });
     }
 
     public function moveRow(string $rowId, string $direction): void
@@ -167,24 +185,43 @@ class EditPage extends EditRecord
     }
 
     /**
-     * Delete a column from a row.
+     * Delete a column from a row (with confirmation modal).
      */
-    public function deleteColumn(string $rowId, string $columnId): void
+    public function confirmDeleteColumn(string $rowId, string $columnId): void
     {
-        $this->refreshContent();
+        $this->editingRowId = $rowId;
+        $this->editingColumnId = $columnId;
+        $this->mountAction('deleteColumnAction');
+    }
 
-        foreach ($this->pageContent['rows'] as &$row) {
-            if ($row['id'] === $rowId) {
-                $row['columns'] = collect($row['columns'])
-                    ->reject(fn ($col) => $col['id'] === $columnId)
-                    ->values()
-                    ->all();
-                break;
-            }
-        }
+    public function deleteColumnAction(): Action
+    {
+        return Action::make('deleteColumnAction')
+            ->label('Delete Column')
+            ->color('danger')
+            ->requiresConfirmation()
+            ->modalHeading('Delete Column')
+            ->modalDescription('Are you sure you want to delete this column and all its widgets?')
+            ->action(function () {
+                $this->refreshContent();
 
-        $this->record->update(['content' => $this->pageContent]);
-        $this->syncContent();
+                foreach ($this->pageContent['rows'] as &$row) {
+                    if ($row['id'] === $this->editingRowId) {
+                        $row['columns'] = collect($row['columns'])
+                            ->reject(fn ($col) => $col['id'] === $this->editingColumnId)
+                            ->values()
+                            ->all();
+                        break;
+                    }
+                }
+
+                $this->record->update(['content' => $this->pageContent]);
+                $this->syncContent();
+                $this->editingRowId = null;
+                $this->editingColumnId = null;
+
+                Notification::make()->title('Column deleted')->success()->duration(2000)->send();
+            });
     }
 
     /**
@@ -614,28 +651,50 @@ class EditPage extends EditRecord
             });
     }
 
-    public function deleteWidget(string $rowId, string $columnId, string $widgetId): void
+    public function confirmDeleteWidget(string $rowId, string $columnId, string $widgetId): void
     {
-        $registry = app(WidgetRegistry::class);
+        $this->editingRowId = $rowId;
+        $this->editingColumnId = $columnId;
+        $this->editingWidgetId = $widgetId;
+        $this->mountAction('deleteWidgetAction');
+    }
 
-        foreach ($this->pageContent['rows'] as &$row) {
-            foreach ($row['columns'] as &$col) {
-                if ($col['id'] === $columnId) {
-                    $widget = collect($col['widgets'])->firstWhere('id', $widgetId);
-                    if ($widget) {
-                        $registry->fireOnDelete($widget['type'], $widget['data'] ?? []);
+    public function deleteWidgetAction(): Action
+    {
+        return Action::make('deleteWidgetAction')
+            ->label('Delete Widget')
+            ->color('danger')
+            ->requiresConfirmation()
+            ->modalHeading('Delete Widget')
+            ->modalDescription('Are you sure you want to delete this widget?')
+            ->action(function () {
+                $this->refreshContent();
+                $registry = app(WidgetRegistry::class);
+
+                foreach ($this->pageContent['rows'] as &$row) {
+                    foreach ($row['columns'] as &$col) {
+                        if ($col['id'] === $this->editingColumnId) {
+                            $widget = collect($col['widgets'])->firstWhere('id', $this->editingWidgetId);
+                            if ($widget) {
+                                $registry->fireOnDelete($widget['type'], $widget['data'] ?? []);
+                            }
+                            $col['widgets'] = collect($col['widgets'])
+                                ->reject(fn ($w) => $w['id'] === $this->editingWidgetId)
+                                ->values()
+                                ->all();
+                            break 2;
+                        }
                     }
-                    $col['widgets'] = collect($col['widgets'])
-                        ->reject(fn ($w) => $w['id'] === $widgetId)
-                        ->values()
-                        ->all();
-                    break 2;
                 }
-            }
-        }
 
-        $this->record->update(['content' => $this->pageContent]);
-        $this->syncContent();
+                $this->record->update(['content' => $this->pageContent]);
+                $this->syncContent();
+                $this->editingRowId = null;
+                $this->editingColumnId = null;
+                $this->editingWidgetId = null;
+
+                Notification::make()->title('Widget deleted')->success()->duration(2000)->send();
+            });
     }
 
     // ─── Properties for Alpine ───────────────────────────────
