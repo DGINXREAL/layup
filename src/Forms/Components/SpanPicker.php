@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Crumbls\Layup\Forms\Components;
 
 use Filament\Forms\Components\Field;

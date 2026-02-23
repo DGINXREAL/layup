@@ -1,6 +1,8 @@
 <?php
 
-namespace Crumbls\Layup\Widgets;
+declare(strict_types=1);
+
+namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -59,6 +61,7 @@ class HeadingWidget extends BaseWidget
     {
         $level = strtoupper($data['level'] ?? 'H2');
         $text = $data['content'] ?? '';
-        return $text ? "[{$level}] {$text}" : "(empty heading)";
+
+        return $text ? "[{$level}] {$text}" : '(empty heading)';
     }
 }

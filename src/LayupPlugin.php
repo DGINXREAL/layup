@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Crumbls\Layup;
 
 use Crumbls\Layup\Contracts\Widget;
@@ -45,6 +47,7 @@ class LayupPlugin implements Plugin
     public function widgets(array $widgets): static
     {
         $this->extraWidgets = array_merge($this->extraWidgets, $widgets);
+
         return $this;
     }
 
@@ -52,13 +55,14 @@ class LayupPlugin implements Plugin
      * Remove specific widget types from the registry.
      *
      * Usage:
-     *   LayupPlugin::make()->withoutWidgets(['html', 'button'])
+     *   LayupPlugin::make()->withoutWidgets([TextWidget::class, ButtonWidget::class])
      *
-     * @param  array<string>  $types  Widget type identifiers to remove
+     * @param  array<class-string<Widget>>  $widgets  Widget classes to remove
      */
-    public function withoutWidgets(array $types): static
+    public function withoutWidgets(array $widgets): static
     {
-        $this->removedWidgets = array_merge($this->removedWidgets, $types);
+        $this->removedWidgets = array_merge($this->removedWidgets, $widgets);
+
         return $this;
     }
 
@@ -68,6 +72,7 @@ class LayupPlugin implements Plugin
     public function withoutConfigWidgets(): static
     {
         $this->useConfigWidgets = false;
+
         return $this;
     }
 
@@ -96,7 +101,11 @@ class LayupPlugin implements Plugin
 
         // Remove excluded widgets
         foreach ($this->removedWidgets as $type) {
-            $registry->unregister($type);
+            if (is_subclass_of($type, Widget::class)) {
+                $registry->unregister($type::getType());
+            } else {
+                $registry->unregister($type);
+            }
         }
     }
 }

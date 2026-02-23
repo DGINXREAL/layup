@@ -1,6 +1,8 @@
 <?php
 
-namespace Crumbls\Layup\Widgets;
+declare(strict_types=1);
+
+namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -76,6 +78,7 @@ class ButtonWidget extends BaseWidget
     {
         $label = $data['label'] ?? 'Button';
         $url = $data['url'] ?? '#';
+
         return "🔘 {$label}" . ($url !== '#' ? " → {$url}" : '');
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
-namespace Crumbls\Layup\Widgets;
+declare(strict_types=1);
+
+namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -70,9 +72,10 @@ class VideoWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $url = $data['url'] ?? '';
-        if (!$url) return '▶ (no video)';
+        if (! $url) {
+            return '▶ (no video)';
+        }
 
-        // Extract platform
         if (str_contains($url, 'youtube') || str_contains($url, 'youtu.be')) {
             return '▶ YouTube · ' . $url;
         }
@@ -88,7 +91,7 @@ class VideoWidget extends BaseWidget
      */
     public static function onSave(array $data): array
     {
-        if (!empty($data['url'])) {
+        if (! empty($data['url'])) {
             $data['embed_url'] = static::toEmbedUrl($data['url']);
         }
 
@@ -97,12 +100,10 @@ class VideoWidget extends BaseWidget
 
     protected static function toEmbedUrl(string $url): string
     {
-        // YouTube: extract video ID
         if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $url, $m)) {
             return "https://www.youtube.com/embed/{$m[1]}";
         }
 
-        // Vimeo: extract video ID
         if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/', $url, $m)) {
             return "https://player.vimeo.com/video/{$m[1]}";
         }

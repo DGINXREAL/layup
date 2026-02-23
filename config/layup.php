@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -7,18 +9,18 @@ return [
     |--------------------------------------------------------------------------
     |
     | Widget classes available in the page builder. Each must extend
-    | Crumbls\Layup\Widgets\BaseWidget.
+    | Crumbls\Layup\View\BaseWidget.
     |
     */
     'widgets' => [
-        \Crumbls\Layup\Widgets\TextWidget::class,
-        \Crumbls\Layup\Widgets\HeadingWidget::class,
-        \Crumbls\Layup\Widgets\ImageWidget::class,
-        \Crumbls\Layup\Widgets\ButtonWidget::class,
-        \Crumbls\Layup\Widgets\VideoWidget::class,
-        \Crumbls\Layup\Widgets\SpacerWidget::class,
-        \Crumbls\Layup\Widgets\DividerWidget::class,
-        \Crumbls\Layup\Widgets\HtmlWidget::class,
+        \Crumbls\Layup\View\TextWidget::class,
+        \Crumbls\Layup\View\HeadingWidget::class,
+        \Crumbls\Layup\View\ImageWidget::class,
+        \Crumbls\Layup\View\ButtonWidget::class,
+        \Crumbls\Layup\View\VideoWidget::class,
+        \Crumbls\Layup\View\SpacerWidget::class,
+        \Crumbls\Layup\View\DividerWidget::class,
+        \Crumbls\Layup\View\HtmlWidget::class,
     ],
 
     /*

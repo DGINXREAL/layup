@@ -1,10 +1,13 @@
 <?php
 
-namespace Crumbls\Layup\Widgets;
+declare(strict_types=1);
+
+namespace Crumbls\Layup\View;
 
 use Crumbls\Layup\Contracts\Widget;
+use Illuminate\Contracts\View\View;
 
-abstract class BaseWidget implements Widget
+abstract class BaseWidget extends BaseView implements Widget
 {
     abstract public static function getType(): string;
 
@@ -33,16 +36,17 @@ abstract class BaseWidget implements Widget
      */
     public static function getPreview(array $data): string
     {
-        if (!empty($data['content'])) {
+        if (! empty($data['content'])) {
             $text = strip_tags($data['content']);
+
             return mb_strlen($text) > 60 ? mb_substr($text, 0, 60) . '…' : $text;
         }
 
-        if (!empty($data['label'])) {
+        if (! empty($data['label'])) {
             return $data['label'];
         }
 
-        if (!empty($data['src'])) {
+        if (! empty($data['src'])) {
             return '🖼 ' . basename($data['src']);
         }
 
@@ -82,5 +86,23 @@ abstract class BaseWidget implements Widget
             'category' => static::getCategory(),
             'defaults' => static::getDefaultData(),
         ];
+    }
+
+    /**
+     * Get the view name for frontend rendering.
+     * Convention: layup::widgets.{type}
+     * Override for custom view paths.
+     */
+    protected function getViewName(): string
+    {
+        return 'layup::widgets.' . static::getType();
+    }
+
+    public function render(): View
+    {
+        return view($this->getViewName(), [
+            'data' => $this->data,
+            'children' => $this->children,
+        ]);
     }
 }

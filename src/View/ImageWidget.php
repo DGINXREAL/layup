@@ -1,9 +1,12 @@
 <?php
 
-namespace Crumbls\Layup\Widgets;
+declare(strict_types=1);
+
+namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Storage;
 
 class ImageWidget extends BaseWidget
 {
@@ -52,18 +55,19 @@ class ImageWidget extends BaseWidget
 
     public static function getPreview(array $data): string
     {
-        if (!empty($data['src'])) {
+        if (! empty($data['src'])) {
             $name = is_array($data['src']) ? 'uploaded image' : basename($data['src']);
+
             return "🖼 {$name}";
         }
+
         return '(no image)';
     }
 
     public static function onDelete(array $data): void
     {
-        // Clean up uploaded file if it exists
-        if (!empty($data['src']) && is_string($data['src'])) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($data['src']);
+        if (! empty($data['src']) && is_string($data['src'])) {
+            Storage::disk('public')->delete($data['src']);
         }
     }
 }

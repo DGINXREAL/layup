@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Crumbls\Layup\Resources\PageResource\Pages;
 
 use Crumbls\Layup\Models\Page;

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Crumbls\Layup\Support;
 
 use Crumbls\Layup\Contracts\Widget;
+use InvalidArgumentException;
 
 class WidgetRegistry
 {
@@ -14,8 +17,8 @@ class WidgetRegistry
      */
     public function register(string $widgetClass): static
     {
-        if (!is_subclass_of($widgetClass, Widget::class)) {
-            throw new \InvalidArgumentException(
+        if (! is_subclass_of($widgetClass, Widget::class)) {
+            throw new InvalidArgumentException(
                 "{$widgetClass} must implement " . Widget::class
             );
         }
@@ -31,6 +34,7 @@ class WidgetRegistry
     public function unregister(string $type): static
     {
         unset($this->widgets[$type]);
+
         return $this;
     }
 
@@ -75,6 +79,7 @@ class WidgetRegistry
     public function getFormSchema(string $type): array
     {
         $class = $this->get($type);
+
         return $class ? $class::getFormSchema() : [];
     }
 
@@ -84,6 +89,7 @@ class WidgetRegistry
     public function getDefaultData(string $type): array
     {
         $class = $this->get($type);
+
         return $class ? $class::getDefaultData() : [];
     }
 
@@ -93,6 +99,7 @@ class WidgetRegistry
     public function getPreview(string $type, array $data): string
     {
         $class = $this->get($type);
+
         return $class ? $class::getPreview($data) : '(unknown widget)';
     }
 
@@ -102,6 +109,7 @@ class WidgetRegistry
     public function fireOnCreate(string $type, array $data): array
     {
         $class = $this->get($type);
+
         return $class ? $class::onCreate($data) : $data;
     }
 
@@ -111,6 +119,7 @@ class WidgetRegistry
     public function fireOnSave(string $type, array $data): array
     {
         $class = $this->get($type);
+
         return $class ? $class::onSave($data) : $data;
     }
 

@@ -1,6 +1,8 @@
 <?php
 
-namespace Crumbls\Layup\Widgets;
+declare(strict_types=1);
+
+namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\Textarea;
 
@@ -46,9 +48,12 @@ class HtmlWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $html = $data['content'] ?? '';
-        if (!$html) return '(empty)';
+        if (! $html) {
+            return '(empty)';
+        }
         $text = strip_tags($html);
         $text = trim(preg_replace('/\s+/', ' ', $text));
+
         return mb_strlen($text) > 50 ? '< > ' . mb_substr($text, 0, 50) . '…' : '< > ' . $text;
     }
 }

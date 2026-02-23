@@ -1,6 +1,8 @@
 <?php
 
-namespace Crumbls\Layup\Widgets;
+declare(strict_types=1);
+
+namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -88,6 +90,7 @@ class DividerWidget extends BaseWidget
     {
         $style = $data['style'] ?? 'solid';
         $width = $data['width'] ?? '100%';
+
         return "— Divider · {$style} · {$width}";
     }
 }

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Crumbls\Layup;
 
+use Crumbls\Layup\Support\WidgetRegistry;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\ServiceProvider;
-use Crumbls\Layup\Support\WidgetRegistry;
 
 class LayupServiceProvider extends ServiceProvider
 {
