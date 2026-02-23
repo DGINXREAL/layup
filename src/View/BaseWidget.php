@@ -13,7 +13,16 @@ abstract class BaseWidget extends BaseView implements Widget
 
     abstract public static function getLabel(): string;
 
-    abstract public static function getFormSchema(): array;
+    /**
+     * Widget-specific content fields.
+     * Every widget must override this.
+     *
+     * @return array<\Filament\Forms\Components\Component>
+     */
+    public static function getContentFormSchema(): array
+    {
+        return [];
+    }
 
     public static function getIcon(): string
     {

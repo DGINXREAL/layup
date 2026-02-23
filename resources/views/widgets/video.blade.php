@@ -1,5 +1,5 @@
 @if(!empty($data['url']))
-<div class="layup-widget-video" style="aspect-ratio: {{ $data['aspect'] ?? '16/9' }}">
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="layup-widget-video {{ $data['class'] ?? '' }}" style="aspect-ratio: {{ $data['aspect'] ?? '16/9' }}">
     <iframe src="{{ $data['embed_url'] ?? $data['url'] }}"
             frameborder="0"
             allowfullscreen

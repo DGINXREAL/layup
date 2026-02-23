@@ -25,7 +25,7 @@ class LayupServiceProvider extends ServiceProvider
 
         FilamentAsset::register([
             Css::make('layup', __DIR__ . '/../resources/css/layup.css'),
-        ]);
+        ], 'crumbls/layup');
 
         $this->publishes([
             __DIR__ . '/../config/layup.php' => config_path('layup.php'),

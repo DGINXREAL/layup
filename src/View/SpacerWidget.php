@@ -28,7 +28,7 @@ class SpacerWidget extends BaseWidget
         return 'layout';
     }
 
-    public static function getFormSchema(): array
+    public static function getContentFormSchema(): array
     {
         return [
             Select::make('height')

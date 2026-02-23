@@ -28,7 +28,7 @@ class HtmlWidget extends BaseWidget
         return 'advanced';
     }
 
-    public static function getFormSchema(): array
+    public static function getContentFormSchema(): array
     {
         return [
             Textarea::make('content')

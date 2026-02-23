@@ -30,7 +30,7 @@ class VideoWidget extends BaseWidget
         return 'media';
     }
 
-    public static function getFormSchema(): array
+    public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('url')

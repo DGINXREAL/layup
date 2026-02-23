@@ -13,13 +13,39 @@ return [
     |
     */
     'widgets' => [
+        // Content
         \Crumbls\Layup\View\TextWidget::class,
         \Crumbls\Layup\View\HeadingWidget::class,
+        \Crumbls\Layup\View\BlurbWidget::class,
+        \Crumbls\Layup\View\IconWidget::class,
+        \Crumbls\Layup\View\AccordionWidget::class,
+        \Crumbls\Layup\View\ToggleWidget::class,
+        \Crumbls\Layup\View\TabsWidget::class,
+        \Crumbls\Layup\View\PersonWidget::class,
+        \Crumbls\Layup\View\TestimonialWidget::class,
+        \Crumbls\Layup\View\NumberCounterWidget::class,
+        \Crumbls\Layup\View\BarCounterWidget::class,
+
+        // Media
         \Crumbls\Layup\View\ImageWidget::class,
-        \Crumbls\Layup\View\ButtonWidget::class,
+        \Crumbls\Layup\View\GalleryWidget::class,
         \Crumbls\Layup\View\VideoWidget::class,
+        \Crumbls\Layup\View\AudioWidget::class,
+        \Crumbls\Layup\View\SliderWidget::class,
+        \Crumbls\Layup\View\MapWidget::class,
+
+        // Interactive
+        \Crumbls\Layup\View\ButtonWidget::class,
+        \Crumbls\Layup\View\CallToActionWidget::class,
+        \Crumbls\Layup\View\CountdownWidget::class,
+        \Crumbls\Layup\View\PricingTableWidget::class,
+        \Crumbls\Layup\View\SocialFollowWidget::class,
+
+        // Layout
         \Crumbls\Layup\View\SpacerWidget::class,
         \Crumbls\Layup\View\DividerWidget::class,
+
+        // Advanced
         \Crumbls\Layup\View\HtmlWidget::class,
     ],
 

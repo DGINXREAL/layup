@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 
-class TextWidget extends BaseWidget
+class ToggleWidget extends BaseWidget
 {
     public static function getType(): string
     {
-        return 'text';
+        return 'toggle';
     }
 
     public static function getLabel(): string
     {
-        return 'Text';
+        return 'Toggle';
     }
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-document-text';
+        return 'heroicon-o-chevron-down';
     }
 
     public static function getCategory(): string
@@ -31,21 +33,31 @@ class TextWidget extends BaseWidget
     public static function getContentFormSchema(): array
     {
         return [
+            TextInput::make('title')
+                ->label('Title')
+                ->required(),
             RichEditor::make('content')
                 ->label('Content')
-                ->toolbarButtons([
-                    'bold', 'italic', 'underline', 'strike',
-                    'link', 'orderedList', 'bulletList',
-                    'blockquote', 'codeBlock',
-                ])
                 ->columnSpanFull(),
+            Toggle::make('open')
+                ->label('Open by default')
+                ->default(false),
         ];
     }
 
     public static function getDefaultData(): array
     {
         return [
+            'title' => '',
             'content' => '',
+            'open' => false,
         ];
+    }
+
+    public static function getPreview(array $data): string
+    {
+        $title = $data['title'] ?? '';
+
+        return $title ? "▸ {$title}" : '(empty toggle)';
     }
 }

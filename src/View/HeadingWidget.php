@@ -29,7 +29,7 @@ class HeadingWidget extends BaseWidget
         return 'content';
     }
 
-    public static function getFormSchema(): array
+    public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('content')

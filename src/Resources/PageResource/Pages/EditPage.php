@@ -7,14 +7,12 @@ namespace Crumbls\Layup\Resources\PageResource\Pages;
 use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Resources\PageResource;
 use Crumbls\Layup\Support\WidgetRegistry;
+use Crumbls\Layup\View\Column;
+use Crumbls\Layup\View\Row;
 use Filament\Actions;
-use Crumbls\Layup\Forms\Components\SpanPicker;
 use Filament\Actions\Action;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use Filament\Schemas\Components\Section;
 use Illuminate\Support\Str;
 
 class EditPage extends EditRecord
@@ -421,38 +419,7 @@ class EditPage extends EditRecord
             ->label('Row Settings')
             ->slideOver()
             ->fillForm(fn () => $this->rowSettings)
-            ->form([
-                Select::make('gap')
-                    ->label('Column Gap')
-                    ->options([
-                        'gap-0' => 'None',
-                        'gap-2' => 'Extra Small',
-                        'gap-4' => 'Small',
-                        'gap-6' => 'Medium',
-                        'gap-8' => 'Large',
-                        'gap-12' => 'Extra Large',
-                    ])
-                    ->default('gap-4'),
-                Select::make('alignment')
-                    ->label('Horizontal Alignment')
-                    ->options([
-                        'justify-start' => 'Start',
-                        'justify-center' => 'Center',
-                        'justify-end' => 'End',
-                        'justify-between' => 'Space Between',
-                        'justify-around' => 'Space Around',
-                    ])
-                    ->default('justify-start'),
-                Select::make('verticalAlignment')
-                    ->label('Vertical Alignment')
-                    ->options([
-                        'items-start' => 'Top',
-                        'items-center' => 'Center',
-                        'items-end' => 'Bottom',
-                        'items-stretch' => 'Stretch',
-                    ])
-                    ->default('items-stretch'),
-            ])
+            ->form(Row::getFormSchema())
             ->action(function (array $data) {
                 $this->refreshContent();
                 $this->pageContent['rows'] = collect($this->pageContent['rows'])->map(function ($row) use ($data) {
@@ -482,10 +449,7 @@ class EditPage extends EditRecord
 
         $this->columnSettings = array_merge(
             $col['settings'] ?? [],
-            ['span_sm' => $col['span']['sm'] ?? 12],
-            ['span_md' => $col['span']['md'] ?? 6],
-            ['span_lg' => $col['span']['lg'] ?? 6],
-            ['span_xl' => $col['span']['xl'] ?? 6],
+            ['span' => $col['span'] ?? ['sm' => 12, 'md' => 6, 'lg' => 6, 'xl' => 6]],
         );
 
         $this->mountAction('editColumnAction');
@@ -497,40 +461,7 @@ class EditPage extends EditRecord
             ->label('Column Settings')
             ->slideOver()
             ->fillForm(fn () => $this->columnSettings)
-            ->form([
-                Section::make('Column Widths')
-                    ->schema([
-                        SpanPicker::make('span_sm')
-                            ->breakpointLabel('Small')
-                            ->color('#f97316')
-                            ->default(12),
-                        SpanPicker::make('span_md')
-                            ->breakpointLabel('Medium')
-                            ->color('#22c55e')
-                            ->default(6),
-                        SpanPicker::make('span_lg')
-                            ->breakpointLabel('Large')
-                            ->color('#3b82f6')
-                            ->default(6),
-                        SpanPicker::make('span_xl')
-                            ->breakpointLabel('Extra Large')
-                            ->color('#a855f7')
-                            ->default(6),
-                    ]),
-                Select::make('padding')
-                    ->label('Padding')
-                    ->options([
-                        'p-0' => 'None',
-                        'p-2' => 'Extra Small',
-                        'p-4' => 'Small',
-                        'p-6' => 'Medium',
-                        'p-8' => 'Large',
-                    ])
-                    ->default('p-4'),
-                TextInput::make('background')
-                    ->label('Background Color')
-                    ->default('transparent'),
-            ])
+            ->form(Column::getFormSchema())
             ->action(function (array $data) {
                 $this->refreshContent();
                 $this->pageContent['rows'] = collect($this->pageContent['rows'])->map(function ($row) use ($data) {
@@ -539,16 +470,9 @@ class EditPage extends EditRecord
                     $row['columns'] = collect($row['columns'])->map(function ($col) use ($data) {
                         if ($col['id'] !== $this->editingColumnId) return $col;
 
-                        $col['span'] = [
-                            'sm' => (int) $data['span_sm'],
-                            'md' => (int) $data['span_md'],
-                            'lg' => (int) $data['span_lg'],
-                            'xl' => (int) $data['span_xl'],
-                        ];
-                        $col['settings'] = [
-                            'padding' => $data['padding'],
-                            'background' => $data['background'],
-                        ];
+                        $col['span'] = $data['span'] ?? $col['span'];
+                        unset($data['span']);
+                        $col['settings'] = $data;
 
                         return $col;
                     })->all();
