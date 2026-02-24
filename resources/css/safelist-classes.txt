@@ -1,4 +1,11 @@
 container
+hidden
+md:block
+md:hidden
+lg:block
+lg:hidden
+xl:block
+xl:hidden
 flex
 flex-wrap
 md:pl-2

@@ -1,4 +1,4 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="rounded overflow-hidden {{ $data['class'] ?? '' }}" style="height:{{ $data['height'] ?? '300px' }};@if(!empty($data['inline_css'])){{ $data['inline_css'] }}@endif">
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="rounded overflow-hidden {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="height:{{ $data['height'] ?? '300px' }};@if(!empty($data['inline_css'])){{ $data['inline_css'] }}@endif">
     @if(!empty($data['embed']))
         {!! $data['embed'] !!}
     @elseif(!empty($data['address']))

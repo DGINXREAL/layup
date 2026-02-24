@@ -1,4 +1,4 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="divide-y divide-gray-200 border border-gray-200 rounded-lg {{ $data['class'] ?? '' }}" x-data="layupAccordion({{ !empty($data['open_first']) ? 'true' : 'false' }})" @if(!empty($data['inline_css']))style="{{ $data['inline_css'] }}"@endif>
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="divide-y divide-gray-200 border border-gray-200 rounded-lg {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" x-data="layupAccordion({{ !empty($data['open_first']) ? 'true' : 'false' }})" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}">
     @foreach(($data['items'] ?? []) as $index => $item)
         <div>
             <button @click="toggle({{ $index }})" class="flex items-center justify-between w-full px-4 py-3 text-left font-medium hover:bg-gray-50 transition-colors" :class="isOpen({{ $index }}) ? 'bg-gray-50' : ''">

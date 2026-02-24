@@ -1,0 +1,199 @@
+<?php
+
+declare(strict_types=1);
+
+use Crumbls\Layup\Support\WidgetRegistry;
+use Crumbls\Layup\View\Column;
+use Crumbls\Layup\View\Row;
+use Crumbls\Layup\View\TextWidget;
+use Crumbls\Layup\View\HeadingWidget;
+use Crumbls\Layup\View\ButtonWidget;
+use Crumbls\Layup\View\ImageWidget;
+use Crumbls\Layup\View\VideoWidget;
+use Crumbls\Layup\View\SpacerWidget;
+use Crumbls\Layup\View\DividerWidget;
+use Crumbls\Layup\View\HtmlWidget;
+
+beforeEach(function () {
+    $registry = app(WidgetRegistry::class);
+    $widgets = config('layup.widgets', []);
+    foreach ($widgets as $class) {
+        if (class_exists($class) && !$registry->has($class::getType())) {
+            $registry->register($class);
+        }
+    }
+});
+
+// --- Widget rendering ---
+
+it('renders text widget without error', function () {
+    $widget = TextWidget::make(['content' => '<p>Hello</p>']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('Hello');
+});
+
+it('renders heading widget with correct tag', function () {
+    $widget = HeadingWidget::make(['content' => 'Title', 'level' => 'h3']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('<h3')
+        ->and($html)->toContain('Title');
+});
+
+it('renders button widget with URL', function () {
+    $widget = ButtonWidget::make(['label' => 'Click', 'url' => 'https://example.com', 'style' => 'primary', 'size' => 'md']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('Click')
+        ->and($html)->toContain('https://example.com');
+});
+
+it('renders spacer widget with height', function () {
+    $widget = SpacerWidget::make(['height' => '5rem']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('5rem');
+});
+
+it('renders divider widget with style', function () {
+    $widget = DividerWidget::make(['style' => 'dotted', 'weight' => '3px', 'color' => '#999', 'width' => '100%', 'spacing' => '2rem']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('dotted');
+});
+
+it('renders html widget with raw content', function () {
+    $widget = HtmlWidget::make(['content' => '<div class="custom">Raw HTML</div>']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('Raw HTML');
+});
+
+it('renders widget with custom id attribute', function () {
+    $widget = TextWidget::make(['content' => 'test', 'id' => 'my-section']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('id="my-section"');
+});
+
+it('renders widget with custom class attribute', function () {
+    $widget = TextWidget::make(['content' => 'test', 'class' => 'custom-class']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('custom-class');
+});
+
+// --- Row rendering ---
+
+it('renders row with container class by default', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 12, 'lg' => 12, 'xl' => 12]], []);
+    $row = Row::make([], [$col]);
+    $html = $row->render()->toHtml();
+    expect($html)->toContain('container')
+        ->and($html)->toContain('mx-auto')
+        ->and($html)->toContain('flex flex-wrap');
+});
+
+it('renders full-width row without container', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 12, 'lg' => 12, 'xl' => 12]], []);
+    $row = Row::make(['full_width' => true], [$col]);
+    $html = $row->render()->toHtml();
+    expect($html)->toContain('flex flex-wrap');
+    // The flex div should not have container class
+    preg_match('/class="flex flex-wrap([^"]*)"/', $html, $matches);
+    expect($matches[1] ?? '')->not->toContain('container');
+});
+
+it('renders row with background color', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 12, 'lg' => 12, 'xl' => 12]], []);
+    $row = Row::make(['background_color' => '#ff0000'], [$col]);
+    $html = $row->render()->toHtml();
+    expect($html)->toContain('background-color: #ff0000');
+});
+
+// --- Column rendering ---
+
+it('renders column with correct responsive width classes', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 6, 'lg' => 4, 'xl' => 3]], []);
+    $col->setPosition(first: true, last: true); // single column
+    $html = $col->render()->toHtml();
+    expect($html)->toContain('w-full')
+        ->and($html)->toContain('md:w-6/12')
+        ->and($html)->toContain('lg:w-4/12')
+        ->and($html)->toContain('xl:w-3/12');
+});
+
+it('renders first column with pr gutter', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 6, 'lg' => 6, 'xl' => 6]], []);
+    $col->setPosition(first: true, last: false);
+    $html = $col->render()->toHtml();
+    expect($html)->toContain('md:pr-2');
+});
+
+it('renders last column with pl gutter', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 6, 'lg' => 6, 'xl' => 6]], []);
+    $col->setPosition(first: false, last: true);
+    $html = $col->render()->toHtml();
+    expect($html)->toContain('md:pl-2');
+});
+
+it('renders middle column with px gutter', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 4, 'lg' => 4, 'xl' => 4]], []);
+    $col->setPosition(first: false, last: false);
+    $html = $col->render()->toHtml();
+    expect($html)->toContain('md:px-2');
+});
+
+it('renders only column with no gutter', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 12, 'lg' => 12, 'xl' => 12]], []);
+    $col->setPosition(first: true, last: true);
+    $html = $col->render()->toHtml();
+    expect($html)->not->toContain('md:pr-2')
+        ->and($html)->not->toContain('md:pl-2')
+        ->and($html)->not->toContain('md:px-2');
+});
+
+// --- Visibility classes ---
+
+it('generates correct visibility classes for hiding on mobile', function () {
+    $classes = \Crumbls\Layup\View\BaseView::visibilityClasses(['sm']);
+    expect($classes)->toBe('hidden md:block');
+});
+
+it('generates correct visibility classes for hiding on tablet', function () {
+    $classes = \Crumbls\Layup\View\BaseView::visibilityClasses(['md']);
+    expect($classes)->toBe('md:hidden lg:block');
+});
+
+it('generates correct visibility classes for hiding on mobile and tablet', function () {
+    $classes = \Crumbls\Layup\View\BaseView::visibilityClasses(['sm', 'md']);
+    expect($classes)->toBe('hidden lg:block');
+});
+
+it('returns empty string for no visibility restrictions', function () {
+    expect(\Crumbls\Layup\View\BaseView::visibilityClasses([]))->toBe('');
+});
+
+it('builds inline styles with text color and alignment', function () {
+    $styles = \Crumbls\Layup\View\BaseView::buildInlineStyles([
+        'text_color' => '#ff0000',
+        'text_align' => 'center',
+        'background_color' => '#000',
+    ]);
+    expect($styles)->toContain('color: #ff0000;')
+        ->and($styles)->toContain('text-align: center;')
+        ->and($styles)->toContain('background-color: #000;');
+});
+
+it('renders text widget with hide_on classes', function () {
+    $widget = TextWidget::make(['content' => 'hidden on mobile', 'hide_on' => ['sm']]);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('hidden')
+        ->and($html)->toContain('md:block');
+});
+
+it('renders text widget with text color', function () {
+    $widget = TextWidget::make(['content' => 'colored', 'text_color' => '#ff0000']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('color: #ff0000');
+});
+
+it('renders column with space-y-4 for vertical spacing', function () {
+    $col = Column::make(['span' => ['sm' => 12, 'md' => 12, 'lg' => 12, 'xl' => 12]], []);
+    $col->setPosition(first: true, last: true);
+    $html = $col->render()->toHtml();
+    expect($html)->toContain('space-y-4');
+});

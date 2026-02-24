@@ -30,15 +30,15 @@
     } else {
         $gutter = 'md:px-2';
     }
+    $vis = \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []);
 @endphp
 <div
     @if(!empty($data['id']))id="{{ $data['id'] }}"@endif
-    class="w-{{ $sm }} md:w-{{ $md }} lg:w-{{ $lg }} xl:w-{{ $xl }} {{ $gutter }} space-y-4 {{ $data['class'] ?? '' }}"
+    class="w-{{ $sm }} md:w-{{ $md }} lg:w-{{ $lg }} xl:w-{{ $xl }} {{ $gutter }} space-y-4 {{ $vis }} {{ $data['class'] ?? '' }}"
     style="
         @if(!empty($data['align_self']) && $data['align_self'] !== 'auto')align-self: {{ match($data['align_self']) { 'start' => 'flex-start', 'end' => 'flex-end', default => $data['align_self'] } }};@endif
         @if(!empty($data['overflow']) && $data['overflow'] !== 'visible')overflow: {{ $data['overflow'] }};@endif
-        @if(!empty($data['background_color']))background-color: {{ $data['background_color'] }};@endif
-        @if(!empty($data['inline_css'])){{ $data['inline_css'] }}@endif
+        {{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}
     "
 >
     @foreach($children as $child)

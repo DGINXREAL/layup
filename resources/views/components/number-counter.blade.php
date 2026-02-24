@@ -1,4 +1,4 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="text-center {{ $data['class'] ?? '' }}" @if(!empty($data['inline_css']))style="{{ $data['inline_css'] }}"@endif>
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="text-center {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}">
     <div class="text-4xl font-bold mb-1">
         <span>{{ $data['prefix'] ?? '' }}</span>
         <span x-data="layupCounter({{ (int)($data['number'] ?? 0) }}, {{ ($data['animate'] ?? true) ? 'true' : 'false' }})" x-intersect.once="start()" x-text="count">0</span>

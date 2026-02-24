@@ -7,10 +7,13 @@ namespace Crumbls\Layup\Resources;
 use BackedEnum;
 use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Resources\PageResource\Pages;
+use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Illuminate\Database\Eloquent\Collection;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -108,10 +111,55 @@ class PageResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('duplicate')
+                    ->label('Duplicate')
+                    ->icon('heroicon-o-document-duplicate')
+                    ->color('gray')
+                    ->requiresConfirmation()
+                    ->action(function (Page $record) {
+                        $modelClass = config('layup.pages.model', Page::class);
+                        $modelClass::create([
+                            'title' => $record->title . ' (Copy)',
+                            'slug' => $record->slug . '-copy-' . Str::random(4),
+                            'content' => $record->content,
+                            'meta' => $record->meta,
+                            'status' => 'draft',
+                        ]);
+                    }),
+                Action::make('export')
+                    ->label('Export')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('gray')
+                    ->action(function (Page $record) {
+                        $json = json_encode([
+                            'title' => $record->title,
+                            'slug' => $record->slug,
+                            'content' => $record->content,
+                            'meta' => $record->meta,
+                            'exported_at' => now()->toIso8601String(),
+                            'layup_version' => '1.0',
+                        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+                        return response()->streamDownload(
+                            fn () => print($json),
+                            Str::slug($record->title) . '.json',
+                            ['Content-Type' => 'application/json'],
+                        );
+                    }),
                 DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    BulkAction::make('publish')
+                        ->label('Publish')
+                        ->icon('heroicon-o-check-circle')
+                        ->requiresConfirmation()
+                        ->action(fn (Collection $records) => $records->each->update(['status' => 'published'])),
+                    BulkAction::make('unpublish')
+                        ->label('Unpublish')
+                        ->icon('heroicon-o-x-circle')
+                        ->requiresConfirmation()
+                        ->action(fn (Collection $records) => $records->each->update(['status' => 'draft'])),
                     DeleteBulkAction::make(),
                 ]),
             ]);

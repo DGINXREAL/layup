@@ -1,1 +1,1 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="{{ $data['class'] ?? '' }}" style="height: {{ $data['height'] ?? '2rem' }};@if(!empty($data['inline_css'])){{ $data['inline_css'] }}@endif"></div>
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="{{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="height: {{ $data['height'] ?? '2rem' }}; {{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}"></div>

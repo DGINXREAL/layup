@@ -1,4 +1,4 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="text-center {{ $data['class'] ?? '' }}" x-data="layupCountdown('{{ $data['target_date'] ?? '' }}')" x-init="start()" @if(!empty($data['inline_css']))style="{{ $data['inline_css'] }}"@endif>
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="text-center {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" x-data="layupCountdown('{{ $data['target_date'] ?? '' }}')" x-init="start()" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}">
     @if(!empty($data['title']))
         <div class="text-lg font-semibold mb-4">{{ $data['title'] }}</div>
     @endif

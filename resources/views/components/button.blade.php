@@ -14,9 +14,9 @@
            'lg' => 'px-7 py-3 text-lg',
            default => 'px-5 py-2.5 text-base',
        } }}
-       {{ $data['class'] ?? '' }}"
+       {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}"
    @if(!empty($data['new_tab'])) target="_blank" rel="noopener noreferrer" @endif
-   @if(!empty($data['inline_css']))style="{{ $data['inline_css'] }}"@endif
+   style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}"
 >
     {{ $data['label'] ?? 'Click Me' }}
 </a>

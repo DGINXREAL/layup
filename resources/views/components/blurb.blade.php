@@ -1,4 +1,4 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="{{ ($data['layout'] ?? 'top') === 'left' ? 'flex gap-4' : '' }} {{ $data['class'] ?? '' }}" @if(!empty($data['inline_css']))style="{{ $data['inline_css'] }}"@endif>
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="{{ ($data['layout'] ?? 'top') === 'left' ? 'flex gap-4' : '' }} {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}">
     @if(($data['media_type'] ?? 'none') === 'image' && !empty($data['image']))
         <div class="{{ ($data['layout'] ?? 'top') === 'left' ? 'shrink-0' : 'mb-4' }}">
             <img src="{{ asset('storage/' . $data['image']) }}" alt="{{ $data['title'] ?? '' }}" class="max-w-full h-auto rounded" />

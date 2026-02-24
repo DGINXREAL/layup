@@ -8,8 +8,8 @@
         'h5' => 'text-lg font-medium',
         'h6' => 'text-base font-medium',
         default => 'text-3xl font-bold',
-    } }} {{ $data['class'] ?? '' }} mb-2"
-    @if(!empty($data['inline_css']))style="{{ $data['inline_css'] }}"@endif
+    } }} {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }} mb-2"
+    style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}"
 >
     {{ $data['content'] ?? '' }}
 </{{ $data['level'] ?? 'h2' }}>

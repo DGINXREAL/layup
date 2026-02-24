@@ -1,3 +1,4 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="prose max-w-none {{ $data['class'] ?? '' }}" @if(!empty($data['inline_css']))style="{{ $data['inline_css'] }}"@endif>
+@php $vis = \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []); @endphp
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="prose max-w-none {{ $vis }} {{ $data['class'] ?? '' }}" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}">
     {!! $data['content'] ?? '' !!}
 </div>

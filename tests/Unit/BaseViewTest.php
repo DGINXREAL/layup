@@ -56,5 +56,5 @@ it('getDesignFormSchema() returns spacing + background fields', function () {
 it('getAdvancedFormSchema() returns id/class/inline_css fields', function () {
     $schema = Row::getAdvancedFormSchema();
     expect($schema)->toBeArray();
-    expect(count($schema))->toBe(3);
+    expect(count($schema))->toBe(4);
 });
