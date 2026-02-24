@@ -242,3 +242,35 @@ it('does not sync safelist when auto_sync is disabled', function () {
 
     Event::assertNotDispatched(SafelistChanged::class);
 });
+
+it('returns section tree wrapping legacy rows in default section', function () {
+    $page = Page::create([
+        'title' => 'Legacy Test',
+        'slug' => 'legacy-section-test',
+        'content' => ['rows' => [['settings' => [], 'columns' => []]]],
+        'status' => 'published',
+    ]);
+
+    $sections = $page->getSectionTree();
+    expect($sections)->toHaveCount(1)
+        ->and($sections[0]['settings'])->toBe([])
+        ->and($sections[0]['rows'])->toHaveCount(1);
+});
+
+it('returns section tree from sections key', function () {
+    $page = Page::create([
+        'title' => 'Sections Test',
+        'slug' => 'sections-key-test',
+        'content' => ['sections' => [
+            ['settings' => ['background_color' => '#ff0000'], 'rows' => [['settings' => [], 'columns' => []]]],
+            ['settings' => [], 'rows' => []],
+        ]],
+        'status' => 'published',
+    ]);
+
+    $sections = $page->getSectionTree();
+    expect($sections)->toHaveCount(2)
+        ->and($sections[0]['settings']['background_color'])->toBe('#ff0000')
+        ->and($sections[0]['rows'])->toHaveCount(1)
+        ->and($sections[1]['rows'])->toHaveCount(0);
+});

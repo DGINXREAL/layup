@@ -211,10 +211,50 @@ class Page extends Model
      *
      * @return array<Row>
      */
+    /**
+     * Get sections with their row trees.
+     * Returns array of ['settings' => [...], 'rows' => [Row, ...]]
+     */
+    public function getSectionTree(): array
+    {
+        $content = $this->content ?? [];
+
+        // Support both { sections: [...] } and legacy { rows: [...] }
+        if (!empty($content['sections'])) {
+            $sections = $content['sections'];
+        } else {
+            // Legacy: wrap all rows in one default section
+            $sections = [['settings' => [], 'rows' => $content['rows'] ?? []]];
+        }
+
+        return array_map(function (array $sectionData) {
+            return [
+                'settings' => $sectionData['settings'] ?? [],
+                'rows' => $this->buildRowTree($sectionData['rows'] ?? []),
+            ];
+        }, $sections);
+    }
+
     public function getContentTree(): array
     {
         $content = $this->content ?? [];
         $rows = $content['rows'] ?? [];
+
+        // If sections exist, flatten all rows from all sections
+        if (!empty($content['sections'])) {
+            $rows = [];
+            foreach ($content['sections'] as $section) {
+                foreach ($section['rows'] ?? [] as $row) {
+                    $rows[] = $row;
+                }
+            }
+        }
+
+        return $this->buildRowTree($rows);
+    }
+
+    protected function buildRowTree(array $rows): array
+    {
         $registry = app(WidgetRegistry::class);
 
         return array_map(function (array $rowData) use ($registry) {

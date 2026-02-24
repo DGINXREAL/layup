@@ -30,9 +30,9 @@
     </x-slot:meta>
     @endif
 
-    <div class="space-y-4 my-4" @if($page->id) data-page-id="{{ $page->id }}" @endif>
-        @foreach($tree as $row)
-            {!! $row->render() !!}
+    <div @if($page->id) data-page-id="{{ $page->id }}" @endif>
+        @foreach($sections as $section)
+            @include('layup::components.section', ['section' => $section])
         @endforeach
     </div>
     @layupScripts

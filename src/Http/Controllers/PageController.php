@@ -36,11 +36,13 @@ class PageController extends Controller
         $view = config('layup.frontend.view', 'layup::frontend.page');
 
         $tree = $page->getContentTree();
+        $sections = $page->getSectionTree();
 
         return response(
             view($view, [
                 'page' => $page,
                 'tree' => $tree,
+                'sections' => $sections,
                 'layout' => $layout,
             ])->render()
         );
