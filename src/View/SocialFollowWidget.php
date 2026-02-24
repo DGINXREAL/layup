@@ -69,6 +69,14 @@ class SocialFollowWidget extends BaseWidget
             Toggle::make('new_tab')
                 ->label('Open in new tab')
                 ->default(true),
+            Select::make('icon_size')
+                ->label('Icon Size')
+                ->options([
+                    'sm' => 'Small',
+                    'md' => 'Medium',
+                    'lg' => 'Large',
+                ])
+                ->default('md'),
         ];
     }
 

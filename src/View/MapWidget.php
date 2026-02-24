@@ -7,6 +7,7 @@ namespace Crumbls\Layup\View;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 
 class MapWidget extends BaseWidget
 {
@@ -61,6 +62,15 @@ class MapWidget extends BaseWidget
                     '18' => 'Building',
                 ])
                 ->default('13'),
+            Select::make('map_type')
+                ->label('Map Type')
+                ->options([
+                    'roadmap' => 'Roadmap',
+                    'satellite' => 'Satellite',
+                    'terrain' => 'Terrain',
+                    'hybrid' => 'Hybrid',
+                ])
+                ->default('roadmap'),
         ];
     }
 

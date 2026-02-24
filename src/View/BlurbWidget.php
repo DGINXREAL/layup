@@ -70,6 +70,16 @@ class BlurbWidget extends BaseWidget
                 ->label('Link URL')
                 ->url()
                 ->nullable(),
+            Select::make('text_alignment')
+                ->label('Text Alignment')
+                ->options([
+                    '' => 'Default',
+                    'left' => 'Left',
+                    'center' => 'Center',
+                    'right' => 'Right',
+                ])
+                ->default('')
+                ->nullable(),
         ];
     }
 

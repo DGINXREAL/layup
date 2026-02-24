@@ -56,6 +56,10 @@ class VideoWidget extends BaseWidget
             Toggle::make('loop')
                 ->label('Loop')
                 ->default(false),
+            Toggle::make('privacy_enhanced')
+                ->label('Privacy-enhanced mode (YouTube)')
+                ->helperText('Uses youtube-nocookie.com domain')
+                ->default(false),
         ];
     }
 
@@ -93,16 +97,18 @@ class VideoWidget extends BaseWidget
     public static function onSave(array $data, ?WidgetContext $context = null): array
     {
         if (! empty($data['url'])) {
-            $data['embed_url'] = static::toEmbedUrl($data['url']);
+            $privacy = !empty($data['privacy_enhanced']);
+            $data['embed_url'] = static::toEmbedUrl($data['url'], $privacy);
         }
 
         return $data;
     }
 
-    protected static function toEmbedUrl(string $url): string
+    protected static function toEmbedUrl(string $url, bool $privacyEnhanced = false): string
     {
         if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $url, $m)) {
-            return "https://www.youtube.com/embed/{$m[1]}";
+            $domain = $privacyEnhanced ? 'www.youtube-nocookie.com' : 'www.youtube.com';
+            return "https://{$domain}/embed/{$m[1]}";
         }
 
         if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/', $url, $m)) {
