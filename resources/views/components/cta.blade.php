@@ -1,4 +1,4 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="bg-gray-50 rounded-xl p-8 text-center {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}" {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}>
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="rounded-xl p-8 text-center {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }} @if(!empty($data['bg_color']))background-color: {{ $data['bg_color'] }};@else background-color: #f9fafb;@endif @if(!empty($data['text_color_cta']))color: {{ $data['text_color_cta'] }};@endif" {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}>
     @if(!empty($data['title']))
         <h2 class="text-2xl font-bold mb-3">{{ $data['title'] }}</h2>
     @endif
@@ -8,7 +8,14 @@
         </div>
     @endif
     @if(!empty($data['button_text']))
-        <a href="{{ $data['button_url'] ?? '#' }}" class="inline-block bg-blue-600 text-white font-medium px-6 py-3 rounded hover:bg-blue-700 transition-colors" @if(!empty($data['new_tab'])) target="_blank" rel="noopener noreferrer" @endif>
+        @php
+            $btnClass = match($data['button_style'] ?? 'primary') {
+                'secondary' => 'bg-gray-600 text-white hover:bg-gray-700',
+                'outline' => 'border-2 border-current hover:bg-white/10',
+                default => 'bg-blue-600 text-white hover:bg-blue-700',
+            };
+        @endphp
+        <a href="{{ $data['button_url'] ?? '#' }}" class="inline-block font-medium px-6 py-3 rounded transition-colors {{ $btnClass }}" @if(!empty($data['new_tab'])) target="_blank" rel="noopener noreferrer" @endif>
             {{ $data['button_text'] }}
         </a>
     @endif

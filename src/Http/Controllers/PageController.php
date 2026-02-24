@@ -62,5 +62,36 @@ class PageController extends Controller
         foreach (config('layup.widgets', []) as $widgetClass) {
             $registry->register($widgetClass);
         }
+
+        // Auto-discover widgets from app namespace
+        $this->discoverAppWidgets($registry);
+    }
+
+    /**
+     * Auto-discover widget classes from App\Layup\Widgets namespace.
+     */
+    protected function discoverAppWidgets(WidgetRegistry $registry): void
+    {
+        $namespace = config('layup.widget_discovery.namespace', 'App\\Layup\\Widgets');
+        $directory = config('layup.widget_discovery.directory') ?? app_path('Layup/Widgets');
+
+        if (! is_dir($directory)) {
+            return;
+        }
+
+        foreach (new \DirectoryIterator($directory) as $file) {
+            if ($file->isDot() || $file->getExtension() !== 'php') {
+                continue;
+            }
+
+            $className = $namespace . '\\' . $file->getBasename('.php');
+
+            if (class_exists($className) && is_subclass_of($className, \Crumbls\Layup\View\BaseWidget::class)) {
+                $type = $className::getType();
+                if (! $registry->has($type)) {
+                    $registry->register($className);
+                }
+            }
+        }
     }
 }

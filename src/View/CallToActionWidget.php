@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 
 class CallToActionWidget extends BaseWidget
 {
@@ -44,6 +46,25 @@ class CallToActionWidget extends BaseWidget
             TextInput::make('button_url')
                 ->label('Button URL')
                 ->url(),
+            Select::make('button_style')
+                ->label('Button Style')
+                ->options([
+                    'primary' => 'Primary',
+                    'secondary' => 'Secondary',
+                    'outline' => 'Outline',
+                ])
+                ->default('primary'),
+            Toggle::make('new_tab')
+                ->label('Open in new tab')
+                ->default(false),
+            TextInput::make('bg_color')
+                ->label('Background Color')
+                ->type('color')
+                ->nullable(),
+            TextInput::make('text_color_cta')
+                ->label('Text Color')
+                ->type('color')
+                ->nullable(),
         ];
     }
 

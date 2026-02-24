@@ -63,6 +63,21 @@ class TestimonialWidget extends BaseWidget
                     'centered' => 'Centered',
                 ])
                 ->default('default'),
+            TextInput::make('company')
+                ->label('Company Name')
+                ->nullable(),
+            Select::make('rating')
+                ->label('Star Rating')
+                ->options([
+                    '' => 'None',
+                    '1' => '★',
+                    '2' => '★★',
+                    '3' => '★★★',
+                    '4' => '★★★★',
+                    '5' => '★★★★★',
+                ])
+                ->default('')
+                ->nullable(),
         ];
     }
 

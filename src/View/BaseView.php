@@ -225,6 +225,22 @@ abstract class BaseView extends Component
                 ])
                 ->default('')
                 ->nullable(),
+            Select::make('opacity')
+                ->label('Opacity')
+                ->options([
+                    '' => 'Default (100%)',
+                    '0.9' => '90%',
+                    '0.8' => '80%',
+                    '0.7' => '70%',
+                    '0.6' => '60%',
+                    '0.5' => '50%',
+                    '0.4' => '40%',
+                    '0.3' => '30%',
+                    '0.2' => '20%',
+                    '0.1' => '10%',
+                ])
+                ->default('')
+                ->nullable(),
             SpacingPicker::advanced('padding', 'Padding'),
             SpacingPicker::advanced('margin', 'Margin'),
             TextInput::make('background_color')
@@ -352,6 +368,9 @@ abstract class BaseView extends Component
         }
         if (!empty($data['box_shadow'])) {
             $styles[] = "box-shadow: {$data['box_shadow']};";
+        }
+        if (!empty($data['opacity'])) {
+            $styles[] = "opacity: {$data['opacity']};";
         }
         if (!empty($data['background_color'])) {
             $styles[] = "background-color: {$data['background_color']};";

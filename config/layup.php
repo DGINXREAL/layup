@@ -56,6 +56,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Widget Auto-Discovery
+    |--------------------------------------------------------------------------
+    |
+    | Automatically discovers and registers widget classes from the given
+    | namespace/directory. Set to null to disable auto-discovery.
+    |
+    */
+    'widget_discovery' => [
+        'namespace' => 'App\\Layup\\Widgets',
+        'directory' => null, // defaults to app_path('Layup/Widgets')
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Pages Configuration
     |--------------------------------------------------------------------------
     |
