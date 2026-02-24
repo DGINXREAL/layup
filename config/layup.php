@@ -82,6 +82,8 @@ return [
         \Crumbls\Layup\View\StepProcessWidget::class,
         \Crumbls\Layup\View\GradientTextWidget::class,
         \Crumbls\Layup\View\FlipCardWidget::class,
+        \Crumbls\Layup\View\PricingToggleWidget::class,
+        \Crumbls\Layup\View\ImageHotspotWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],
