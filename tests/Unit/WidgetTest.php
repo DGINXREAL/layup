@@ -58,6 +58,8 @@ use Crumbls\Layup\View\ShareButtonsWidget;
 use Crumbls\Layup\View\ModalWidget;
 use Crumbls\Layup\View\TypewriterWidget;
 use Crumbls\Layup\View\CardWidget;
+use Crumbls\Layup\View\TableOfContentsWidget;
+use Crumbls\Layup\View\StepProcessWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
 
@@ -120,6 +122,8 @@ $widgets = [
     ModalWidget::class,
     TypewriterWidget::class,
     CardWidget::class,
+    TableOfContentsWidget::class,
+    StepProcessWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

@@ -78,6 +78,8 @@ return [
         \Crumbls\Layup\View\ModalWidget::class,
         \Crumbls\Layup\View\TypewriterWidget::class,
         \Crumbls\Layup\View\CardWidget::class,
+        \Crumbls\Layup\View\TableOfContentsWidget::class,
+        \Crumbls\Layup\View\StepProcessWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],
