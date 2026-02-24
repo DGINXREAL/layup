@@ -52,6 +52,8 @@ return [
         \Crumbls\Layup\View\AlertWidget::class,
         \Crumbls\Layup\View\TableWidget::class,
         \Crumbls\Layup\View\ProgressCircleWidget::class,
+        \Crumbls\Layup\View\MenuWidget::class,
+        \Crumbls\Layup\View\SearchWidget::class,
     ],
 
     /*

@@ -32,6 +32,8 @@ use Crumbls\Layup\View\AlertWidget;
 use Crumbls\Layup\View\TableWidget;
 use Crumbls\Layup\View\EmbedWidget;
 use Crumbls\Layup\View\ProgressCircleWidget;
+use Crumbls\Layup\View\MenuWidget;
+use Crumbls\Layup\View\SearchWidget;
 
 $widgets = [
     TextWidget::class,
@@ -64,6 +66,8 @@ $widgets = [
     TableWidget::class,
     EmbedWidget::class,
     ProgressCircleWidget::class,
+    MenuWidget::class,
+    SearchWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {
