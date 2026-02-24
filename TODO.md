@@ -36,7 +36,7 @@
 
 ### Builder Canvas
 - [x] Live preview of widget content
-- [ ] Inline text editing
+- [x] Inline text editing
 - [ ] Visual column resize handles
 
 ### Page Management ✅ COMPLETE
@@ -68,21 +68,28 @@
 - [x] Image: hover effects (zoom, grayscale→color, brighten, blur→clear)
 - [ ] Blurb: icon picker UI (nice-to-have)
 
-## Summary (as of ~3:30am MST Feb 24)
+## Summary (as of ~5:30am MST Feb 24)
 - **852 tests, 1706 assertions** — all passing
 - **75 widgets** total
 - **Section component** with background image/video/gradient, parallax, overlay
 - **Structured data** (WebPage, Article, FAQPage, BreadcrumbList)
-- **Page templates** (5 built-in), revision history, content validator
-- **3 artisan commands**: layup:install, layup:safelist, layup:make-widget, layup:audit
+- **Page templates** (5 built-in), revision history with browser UI
+- **4 artisan commands**: layup:install, layup:safelist, layup:make-widget, layup:audit
 - **Alpine.js components** for interactive widgets (accordion, tabs, countdown, slider, lightbox, etc.)
 - **Full Design/Advanced tabs** on all widgets (colors, borders, spacing, animations, visibility)
+- **Builder UX enhancements**: Widget icons (65+ heroicons), recently used widgets, drag from picker, improved previews, inline text editing
+- **Revision browser**: Slideover modal with restore functionality, timestamps, author tracking
+
+## Completed Tonight (Priority 3 UX Polish)
+1. ✅ Widget icons in picker modal - 65+ heroicon SVGs render correctly per widget type
+2. ✅ Recently used widgets - localStorage tracking, shows last 5 widgets at top of picker
+3. ✅ Revision browser UI - Slideover with history, restore buttons, metadata display
+4. ✅ Drag from picker to canvas - Drag widgets directly onto columns from picker
+5. ✅ Live preview improvements - 20+ widget-specific preview formats with icons and context
+6. ✅ Inline text editing - Double-click text/heading widgets to quick-edit content
 
 ## Future (post-sprint)
-- Widget icons in picker modal
-- Live preview / inline editing on builder canvas
-- Visual column resize handles
-- Revision browser UI
-- Drag from widget picker to canvas
+- Visual column resize handles (drag to adjust spans)
+- Blurb: icon picker UI (nice-to-have)
 - More page templates
 - Publish to Packagist
