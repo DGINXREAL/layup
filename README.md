@@ -43,31 +43,52 @@ A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style
 
 ## Installation
 
+**1. Require the package:**
+
 ```bash
 composer require crumbls/layup
 ```
 
-Publish and run migrations:
+**2. Run migrations:**
 
 ```bash
 php artisan migrate
 ```
 
-Register the plugin in your Filament panel:
+This creates the `layup_pages` and `layup_page_revisions` tables.
+
+**3. Register the plugin in your Filament panel provider:**
 
 ```php
 use Crumbls\Layup\LayupPlugin;
 
-->plugins([
-    LayupPlugin::make(),
-])
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        // ...
+        ->plugins([
+            LayupPlugin::make(),
+        ]);
+}
 ```
 
-Publish the config (optional):
+**4. Publish assets:**
+
+```bash
+php artisan vendor:publish --tag=layup-assets
+```
+
+**5. (Optional) Publish the config:**
 
 ```bash
 php artisan vendor:publish --tag=layup-config
 ```
+
+That's it. Head to your Filament panel — you'll see a **Pages** resource in the sidebar.
+
+### Quick Verification
+
+After installation, visit `/admin/pages` (or your panel path) and create a new page. You should see the visual builder with rows, columns, and the widget picker.
 
 ## Frontend Rendering
 
