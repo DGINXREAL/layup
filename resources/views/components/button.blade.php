@@ -16,7 +16,7 @@
        } }}
        {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}"
    @if(!empty($data['new_tab'])) target="_blank" rel="noopener noreferrer" @endif
-   style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}"
+   style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }} @if(!empty($data['bg_color']))background-color: {{ $data['bg_color'] }};@endif @if(!empty($data['text_color_override']))color: {{ $data['text_color_override'] }};@endif"
    {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     {{ $data['label'] ?? 'Click Me' }}

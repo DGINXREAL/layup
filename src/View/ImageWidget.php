@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Crumbls\Layup\View;
 
 use Crumbls\Layup\Support\WidgetContext;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Facades\Storage;
@@ -42,6 +43,14 @@ class ImageWidget extends BaseWidget
                 ->label('Alt Text'),
             TextInput::make('caption')
                 ->label('Caption'),
+            TextInput::make('link_url')
+                ->label('Link URL')
+                ->url()
+                ->placeholder('https://...')
+                ->nullable(),
+            Checkbox::make('link_new_tab')
+                ->label('Open in new tab')
+                ->default(false),
         ];
     }
 

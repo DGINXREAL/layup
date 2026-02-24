@@ -27,6 +27,11 @@ use Crumbls\Layup\View\CallToActionWidget;
 use Crumbls\Layup\View\CountdownWidget;
 use Crumbls\Layup\View\PricingTableWidget;
 use Crumbls\Layup\View\SocialFollowWidget;
+use Crumbls\Layup\View\CodeWidget;
+use Crumbls\Layup\View\AlertWidget;
+use Crumbls\Layup\View\TableWidget;
+use Crumbls\Layup\View\EmbedWidget;
+use Crumbls\Layup\View\ProgressCircleWidget;
 
 $widgets = [
     TextWidget::class,
@@ -54,6 +59,11 @@ $widgets = [
     CountdownWidget::class,
     PricingTableWidget::class,
     SocialFollowWidget::class,
+    CodeWidget::class,
+    AlertWidget::class,
+    TableWidget::class,
+    EmbedWidget::class,
+    ProgressCircleWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

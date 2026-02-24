@@ -60,6 +60,14 @@ class ButtonWidget extends BaseWidget
             Toggle::make('new_tab')
                 ->label('Open in new tab')
                 ->default(false),
+            TextInput::make('bg_color')
+                ->label('Custom Background Color')
+                ->type('color')
+                ->nullable(),
+            TextInput::make('text_color_override')
+                ->label('Custom Text Color')
+                ->type('color')
+                ->nullable(),
         ];
     }
 

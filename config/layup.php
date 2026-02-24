@@ -47,6 +47,11 @@ return [
 
         // Advanced
         \Crumbls\Layup\View\HtmlWidget::class,
+        \Crumbls\Layup\View\CodeWidget::class,
+        \Crumbls\Layup\View\EmbedWidget::class,
+        \Crumbls\Layup\View\AlertWidget::class,
+        \Crumbls\Layup\View\TableWidget::class,
+        \Crumbls\Layup\View\ProgressCircleWidget::class,
     ],
 
     /*
