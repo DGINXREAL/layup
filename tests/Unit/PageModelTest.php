@@ -169,6 +169,55 @@ it('does not dispatch SafelistChanged when safelist is unchanged', function () {
     Event::assertDispatchedTimes(SafelistChanged::class, 1);
 });
 
+// --- Revisions ---
+
+it('auto-saves revision when content changes', function () {
+    config(['layup.revisions.enabled' => true]);
+
+    $page = Page::create(['title' => 'Rev Test', 'slug' => 'rev-test', 'content' => ['rows' => []], 'status' => 'draft']);
+    expect($page->revisions()->count())->toBe(0); // initial create, no change
+
+    $page->content = ['rows' => [['id' => 'r1', 'settings' => [], 'columns' => []]]];
+    $page->save();
+
+    expect($page->revisions()->count())->toBe(1);
+});
+
+it('does not save revision when content unchanged', function () {
+    config(['layup.revisions.enabled' => true]);
+
+    $page = Page::create(['title' => 'No Rev', 'slug' => 'no-rev', 'content' => ['rows' => []], 'status' => 'draft']);
+    $page->title = 'Updated Title';
+    $page->save();
+
+    expect($page->revisions()->count())->toBe(0);
+});
+
+it('does not save revision when disabled', function () {
+    config(['layup.revisions.enabled' => false]);
+
+    $page = Page::create(['title' => 'Disabled', 'slug' => 'disabled-rev', 'content' => ['rows' => []], 'status' => 'draft']);
+    $page->content = ['rows' => [['id' => 'r1', 'settings' => [], 'columns' => []]]];
+    $page->save();
+
+    expect($page->revisions()->count())->toBe(0);
+    config(['layup.revisions.enabled' => true]);
+});
+
+it('prunes old revisions beyond max', function () {
+    config(['layup.revisions.enabled' => true, 'layup.revisions.max' => 3]);
+
+    $page = Page::create(['title' => 'Prune', 'slug' => 'prune-test', 'content' => ['rows' => []], 'status' => 'draft']);
+
+    for ($i = 1; $i <= 5; $i++) {
+        $page->content = ['rows' => [['id' => "r{$i}", 'settings' => [], 'columns' => []]]];
+        $page->save();
+    }
+
+    expect($page->revisions()->count())->toBeLessThanOrEqual(3);
+    config(['layup.revisions.max' => 50]);
+});
+
 it('sitemapEntries returns published pages', function () {
     Page::create(['title' => 'Published', 'slug' => 'sitemap-pub', 'content' => ['rows' => []], 'status' => 'published']);
     Page::create(['title' => 'Draft', 'slug' => 'sitemap-draft', 'content' => ['rows' => []], 'status' => 'draft']);

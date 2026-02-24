@@ -11,6 +11,7 @@ use Crumbls\Layup\View\Column;
 use Crumbls\Layup\View\Row;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Page extends Model
@@ -22,6 +23,11 @@ class Page extends Model
         static::saved(function (Page $page) {
             if (config('layup.safelist.enabled') && config('layup.safelist.auto_sync')) {
                 SafelistCollector::sync();
+            }
+
+            // Auto-save revision when content changes
+            if ($page->wasChanged('content') && config('layup.revisions.enabled', true)) {
+                $page->saveRevision();
             }
         });
 
@@ -111,6 +117,49 @@ class Page extends Model
     | URL Generation
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Get all revisions for this page.
+     */
+    public function revisions(): HasMany
+    {
+        return $this->hasMany(PageRevision::class, 'page_id')->latest('created_at');
+    }
+
+    /**
+     * Save a revision of the current content.
+     */
+    public function saveRevision(?string $note = null): PageRevision
+    {
+        $maxRevisions = config('layup.revisions.max', 50);
+
+        $revision = $this->revisions()->create([
+            'content' => $this->content,
+            'note' => $note,
+            'author' => auth()->user()?->name ?? auth()->user()?->email,
+            'created_at' => now(),
+        ]);
+
+        // Prune old revisions
+        $count = $this->revisions()->count();
+        if ($count > $maxRevisions) {
+            $this->revisions()
+                ->oldest('created_at')
+                ->limit($count - $maxRevisions)
+                ->delete();
+        }
+
+        return $revision;
+    }
+
+    /**
+     * Restore content from a revision.
+     */
+    public function restoreRevision(PageRevision $revision): void
+    {
+        $this->content = $revision->content;
+        $this->save();
+    }
 
     /**
      * Get the public-facing URL for this page.
