@@ -8,7 +8,8 @@ It's not a CMS. It's not a theme. It's a plugin that gives your Filament panel a
 
 ## Why It Exists
 
-Every Filament project eventually needs a way to build content pages. The options today are:
+It seems like every Filament project we've been on needs a way to build content pages, preferably without a developer. 
+The options today are:
 
 1. **Hardcode Blade views** — fast to start, painful to maintain
 2. **Full CMS packages** — heavy, opinionated, fight your existing architecture
@@ -24,13 +25,14 @@ Layup uses Filament's form builder, not a parallel system. Widget settings are `
 
 ### Extensibility Over Completeness
 
-75 widgets ship built-in, but the real power is making your own. A custom widget is one PHP class with a form schema and a Blade view. Auto-discovery means you drop it in `App\Layup\Widgets` and it shows up in the picker.
+75 widgets ship built-in, but the real power is making your own or overriding the blade files to match your frontend framework. 
+A custom widget is one PHP class with a form schema and a Blade view. Auto-discovery means you drop it in `App\Layup\Widgets` and it shows up in the picker.
 
 The goal isn't to ship every possible widget — it's to make building *your* widgets trivially easy.
 
 ### Progressive Complexity
 
-A simple page needs zero configuration. A complex multi-panel setup with custom models, separate page tables, and curated widget lists is a few lines of config. Layup scales from "just install it" to "deeply customized" without forcing the complexity upfront.
+Once setup, a simple page needs zero configuration. A complex multi-panel setup with custom models, separate page tables, and curated widget lists is a few lines of config. Layup scales from "just install it" to "deeply customized" without forcing the complexity upfront.
 
 ### Frontend-Agnostic
 
@@ -61,6 +63,8 @@ Layup handles the editor. Frontend rendering is opt-in and swappable. Use the bu
 - Page analytics integration (per-widget engagement tracking)
 
 ## How You Can Contribute
+
+I know we will have issues as it gets used.  That's just how it goes. Submit your PRs.  If you are using an agent, ask them to review this file first to check for alignment.
 
 ### Build Widgets
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use Crumbls\Layup\View\HeadingWidget;
 use Crumbls\Layup\View\Row;
 use Crumbls\Layup\View\TextWidget;
-use Crumbls\Layup\View\HeadingWidget;
 
 // Helper to extract names safely from schema components
 function schemaNames(array $schema): array
