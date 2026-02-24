@@ -60,6 +60,8 @@ use Crumbls\Layup\View\TypewriterWidget;
 use Crumbls\Layup\View\CardWidget;
 use Crumbls\Layup\View\TableOfContentsWidget;
 use Crumbls\Layup\View\StepProcessWidget;
+use Crumbls\Layup\View\GradientTextWidget;
+use Crumbls\Layup\View\FlipCardWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
 
@@ -124,6 +126,8 @@ $widgets = [
     CardWidget::class,
     TableOfContentsWidget::class,
     StepProcessWidget::class,
+    GradientTextWidget::class,
+    FlipCardWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

@@ -22,9 +22,9 @@ A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style
 - **Content validation** — structural + widget type validation
 - **Widget auto-discovery** — scans `App\Layup\Widgets` for custom widgets
 - **Configurable model** — swap the Page model per dashboard
-- **614 tests, 1225 assertions**
+- **713 tests, 1424 assertions**
 
-### Built-in Widgets (50)
+### Built-in Widgets (60)
 
 | Category | Widgets |
 |----------|---------|

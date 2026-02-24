@@ -80,6 +80,8 @@ return [
         \Crumbls\Layup\View\CardWidget::class,
         \Crumbls\Layup\View\TableOfContentsWidget::class,
         \Crumbls\Layup\View\StepProcessWidget::class,
+        \Crumbls\Layup\View\GradientTextWidget::class,
+        \Crumbls\Layup\View\FlipCardWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],
