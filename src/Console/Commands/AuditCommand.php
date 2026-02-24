@@ -21,7 +21,7 @@ class AuditCommand extends Command
         $modelClass = config('layup.pages.model', Page::class);
         $pages = $modelClass::all();
 
-        $this->info("Layup Audit Report");
+        $this->info('Layup Audit Report');
         $this->line(str_repeat('─', 40));
         $this->newLine();
 
@@ -33,11 +33,11 @@ class AuditCommand extends Command
         // Widget registry
         $registry = app(WidgetRegistry::class);
         foreach (config('layup.widgets', []) as $class) {
-            if (class_exists($class) && !$registry->has($class::getType())) {
+            if (class_exists($class) && ! $registry->has($class::getType())) {
                 $registry->register($class);
             }
         }
-        $this->line("🧩 Registered widgets: " . count($registry->all()));
+        $this->line('🧩 Registered widgets: ' . count($registry->all()));
 
         // Validate all pages
         $validator = new ContentValidator(strict: true);
@@ -47,7 +47,7 @@ class AuditCommand extends Command
 
         foreach ($pages as $page) {
             $result = $validator->validate($page->content ?? ['rows' => []]);
-            if (!$result->passes()) {
+            if (! $result->passes()) {
                 $issues[$page->title] = $result->errors();
             }
 
@@ -66,10 +66,10 @@ class AuditCommand extends Command
         $this->line("🔧 Total widget instances: {$totalWidgets}");
 
         // Widget usage breakdown
-        if (!empty($widgetUsage)) {
+        if ($widgetUsage !== []) {
             arsort($widgetUsage);
             $this->newLine();
-            $this->line("Widget usage:");
+            $this->line('Widget usage:');
             foreach ($widgetUsage as $type => $count) {
                 $registered = $registry->has($type) ? '✓' : '✗';
                 $this->line("  {$registered} {$type}: {$count}");
@@ -77,9 +77,9 @@ class AuditCommand extends Command
         }
 
         // Validation issues
-        if (!empty($issues)) {
+        if ($issues !== []) {
             $this->newLine();
-            $this->warn("⚠️  Content issues found:");
+            $this->warn('⚠️  Content issues found:');
             foreach ($issues as $title => $errors) {
                 $this->line("  {$title}:");
                 foreach ($errors as $error) {
@@ -88,7 +88,7 @@ class AuditCommand extends Command
             }
         } else {
             $this->newLine();
-            $this->info("✅ All pages pass content validation");
+            $this->info('✅ All pages pass content validation');
         }
 
         // Safelist status

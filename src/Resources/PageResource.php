@@ -7,23 +7,22 @@ namespace Crumbls\Layup\Resources;
 use BackedEnum;
 use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Resources\PageResource\Pages;
+use Crumbls\Layup\Support\PageTemplate;
 use Filament\Actions\Action;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Illuminate\Database\Eloquent\Collection;
-use Crumbls\Layup\Support\PageTemplate;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 use UnitEnum;
 
@@ -36,9 +35,9 @@ class PageResource extends Resource
         return config('layup.pages.model', Page::class);
     }
 
-    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-duplicate';
 
-    protected static string | UnitEnum | null $navigationGroup = 'Content';
+    protected static string|UnitEnum|null $navigationGroup = 'Content';
 
     protected static ?string $navigationLabel = 'Pages';
 
@@ -56,7 +55,7 @@ class PageResource extends Resource
                             ->placeholder('Blank page')
                             ->nullable()
                             ->reactive()
-                            ->afterStateUpdated(function ($state, \Filament\Schemas\Components\Utilities\Set $set) {
+                            ->afterStateUpdated(function ($state, \Filament\Schemas\Components\Utilities\Set $set): void {
                                 if ($state) {
                                     $template = PageTemplate::get($state);
                                     if ($template) {
@@ -73,8 +72,7 @@ class PageResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, \Filament\Schemas\Components\Utilities\Set $set, ?Page $record) =>
-                                $record === null ? $set('slug', Str::slug($state)) : null
+                            ->afterStateUpdated(fn ($state, \Filament\Schemas\Components\Utilities\Set $set, ?Page $record): mixed => $record instanceof \Crumbls\Layup\Models\Page ? null : $set('slug', Str::slug($state))
                             ),
                         TextInput::make('slug')
                             ->required()
@@ -113,7 +111,7 @@ class PageResource extends Resource
                     ->searchable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state) => match ($state) {
+                    ->color(fn (string $state): string => match ($state) {
                         'draft' => 'warning',
                         'published' => 'success',
                         default => 'gray',
@@ -136,7 +134,7 @@ class PageResource extends Resource
                     ->icon('heroicon-o-document-duplicate')
                     ->color('gray')
                     ->requiresConfirmation()
-                    ->action(function (Page $record) {
+                    ->action(function (Page $record): void {
                         $modelClass = config('layup.pages.model', Page::class);
                         $modelClass::create([
                             'title' => $record->title . ' (Copy)',
@@ -161,7 +159,7 @@ class PageResource extends Resource
                         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
                         return response()->streamDownload(
-                            fn () => print($json),
+                            fn () => print ($json),
                             Str::slug($record->title) . '.json',
                             ['Content-Type' => 'application/json'],
                         );

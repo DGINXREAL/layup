@@ -10,10 +10,25 @@ use Filament\Forms\Components\TextInput;
 
 class HighlightBoxWidget extends BaseWidget
 {
-    public static function getType(): string { return 'highlight-box'; }
-    public static function getLabel(): string { return 'Highlight Box'; }
-    public static function getIcon(): string { return 'heroicon-o-light-bulb'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'highlight-box';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Highlight Box';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-light-bulb';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {

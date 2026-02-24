@@ -69,6 +69,7 @@ class ListWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['items'] ?? []);
+
         return "• List ({$count} items)";
     }
 }

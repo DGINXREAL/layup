@@ -66,6 +66,7 @@ class BreadcrumbsWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $labels = array_column($data['items'] ?? [], 'label');
+
         return implode(' > ', array_slice($labels, 0, 3));
     }
 }

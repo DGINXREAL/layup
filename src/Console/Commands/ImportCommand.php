@@ -21,50 +21,56 @@ class ImportCommand extends Command
     {
         $file = $this->argument('file');
 
-        if (!file_exists($file)) {
+        if (! file_exists($file)) {
             $this->error("File not found: {$file}");
+
             return self::FAILURE;
         }
 
         $data = json_decode(file_get_contents($file), true);
-        if (!is_array($data) || !isset($data['pages'])) {
+        if (! is_array($data) || ! isset($data['pages'])) {
             $this->error('Invalid export file — expected { "pages": [...] }');
+
             return self::FAILURE;
         }
 
         $modelClass = config('layup.pages.model', Page::class);
-        $validator = new ContentValidator();
+        $validator = new ContentValidator;
         $imported = 0;
         $skipped = 0;
         $errors = 0;
 
         foreach ($data['pages'] as $pageData) {
             $slug = $pageData['slug'] ?? null;
-            if (!$slug) {
+            if (! $slug) {
                 $this->warn('Skipping page without slug');
                 $skipped++;
+
                 continue;
             }
 
             // Validate content
             $result = $validator->validate($pageData['content'] ?? ['rows' => []]);
-            if (!$result->passes()) {
+            if (! $result->passes()) {
                 $this->warn("Invalid content for '{$slug}': " . implode(', ', $result->errors()));
                 $errors++;
+
                 continue;
             }
 
             if ($this->option('dry-run')) {
                 $this->line("✓ {$slug} — valid");
                 $imported++;
+
                 continue;
             }
 
             $existing = $modelClass::withTrashed()->where('slug', $slug)->first();
 
-            if ($existing && !$this->option('overwrite')) {
+            if ($existing && ! $this->option('overwrite')) {
                 $this->warn("Skipping '{$slug}' (already exists, use --overwrite)");
                 $skipped++;
+
                 continue;
             }
 
@@ -78,7 +84,7 @@ class ImportCommand extends Command
                 $this->info("Updated: {$slug}");
             } else {
                 $modelClass::create([
-                    'title' => $pageData['title'] ?? ucfirst($slug),
+                    'title' => $pageData['title'] ?? ucfirst((string) $slug),
                     'slug' => $slug,
                     'content' => $pageData['content'] ?? ['rows' => []],
                     'meta' => $pageData['meta'] ?? [],

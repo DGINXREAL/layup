@@ -9,10 +9,25 @@ use Filament\Forms\Components\TextInput;
 
 class SkillBarWidget extends BaseWidget
 {
-    public static function getType(): string { return 'skill-bar'; }
-    public static function getLabel(): string { return 'Skill Bar'; }
-    public static function getIcon(): string { return 'heroicon-o-adjustments-horizontal'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'skill-bar';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Skill Bar';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-adjustments-horizontal';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {
@@ -41,6 +56,7 @@ class SkillBarWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['skills'] ?? []);
+
         return "📊 Skill Bars ({$count})";
     }
 }

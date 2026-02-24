@@ -13,7 +13,7 @@ class ValidationResult
 
     public function passes(): bool
     {
-        return empty($this->errors);
+        return $this->errors === [];
     }
 
     /** @return array<string> */

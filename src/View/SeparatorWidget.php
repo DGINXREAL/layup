@@ -80,7 +80,7 @@ class SeparatorWidget extends BaseWidget
 
     public static function getPreview(array $data): string
     {
-        return match($data['style'] ?? 'line') {
+        return match ($data['style'] ?? 'line') {
             'dots' => '● ● ●',
             'stars' => '★ ★ ★',
             'diamond' => '◆',

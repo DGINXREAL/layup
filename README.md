@@ -22,7 +22,7 @@ A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style
 - **Content validation** — structural + widget type validation
 - **Widget auto-discovery** — scans `App\Layup\Widgets` for custom widgets
 - **Configurable model** — swap the Page model per dashboard
-- **848 tests, 1694 assertions**
+- **1,051 tests, 3,304 assertions**
 
 ### Built-in Widgets (75)
 
@@ -471,6 +471,14 @@ class PageB extends \Crumbls\Layup\Models\Page
 }
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and testing guidelines.
+
+## Vision & Roadmap
+
+See [VISION.md](VISION.md) for where Layup is headed and how you can help shape it.
+
 ## License
 
-MIT
+MIT — see [LICENSE.md](LICENSE.md)

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-it('scaffolds a new widget class and blade', function () {
+it('scaffolds a new widget class and blade', function (): void {
     $phpPath = app_path('Layup/Widgets/TestBannerWidget.php');
     $bladePath = resource_path('views/components/layup/test-banner.blade.php');
 
@@ -28,10 +28,12 @@ it('scaffolds a new widget class and blade', function () {
     @rmdir(resource_path('views/components/layup'));
 });
 
-it('fails if widget already exists', function () {
+it('fails if widget already exists', function (): void {
     $phpPath = app_path('Layup/Widgets/DuplicateWidget.php');
     $dir = dirname($phpPath);
-    if (!is_dir($dir)) mkdir($dir, 0755, true);
+    if (! is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
     file_put_contents($phpPath, '<?php // existing');
 
     $this->artisan('layup:make-widget', ['name' => 'Duplicate'])
@@ -42,7 +44,7 @@ it('fails if widget already exists', function () {
     @rmdir(app_path('Layup'));
 });
 
-it('auto-appends Widget suffix', function () {
+it('auto-appends Widget suffix', function (): void {
     $phpPath = app_path('Layup/Widgets/AutoSuffixWidget.php');
     @unlink($phpPath);
 

@@ -79,6 +79,7 @@ class ShareButtonsWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['networks'] ?? []);
+
         return "🔗 Share Buttons ({$count} networks)";
     }
 }

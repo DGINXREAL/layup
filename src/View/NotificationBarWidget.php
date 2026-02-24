@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Crumbls\Layup\View;
 
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 
@@ -74,6 +73,7 @@ class NotificationBarWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $text = $data['text'] ?? '';
+
         return "🔔 {$text}";
     }
 }

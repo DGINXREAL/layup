@@ -7,7 +7,7 @@ use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Support\SafelistCollector;
 use Illuminate\Support\Facades\Event;
 
-it('returns static classes from safelist file', function () {
+it('returns static classes from safelist file', function (): void {
     $classes = SafelistCollector::staticClasses();
 
     expect($classes)->toBeArray()
@@ -23,15 +23,15 @@ it('returns static classes from safelist file', function () {
         ->and($classes)->toContain('w-full');
 });
 
-it('returns empty array from classesFromContent with null content', function () {
+it('returns empty array from classesFromContent with null content', function (): void {
     expect(SafelistCollector::classesFromContent(null))->toBe([]);
 });
 
-it('returns empty array from classesFromContent with empty rows', function () {
+it('returns empty array from classesFromContent with empty rows', function (): void {
     expect(SafelistCollector::classesFromContent(['rows' => []]))->toBe([]);
 });
 
-it('extracts user custom classes from row settings', function () {
+it('extracts user custom classes from row settings', function (): void {
     $content = ['rows' => [[
         'id' => 'r1',
         'settings' => ['class' => 'my-custom bg-brand-500'],
@@ -43,7 +43,7 @@ it('extracts user custom classes from row settings', function () {
         ->and($classes)->toContain('bg-brand-500');
 });
 
-it('extracts user custom classes from column settings', function () {
+it('extracts user custom classes from column settings', function (): void {
     $content = ['rows' => [[
         'id' => 'r1',
         'settings' => [],
@@ -58,7 +58,7 @@ it('extracts user custom classes from column settings', function () {
     expect($classes)->toContain('col-special');
 });
 
-it('extracts user custom classes from widget data', function () {
+it('extracts user custom classes from widget data', function (): void {
     $content = ['rows' => [[
         'id' => 'r1',
         'settings' => [],
@@ -78,7 +78,7 @@ it('extracts user custom classes from widget data', function () {
         ->and($classes)->toContain('prose-lg');
 });
 
-it('deduplicates classes', function () {
+it('deduplicates classes', function (): void {
     $content = ['rows' => [
         ['id' => 'r1', 'settings' => ['class' => 'dupe'], 'columns' => [[
             'id' => 'c1', 'settings' => ['class' => 'dupe'], 'widgets' => [],
@@ -89,7 +89,7 @@ it('deduplicates classes', function () {
     expect(array_count_values($classes)['dupe'])->toBe(1);
 });
 
-it('extracts gap class from row settings', function () {
+it('extracts gap class from row settings', function (): void {
     $content = ['rows' => [[
         'id' => 'r1',
         'settings' => ['gap' => 'gap-6'],
@@ -100,7 +100,7 @@ it('extracts gap class from row settings', function () {
     expect($classes)->toContain('gap-6');
 });
 
-it('merges static and dynamic classes', function () {
+it('merges static and dynamic classes', function (): void {
     Page::create([
         'title' => 'Test',
         'slug' => 'safelist-merge',
@@ -117,7 +117,7 @@ it('merges static and dynamic classes', function () {
         ->and($all)->toContain('unique-dynamic-class'); // dynamic
 });
 
-it('generates safelist file string with one class per line', function () {
+it('generates safelist file string with one class per line', function (): void {
     $output = SafelistCollector::toSafelistFile();
     $lines = array_filter(explode("\n", trim($output)));
     expect(count($lines))->toBeGreaterThan(40);
@@ -127,7 +127,7 @@ it('generates safelist file string with one class per line', function () {
     expect($lines)->toBe($sorted);
 });
 
-it('extracts inline styles from content', function () {
+it('extracts inline styles from content', function (): void {
     $content = ['rows' => [[
         'id' => 'r1',
         'settings' => ['inline_css' => 'background: red;'],
@@ -148,7 +148,7 @@ it('extracts inline styles from content', function () {
         ->and($styles)->toContain('color: blue;');
 });
 
-it('sync dispatches SafelistChanged event on change', function () {
+it('sync dispatches SafelistChanged event on change', function (): void {
     Event::fake([SafelistChanged::class]);
     cache()->forget('layup:safelist:hash');
     cache()->forget('layup:safelist:classes');
@@ -162,7 +162,7 @@ it('sync dispatches SafelistChanged event on change', function () {
     @unlink($path);
 });
 
-it('sync does not dispatch when hash unchanged', function () {
+it('sync does not dispatch when hash unchanged', function (): void {
     Event::fake([SafelistChanged::class]);
     cache()->forget('layup:safelist:hash');
     cache()->forget('layup:safelist:classes');
@@ -179,7 +179,7 @@ it('sync does not dispatch when hash unchanged', function () {
     @unlink($path);
 });
 
-it('sync writes file to disk', function () {
+it('sync writes file to disk', function (): void {
     cache()->forget('layup:safelist:hash');
     cache()->forget('layup:safelist:classes');
 
@@ -194,11 +194,11 @@ it('sync writes file to disk', function () {
     @unlink($path);
 });
 
-it('classesForPages works with empty collection', function () {
+it('classesForPages works with empty collection', function (): void {
     expect(SafelistCollector::classesForPages([]))->toBe([]);
 });
 
-it('includes extra_classes from config', function () {
+it('includes extra_classes from config', function (): void {
     config(['layup.safelist.extra_classes' => ['custom-brand', 'bg-brand-500']]);
 
     $all = SafelistCollector::classes();

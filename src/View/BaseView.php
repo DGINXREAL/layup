@@ -16,20 +16,15 @@ use Illuminate\View\Component;
 
 abstract class BaseView extends Component
 {
-    /** @var array<BaseView> */
-    protected array $children = [];
-
-    protected array $data = [];
-
     protected bool $isFirst = false;
 
     protected bool $isLast = false;
 
-    public function __construct(array $data = [], array $children = [])
-    {
-        $this->data = $data;
-        $this->children = $children;
-    }
+    public function __construct(
+        protected array $data = [],
+        /** @var array<BaseView> */
+        protected array $children = []
+    ) {}
 
     /**
      * Set position within parent (first/last) for gutter logic.
@@ -305,7 +300,7 @@ abstract class BaseView extends Component
                     '1000' => 'Very Slow (1s)',
                 ])
                 ->default('500')
-                ->visible(fn ($get) => !empty($get('animation')))
+                ->visible(fn ($get): bool => ! empty($get('animation')))
                 ->nullable(),
         ];
     }
@@ -316,7 +311,7 @@ abstract class BaseView extends Component
      */
     public static function visibilityClasses(array $hideOn): string
     {
-        if (empty($hideOn)) {
+        if ($hideOn === []) {
             return '';
         }
 
@@ -331,11 +326,11 @@ abstract class BaseView extends Component
 
             if ($i === 0 && $hidden) {
                 $classes[] = 'hidden';
-            } elseif ($i === 0 && !$hidden) {
+            } elseif ($i === 0 && ! $hidden) {
                 // default visible, no class needed
-            } elseif ($hidden && !$prevHidden) {
+            } elseif ($hidden && ! $prevHidden) {
                 $classes[] = "{$bp}:hidden";
-            } elseif (!$hidden && $prevHidden) {
+            } elseif (! $hidden && $prevHidden) {
                 $classes[] = "{$bp}:block";
             }
         }
@@ -350,32 +345,32 @@ abstract class BaseView extends Component
     {
         $styles = [];
 
-        if (!empty($data['text_color'])) {
+        if (! empty($data['text_color'])) {
             $styles[] = "color: {$data['text_color']};";
         }
-        if (!empty($data['text_align'])) {
+        if (! empty($data['text_align'])) {
             $styles[] = "text-align: {$data['text_align']};";
         }
-        if (!empty($data['font_size'])) {
+        if (! empty($data['font_size'])) {
             $styles[] = "font-size: {$data['font_size']};";
         }
-        if (!empty($data['border_radius'])) {
+        if (! empty($data['border_radius'])) {
             $styles[] = "border-radius: {$data['border_radius']};";
         }
-        if (!empty($data['border_width']) && !empty($data['border_style'])) {
+        if (! empty($data['border_width']) && ! empty($data['border_style'])) {
             $color = $data['border_color'] ?? '#e5e7eb';
             $styles[] = "border: {$data['border_width']} {$data['border_style']} {$color};";
         }
-        if (!empty($data['box_shadow'])) {
+        if (! empty($data['box_shadow'])) {
             $styles[] = "box-shadow: {$data['box_shadow']};";
         }
-        if (!empty($data['opacity'])) {
+        if (! empty($data['opacity'])) {
             $styles[] = "opacity: {$data['opacity']};";
         }
-        if (!empty($data['background_color'])) {
+        if (! empty($data['background_color'])) {
             $styles[] = "background-color: {$data['background_color']};";
         }
-        if (!empty($data['inline_css'])) {
+        if (! empty($data['inline_css'])) {
             $styles[] = $data['inline_css'];
         }
 
@@ -413,7 +408,7 @@ abstract class BaseView extends Component
             default => '',
         };
 
-        if (empty($initial)) {
+        if ($initial === '' || $initial === '0') {
             return '';
         }
 

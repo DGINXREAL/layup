@@ -72,6 +72,7 @@ class MasonryWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['images'] ?? []);
+
         return "🧱 Masonry ({$count} images)";
     }
 }

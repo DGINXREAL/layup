@@ -7,7 +7,7 @@ use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Support\SafelistCollector;
 use Illuminate\Support\Facades\Event;
 
-it('creates a page with title/slug/content/status', function () {
+it('creates a page with title/slug/content/status', function (): void {
     $page = Page::create([
         'title' => 'Test Page',
         'slug' => 'test-page',
@@ -20,7 +20,7 @@ it('creates a page with title/slug/content/status', function () {
     expect($page->status)->toBe('draft');
 });
 
-it('casts content to array', function () {
+it('casts content to array', function (): void {
     $page = Page::create([
         'title' => 'T', 'slug' => 'cast-content',
         'content' => ['rows' => [['columns' => []]]],
@@ -31,7 +31,7 @@ it('casts content to array', function () {
     expect($fresh->content['rows'])->toHaveCount(1);
 });
 
-it('casts meta to array', function () {
+it('casts meta to array', function (): void {
     $page = Page::create([
         'title' => 'T', 'slug' => 'cast-meta',
         'content' => null,
@@ -41,31 +41,31 @@ it('casts meta to array', function () {
     expect($page->fresh()->meta)->toBeArray()->toHaveKey('description');
 });
 
-it('scopePublished filters correctly', function () {
+it('scopePublished filters correctly', function (): void {
     Page::create(['title' => 'A', 'slug' => 'a', 'status' => 'published']);
     Page::create(['title' => 'B', 'slug' => 'b', 'status' => 'draft']);
     expect(Page::published()->count())->toBe(1);
 });
 
-it('scopeDraft filters correctly', function () {
+it('scopeDraft filters correctly', function (): void {
     Page::create(['title' => 'A', 'slug' => 'a2', 'status' => 'published']);
     Page::create(['title' => 'B', 'slug' => 'b2', 'status' => 'draft']);
     expect(Page::draft()->count())->toBe(1);
 });
 
-it('supports soft deletes', function () {
+it('supports soft deletes', function (): void {
     $page = Page::create(['title' => 'Del', 'slug' => 'del', 'status' => 'draft']);
     $page->delete();
     expect(Page::where('slug', 'del')->count())->toBe(0);
     expect(Page::withTrashed()->where('slug', 'del')->count())->toBe(1);
 });
 
-it('enforces slug uniqueness', function () {
+it('enforces slug uniqueness', function (): void {
     Page::create(['title' => 'A', 'slug' => 'unique-slug', 'status' => 'draft']);
     Page::create(['title' => 'B', 'slug' => 'unique-slug', 'status' => 'draft']);
 })->throws(\Illuminate\Database\QueryException::class);
 
-it('stores and retrieves complex content JSON', function () {
+it('stores and retrieves complex content JSON', function (): void {
     $content = [
         'rows' => [
             [
@@ -87,22 +87,22 @@ it('stores and retrieves complex content JSON', function () {
     expect($fresh->content['rows'][0]['columns'][0]['widgets'][0]['type'])->toBe('text');
 });
 
-it('reads table name from config', function () {
-    $page = new Page();
+it('reads table name from config', function (): void {
+    $page = new Page;
     expect($page->getTable())->toBe(config('layup.pages.table', 'layup_pages'));
 });
 
-it('getUrl() returns the correct URL', function () {
+it('getUrl() returns the correct URL', function (): void {
     $page = Page::create(['title' => 'Url', 'slug' => 'my-page', 'status' => 'draft']);
     expect($page->getUrl())->toEndWith('/pages/my-page');
 });
 
-it('getMetaTitle() falls back to title', function () {
+it('getMetaTitle() falls back to title', function (): void {
     $page = Page::create(['title' => 'Fallback', 'slug' => 'meta-title', 'status' => 'draft']);
     expect($page->getMetaTitle())->toBe('Fallback');
 });
 
-it('getMetaTitle() uses meta title when set', function () {
+it('getMetaTitle() uses meta title when set', function (): void {
     $page = Page::create([
         'title' => 'Fallback', 'slug' => 'meta-title2', 'status' => 'draft',
         'meta' => ['title' => 'Custom Title'],
@@ -110,7 +110,7 @@ it('getMetaTitle() uses meta title when set', function () {
     expect($page->getMetaTitle())->toBe('Custom Title');
 });
 
-it('getMetaDescription() returns description from meta', function () {
+it('getMetaDescription() returns description from meta', function (): void {
     $page = Page::create([
         'title' => 'D', 'slug' => 'meta-desc', 'status' => 'draft',
         'meta' => ['description' => 'A desc'],
@@ -118,7 +118,7 @@ it('getMetaDescription() returns description from meta', function () {
     expect($page->getMetaDescription())->toBe('A desc');
 });
 
-it('getMetaKeywords() returns keywords from meta', function () {
+it('getMetaKeywords() returns keywords from meta', function (): void {
     $page = Page::create([
         'title' => 'K', 'slug' => 'meta-kw', 'status' => 'draft',
         'meta' => ['keywords' => 'a,b,c'],
@@ -126,7 +126,7 @@ it('getMetaKeywords() returns keywords from meta', function () {
     expect($page->getMetaKeywords())->toBe('a,b,c');
 });
 
-it('dispatches SafelistChanged when saving a page adds new classes', function () {
+it('dispatches SafelistChanged when saving a page adds new classes', function (): void {
     Event::fake([SafelistChanged::class]);
 
     // Seed cache with a minimal class list so the new page triggers a change
@@ -142,12 +142,10 @@ it('dispatches SafelistChanged when saving a page adds new classes', function ()
         'status' => 'published',
     ]);
 
-    Event::assertDispatched(SafelistChanged::class, function (SafelistChanged $e) {
-        return in_array('my-custom-class', $e->added);
-    });
+    Event::assertDispatched(SafelistChanged::class, fn (SafelistChanged $e): bool => in_array('my-custom-class', $e->added));
 });
 
-it('does not dispatch SafelistChanged when safelist is unchanged', function () {
+it('does not dispatch SafelistChanged when safelist is unchanged', function (): void {
     Event::fake([SafelistChanged::class]);
 
     config(['layup.safelist.enabled' => true, 'layup.safelist.auto_sync' => true]);
@@ -171,7 +169,7 @@ it('does not dispatch SafelistChanged when safelist is unchanged', function () {
 
 // --- Revisions ---
 
-it('auto-saves revision when content changes', function () {
+it('auto-saves revision when content changes', function (): void {
     config(['layup.revisions.enabled' => true]);
 
     $page = Page::create(['title' => 'Rev Test', 'slug' => 'rev-test', 'content' => ['rows' => []], 'status' => 'draft']);
@@ -183,7 +181,7 @@ it('auto-saves revision when content changes', function () {
     expect($page->revisions()->count())->toBe(1);
 });
 
-it('does not save revision when content unchanged', function () {
+it('does not save revision when content unchanged', function (): void {
     config(['layup.revisions.enabled' => true]);
 
     $page = Page::create(['title' => 'No Rev', 'slug' => 'no-rev', 'content' => ['rows' => []], 'status' => 'draft']);
@@ -193,7 +191,7 @@ it('does not save revision when content unchanged', function () {
     expect($page->revisions()->count())->toBe(0);
 });
 
-it('does not save revision when disabled', function () {
+it('does not save revision when disabled', function (): void {
     config(['layup.revisions.enabled' => false]);
 
     $page = Page::create(['title' => 'Disabled', 'slug' => 'disabled-rev', 'content' => ['rows' => []], 'status' => 'draft']);
@@ -204,7 +202,7 @@ it('does not save revision when disabled', function () {
     config(['layup.revisions.enabled' => true]);
 });
 
-it('prunes old revisions beyond max', function () {
+it('prunes old revisions beyond max', function (): void {
     config(['layup.revisions.enabled' => true, 'layup.revisions.max' => 3]);
 
     $page = Page::create(['title' => 'Prune', 'slug' => 'prune-test', 'content' => ['rows' => []], 'status' => 'draft']);
@@ -218,7 +216,7 @@ it('prunes old revisions beyond max', function () {
     config(['layup.revisions.max' => 50]);
 });
 
-it('sitemapEntries returns published pages', function () {
+it('sitemapEntries returns published pages', function (): void {
     Page::create(['title' => 'Published', 'slug' => 'sitemap-pub', 'content' => ['rows' => []], 'status' => 'published']);
     Page::create(['title' => 'Draft', 'slug' => 'sitemap-draft', 'content' => ['rows' => []], 'status' => 'draft']);
 
@@ -228,7 +226,7 @@ it('sitemapEntries returns published pages', function () {
     expect($urls)->not->toContain(url('pages/sitemap-draft'));
 });
 
-it('does not sync safelist when auto_sync is disabled', function () {
+it('does not sync safelist when auto_sync is disabled', function (): void {
     Event::fake([SafelistChanged::class]);
 
     config(['layup.safelist.enabled' => true, 'layup.safelist.auto_sync' => false]);
@@ -243,7 +241,7 @@ it('does not sync safelist when auto_sync is disabled', function () {
     Event::assertNotDispatched(SafelistChanged::class);
 });
 
-it('returns section tree wrapping legacy rows in default section', function () {
+it('returns section tree wrapping legacy rows in default section', function (): void {
     $page = Page::create([
         'title' => 'Legacy Test',
         'slug' => 'legacy-section-test',
@@ -257,7 +255,7 @@ it('returns section tree wrapping legacy rows in default section', function () {
         ->and($sections[0]['rows'])->toHaveCount(1);
 });
 
-it('returns section tree from sections key', function () {
+it('returns section tree from sections key', function (): void {
     $page = Page::create([
         'title' => 'Sections Test',
         'slug' => 'sections-key-test',
@@ -275,7 +273,7 @@ it('returns section tree from sections key', function () {
         ->and($sections[1]['rows'])->toHaveCount(0);
 });
 
-it('generates WebPage structured data by default', function () {
+it('generates WebPage structured data by default', function (): void {
     $page = Page::create([
         'title' => 'SD Test',
         'slug' => 'sd-test',
@@ -290,7 +288,7 @@ it('generates WebPage structured data by default', function () {
         ->and($schemas[1]['@type'])->toBe('BreadcrumbList');
 });
 
-it('generates Article structured data with author', function () {
+it('generates Article structured data with author', function (): void {
     $page = Page::create([
         'title' => 'Blog Post',
         'slug' => 'blog-post',
@@ -304,7 +302,7 @@ it('generates Article structured data with author', function () {
         ->and($schemas[0]['author']['name'])->toBe('Jane Doe');
 });
 
-it('generates FAQPage structured data from accordion widgets', function () {
+it('generates FAQPage structured data from accordion widgets', function (): void {
     $page = Page::create([
         'title' => 'FAQ',
         'slug' => 'faq-test',
@@ -332,7 +330,7 @@ it('generates FAQPage structured data from accordion widgets', function () {
         ->and($schemas[0]['mainEntity'][0]['name'])->toBe('What is Layup?');
 });
 
-it('generates breadcrumb with nested slug', function () {
+it('generates breadcrumb with nested slug', function (): void {
     $page = Page::create([
         'title' => 'Sub Page',
         'slug' => 'docs/getting-started',

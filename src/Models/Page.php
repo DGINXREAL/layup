@@ -20,7 +20,7 @@ class Page extends Model
 
     protected static function booted(): void
     {
-        static::saved(function (Page $page) {
+        static::saved(function (Page $page): void {
             if (config('layup.safelist.enabled') && config('layup.safelist.auto_sync')) {
                 SafelistCollector::sync();
             }
@@ -31,7 +31,7 @@ class Page extends Model
             }
         });
 
-        static::deleted(function (Page $page) {
+        static::deleted(function (Page $page): void {
             if (config('layup.safelist.enabled') && config('layup.safelist.auto_sync')) {
                 SafelistCollector::sync();
             }
@@ -136,13 +136,11 @@ class Page extends Model
         ]);
 
         // Article-specific fields
-        if ($type === 'Article' || $type === 'BlogPosting') {
-            if (!empty($this->meta['author'])) {
-                $page['author'] = [
-                    '@type' => 'Person',
-                    'name' => $this->meta['author'],
-                ];
-            }
+        if (($type === 'Article' || $type === 'BlogPosting') && ! empty($this->meta['author'])) {
+            $page['author'] = [
+                '@type' => 'Person',
+                'name' => $this->meta['author'],
+            ];
         }
 
         $schemas[] = $page;
@@ -150,8 +148,8 @@ class Page extends Model
         // FAQ schema — auto-detect from accordion/toggle widgets
         if ($type === 'FAQPage') {
             $faqs = $this->extractFaqItems();
-            if (!empty($faqs)) {
-                $schemas[0]['mainEntity'] = array_map(fn(array $faq) => [
+            if ($faqs !== []) {
+                $schemas[0]['mainEntity'] = array_map(fn (array $faq): array => [
                     '@type' => 'Question',
                     'name' => $faq['question'],
                     'acceptedAnswer' => [
@@ -198,7 +196,7 @@ class Page extends Model
         $rows = $this->content['rows'] ?? [];
 
         // Also check inside sections
-        if (!empty($this->content['sections'])) {
+        if (! empty($this->content['sections'])) {
             $rows = [];
             foreach ($this->content['sections'] as $section) {
                 foreach ($section['rows'] ?? [] as $row) {
@@ -213,10 +211,10 @@ class Page extends Model
                     $type = $widget['type'] ?? '';
                     if (in_array($type, ['accordion', 'toggle'])) {
                         foreach ($widget['data']['items'] ?? [] as $item) {
-                            if (!empty($item['title']) && !empty($item['content'])) {
+                            if (! empty($item['title']) && ! empty($item['content'])) {
                                 $faqs[] = [
                                     'question' => $item['title'],
-                                    'answer' => strip_tags($item['content']),
+                                    'answer' => strip_tags((string) $item['content']),
                                 ];
                             }
                         }
@@ -343,12 +341,10 @@ class Page extends Model
             $sections = [['settings' => [], 'rows' => $content['rows'] ?? []]];
         }
 
-        return array_map(function (array $sectionData) {
-            return [
-                'settings' => $sectionData['settings'] ?? [],
-                'rows' => $this->buildRowTree($sectionData['rows'] ?? []),
-            ];
-        }, $sections);
+        return array_map(fn (array $sectionData): array => [
+            'settings' => $sectionData['settings'] ?? [],
+            'rows' => $this->buildRowTree($sectionData['rows'] ?? []),
+        ], $sections);
     }
 
     public function getContentTree(): array
@@ -373,14 +369,14 @@ class Page extends Model
     {
         $registry = app(WidgetRegistry::class);
 
-        return array_map(function (array $rowData) use ($registry) {
-            $columns = array_map(function (array $colData) use ($registry) {
+        return array_map(function (array $rowData) use ($registry): \Crumbls\Layup\View\Row {
+            $columns = array_map(function (array $colData) use ($registry): \Crumbls\Layup\View\Column {
                 $widgets = array_map(function (array $widgetData) use ($registry) {
                     $type = $widgetData['type'] ?? null;
                     $class = $type ? $registry->get($type) : null;
 
                     if (! $class) {
-                        return null;
+                        return;
                     }
 
                     return $class::make($widgetData['data'] ?? []);
@@ -433,12 +429,10 @@ class Page extends Model
      */
     public static function sitemapEntries(): array
     {
-        return static::published()->get()->map(function (self $page) {
-            return [
-                'url' => $page->getUrl(),
-                'lastmod' => $page->updated_at->toDateString(),
-                'priority' => '0.7',
-            ];
-        })->all();
+        return static::published()->get()->map(fn (self $page): array => [
+            'url' => $page->getUrl(),
+            'lastmod' => $page->updated_at->toDateString(),
+            'priority' => '0.7',
+        ])->all();
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Support\SafelistCollector;
 
-it('writes safelist file to default path', function () {
+it('writes safelist file to default path', function (): void {
     $path = SafelistCollector::defaultPath();
 
     $this->artisan('layup:safelist')
@@ -17,12 +17,12 @@ it('writes safelist file to default path', function () {
     @unlink($path);
 });
 
-it('outputs to stdout with --stdout flag', function () {
+it('outputs to stdout with --stdout flag', function (): void {
     $this->artisan('layup:safelist', ['--stdout' => true])
         ->assertSuccessful();
 });
 
-it('static-only excludes dynamic classes', function () {
+it('static-only excludes dynamic classes', function (): void {
     Page::create([
         'title' => 'Static Only Test',
         'slug' => 'static-only-test',
@@ -39,7 +39,7 @@ it('static-only excludes dynamic classes', function () {
         ->doesntExpectOutput('should-not-appear-xyz');
 });
 
-it('writes to custom output path', function () {
+it('writes to custom output path', function (): void {
     $relative = 'storage/layup-test-custom-safelist.txt';
     $path = base_path($relative);
 

@@ -69,6 +69,7 @@ class TimelineWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['events'] ?? []);
+
         return "📅 Timeline ({$count} events)";
     }
 }

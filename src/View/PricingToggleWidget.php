@@ -92,6 +92,7 @@ class PricingToggleWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['plans'] ?? []);
+
         return "💰 Pricing Toggle ({$count} plans)";
     }
 }

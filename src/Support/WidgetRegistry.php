@@ -140,7 +140,7 @@ class WidgetRegistry
     public function grouped(): array
     {
         return collect($this->widgets)
-            ->mapToGroups(fn (string $class, string $type) => [$class::getCategory() => $class::toArray()])
+            ->mapToGroups(fn (string $class, string $type): array => [$class::getCategory() => $class::toArray()])
             ->all();
     }
 }

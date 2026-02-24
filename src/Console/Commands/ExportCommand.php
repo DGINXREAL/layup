@@ -25,15 +25,13 @@ class ExportCommand extends Command
             $query->where('status', $status);
         }
 
-        $pages = $query->get()->map(function ($page) {
-            return [
-                'title' => $page->title,
-                'slug' => $page->slug,
-                'status' => $page->status,
-                'content' => $page->content,
-                'meta' => $page->meta,
-            ];
-        })->toArray();
+        $pages = $query->get()->map(fn ($page): array => [
+            'title' => $page->title,
+            'slug' => $page->slug,
+            'status' => $page->status,
+            'content' => $page->content,
+            'meta' => $page->meta,
+        ])->toArray();
 
         $flags = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
         if ($this->option('pretty')) {
@@ -44,7 +42,7 @@ class ExportCommand extends Command
 
         if ($output = $this->option('output')) {
             file_put_contents($output, $json);
-            $this->info("Exported " . count($pages) . " pages to {$output}");
+            $this->info('Exported ' . count($pages) . " pages to {$output}");
         } else {
             $this->line($json);
         }

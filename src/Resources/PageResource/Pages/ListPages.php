@@ -31,11 +31,12 @@ class ListPages extends ListRecords
                         ->acceptedFileTypes(['application/json'])
                         ->required(),
                 ])
-                ->action(function (array $data) {
+                ->action(function (array $data): void {
                     $path = storage_path('app/' . $data['file']);
 
                     if (! file_exists($path)) {
                         Notification::make()->danger()->title('File not found')->send();
+
                         return;
                     }
 
@@ -44,12 +45,14 @@ class ListPages extends ListRecords
 
                     if (! $json || ! isset($json['content'])) {
                         Notification::make()->danger()->title('Invalid Layup JSON file')->send();
+
                         return;
                     }
 
-                    $validator = new ContentValidator();
+                    $validator = new ContentValidator;
                     if (! $validator->validate($json['content'])) {
                         Notification::make()->danger()->title('Invalid page content structure')->send();
+
                         return;
                     }
 

@@ -85,6 +85,7 @@ class ImageHotspotWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['hotspots'] ?? []);
+
         return "📍 Image Hotspot ({$count} pins)";
     }
 }

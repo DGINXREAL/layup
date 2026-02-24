@@ -52,6 +52,7 @@ class RichTextWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $content = strip_tags($data['content'] ?? '');
+
         return mb_strlen($content) > 60 ? mb_substr($content, 0, 60) . '…' : ($content ?: '(empty)');
     }
 }

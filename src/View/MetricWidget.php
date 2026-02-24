@@ -10,10 +10,25 @@ use Filament\Forms\Components\TextInput;
 
 class MetricWidget extends BaseWidget
 {
-    public static function getType(): string { return 'metric'; }
-    public static function getLabel(): string { return 'Metrics Row'; }
-    public static function getIcon(): string { return 'heroicon-o-chart-bar-square'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'metric';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Metrics Row';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-chart-bar-square';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {
@@ -52,6 +67,7 @@ class MetricWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['metrics'] ?? []);
+
         return "📊 Metrics ({$count})";
     }
 }

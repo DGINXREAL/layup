@@ -80,6 +80,7 @@ class GradientTextWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $text = $data['text'] ?? '';
+
         return "🌈 {$text}";
     }
 }

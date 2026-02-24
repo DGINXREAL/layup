@@ -10,10 +10,25 @@ use Filament\Forms\Components\TextInput;
 
 class AvatarGroupWidget extends BaseWidget
 {
-    public static function getType(): string { return 'avatar-group'; }
-    public static function getLabel(): string { return 'Avatar Group'; }
-    public static function getIcon(): string { return 'heroicon-o-users'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'avatar-group';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Avatar Group';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-users';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {
@@ -49,6 +64,7 @@ class AvatarGroupWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['avatars'] ?? []);
-        return "👥 {$count} avatars" . (!empty($data['extra_count']) ? " {$data['extra_count']}" : '');
+
+        return "👥 {$count} avatars" . (empty($data['extra_count']) ? '' : " {$data['extra_count']}");
     }
 }

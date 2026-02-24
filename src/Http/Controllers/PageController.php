@@ -82,10 +82,12 @@ class PageController extends Controller
         }
 
         foreach (new \DirectoryIterator($directory) as $file) {
-            if ($file->isDot() || $file->getExtension() !== 'php') {
+            if ($file->isDot()) {
                 continue;
             }
-
+            if ($file->getExtension() !== 'php') {
+                continue;
+            }
             $className = $namespace . '\\' . $file->getBasename('.php');
 
             if (class_exists($className) && is_subclass_of($className, \Crumbls\Layup\View\BaseWidget::class)) {

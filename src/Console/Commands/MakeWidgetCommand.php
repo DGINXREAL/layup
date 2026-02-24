@@ -17,7 +17,7 @@ class MakeWidgetCommand extends Command
     {
         $name = $this->argument('name');
         $className = Str::studly($name);
-        if (!str_ends_with($className, 'Widget')) {
+        if (! str_ends_with($className, 'Widget')) {
             $className .= 'Widget';
         }
 
@@ -28,12 +28,13 @@ class MakeWidgetCommand extends Command
 
         if (file_exists($phpPath)) {
             $this->error("Widget class already exists: {$phpPath}");
+
             return self::FAILURE;
         }
 
         // Create PHP class
         $phpDir = dirname($phpPath);
-        if (!is_dir($phpDir)) {
+        if (! is_dir($phpDir)) {
             mkdir($phpDir, 0755, true);
         }
 
@@ -43,7 +44,7 @@ class MakeWidgetCommand extends Command
 
         // Create Blade view
         $bladeDir = dirname($bladePath);
-        if (!is_dir($bladeDir)) {
+        if (! is_dir($bladeDir)) {
             mkdir($bladeDir, 0755, true);
         }
 
@@ -52,11 +53,11 @@ class MakeWidgetCommand extends Command
         $this->info("Created blade view: {$bladePath}");
 
         $this->newLine();
-        $this->comment("Next steps:");
+        $this->comment('Next steps:');
         $this->line("  1. Edit {$phpPath} to add your form fields");
         $this->line("  2. Edit {$bladePath} to customize the frontend HTML");
-        $this->line("  3. The widget will be auto-discovered from App\\Layup\\Widgets");
-        $this->line("     Or add it to config/layup.php widgets array:");
+        $this->line('  3. The widget will be auto-discovered from App\\Layup\\Widgets');
+        $this->line('     Or add it to config/layup.php widgets array:');
         $this->line("     \\{$namespace}\\{$className}::class,");
 
         return self::SUCCESS;

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Crumbls\Layup\Resources\PageResource\Pages;
 
-use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Resources\PageResource;
 use Crumbls\Layup\Support\ContentValidator;
 use Crumbls\Layup\Support\PageTemplate;
@@ -25,16 +24,21 @@ class EditPage extends EditRecord
 
     protected \Filament\Support\Enums\Width|string|null $maxContentWidth = 'full';
 
-    /** @var array Excluded from Filament's form hydration via $except */
+    /** @var array Excluded from Filament's form hydration via */
     public array $pageContent = [];
 
     public ?string $editingRowId = null;
+
     public ?string $editingColumnId = null;
+
     public ?string $editingWidgetId = null;
+
     public ?string $editingWidgetType = null;
 
     public array $rowSettings = [];
+
     public array $columnSettings = [];
+
     public array $widgetData = [];
 
     public function mount(int|string $record): void
@@ -54,9 +58,9 @@ class EditPage extends EditRecord
                 ->modalWidth('2xl')
                 ->modalHeading('Revision History')
                 ->modalDescription('View and restore previous versions of this page')
-                ->modalContent(fn () => $this->getRevisionHistoryView())
+                ->modalContent(fn (): \Illuminate\Contracts\View\View => $this->getRevisionHistoryView())
                 ->modalFooterActions([])
-                ->action(fn () => null),
+                ->action(fn (): null => null),
             Action::make('saveAsTemplate')
                 ->label('Save as Template')
                 ->icon('heroicon-o-document-duplicate')
@@ -65,12 +69,12 @@ class EditPage extends EditRecord
                     \Filament\Forms\Components\TextInput::make('template_name')
                         ->label('Template Name')
                         ->required()
-                        ->default(fn () => $this->record->title . ' Template'),
+                        ->default(fn (): string => $this->record->title . ' Template'),
                     \Filament\Forms\Components\TextInput::make('template_description')
                         ->label('Description')
                         ->nullable(),
                 ])
-                ->action(function (array $data) {
+                ->action(function (array $data): void {
                     PageTemplate::saveFromPage(
                         $data['template_name'],
                         $this->record->content ?? ['rows' => []],
@@ -81,34 +85,34 @@ class EditPage extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-    
+
     protected function getRevisionHistoryView(): \Illuminate\Contracts\View\View
     {
         $revisions = $this->record->revisions()
             ->orderBy('created_at', 'desc')
             ->limit(50)
             ->get();
-            
+
         return view('layup::revision-history', [
             'revisions' => $revisions,
             'currentPageId' => $this->record->id,
         ]);
     }
-    
+
     public function restoreRevision(int $revisionId): void
     {
         $revision = $this->record->revisions()->findOrFail($revisionId);
-        
+
         $this->record->update(['content' => $revision->content]);
         $this->pageContent = $revision->content;
         $this->syncContent();
-        
+
         Notification::make()
             ->title('Revision restored')
             ->body('Page content has been restored to ' . $revision->created_at->diffForHumans())
             ->success()
             ->send();
-            
+
         $this->dispatch('close-modal', id: 'revisions');
     }
 
@@ -130,7 +134,7 @@ class EditPage extends EditRecord
      */
     public function restoreContent(array $content): void
     {
-        $result = (new ContentValidator())->validate($content);
+        $result = (new ContentValidator)->validate($content);
 
         if (! $result->passes()) {
             Notification::make()
@@ -155,7 +159,7 @@ class EditPage extends EditRecord
                 'alignment' => 'justify-start',
                 'verticalAlignment' => 'items-stretch',
             ],
-            'columns' => collect($spans)->map(fn (int $span) => [
+            'columns' => collect($spans)->map(fn (int $span): array => [
                 'id' => 'col_' . Str::random(8),
                 'span' => ['sm' => 12, 'md' => $span, 'lg' => $span, 'xl' => $span],
                 'settings' => ['padding' => 'p-4', 'background' => 'transparent'],
@@ -177,7 +181,7 @@ class EditPage extends EditRecord
                 'alignment' => 'justify-start',
                 'verticalAlignment' => 'items-stretch',
             ],
-            'columns' => collect($spans)->map(fn (int $span) => [
+            'columns' => collect($spans)->map(fn (int $span): array => [
                 'id' => 'col_' . Str::random(8),
                 'span' => ['sm' => 12, 'md' => $span, 'lg' => $span, 'xl' => $span],
                 'settings' => ['padding' => 'p-4', 'background' => 'transparent'],
@@ -204,10 +208,10 @@ class EditPage extends EditRecord
             ->requiresConfirmation()
             ->modalHeading('Delete Row')
             ->modalDescription('Are you sure you want to delete this row and all its contents?')
-            ->action(function () {
+            ->action(function (): void {
                 $this->refreshContent();
                 $this->pageContent['rows'] = collect($this->pageContent['rows'])
-                    ->reject(fn ($row) => $row['id'] === $this->editingRowId)
+                    ->reject(fn ($row): bool => $row['id'] === $this->editingRowId)
                     ->values()
                     ->all();
 
@@ -222,12 +226,16 @@ class EditPage extends EditRecord
     public function moveRow(string $rowId, string $direction): void
     {
         $rows = collect($this->pageContent['rows']);
-        $index = $rows->search(fn ($r) => $r['id'] === $rowId);
+        $index = $rows->search(fn ($r): bool => $r['id'] === $rowId);
 
-        if ($index === false) return;
+        if ($index === false) {
+            return;
+        }
 
         $newIndex = $direction === 'up' ? $index - 1 : $index + 1;
-        if ($newIndex < 0 || $newIndex >= $rows->count()) return;
+        if ($newIndex < 0 || $newIndex >= $rows->count()) {
+            return;
+        }
 
         $arr = $rows->all();
         [$arr[$index], $arr[$newIndex]] = [$arr[$newIndex], $arr[$index]];
@@ -278,13 +286,13 @@ class EditPage extends EditRecord
             ->requiresConfirmation()
             ->modalHeading('Delete Column')
             ->modalDescription('Are you sure you want to delete this column and all its widgets?')
-            ->action(function () {
+            ->action(function (): void {
                 $this->refreshContent();
 
                 foreach ($this->pageContent['rows'] as &$row) {
                     if ($row['id'] === $this->editingRowId) {
                         $row['columns'] = collect($row['columns'])
-                            ->reject(fn ($col) => $col['id'] === $this->editingColumnId)
+                            ->reject(fn ($col): bool => $col['id'] === $this->editingColumnId)
                             ->values()
                             ->all();
                         break;
@@ -308,14 +316,20 @@ class EditPage extends EditRecord
         $this->refreshContent();
 
         foreach ($this->pageContent['rows'] as &$row) {
-            if ($row['id'] !== $rowId) continue;
+            if ($row['id'] !== $rowId) {
+                continue;
+            }
 
             $cols = collect($row['columns']);
-            $index = $cols->search(fn ($c) => $c['id'] === $columnId);
-            if ($index === false) break;
+            $index = $cols->search(fn ($c): bool => $c['id'] === $columnId);
+            if ($index === false) {
+                break;
+            }
 
             $newIndex = $direction === 'left' ? $index - 1 : $index + 1;
-            if ($newIndex < 0 || $newIndex >= $cols->count()) break;
+            if ($newIndex < 0 || $newIndex >= $cols->count()) {
+                break;
+            }
 
             $arr = $cols->all();
             [$arr[$index], $arr[$newIndex]] = [$arr[$newIndex], $arr[$index]];
@@ -335,16 +349,24 @@ class EditPage extends EditRecord
         $this->refreshContent();
 
         foreach ($this->pageContent['rows'] as &$row) {
-            if ($row['id'] !== $rowId) continue;
+            if ($row['id'] !== $rowId) {
+                continue;
+            }
             foreach ($row['columns'] as &$col) {
-                if ($col['id'] !== $columnId) continue;
+                if ($col['id'] !== $columnId) {
+                    continue;
+                }
 
                 $widgets = collect($col['widgets']);
-                $index = $widgets->search(fn ($w) => $w['id'] === $widgetId);
-                if ($index === false) break 2;
+                $index = $widgets->search(fn ($w): bool => $w['id'] === $widgetId);
+                if ($index === false) {
+                    break 2;
+                }
 
                 $newIndex = $direction === 'up' ? $index - 1 : $index + 1;
-                if ($newIndex < 0 || $newIndex >= $widgets->count()) break 2;
+                if ($newIndex < 0 || $newIndex >= $widgets->count()) {
+                    break 2;
+                }
 
                 $arr = $widgets->all();
                 [$arr[$index], $arr[$newIndex]] = [$arr[$newIndex], $arr[$index]];
@@ -365,11 +387,17 @@ class EditPage extends EditRecord
 
         // Remove from source
         foreach ($this->pageContent['rows'] as &$row) {
-            if ($row['id'] !== $sourceRowId) continue;
+            if ($row['id'] !== $sourceRowId) {
+                continue;
+            }
             foreach ($row['columns'] as &$col) {
-                if ($col['id'] !== $sourceColId) continue;
-                $index = collect($col['widgets'])->search(fn ($w) => $w['id'] === $widgetId);
-                if ($index === false) return;
+                if ($col['id'] !== $sourceColId) {
+                    continue;
+                }
+                $index = collect($col['widgets'])->search(fn ($w): bool => $w['id'] === $widgetId);
+                if ($index === false) {
+                    return;
+                }
                 $widget = $col['widgets'][$index];
                 array_splice($col['widgets'], $index, 1);
                 break 2;
@@ -377,13 +405,19 @@ class EditPage extends EditRecord
         }
         unset($row, $col);
 
-        if (!$widget) return;
+        if (! $widget) {
+            return;
+        }
 
         // Insert into target
         foreach ($this->pageContent['rows'] as &$row) {
-            if ($row['id'] !== $targetRowId) continue;
+            if ($row['id'] !== $targetRowId) {
+                continue;
+            }
             foreach ($row['columns'] as &$col) {
-                if ($col['id'] !== $targetColId) continue;
+                if ($col['id'] !== $targetColId) {
+                    continue;
+                }
                 array_splice($col['widgets'], $position, 0, [$widget]);
                 break 2;
             }
@@ -396,11 +430,11 @@ class EditPage extends EditRecord
 
     public function moveRowTo(string $rowId, int $targetIndex): void
     {
-        $this->refreshContent();
-
         $rows = $this->pageContent['rows'];
-        $sourceIndex = collect($rows)->search(fn ($r) => $r['id'] === $rowId);
-        if ($sourceIndex === false) return;
+        $sourceIndex = collect($rows)->search(fn ($r): bool => $r['id'] === $rowId);
+        if ($sourceIndex === false) {
+            return;
+        }
 
         $row = $rows[$sourceIndex];
         array_splice($rows, $sourceIndex, 1);
@@ -418,8 +452,10 @@ class EditPage extends EditRecord
         $this->refreshContent();
 
         $rows = collect($this->pageContent['rows']);
-        $index = $rows->search(fn ($r) => $r['id'] === $rowId);
-        if ($index === false) return;
+        $index = $rows->search(fn ($r): bool => $r['id'] === $rowId);
+        if ($index === false) {
+            return;
+        }
 
         $original = $rows[$index];
         $clone = $this->deepCloneRow($original);
@@ -436,13 +472,19 @@ class EditPage extends EditRecord
         $this->refreshContent();
 
         foreach ($this->pageContent['rows'] as &$row) {
-            if ($row['id'] !== $rowId) continue;
+            if ($row['id'] !== $rowId) {
+                continue;
+            }
             foreach ($row['columns'] as &$col) {
-                if ($col['id'] !== $columnId) continue;
+                if ($col['id'] !== $columnId) {
+                    continue;
+                }
 
                 $widgets = collect($col['widgets']);
-                $index = $widgets->search(fn ($w) => $w['id'] === $widgetId);
-                if ($index === false) break 2;
+                $index = $widgets->search(fn ($w): bool => $w['id'] === $widgetId);
+                if ($index === false) {
+                    break 2;
+                }
 
                 $original = $col['widgets'][$index];
                 $clone = [
@@ -466,12 +508,14 @@ class EditPage extends EditRecord
     {
         $clone = $row;
         $clone['id'] = 'row_' . Str::random(8);
-        $clone['columns'] = collect($row['columns'])->map(function ($col) {
+        $clone['columns'] = collect($row['columns'])->map(function (array $col): array {
             $col['id'] = 'col_' . Str::random(8);
-            $col['widgets'] = collect($col['widgets'] ?? [])->map(function ($widget) {
+            $col['widgets'] = collect($col['widgets'] ?? [])->map(function (array $widget): array {
                 $widget['id'] = 'widget_' . Str::random(8);
+
                 return $widget;
             })->all();
+
             return $col;
         })->all();
 
@@ -494,19 +538,20 @@ class EditPage extends EditRecord
         return Action::make('editRowAction')
             ->label('Row Settings')
             ->slideOver()
-            ->fillForm(fn () => $this->rowSettings)
+            ->fillForm(fn (): array => $this->rowSettings)
             ->form(Row::getFormSchema())
-            ->action(function (array $data) {
+            ->action(function (array $data): void {
                 $this->refreshContent();
-                $this->pageContent['rows'] = collect($this->pageContent['rows'])->map(function ($row) use ($data) {
+                $this->pageContent['rows'] = collect($this->pageContent['rows'])->map(function (array $row) use ($data): array {
                     if ($row['id'] === $this->editingRowId) {
                         $row['settings'] = $data;
                     }
+
                     return $row;
                 })->all();
 
                 $this->record->update(['content' => $this->pageContent]);
-        $this->syncContent();
+                $this->syncContent();
                 $this->editingRowId = null;
 
                 Notification::make()->title('Row updated')->success()->duration(2000)->send();
@@ -536,15 +581,19 @@ class EditPage extends EditRecord
         return Action::make('editColumnAction')
             ->label('Column Settings')
             ->slideOver()
-            ->fillForm(fn () => $this->columnSettings)
+            ->fillForm(fn (): array => $this->columnSettings)
             ->form(Column::getFormSchema())
-            ->action(function (array $data) {
+            ->action(function (array $data): void {
                 $this->refreshContent();
-                $this->pageContent['rows'] = collect($this->pageContent['rows'])->map(function ($row) use ($data) {
-                    if ($row['id'] !== $this->editingRowId) return $row;
+                $this->pageContent['rows'] = collect($this->pageContent['rows'])->map(function (array $row) use ($data): array {
+                    if ($row['id'] !== $this->editingRowId) {
+                        return $row;
+                    }
 
-                    $row['columns'] = collect($row['columns'])->map(function ($col) use ($data) {
-                        if ($col['id'] !== $this->editingColumnId) return $col;
+                    $row['columns'] = collect($row['columns'])->map(function (array $col) use ($data): array {
+                        if ($col['id'] !== $this->editingColumnId) {
+                            return $col;
+                        }
 
                         $col['span'] = $data['span'] ?? $col['span'];
                         unset($data['span']);
@@ -557,7 +606,7 @@ class EditPage extends EditRecord
                 })->all();
 
                 $this->record->update(['content' => $this->pageContent]);
-        $this->syncContent();
+                $this->syncContent();
                 $this->editingRowId = null;
                 $this->editingColumnId = null;
 
@@ -591,7 +640,7 @@ class EditPage extends EditRecord
         $this->record->update(['content' => $this->pageContent]);
         $this->syncContent();
     }
-    
+
     public function addWidgetAt(string $rowId, string $columnId, string $widgetType, int $position): void
     {
         $registry = app(WidgetRegistry::class);
@@ -605,7 +654,9 @@ class EditPage extends EditRecord
         ];
 
         foreach ($this->pageContent['rows'] as &$row) {
-            if ($row['id'] !== $rowId) continue;
+            if ($row['id'] !== $rowId) {
+                continue;
+            }
             foreach ($row['columns'] as &$col) {
                 if ($col['id'] === $columnId) {
                     array_splice($col['widgets'], $position, 0, [$widget]);
@@ -641,23 +692,28 @@ class EditPage extends EditRecord
         return Action::make('editWidgetAction')
             ->label('Edit Widget')
             ->slideOver()
-            ->fillForm(fn () => $this->widgetData)
+            ->fillForm(fn (): array => $this->widgetData)
             ->form(fn () => $registry->getFormSchema($this->editingWidgetType ?? 'text'))
-            ->action(function (array $data) {
+            ->action(function (array $data): void {
                 $this->refreshContent();
                 $registry = app(WidgetRegistry::class);
                 $data = $registry->fireOnSave($this->editingWidgetType, $data);
 
-                $this->pageContent['rows'] = collect($this->pageContent['rows'])->map(function ($row) use ($data) {
-                    if ($row['id'] !== $this->editingRowId) return $row;
+                $this->pageContent['rows'] = collect($this->pageContent['rows'])->map(function (array $row) use ($data): array {
+                    if ($row['id'] !== $this->editingRowId) {
+                        return $row;
+                    }
 
-                    $row['columns'] = collect($row['columns'])->map(function ($col) use ($data) {
-                        if ($col['id'] !== $this->editingColumnId) return $col;
+                    $row['columns'] = collect($row['columns'])->map(function (array $col) use ($data): array {
+                        if ($col['id'] !== $this->editingColumnId) {
+                            return $col;
+                        }
 
-                        $col['widgets'] = collect($col['widgets'])->map(function ($widget) use ($data) {
+                        $col['widgets'] = collect($col['widgets'])->map(function (array $widget) use ($data): array {
                             if ($widget['id'] === $this->editingWidgetId) {
                                 $widget['data'] = $data;
                             }
+
                             return $widget;
                         })->all();
 
@@ -690,11 +746,15 @@ class EditPage extends EditRecord
     public function updateWidgetContent(string $rowId, string $columnId, string $widgetId, string $content): void
     {
         $this->refreshContent();
-        
+
         foreach ($this->pageContent['rows'] as &$row) {
-            if ($row['id'] !== $rowId) continue;
+            if ($row['id'] !== $rowId) {
+                continue;
+            }
             foreach ($row['columns'] as &$col) {
-                if ($col['id'] !== $columnId) continue;
+                if ($col['id'] !== $columnId) {
+                    continue;
+                }
                 foreach ($col['widgets'] as &$widget) {
                     if ($widget['id'] === $widgetId) {
                         $widget['data']['content'] = $content;
@@ -703,16 +763,16 @@ class EditPage extends EditRecord
                 }
             }
         }
-        
+
         $this->record->update(['content' => $this->pageContent]);
         $this->syncContent();
-        
+
         Notification::make()->title('Content updated')->success()->duration(2000)->send();
     }
-    
+
     public function updateContent(array $content): void
     {
-        $result = (new ContentValidator())->validate($content);
+        $result = (new ContentValidator)->validate($content);
 
         if (! $result->passes()) {
             Notification::make()
@@ -728,7 +788,7 @@ class EditPage extends EditRecord
         $this->record->update(['content' => $this->pageContent]);
         $this->syncContent();
     }
-    
+
     public function deleteWidgetAction(): Action
     {
         return Action::make('deleteWidgetAction')
@@ -737,7 +797,7 @@ class EditPage extends EditRecord
             ->requiresConfirmation()
             ->modalHeading('Delete Widget')
             ->modalDescription('Are you sure you want to delete this widget?')
-            ->action(function () {
+            ->action(function (): void {
                 $this->refreshContent();
                 $registry = app(WidgetRegistry::class);
 
@@ -749,7 +809,7 @@ class EditPage extends EditRecord
                                 $registry->fireOnDelete($widget['type'], $widget['data'] ?? []);
                             }
                             $col['widgets'] = collect($col['widgets'])
-                                ->reject(fn ($w) => $w['id'] === $this->editingWidgetId)
+                                ->reject(fn ($w): bool => $w['id'] === $this->editingWidgetId)
                                 ->values()
                                 ->all();
                             break 2;

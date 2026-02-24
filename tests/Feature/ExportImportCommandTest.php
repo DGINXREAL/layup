@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Crumbls\Layup\Models\Page;
 
-it('exports pages as JSON', function () {
+it('exports pages as JSON', function (): void {
     Page::create(['title' => 'Export Test', 'slug' => 'export-test', 'content' => ['rows' => []], 'status' => 'published']);
 
     $this->artisan('layup:export', ['--output' => storage_path('test-export.json'), '--pretty' => true])
@@ -17,7 +17,7 @@ it('exports pages as JSON', function () {
     @unlink(storage_path('test-export.json'));
 });
 
-it('exports only published pages with status filter', function () {
+it('exports only published pages with status filter', function (): void {
     Page::create(['title' => 'Pub', 'slug' => 'export-pub', 'content' => ['rows' => []], 'status' => 'published']);
     Page::create(['title' => 'Draft', 'slug' => 'export-draft', 'content' => ['rows' => []], 'status' => 'draft']);
 
@@ -31,7 +31,7 @@ it('exports only published pages with status filter', function () {
     @unlink(storage_path('test-export2.json'));
 });
 
-it('imports pages from JSON file', function () {
+it('imports pages from JSON file', function (): void {
     $export = json_encode([
         'pages' => [
             ['title' => 'Imported', 'slug' => 'imported-page', 'content' => ['rows' => []], 'status' => 'draft'],
@@ -47,7 +47,7 @@ it('imports pages from JSON file', function () {
     @unlink(storage_path('test-import.json'));
 });
 
-it('validates with dry-run without creating', function () {
+it('validates with dry-run without creating', function (): void {
     $export = json_encode([
         'pages' => [
             ['title' => 'DryRun', 'slug' => 'dry-run-test', 'content' => ['rows' => []], 'status' => 'draft'],
@@ -63,7 +63,7 @@ it('validates with dry-run without creating', function () {
     @unlink(storage_path('test-dry.json'));
 });
 
-it('fails on missing file', function () {
+it('fails on missing file', function (): void {
     $this->artisan('layup:import', ['file' => '/nonexistent.json'])
         ->assertFailed();
 });

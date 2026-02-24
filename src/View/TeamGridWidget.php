@@ -77,6 +77,7 @@ class TeamGridWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['members'] ?? []);
+
         return "👥 Team Grid ({$count} members)";
     }
 }

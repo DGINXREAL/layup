@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 
@@ -83,6 +82,7 @@ class TypewriterWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $first = is_array($data['words'] ?? null) ? ($data['words'][0] ?? '') : '';
+
         return "⌨️ {$data['prefix']}{$first}|";
     }
 }

@@ -6,14 +6,14 @@ use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Support\WidgetRegistry;
 use Crumbls\Layup\View\TextWidget;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $registry = app(WidgetRegistry::class);
-    if (!$registry->has('text')) {
+    if (! $registry->has('text')) {
         $registry->register(TextWidget::class);
     }
 });
 
-it('builds section tree from sections key', function () {
+it('builds section tree from sections key', function (): void {
     $page = Page::create([
         'title' => 'Section Test',
         'slug' => 'section-render-test',
@@ -40,7 +40,7 @@ it('builds section tree from sections key', function () {
         ->and($sections[0]['rows'])->toHaveCount(1);
 });
 
-it('flattens sections into getContentTree for backward compat', function () {
+it('flattens sections into getContentTree for backward compat', function (): void {
     $page = Page::create([
         'title' => 'Flat Test',
         'slug' => 'flat-section-test',
@@ -57,7 +57,7 @@ it('flattens sections into getContentTree for backward compat', function () {
     expect($tree)->toHaveCount(3); // 1 + 2 rows flattened
 });
 
-it('builds section styles correctly', function () {
+it('builds section styles correctly', function (): void {
     $styles = \Crumbls\Layup\View\Section::buildSectionStyles([
         'background_color' => '#333',
         'background_gradient' => 'linear-gradient(to right, #000, #fff)',
@@ -69,7 +69,7 @@ it('builds section styles correctly', function () {
         ->and($styles)->toContain('min-height: 100vh');
 });
 
-it('handles empty sections gracefully', function () {
+it('handles empty sections gracefully', function (): void {
     $page = Page::create([
         'title' => 'Empty Sections',
         'slug' => 'empty-sections-test',

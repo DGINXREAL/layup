@@ -8,10 +8,25 @@ use Filament\Forms\Components\TextInput;
 
 class SocialProofWidget extends BaseWidget
 {
-    public static function getType(): string { return 'social-proof'; }
-    public static function getLabel(): string { return 'Social Proof Bar'; }
-    public static function getIcon(): string { return 'heroicon-o-trophy'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'social-proof';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Social Proof Bar';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-trophy';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {

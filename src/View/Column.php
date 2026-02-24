@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Crumbls\Layup\View;
 
-use Crumbls\Layup\Forms\Components\SpacingPicker;
 use Crumbls\Layup\Forms\Components\SpanPicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Contracts\View\View;

@@ -88,6 +88,7 @@ class PostListWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $limit = $data['limit'] ?? 6;
+
         return "📝 Post List ({$limit} posts)";
     }
 }

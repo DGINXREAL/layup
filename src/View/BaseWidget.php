@@ -47,7 +47,7 @@ abstract class BaseWidget extends BaseView implements Widget
     public static function getPreview(array $data): string
     {
         if (! empty($data['content'])) {
-            $text = strip_tags($data['content']);
+            $text = strip_tags((string) $data['content']);
 
             return mb_strlen($text) > 60 ? mb_substr($text, 0, 60) . '…' : $text;
         }
@@ -57,7 +57,7 @@ abstract class BaseWidget extends BaseView implements Widget
         }
 
         if (! empty($data['src'])) {
-            return '🖼 ' . basename($data['src']);
+            return '🖼 ' . basename((string) $data['src']);
         }
 
         return '(empty)';

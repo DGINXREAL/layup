@@ -85,6 +85,7 @@ class TestimonialSliderWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['testimonials'] ?? []);
+
         return "💬 Testimonial Slider ({$count})";
     }
 }

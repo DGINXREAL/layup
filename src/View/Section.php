@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
-use Filament\Schemas\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Tabs;
 
 class Section extends BaseView
 {
@@ -17,7 +16,6 @@ class Section extends BaseView
      * Section wraps one or more rows and provides background styling.
      * Content structure: { sections: [{ id, settings, rows: [...] }] }
      */
-
     public static function getFormSchema(?string $statePath = null): array
     {
         return [
@@ -97,29 +95,29 @@ class Section extends BaseView
     {
         $styles = [];
 
-        if (!empty($settings['background_color'])) {
+        if (! empty($settings['background_color'])) {
             $styles[] = "background-color: {$settings['background_color']}";
         }
 
-        if (!empty($settings['background_gradient'])) {
+        if (! empty($settings['background_gradient'])) {
             $styles[] = "background: {$settings['background_gradient']}";
         }
 
-        if (!empty($settings['background_image']) && empty($settings['background_video'])) {
+        if (! empty($settings['background_image']) && empty($settings['background_video'])) {
             $url = asset('storage/' . $settings['background_image']);
             $styles[] = "background-image: url('{$url}')";
             $styles[] = 'background-size: cover';
             $styles[] = 'background-position: center';
-            if (!empty($settings['parallax'])) {
+            if (! empty($settings['parallax'])) {
                 $styles[] = 'background-attachment: fixed';
             }
         }
 
-        if (!empty($settings['min_height'])) {
+        if (! empty($settings['min_height'])) {
             $styles[] = "min-height: {$settings['min_height']}";
         }
 
-        if (!empty($settings['inline_css'])) {
+        if (! empty($settings['inline_css'])) {
             $styles[] = $settings['inline_css'];
         }
 

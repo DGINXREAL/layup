@@ -10,10 +10,25 @@ use Filament\Forms\Components\TextInput;
 
 class TestimonialGridWidget extends BaseWidget
 {
-    public static function getType(): string { return 'testimonial-grid'; }
-    public static function getLabel(): string { return 'Testimonial Grid'; }
-    public static function getIcon(): string { return 'heroicon-o-chat-bubble-bottom-center-text'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'testimonial-grid';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Testimonial Grid';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-chat-bubble-bottom-center-text';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {
@@ -45,6 +60,7 @@ class TestimonialGridWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['testimonials'] ?? []);
+
         return "💬 Testimonial Grid ({$count})";
     }
 }

@@ -9,10 +9,25 @@ use Filament\Forms\Components\TextInput;
 
 class BadgeWidget extends BaseWidget
 {
-    public static function getType(): string { return 'badge'; }
-    public static function getLabel(): string { return 'Badge'; }
-    public static function getIcon(): string { return 'heroicon-o-tag'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'badge';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Badge';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-tag';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {

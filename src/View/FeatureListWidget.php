@@ -86,6 +86,7 @@ class FeatureListWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['features'] ?? []);
+
         return "✓ Feature List ({$count} items)";
     }
 }

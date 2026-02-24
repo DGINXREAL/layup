@@ -10,10 +10,25 @@ use Filament\Forms\Components\TextInput;
 
 class HotspotWidget extends BaseWidget
 {
-    public static function getType(): string { return 'hotspot'; }
-    public static function getLabel(): string { return 'Hotspot Image'; }
-    public static function getIcon(): string { return 'heroicon-o-map-pin'; }
-    public static function getCategory(): string { return 'media'; }
+    public static function getType(): string
+    {
+        return 'hotspot';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Hotspot Image';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-map-pin';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'media';
+    }
 
     public static function getContentFormSchema(): array
     {
@@ -40,6 +55,7 @@ class HotspotWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['points'] ?? []);
+
         return "📍 Hotspot Image ({$count} points)";
     }
 }

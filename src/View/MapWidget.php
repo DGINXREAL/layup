@@ -7,7 +7,6 @@ namespace Crumbls\Layup\View;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 
 class MapWidget extends BaseWidget
 {

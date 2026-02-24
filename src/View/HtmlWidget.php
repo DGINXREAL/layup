@@ -51,8 +51,8 @@ class HtmlWidget extends BaseWidget
         if (! $html) {
             return '(empty)';
         }
-        $text = strip_tags($html);
-        $text = trim(preg_replace('/\s+/', ' ', $text));
+        $text = strip_tags((string) $html);
+        $text = trim((string) preg_replace('/\s+/', ' ', $text));
 
         return mb_strlen($text) > 50 ? '< > ' . mb_substr($text, 0, 50) . '…' : '< > ' . $text;
     }

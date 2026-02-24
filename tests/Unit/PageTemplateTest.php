@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Crumbls\Layup\Support\PageTemplate;
 
-it('loads built-in templates', function () {
+it('loads built-in templates', function (): void {
     $templates = PageTemplate::all();
     expect($templates)->toBeArray()
         ->and($templates)->toHaveKey('blank')
@@ -14,14 +14,14 @@ it('loads built-in templates', function () {
         ->and($templates)->toHaveKey('pricing');
 });
 
-it('returns template options for select dropdown', function () {
+it('returns template options for select dropdown', function (): void {
     $options = PageTemplate::options();
     expect($options)->toBeArray()
         ->and($options['blank'])->toBe('Blank Page')
         ->and($options['landing-page'])->toBe('Landing Page');
 });
 
-it('gets a single template by slug', function () {
+it('gets a single template by slug', function (): void {
     $template = PageTemplate::get('landing-page');
     expect($template)->not->toBeNull()
         ->and($template['name'])->toBe('Landing Page')
@@ -29,16 +29,16 @@ it('gets a single template by slug', function () {
         ->and(count($template['content']['rows']))->toBeGreaterThan(0);
 });
 
-it('returns null for unknown template', function () {
+it('returns null for unknown template', function (): void {
     expect(PageTemplate::get('nonexistent-xyz'))->toBeNull();
 });
 
-it('blank template has empty rows', function () {
+it('blank template has empty rows', function (): void {
     $blank = PageTemplate::get('blank');
     expect($blank['content']['rows'])->toBe([]);
 });
 
-it('saves a custom template to disk', function () {
+it('saves a custom template to disk', function (): void {
     $content = ['rows' => [['id' => 'r1', 'settings' => [], 'columns' => []]]];
     $slug = PageTemplate::saveFromPage('Test Template', $content, 'A test');
 
@@ -58,7 +58,7 @@ it('saves a custom template to disk', function () {
     @rmdir(resource_path('layup'));
 });
 
-it('landing page template has valid widget types', function () {
+it('landing page template has valid widget types', function (): void {
     $template = PageTemplate::get('landing-page');
     $types = [];
     foreach ($template['content']['rows'] as $row) {

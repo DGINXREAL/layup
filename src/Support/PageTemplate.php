@@ -22,7 +22,7 @@ class PageTemplate
         // Published/custom templates
         $customPath = resource_path('layup/templates');
         if (is_dir($customPath)) {
-            $templates = array_merge($templates, static::loadFromDirectory($customPath));
+            return array_merge($templates, static::loadFromDirectory($customPath));
         }
 
         return $templates;
@@ -41,10 +41,12 @@ class PageTemplate
 
         $templates = [];
         foreach (new \DirectoryIterator($path) as $file) {
-            if ($file->isDot() || $file->getExtension() !== 'json') {
+            if ($file->isDot()) {
                 continue;
             }
-
+            if ($file->getExtension() !== 'json') {
+                continue;
+            }
             $slug = $file->getBasename('.json');
             $data = json_decode(file_get_contents($file->getPathname()), true);
 
@@ -77,7 +79,7 @@ class PageTemplate
     public static function options(): array
     {
         return collect(static::all())
-            ->mapWithKeys(fn (array $t, string $slug) => [$slug => $t['name']])
+            ->mapWithKeys(fn (array $t, string $slug): array => [$slug => $t['name']])
             ->all();
     }
 

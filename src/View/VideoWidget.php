@@ -81,14 +81,14 @@ class VideoWidget extends BaseWidget
             return '▶ (no video)';
         }
 
-        if (str_contains($url, 'youtube') || str_contains($url, 'youtu.be')) {
+        if (str_contains((string) $url, 'youtube') || str_contains((string) $url, 'youtu.be')) {
             return '▶ YouTube · ' . $url;
         }
-        if (str_contains($url, 'vimeo')) {
+        if (str_contains((string) $url, 'vimeo')) {
             return '▶ Vimeo · ' . $url;
         }
 
-        return '▶ Video · ' . basename($url);
+        return '▶ Video · ' . basename((string) $url);
     }
 
     /**
@@ -97,7 +97,7 @@ class VideoWidget extends BaseWidget
     public static function onSave(array $data, ?WidgetContext $context = null): array
     {
         if (! empty($data['url'])) {
-            $privacy = !empty($data['privacy_enhanced']);
+            $privacy = ! empty($data['privacy_enhanced']);
             $data['embed_url'] = static::toEmbedUrl($data['url'], $privacy);
         }
 
@@ -108,6 +108,7 @@ class VideoWidget extends BaseWidget
     {
         if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $url, $m)) {
             $domain = $privacyEnhanced ? 'www.youtube-nocookie.com' : 'www.youtube.com';
+
             return "https://{$domain}/embed/{$m[1]}";
         }
 

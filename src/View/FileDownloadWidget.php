@@ -9,10 +9,25 @@ use Filament\Forms\Components\TextInput;
 
 class FileDownloadWidget extends BaseWidget
 {
-    public static function getType(): string { return 'file-download'; }
-    public static function getLabel(): string { return 'File Download'; }
-    public static function getIcon(): string { return 'heroicon-o-arrow-down-tray'; }
-    public static function getCategory(): string { return 'interactive'; }
+    public static function getType(): string
+    {
+        return 'file-download';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'File Download';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-arrow-down-tray';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'interactive';
+    }
 
     public static function getContentFormSchema(): array
     {

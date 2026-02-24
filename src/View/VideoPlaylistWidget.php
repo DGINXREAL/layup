@@ -63,6 +63,7 @@ class VideoPlaylistWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['videos'] ?? []);
+
         return "🎬 Video Playlist ({$count} videos)";
     }
 }

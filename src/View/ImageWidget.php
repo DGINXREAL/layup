@@ -78,7 +78,7 @@ class ImageWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         if (! empty($data['src'])) {
-            $name = is_array($data['src']) ? 'uploaded image' : basename($data['src']);
+            $name = is_array($data['src']) ? 'uploaded image' : basename((string) $data['src']);
 
             return "🖼 {$name}";
         }

@@ -9,10 +9,25 @@ use Filament\Forms\Components\TextInput;
 
 class PriceWidget extends BaseWidget
 {
-    public static function getType(): string { return 'price'; }
-    public static function getLabel(): string { return 'Price Display'; }
-    public static function getIcon(): string { return 'heroicon-o-currency-dollar'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'price';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Price Display';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-currency-dollar';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {

@@ -66,6 +66,7 @@ class LogoSliderWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['logos'] ?? []);
+
         return "🏢 Logo Slider ({$count} logos)";
     }
 }

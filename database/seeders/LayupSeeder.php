@@ -4,7 +4,6 @@ namespace Crumbls\Layup\Database\Seeders;
 
 use Crumbls\Layup\Models\Page;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class LayupSeeder extends Seeder
 {

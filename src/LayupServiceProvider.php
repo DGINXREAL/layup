@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Crumbls\Layup;
 
-use Crumbls\Layup\Console\Commands\GenerateSafelist;
-use Crumbls\Layup\Console\Commands\InstallCommand;
 use Crumbls\Layup\Console\Commands\AuditCommand;
 use Crumbls\Layup\Console\Commands\ExportCommand;
+use Crumbls\Layup\Console\Commands\GenerateSafelist;
 use Crumbls\Layup\Console\Commands\ImportCommand;
+use Crumbls\Layup\Console\Commands\InstallCommand;
 use Crumbls\Layup\Console\Commands\MakeWidgetCommand;
 use Crumbls\Layup\Support\WidgetRegistry;
 use Filament\Support\Assets\Css;
@@ -22,7 +22,7 @@ class LayupServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/layup.php', 'layup');
 
-        $this->app->singleton(WidgetRegistry::class, fn () => new WidgetRegistry());
+        $this->app->singleton(WidgetRegistry::class, fn (): \Crumbls\Layup\Support\WidgetRegistry => new WidgetRegistry);
     }
 
     public function boot(): void
@@ -62,10 +62,8 @@ class LayupServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/templates' => resource_path('layup/templates'),
         ], 'layup-templates');
 
-        Blade::directive('layupScripts', function () {
-            return "<?php if(config('layup.frontend.include_scripts', true)): ?>"
-                . '<script>' . file_get_contents(__DIR__ . '/../resources/js/layup.js') . '</script>'
-                . '<?php endif; ?>';
-        });
+        Blade::directive('layupScripts', fn (): string => "<?php if(config('layup.frontend.include_scripts', true)): ?>"
+            . '<script>' . file_get_contents(__DIR__ . '/../resources/js/layup.js') . '</script>'
+            . '<?php endif; ?>');
     }
 }

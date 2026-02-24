@@ -17,9 +17,9 @@ class SafelistChanged
     use Dispatchable;
 
     /**
-     * @param  array<string>  $added    New classes added to the safelist
+     * @param  array<string>  $added  New classes added to the safelist
      * @param  array<string>  $removed  Classes removed from the safelist
-     * @param  string         $path     Path to the safelist file
+     * @param  string  $path  Path to the safelist file
      */
     public function __construct(
         public readonly array $added,

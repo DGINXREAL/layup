@@ -11,17 +11,20 @@ class SpanPicker extends Field
     protected string $view = 'layup::forms.components.span-picker';
 
     protected string $breakpointLabel = '';
+
     protected string $color = '#f59e0b';
 
     public function breakpointLabel(string $label): static
     {
         $this->breakpointLabel = $label;
+
         return $this;
     }
 
     public function color(string $color): static
     {
         $this->color = $color;
+
         return $this;
     }
 

@@ -10,10 +10,25 @@ use Filament\Forms\Components\TextInput;
 
 class FeatureGridWidget extends BaseWidget
 {
-    public static function getType(): string { return 'feature-grid'; }
-    public static function getLabel(): string { return 'Feature Grid'; }
-    public static function getIcon(): string { return 'heroicon-o-squares-plus'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'feature-grid';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Feature Grid';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-squares-plus';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {
@@ -42,6 +57,7 @@ class FeatureGridWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['features'] ?? []);
+
         return "✨ Feature Grid ({$count})";
     }
 }

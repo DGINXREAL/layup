@@ -75,6 +75,7 @@ class StepProcessWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['steps'] ?? []);
+
         return "1→2→3 Process ({$count} steps)";
     }
 }

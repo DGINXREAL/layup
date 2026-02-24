@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 use Crumbls\Layup\Models\Page;
 
-beforeEach(function () {
+beforeEach(function (): void {
     config(['layup.frontend.enabled' => true]);
     config(['layup.frontend.include_scripts' => true]);
 });
 
-it('returns 200 for a published page', function () {
+it('returns 200 for a published page', function (): void {
     Page::create([
         'title' => 'Test Page',
         'slug' => 'test-page',
@@ -20,11 +20,11 @@ it('returns 200 for a published page', function () {
     $this->get('/pages/test-page')->assertStatus(200);
 });
 
-it('returns 404 for a missing slug', function () {
+it('returns 404 for a missing slug', function (): void {
     $this->get('/pages/nonexistent')->assertStatus(404);
 });
 
-it('returns 404 for a draft page', function () {
+it('returns 404 for a draft page', function (): void {
     Page::create([
         'title' => 'Draft',
         'slug' => 'draft-page',
@@ -35,7 +35,7 @@ it('returns 404 for a draft page', function () {
     $this->get('/pages/draft-page')->assertStatus(404);
 });
 
-it('supports nested slugs', function () {
+it('supports nested slugs', function (): void {
     Page::create([
         'title' => 'Nested',
         'slug' => 'about/team',
@@ -46,7 +46,7 @@ it('supports nested slugs', function () {
     $this->get('/pages/about/team')->assertStatus(200);
 });
 
-it('renders widget HTML for text widget', function () {
+it('renders widget HTML for text widget', function (): void {
     Page::create([
         'title' => 'Text Test',
         'slug' => 'text-test',
@@ -72,7 +72,7 @@ it('renders widget HTML for text widget', function () {
         ->assertSee('Hello from Layup');
 });
 
-it('renders heading widget with correct level', function () {
+it('renders heading widget with correct level', function (): void {
     Page::create([
         'title' => 'Heading Test',
         'slug' => 'heading-test',
@@ -99,7 +99,7 @@ it('renders heading widget with correct level', function () {
     $response->assertSee('<h1', false);
 });
 
-it('renders button widget', function () {
+it('renders button widget', function (): void {
     Page::create([
         'title' => 'Button Test',
         'slug' => 'button-test',
@@ -126,7 +126,7 @@ it('renders button widget', function () {
     $response->assertSee('https://example.com', false);
 });
 
-it('renders accordion widget with Alpine directive', function () {
+it('renders accordion widget with Alpine directive', function (): void {
     Page::create([
         'title' => 'Accordion Test',
         'slug' => 'accordion-test',
@@ -154,7 +154,7 @@ it('renders accordion widget with Alpine directive', function () {
     $response->assertSee('Q2');
 });
 
-it('renders pricing table with featured badge', function () {
+it('renders pricing table with featured badge', function (): void {
     Page::create([
         'title' => 'Pricing Test',
         'slug' => 'pricing-test',
@@ -192,7 +192,7 @@ it('renders pricing table with featured badge', function () {
     $response->assertSee('49');
 });
 
-it('renders countdown widget with Alpine directive', function () {
+it('renders countdown widget with Alpine directive', function (): void {
     Page::create([
         'title' => 'Countdown Test',
         'slug' => 'countdown-test',
@@ -219,7 +219,7 @@ it('renders countdown widget with Alpine directive', function () {
     $response->assertSee('Launch!');
 });
 
-it('renders row with container class', function () {
+it('renders row with container class', function (): void {
     Page::create([
         'title' => 'Container Test',
         'slug' => 'container-test',
@@ -242,7 +242,7 @@ it('renders row with container class', function () {
     $response->assertSee('mx-auto', false);
 });
 
-it('renders full-width row without container', function () {
+it('renders full-width row without container', function (): void {
     Page::create([
         'title' => 'Full Width Test',
         'slug' => 'full-width-test',
@@ -263,11 +263,11 @@ it('renders full-width row without container', function () {
     // The inner flex div should NOT have container class
     expect($content)->toContain('flex flex-wrap');
     // full_width rows skip the container — check the flex div doesn't include it
-    preg_match('/class="flex flex-wrap([^"]*)"/', $content, $matches);
+    preg_match('/class="flex flex-wrap([^"]*)"/', (string) $content, $matches);
     expect($matches[1] ?? '')->not->toContain('container');
 });
 
-it('renders column with correct responsive width classes', function () {
+it('renders column with correct responsive width classes', function (): void {
     Page::create([
         'title' => 'Column Width Test',
         'slug' => 'col-width-test',
@@ -292,7 +292,7 @@ it('renders column with correct responsive width classes', function () {
     $response->assertSee('xl:w-3/12', false);
 });
 
-it('renders column gutters correctly for multi-column rows', function () {
+it('renders column gutters correctly for multi-column rows', function (): void {
     Page::create([
         'title' => 'Gutter Test',
         'slug' => 'gutter-test',
@@ -316,7 +316,7 @@ it('renders column gutters correctly for multi-column rows', function () {
     expect($content)->toContain('md:pl-2');
 });
 
-it('includes @layupScripts when enabled', function () {
+it('includes @layupScripts when enabled', function (): void {
     Page::create([
         'title' => 'Scripts Test',
         'slug' => 'scripts-test',
@@ -330,7 +330,7 @@ it('includes @layupScripts when enabled', function () {
     $response->assertSee('Alpine.data', false);
 });
 
-it('excludes @layupScripts when disabled', function () {
+it('excludes @layupScripts when disabled', function (): void {
     config(['layup.frontend.include_scripts' => false]);
 
     Page::create([
@@ -344,7 +344,7 @@ it('excludes @layupScripts when disabled', function () {
     expect($content)->not->toContain('Alpine.data');
 });
 
-it('uses configurable route prefix', function () {
+it('uses configurable route prefix', function (): void {
     // Default prefix is 'pages'
     Page::create([
         'title' => 'Prefix Test',
@@ -356,7 +356,7 @@ it('uses configurable route prefix', function () {
     $this->get('/pages/prefix-test')->assertStatus(200);
 });
 
-it('renders multiple widgets in a single column', function () {
+it('renders multiple widgets in a single column', function (): void {
     Page::create([
         'title' => 'Multi Widget',
         'slug' => 'multi-widget',
@@ -384,7 +384,7 @@ it('renders multiple widgets in a single column', function () {
     $response->assertSee('Go');
 });
 
-it('renders spacer and divider widgets', function () {
+it('renders spacer and divider widgets', function (): void {
     Page::create([
         'title' => 'Layout Widgets',
         'slug' => 'layout-widgets',
@@ -410,13 +410,13 @@ it('renders spacer and divider widgets', function () {
     $response->assertSee('dashed', false);
 });
 
-it('returns 404 when frontend routes are disabled', function () {
+it('returns 404 when frontend routes are disabled', function (): void {
     // Note: routes are loaded at boot time, so we can't truly disable them mid-test.
     // Instead, verify the config key exists and affects the service provider logic.
     expect(config('layup.frontend.enabled'))->toBeTrue();
 });
 
-it('skips unknown widget types gracefully', function () {
+it('skips unknown widget types gracefully', function (): void {
     Page::create([
         'title' => 'Unknown Widget',
         'slug' => 'unknown-widget',

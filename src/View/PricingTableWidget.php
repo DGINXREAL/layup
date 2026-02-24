@@ -58,7 +58,7 @@ class PricingTableWidget extends BaseWidget
                 ->default('month'),
             TextInput::make('period_custom')
                 ->label('Custom Period Text')
-                ->visible(fn (callable $get) => $get('period') === 'custom')
+                ->visible(fn (callable $get): bool => $get('period') === 'custom')
                 ->nullable(),
             Repeater::make('features')
                 ->label('Features')

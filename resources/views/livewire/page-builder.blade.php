@@ -100,6 +100,8 @@
                         <div
                             class="lyp-row-drop-indicator"
                             :class="{ 'lyp-row-drop-indicator--active': rowDrag.dropIndex === rowIndex }"
+                            @dragover.prevent="if(rowDrag.active) rowDrag.dropIndex = rowIndex"
+                            @drop.prevent="onRowDrop($event)"
                         ></div>
                         <div
                             class="lyp-row"
@@ -512,8 +514,9 @@
                 let targetIndex = this.rowDrag.dropIndex;
                 if (this.rowDrag.sourceIndex < targetIndex) targetIndex--;
                 const sourceIndex = this.rowDrag.sourceIndex;
+                const rowId = this.rowDrag.rowId;
                 this.onRowDragEnd();
-                if (sourceIndex !== targetIndex) $wire.moveRowTo(this.rowDrag.rowId || arguments[0], targetIndex);
+                if (sourceIndex !== targetIndex) $wire.moveRowTo(rowId, targetIndex);
             },
 
             // Widget drag

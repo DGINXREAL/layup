@@ -165,12 +165,12 @@ class BlurbWidget extends BaseWidget
                     'heroicon-o-no-symbol' => '🚫 No Symbol',
                 ])
                 ->placeholder('Choose an icon…')
-                ->visible(fn (callable $get) => $get('media_type') === 'icon'),
+                ->visible(fn (callable $get): bool => $get('media_type') === 'icon'),
             FileUpload::make('image')
                 ->label('Image')
                 ->image()
                 ->directory('layup/blurbs')
-                ->visible(fn (callable $get) => $get('media_type') === 'image'),
+                ->visible(fn (callable $get): bool => $get('media_type') === 'image'),
             Select::make('layout')
                 ->label('Layout')
                 ->options([

@@ -22,6 +22,7 @@ use Crumbls\Layup\Models\Page;
  *   $classes = SafelistCollector::classesFromContent($page->content);
  *
  * In your Tailwind config (v4 CSS or v3 config):
+ *
  *   @source "../../storage/layup-safelist.txt";
  *
  * Or generate the file with the Artisan command:
@@ -61,7 +62,7 @@ class SafelistCollector
         }
 
         return array_values(array_filter(
-            array_map('trim', file($path, FILE_IGNORE_NEW_LINES)),
+            array_map(trim(...), file($path, FILE_IGNORE_NEW_LINES)),
         ));
     }
 
@@ -158,7 +159,7 @@ class SafelistCollector
 
         // User-added classes via Advanced tab
         if (! empty($data['class'])) {
-            $classes = array_merge($classes, static::splitClasses($data['class']));
+            return array_merge($classes, static::splitClasses($data['class']));
         }
 
         return $classes;
@@ -252,7 +253,7 @@ class SafelistCollector
      */
     public static function sync(?string $path = null): bool
     {
-        $path = $path ?? static::defaultPath();
+        $path ??= static::defaultPath();
 
         $newClasses = static::classes();
         sort($newClasses);

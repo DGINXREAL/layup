@@ -11,10 +11,25 @@ use Filament\Forms\Components\TextInput;
 
 class ChangelogWidget extends BaseWidget
 {
-    public static function getType(): string { return 'changelog'; }
-    public static function getLabel(): string { return 'Changelog'; }
-    public static function getIcon(): string { return 'heroicon-o-document-text'; }
-    public static function getCategory(): string { return 'content'; }
+    public static function getType(): string
+    {
+        return 'changelog';
+    }
+
+    public static function getLabel(): string
+    {
+        return 'Changelog';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-document-text';
+    }
+
+    public static function getCategory(): string
+    {
+        return 'content';
+    }
 
     public static function getContentFormSchema(): array
     {
@@ -42,6 +57,7 @@ class ChangelogWidget extends BaseWidget
     public static function getPreview(array $data): string
     {
         $count = count($data['releases'] ?? []);
+
         return "📋 Changelog ({$count} releases)";
     }
 }
