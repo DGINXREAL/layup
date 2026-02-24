@@ -72,6 +72,9 @@ use Crumbls\Layup\View\AnchorWidget;
 use Crumbls\Layup\View\BannerWidget;
 use Crumbls\Layup\View\ContentToggleWidget;
 use Crumbls\Layup\View\LogoSliderWidget;
+use Crumbls\Layup\View\TestimonialSliderWidget;
+use Crumbls\Layup\View\IconBoxWidget;
+use Crumbls\Layup\View\AnimatedHeadingWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
 
@@ -148,6 +151,9 @@ $widgets = [
     BannerWidget::class,
     ContentToggleWidget::class,
     LogoSliderWidget::class,
+    TestimonialSliderWidget::class,
+    IconBoxWidget::class,
+    AnimatedHeadingWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {
