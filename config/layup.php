@@ -65,6 +65,8 @@ return [
         \Crumbls\Layup\View\BeforeAfterWidget::class,
         \Crumbls\Layup\View\TeamGridWidget::class,
         \Crumbls\Layup\View\NotificationBarWidget::class,
+        \Crumbls\Layup\View\HeroWidget::class,
+        \Crumbls\Layup\View\BreadcrumbsWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],
