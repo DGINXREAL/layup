@@ -203,7 +203,12 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <div class="lyp-widget-preview" x-text="getWidgetPreview(widget)"></div>
+                                                        <div 
+                                                            class="lyp-widget-preview" 
+                                                            :class="{ 'lyp-widget-preview--editable': isInlineEditable(widget.type) }"
+                                                            x-text="getWidgetPreview(widget)"
+                                                            @dblclick.stop="startInlineEdit(row.id, col.id, widget.id, widget.type, widget.data)"
+                                                        ></div>
                                                     </div>
                                                 </div>
                                             </template>
@@ -365,6 +370,9 @@
 
             // Widget Picker
             picker: { open: false, rowId: null, colId: null, search: '' },
+            
+            // Inline editing
+            inlineEdit: { active: false, rowId: null, colId: null, widgetId: null, widgetType: null, originalData: null },
 
             openPicker(rowId, colId) {
                 this.picker = { open: true, rowId, colId, search: '' };
@@ -674,6 +682,62 @@
                 const tmp = document.createElement('div');
                 tmp.innerHTML = html || '';
                 return (tmp.textContent || tmp.innerText || '').trim();
+            },
+            
+            // Inline editing
+            isInlineEditable(widgetType) {
+                return ['text', 'heading', 'animated-heading', 'blockquote'].includes(widgetType);
+            },
+            
+            startInlineEdit(rowId, colId, widgetId, widgetType, data) {
+                if (!this.isInlineEditable(widgetType)) return;
+                
+                this.inlineEdit = {
+                    active: true,
+                    rowId,
+                    colId,
+                    widgetId,
+                    widgetType,
+                    originalData: JSON.parse(JSON.stringify(data))
+                };
+                
+                // Show prompt for inline edit
+                const currentContent = this.stripHtml(data.content || '');
+                const prompt = widgetType === 'heading' ? 'Edit heading:' : 'Edit text:';
+                const newContent = window.prompt(prompt, currentContent);
+                
+                if (newContent !== null && newContent !== currentContent) {
+                    this.saveInlineEdit(newContent);
+                } else {
+                    this.cancelInlineEdit();
+                }
+            },
+            
+            saveInlineEdit(newContent) {
+                if (!this.inlineEdit.active) return;
+                
+                const { rowId, colId, widgetId } = this.inlineEdit;
+                
+                // Update widget data in content
+                for (let row of this.content.rows) {
+                    if (row.id !== rowId) continue;
+                    for (let col of row.columns) {
+                        if (col.id !== colId) continue;
+                        for (let widget of col.widgets) {
+                            if (widget.id === widgetId) {
+                                widget.data.content = newContent;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                $wire.updateWidgetContent(rowId, colId, widgetId, newContent);
+                this.cancelInlineEdit();
+            },
+            
+            cancelInlineEdit() {
+                this.inlineEdit = { active: false, rowId: null, colId: null, widgetId: null, widgetType: null, originalData: null };
             },
             
             getIconSvg(iconName) {

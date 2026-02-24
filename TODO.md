@@ -35,7 +35,7 @@
 - [x] Drag from picker to canvas
 
 ### Builder Canvas
-- [ ] Live preview of widget content
+- [x] Live preview of widget content
 - [ ] Inline text editing
 - [ ] Visual column resize handles
 

@@ -687,6 +687,29 @@ class EditPage extends EditRecord
         $this->mountAction('deleteWidgetAction');
     }
 
+    public function updateWidgetContent(string $rowId, string $columnId, string $widgetId, string $content): void
+    {
+        $this->refreshContent();
+        
+        foreach ($this->pageContent['rows'] as &$row) {
+            if ($row['id'] !== $rowId) continue;
+            foreach ($row['columns'] as &$col) {
+                if ($col['id'] !== $columnId) continue;
+                foreach ($col['widgets'] as &$widget) {
+                    if ($widget['id'] === $widgetId) {
+                        $widget['data']['content'] = $content;
+                        break 3;
+                    }
+                }
+            }
+        }
+        
+        $this->record->update(['content' => $this->pageContent]);
+        $this->syncContent();
+        
+        Notification::make()->title('Content updated')->success()->duration(2000)->send();
+    }
+    
     public function deleteWidgetAction(): Action
     {
         return Action::make('deleteWidgetAction')
