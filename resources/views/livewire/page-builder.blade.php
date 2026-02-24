@@ -302,6 +302,22 @@
                         />
                     </div>
                     <div class="lyp-picker-body">
+                        {{-- Recently Used --}}
+                        <template x-if="!picker.search && getRecentWidgets().length > 0">
+                            <div>
+                                <div class="lyp-picker-cat-label">Recently Used</div>
+                                <div class="lyp-picker-grid">
+                                    <template x-for="w in getRecentWidgets()" :key="w.type">
+                                        <button @click="selectWidget(w.type)" class="lyp-picker-item">
+                                            <span x-html="getIconSvg(w.icon)" class="lyp-picker-item-icon"></span>
+                                            <span class="lyp-picker-item-label" x-text="w.label"></span>
+                                        </button>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                        
+                        {{-- Widget Categories --}}
                         <template x-for="cat in getFilteredWidgetCategories()" :key="cat.name">
                             <div>
                                 <div class="lyp-picker-cat-label" x-text="cat.name"></div>
@@ -349,7 +365,31 @@
 
             selectWidget(type) {
                 $wire.addWidget(this.picker.rowId, this.picker.colId, type);
+                this.trackRecentWidget(type);
                 this.closePicker();
+            },
+            
+            trackRecentWidget(type) {
+                try {
+                    const recent = JSON.parse(localStorage.getItem('layup-recent-widgets') || '[]');
+                    const filtered = recent.filter(t => t !== type);
+                    filtered.unshift(type);
+                    localStorage.setItem('layup-recent-widgets', JSON.stringify(filtered.slice(0, 5)));
+                } catch (e) {
+                    console.warn('Failed to track recent widget:', e);
+                }
+            },
+            
+            getRecentWidgets() {
+                try {
+                    const recent = JSON.parse(localStorage.getItem('layup-recent-widgets') || '[]');
+                    return recent.map(type => {
+                        const widget = this.widgetRegistry.find(w => w.type === type);
+                        return widget || null;
+                    }).filter(w => w !== null);
+                } catch (e) {
+                    return [];
+                }
             },
 
             getFilteredWidgetCategories() {

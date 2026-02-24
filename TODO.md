@@ -30,7 +30,7 @@
 ## Priority 3: Builder UX Polish
 
 ### Widget Picker
-- [ ] Widget icons in picker modal
+- [x] Widget icons in picker modal
 - [ ] Recently used widgets
 - [ ] Drag from picker to canvas
 
