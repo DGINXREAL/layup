@@ -102,6 +102,10 @@ return [
         \Crumbls\Layup\View\BadgeWidget::class,
         \Crumbls\Layup\View\AvatarGroupWidget::class,
         \Crumbls\Layup\View\TestimonialGridWidget::class,
+        \Crumbls\Layup\View\FileDownloadWidget::class,
+        \Crumbls\Layup\View\ChangelogWidget::class,
+        \Crumbls\Layup\View\SkillBarWidget::class,
+        \Crumbls\Layup\View\PriceWidget::class,
     ],
 
     /*
