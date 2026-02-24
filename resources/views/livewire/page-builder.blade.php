@@ -161,7 +161,7 @@
                                         @drop.prevent="onDropCol($event, row.id, col.id)"
                                     >
                                         <div class="lyp-col-header">
-                                            <span class="lyp-col-label" x-text="'Col ' + (colIndex + 1) + ' · ' + getColSpan(col) + '/12'"></span>
+                                            <span class="lyp-col-label font-medium text-gray-950 dark:text-white truncate text-sm" x-text="'Col ' + (colIndex + 1) + ' · ' + getColSpan(col) + '/12'"></span>
                                             <div class="lyp-actions">
                                                 <button @click.stop="$wire.moveColumn(row.id, col.id, 'left')" :disabled="colIndex === 0" class="lyp-action-btn lyp-action-btn--sm" title="Move left">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
