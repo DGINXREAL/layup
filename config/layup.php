@@ -54,6 +54,7 @@ return [
         \Crumbls\Layup\View\ProgressCircleWidget::class,
         \Crumbls\Layup\View\MenuWidget::class,
         \Crumbls\Layup\View\SearchWidget::class,
+        \Crumbls\Layup\View\ContactFormWidget::class,
     ],
 
     /*
