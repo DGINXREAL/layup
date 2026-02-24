@@ -63,6 +63,15 @@ class GalleryWidget extends BaseWidget
             Toggle::make('lightbox')
                 ->label('Enable Lightbox')
                 ->default(true),
+            Toggle::make('show_captions')
+                ->label('Show Captions')
+                ->default(false),
+            \Filament\Forms\Components\Textarea::make('captions_text')
+                ->label('Captions (one per line, matching image order)')
+                ->helperText('Enter one caption per line. Line 1 = first image, etc.')
+                ->rows(4)
+                ->nullable()
+                ->columnSpanFull(),
         ];
     }
 

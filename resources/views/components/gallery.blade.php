@@ -1,6 +1,8 @@
 @php
     $vis = \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []);
     $lightbox = !empty($data['lightbox']);
+    $showCaptions = !empty($data['show_captions']);
+    $captions = $showCaptions ? array_map('trim', explode("\n", $data['captions_text'] ?? '')) : [];
 @endphp
 <div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif
      class="{{ $vis }} {{ $data['class'] ?? '' }}"
@@ -8,17 +10,20 @@
      {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
      @if($lightbox) x-data="layupLightbox()" @endif
 >
-    @foreach(($data['images'] ?? []) as $image)
+    @foreach(($data['images'] ?? []) as $idx => $image)
         @if(!empty($image))
             <div class="overflow-hidden rounded">
                 @if($lightbox)
-                    <img src="{{ asset('storage/' . $image) }}" alt="" loading="lazy"
+                    <img src="{{ asset('storage/' . $image) }}" alt="{{ $captions[$idx] ?? '' }}" loading="lazy"
                          class="w-full h-auto block hover:scale-105 transition-transform duration-300 cursor-pointer"
                          data-lightbox-src="{{ asset('storage/' . $image) }}"
                          @click="show('{{ asset('storage/' . $image) }}')" />
                 @else
-                    <img src="{{ asset('storage/' . $image) }}" alt="" loading="lazy"
+                    <img src="{{ asset('storage/' . $image) }}" alt="{{ $captions[$idx] ?? '' }}" loading="lazy"
                          class="w-full h-auto block hover:scale-105 transition-transform duration-300" />
+                @endif
+                @if($showCaptions && !empty($captions[$idx]))
+                    <p class="text-sm text-gray-500 mt-1 px-1">{{ $captions[$idx] }}</p>
                 @endif
             </div>
         @endif
