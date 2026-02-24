@@ -1,6 +1,6 @@
 <div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="border rounded-xl p-6 {{ !empty($data['featured']) ? 'border-blue-500 ring-2 ring-blue-500 relative' : 'border-gray-200' }} {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}" {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}>
     @if(!empty($data['featured']))
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Popular</div>
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{{ $data['badge_text'] ?? 'Popular' }}</div>
     @endif
     @if(!empty($data['title']))
         <h3 class="text-lg font-bold text-center mb-1">{{ $data['title'] }}</h3>

@@ -1,9 +1,37 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="{{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="display:grid;grid-template-columns:repeat({{ $data['columns'] ?? 3 }},1fr);gap:{{ $data['gap'] ?? '0.5rem' }};@if(!empty($data['inline_css'])){{ $data['inline_css'] }}@endif" {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}>
+@php
+    $vis = \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []);
+    $lightbox = !empty($data['lightbox']);
+@endphp
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif
+     class="{{ $vis }} {{ $data['class'] ?? '' }}"
+     style="display:grid;grid-template-columns:repeat({{ $data['columns'] ?? 3 }},1fr);gap:{{ $data['gap'] ?? '0.5rem' }}; {{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}"
+     {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
+     @if($lightbox) x-data="layupLightbox()" @endif
+>
     @foreach(($data['images'] ?? []) as $image)
         @if(!empty($image))
             <div class="overflow-hidden rounded">
-                <img src="{{ asset('storage/' . $image) }}" alt="" loading="lazy" class="w-full h-auto block hover:scale-105 transition-transform duration-300" />
+                @if($lightbox)
+                    <img src="{{ asset('storage/' . $image) }}" alt="" loading="lazy"
+                         class="w-full h-auto block hover:scale-105 transition-transform duration-300 cursor-pointer"
+                         data-lightbox-src="{{ asset('storage/' . $image) }}"
+                         @click="show('{{ asset('storage/' . $image) }}')" />
+                @else
+                    <img src="{{ asset('storage/' . $image) }}" alt="" loading="lazy"
+                         class="w-full h-auto block hover:scale-105 transition-transform duration-300" />
+                @endif
             </div>
         @endif
     @endforeach
+
+    @if($lightbox)
+        <template x-teleport="body">
+            <div x-show="open" x-transition.opacity class="fixed inset-0 z-50 flex items-center justify-center bg-black/90" @click.self="close()" @keydown.escape.window="close()" @keydown.arrow-right.window="next()" @keydown.arrow-left.window="prev()">
+                <button @click="close()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300">&times;</button>
+                <button @click="prev()" class="absolute left-4 text-white text-3xl hover:text-gray-300">&#8249;</button>
+                <img :src="current" class="max-w-[90vw] max-h-[90vh] object-contain" />
+                <button @click="next()" class="absolute right-4 text-white text-3xl hover:text-gray-300">&#8250;</button>
+            </div>
+        </template>
+    @endif
 </div>

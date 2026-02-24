@@ -132,4 +132,32 @@ document.addEventListener('alpine:init', () => {
         },
     }));
 
+    Alpine.data('layupLightbox', () => ({
+        open: false,
+        current: '',
+        images: [],
+        index: 0,
+        init() {
+            this.images = Array.from(this.$el.querySelectorAll('[data-lightbox-src]')).map(el => el.dataset.lightboxSrc);
+        },
+        show(src) {
+            this.current = src;
+            this.index = this.images.indexOf(src);
+            this.open = true;
+            document.body.style.overflow = 'hidden';
+        },
+        close() {
+            this.open = false;
+            document.body.style.overflow = '';
+        },
+        next() {
+            this.index = (this.index + 1) % this.images.length;
+            this.current = this.images[this.index];
+        },
+        prev() {
+            this.index = (this.index - 1 + this.images.length) % this.images.length;
+            this.current = this.images[this.index];
+        },
+    }));
+
 });

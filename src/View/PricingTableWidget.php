@@ -81,6 +81,11 @@ class PricingTableWidget extends BaseWidget
             Toggle::make('featured')
                 ->label('Featured / Highlighted')
                 ->default(false),
+            TextInput::make('badge_text')
+                ->label('Badge Text')
+                ->placeholder('Popular')
+                ->default('Popular')
+                ->nullable(),
         ];
     }
 
