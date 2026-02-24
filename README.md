@@ -1,6 +1,6 @@
 # Layup
 
-A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style editor with rows, columns, and 25 extensible widgets — all using native Filament form components.
+A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style editor with rows, columns, and 30 extensible widgets — all using native Filament form components.
 
 ## Features
 
@@ -10,21 +10,29 @@ A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style
 - **Undo/Redo** — Ctrl+Z / Ctrl+Shift+Z with full history stack
 - **Widget picker modal** — searchable, categorized, grid layout
 - **Three-tab form schema** — Content / Design / Advanced on every component
-- **Frontend rendering** — configurable routes, layouts, and SEO meta
+- **Full Design tab** — text color, alignment, font size, border, border radius, box shadow, opacity, background color, padding, margin
+- **Responsive visibility** — show/hide per breakpoint on any element
+- **Entrance animations** — fade in, slide up/down/left/right, zoom in (via Alpine x-intersect)
+- **Frontend rendering** — configurable routes, layouts, and SEO meta (OG, Twitter Cards, canonical, JSON-LD)
 - **Tailwind safelist** — automatic class collection for dynamic content
+- **Page templates** — 5 built-in templates (blank, landing, about, contact, pricing) + save your own
+- **Content revisions** — auto-save on content change, configurable max, restore from history
+- **Export / Import** — pages as JSON files
 - **Widget lifecycle hooks** — `onSave`, `onCreate`, `onDelete` with optional context
 - **Content validation** — structural + widget type validation
+- **Widget auto-discovery** — scans `App\Layup\Widgets` for custom widgets
 - **Configurable model** — swap the Page model per dashboard
+- **422 tests, 841 assertions**
 
-### Built-in Widgets (25)
+### Built-in Widgets (30)
 
 | Category | Widgets |
 |----------|---------|
-| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter |
-| **Media** | Image, Gallery, Video, Audio, Slider, Map |
+| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter, Alert, Table, Progress Circle |
+| **Media** | Image, Gallery (with lightbox), Video, Audio, Slider, Map |
 | **Interactive** | Button, Call to Action, Countdown, Pricing Table, Social Follow |
 | **Layout** | Spacer, Divider |
-| **Advanced** | HTML |
+| **Advanced** | HTML, Code Block, Embed |
 
 ## Requirements
 
