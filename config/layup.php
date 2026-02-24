@@ -97,6 +97,11 @@ return [
         \Crumbls\Layup\View\AnimatedHeadingWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
+        \Crumbls\Layup\View\FaqWidget::class,
+        \Crumbls\Layup\View\VideoPlaylistWidget::class,
+        \Crumbls\Layup\View\BadgeWidget::class,
+        \Crumbls\Layup\View\AvatarGroupWidget::class,
+        \Crumbls\Layup\View\TestimonialGridWidget::class,
     ],
 
     /*

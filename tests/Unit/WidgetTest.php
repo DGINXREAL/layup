@@ -77,6 +77,10 @@ use Crumbls\Layup\View\IconBoxWidget;
 use Crumbls\Layup\View\AnimatedHeadingWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
+use Crumbls\Layup\View\VideoPlaylistWidget;
+use Crumbls\Layup\View\BadgeWidget;
+use Crumbls\Layup\View\AvatarGroupWidget;
+use Crumbls\Layup\View\TestimonialGridWidget;
 
 $widgets = [
     TextWidget::class,
@@ -154,6 +158,10 @@ $widgets = [
     TestimonialSliderWidget::class,
     IconBoxWidget::class,
     AnimatedHeadingWidget::class,
+    VideoPlaylistWidget::class,
+    BadgeWidget::class,
+    AvatarGroupWidget::class,
+    TestimonialGridWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

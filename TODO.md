@@ -3,21 +3,18 @@
 ## Priority 1: Testing ✅ COMPLETE
 - [x] Frontend/HTTP Tests (22 tests)
 - [x] SafelistCollector Tests (16 tests)
-- [x] Artisan Command Tests (4 + 3 make-widget)
+- [x] Artisan Command Tests (4 tests)
 - [x] ContentValidator Tests (14 tests)
 - [x] Rendering Tests (28 tests)
 - [x] PageTemplate Tests (7 tests)
 - [x] Revision Tests (4 tests)
-- [x] Section Tests (7 tests)
-- [x] PageModel Section Tests (2 tests)
 
 ## Priority 2: Missing Divi Features ✅ COMPLETE
 
 ### Sections (wraps rows) ✅
 - [x] `Section` view component — outermost wrapper around rows
 - [x] Section settings: background image/video/gradient, parallax, fullscreen height
-- [x] Section blade renders rows inside with overlay support
-- [x] Page model: `getSectionTree()` supports both legacy `{ rows }` and new `{ sections }`
+- [x] Update page content structure: supports both `{ sections: [...] }` and legacy `{ rows: [...] }`
 
 ### Design Tab Enhancements ✅
 - [x] Text color picker, Font size selector, Text alignment
@@ -52,38 +49,40 @@
 - [x] SEO: OG tags, Twitter Cards, canonical, JSON-LD breadcrumbs
 - [x] Sitemap helper (Page::sitemapEntries())
 - [x] layup:install command, Widget auto-discovery, Extra safelist classes
-- [x] layup:make-widget scaffolding command
-- [x] layup:audit health check command
-- [ ] Structured data: more schema.org types
+- [x] Structured data: WebPage, Article/BlogPosting, FAQPage schema.org types
+- [x] `layup:make-widget` artisan command (scaffold custom widgets)
+- [x] `layup:audit` command (page health check, widget usage stats)
 
 ## Priority 5: Widget Polish ✅ MOSTLY COMPLETE
+- [x] Heading: link URL
+- [x] Image: link URL, new tab
+- [x] Button: custom bg/text colors, hover colors via Alpine
+- [x] Video: privacy-enhanced mode (youtube-nocookie.com)
+- [x] Blurb: text alignment, right layout support
+- [x] CTA: button style, bg/text colors, new tab
+- [x] Testimonial: star rating, company name
+- [x] PricingTable: custom badge text
+- [x] Map: map type (roadmap/satellite/terrain/hybrid)
+- [x] SocialFollow: icon size
+- [x] Gallery: lightbox + captions
+- [x] Image: hover effects (zoom, grayscale→color, brighten, blur→clear)
+- [ ] Blurb: icon picker UI (nice-to-have)
 
-### Completed
-- [x] All original widget enhancements (heading, image, button, video, blurb, CTA, testimonial, pricing, map, social, gallery)
-- [x] Hover states: Button hover colors, Image hover effects (zoom, grayscale, brighten, blur)
+## Summary (as of ~3:30am MST Feb 24)
+- **852 tests, 1706 assertions** — all passing
+- **75 widgets** total
+- **Section component** with background image/video/gradient, parallax, overlay
+- **Structured data** (WebPage, Article, FAQPage, BreadcrumbList)
+- **Page templates** (5 built-in), revision history, content validator
+- **3 artisan commands**: layup:install, layup:safelist, layup:make-widget, layup:audit
+- **Alpine.js components** for interactive widgets (accordion, tabs, countdown, slider, lightbox, etc.)
+- **Full Design/Advanced tabs** on all widgets (colors, borders, spacing, animations, visibility)
 
-### New Widgets Added (17 new, 47 total)
-- [x] Code Block, Alert, Table, Embed, Progress Circle (batch 1)
-- [x] Menu, Search, Contact Form (batch 2)
-- [x] Star Rating, Logo Grid, Blockquote, Feature List (batch 3)
-- [x] Timeline, Stat Card, Marquee, Before/After (batch 4)
-- [x] Team Grid, Notification Bar (batch 5)
-- [x] Hero Section, Breadcrumbs (batch 6)
-- [x] Testimonial Carousel, Comparison Table (batch 7)
-
-### Remaining
-- [ ] Gallery: caption per image
-- [ ] Blurb: icon picker UI
-
-## Summary (as of ~3am MST)
-- **587 tests, 1171 assertions** — all passing
-- **47 widgets** total
-- **8 Alpine.js components** + inline Alpine in many widgets
-- **5 page templates** (blank, landing, about, contact, pricing)
-- **4 artisan commands** (install, safelist, make-widget, audit)
-- **Section component** with background image/video/gradient/parallax/overlay
-- **Revision history** with auto-save and pruning
-- **Full Design tab**: text color, alignment, font size, border, border radius, box shadow, opacity
-- **Responsive visibility**: hide on any breakpoint
-- **Entrance animations**: 6 types with configurable duration
-- **SEO**: OG, Twitter, canonical, JSON-LD breadcrumbs, sitemap helper
+## Future (post-sprint)
+- Widget icons in picker modal
+- Live preview / inline editing on builder canvas
+- Visual column resize handles
+- Revision browser UI
+- Drag from widget picker to canvas
+- More page templates
+- Publish to Packagist
