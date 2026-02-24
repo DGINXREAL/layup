@@ -19,10 +19,35 @@ abstract class BaseView extends Component
 
     protected array $data = [];
 
+    protected bool $isFirst = false;
+
+    protected bool $isLast = false;
+
     public function __construct(array $data = [], array $children = [])
     {
         $this->data = $data;
         $this->children = $children;
+    }
+
+    /**
+     * Set position within parent (first/last) for gutter logic.
+     */
+    public function setPosition(bool $first = false, bool $last = false): static
+    {
+        $this->isFirst = $first;
+        $this->isLast = $last;
+
+        return $this;
+    }
+
+    public function isFirst(): bool
+    {
+        return $this->isFirst;
+    }
+
+    public function isLast(): bool
+    {
+        return $this->isLast;
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Crumbls\Layup\View;
 
 use Crumbls\Layup\Contracts\Widget;
+use Crumbls\Layup\Support\WidgetContext;
 use Illuminate\Contracts\View\View;
 
 abstract class BaseWidget extends BaseView implements Widget
@@ -64,24 +65,27 @@ abstract class BaseWidget extends BaseView implements Widget
 
     /**
      * Called after save. Override to transform or validate data.
+     * Context is provided when available (page, row/column/widget IDs).
      */
-    public static function onSave(array $data): array
+    public static function onSave(array $data, ?WidgetContext $context = null): array
     {
         return $data;
     }
 
     /**
      * Called on widget creation. Override for init logic.
+     * Context is provided when available.
      */
-    public static function onCreate(array $data): array
+    public static function onCreate(array $data, ?WidgetContext $context = null): array
     {
         return $data;
     }
 
     /**
      * Called on widget deletion. Override for cleanup.
+     * Context is provided when available.
      */
-    public static function onDelete(array $data): void
+    public static function onDelete(array $data, ?WidgetContext $context = null): void
     {
         // No-op by default
     }
@@ -99,12 +103,12 @@ abstract class BaseWidget extends BaseView implements Widget
 
     /**
      * Get the view name for frontend rendering.
-     * Convention: layup::widgets.{type}
+     * Convention: layup::components.{type}
      * Override for custom view paths.
      */
     protected function getViewName(): string
     {
-        return 'layup::widgets.' . static::getType();
+        return 'layup::components.' . static::getType();
     }
 
     public function render(): View

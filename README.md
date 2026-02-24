@@ -1,29 +1,30 @@
 # Layup
 
-A visual page builder plugin for [Filament 5](https://filamentphp.com). Divi-style grid editor with rows, columns, and extensible widgets.
+A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style editor with rows, columns, and 25 extensible widgets — all using native Filament form components.
 
 ## Features
 
-- **12-column grid** with responsive breakpoints (sm/md/lg/xl)
+- **Flex-based 12-column grid** with responsive breakpoints (sm/md/lg/xl)
 - **Visual span picker** — click-to-set column widths per breakpoint
 - **Drag & drop** — reorder widgets and rows
 - **Undo/Redo** — Ctrl+Z / Ctrl+Shift+Z with full history stack
-- **Inline row insertion** — hover-reveal insert zones between rows
-- **Row & widget duplication** — one-click cloning
-- **Extensible widget system** — interface contract with lifecycle hooks
+- **Widget picker modal** — searchable, categorized, grid layout
+- **Three-tab form schema** — Content / Design / Advanced on every component
+- **Frontend rendering** — configurable routes, layouts, and SEO meta
+- **Tailwind safelist** — automatic class collection for dynamic content
+- **Widget lifecycle hooks** — `onSave`, `onCreate`, `onDelete` with optional context
+- **Content validation** — structural + widget type validation
+- **Configurable model** — swap the Page model per dashboard
 
-### Built-in Widgets
+### Built-in Widgets (25)
 
-| Widget | Category | Description |
-|--------|----------|-------------|
-| Text | Content | Rich text content |
-| Heading | Content | H1–H6 headings |
-| Image | Media | Image with alt text and link |
-| Video | Media | YouTube/Vimeo embeds with aspect ratio control |
-| Button | Content | Styled buttons with links |
-| HTML | Content | Raw HTML |
-| Spacer | Layout | Configurable vertical spacing |
-| Divider | Layout | Horizontal rules with style options |
+| Category | Widgets |
+|----------|---------|
+| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter |
+| **Media** | Image, Gallery, Video, Audio, Slider, Map |
+| **Interactive** | Button, Call to Action, Countdown, Pricing Table, Social Follow |
+| **Layout** | Spacer, Divider |
+| **Advanced** | HTML |
 
 ## Requirements
 
@@ -54,55 +55,361 @@ use Crumbls\Layup\LayupPlugin;
 ])
 ```
 
-## Configuration
-
-Publish the config:
+Publish the config (optional):
 
 ```bash
 php artisan vendor:publish --tag=layup-config
 ```
 
-### Custom Widgets
+## Frontend Rendering
 
-Create a widget by implementing `Crumbls\Layup\Contracts\Widget` or extending `Crumbls\Layup\Widgets\BaseWidget`:
+Layup includes an optional frontend controller that serves pages at a configurable URL prefix.
+
+### Enable Frontend Routes
+
+In `config/layup.php`:
 
 ```php
-use Crumbls\Layup\Widgets\BaseWidget;
+'frontend' => [
+    'enabled' => true,
+    'prefix'  => 'pages',       // → yoursite.com/pages/{slug}
+    'middleware' => ['web'],
+    'domain'  => null,           // Restrict to a specific domain
+    'layout'  => 'layouts.app',  // Blade component layout
+    'view'    => 'layup::frontend.page',
+],
+```
+
+The `layout` value is passed to `<x-dynamic-component>`, so it should be a Blade component name. For example:
+
+- `'layouts.app'` → `resources/views/components/layouts/app.blade.php`
+- `'app-layout'` → `App\View\Components\AppLayout`
+
+Your layout must include `{{ $slot }}` where the page content should render.
+
+### Nested Slugs
+
+Pages support nested slugs via wildcard routing:
+
+```
+/pages/about          → slug: about
+/pages/about/team     → slug: about/team
+```
+
+## Tailwind CSS Integration
+
+Layup generates Tailwind utility classes dynamically — column widths like `w-6/12`, `md:w-3/12`, gap values, and any custom classes users add via the Advanced tab. Since Tailwind scans source files (not databases), these classes need to be safelisted.
+
+### How It Works
+
+Layup provides two layers of class collection:
+
+1. **Static classes** — Every possible Tailwind utility the plugin can generate (column widths × 4 breakpoints, flex utilities, gap values). These are finite and ship with the package.
+2. **Dynamic classes** — Custom classes users type into the "CSS Classes" field on any row, column, or widget's Advanced tab.
+
+Both are merged into a single safelist file.
+
+### Quick Setup
+
+**1. Generate the safelist file:**
+
+```bash
+php artisan layup:safelist
+```
+
+This writes `storage/layup-safelist.txt` with all classes (static + from published pages).
+
+**2. Add to your CSS (Tailwind v4):**
+
+```css
+/* resources/css/app.css */
+@import "tailwindcss";
+@source "../../storage/layup-safelist.txt";
+```
+
+**3. Build:**
+
+```bash
+npm run build
+```
+
+That's it. All Layup classes will be included in your compiled CSS.
+
+### Tailwind v3
+
+If you're on Tailwind v3, add the safelist file to your `tailwind.config.js`:
+
+```js
+module.exports = {
+    content: [
+        './resources/**/*.blade.php',
+        './storage/layup-safelist.txt',
+    ],
+    // ...
+}
+```
+
+### Build Pipeline Integration
+
+Add the safelist command to your build script so it always runs before Tailwind compiles:
+
+```json
+{
+    "scripts": {
+        "build": "php artisan layup:safelist && vite build"
+    }
+}
+```
+
+Or in a deploy script:
+
+```bash
+php artisan layup:safelist
+npm run build
+```
+
+### Auto-Sync on Save
+
+By default, Layup regenerates the safelist file every time a page is saved. If new classes are detected, it dispatches a `SafelistChanged` event.
+
+```php
+'safelist' => [
+    'enabled'   => true,   // Enable safelist generation
+    'auto_sync' => true,   // Regenerate on page save
+    'path'      => 'storage/layup-safelist.txt',
+],
+```
+
+#### Listening for Changes
+
+Use the `SafelistChanged` event to trigger a rebuild, send a notification, or log the change:
+
+```php
+use Crumbls\Layup\Events\SafelistChanged;
+
+class HandleSafelistChange
+{
+    public function handle(SafelistChanged $event): void
+    {
+        // $event->added   — array of new classes
+        // $event->removed — array of removed classes
+        // $event->path    — path to the safelist file
+
+        logger()->info('Layup safelist changed', [
+            'added'   => $event->added,
+            'removed' => $event->removed,
+        ]);
+
+        // Trigger a rebuild, notify the team, etc.
+    }
+}
+```
+
+Register in your `EventServiceProvider`:
+
+```php
+protected $listen = [
+    \Crumbls\Layup\Events\SafelistChanged::class => [
+        \App\Listeners\HandleSafelistChange::class,
+    ],
+];
+```
+
+#### How Change Detection Works
+
+Layup uses Laravel's cache (any driver — file, Redis, database, array) to store a hash of the last known class list. On page save, it regenerates the list, compares the hash, and only dispatches the event if something actually changed.
+
+The safelist file write is **best-effort** — if the filesystem is read-only (serverless, containerized deploys), the write silently fails but the event still fires. You can listen for the event and handle the rebuild however your infrastructure requires.
+
+#### Disabling Auto-Sync
+
+If you don't want safelist regeneration on every save (e.g., in production where you build once at deploy time):
+
+```php
+'safelist' => [
+    'auto_sync' => false,
+],
+```
+
+You'll need to run `php artisan layup:safelist` manually or as part of your deploy pipeline.
+
+### Command Options
+
+```bash
+# Default: write to storage/layup-safelist.txt
+php artisan layup:safelist
+
+# Custom output path
+php artisan layup:safelist --output=resources/css/layup-classes.txt
+
+# Print to stdout (pipe to another tool)
+php artisan layup:safelist --stdout
+
+# Static classes only (no database query — useful in CI)
+php artisan layup:safelist --static-only
+```
+
+### What Gets Safelisted
+
+| Source | Classes | Example |
+|--------|---------|---------|
+| Column widths | `w-{n}/12` × 4 breakpoints | `w-6/12`, `md:w-4/12`, `lg:w-8/12` |
+| Flex utilities | `flex`, `flex-wrap` | Always included |
+| Gap values | `gap-{0-12}` | `gap-4`, `gap-8` |
+| User classes | Anything in the "CSS Classes" field | `my-hero`, `bg-blue-500` |
+
+Widget-specific classes (like `layup-widget-text`, `layup-accordion-item`) are **not** Tailwind utilities — they're styled by Layup's own CSS and don't need safelisting.
+
+## Custom Widgets
+
+Create a widget by extending `Crumbls\Layup\View\BaseWidget`:
+
+```php
+use Crumbls\Layup\View\BaseWidget;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Schema;
+use Filament\Forms\Components\RichEditor;
 
 class MyWidget extends BaseWidget
 {
     public static function getType(): string { return 'my-widget'; }
     public static function getLabel(): string { return 'My Widget'; }
+    public static function getIcon(): string { return 'heroicon-o-cube'; }
     public static function getCategory(): string { return 'custom'; }
 
-    public static function schema(Schema $schema): Schema
+    public static function getContentFormSchema(): array
     {
-        return $schema->components([
-            TextInput::make('title')->required(),
-        ]);
+        return [
+            TextInput::make('data.title')->label('Title')->required(),
+            RichEditor::make('data.content')->label('Content'),
+        ];
+    }
+
+    public static function getDefaultData(): array
+    {
+        return [
+            'title' => '',
+            'content' => '',
+        ];
     }
 
     public static function getPreview(array $data): string
     {
-        return e($data['title'] ?? 'My Widget');
+        return $data['title'] ?: '(empty)';
+    }
+
+    public function render(): \Illuminate\Contracts\View\View
+    {
+        return view('widgets.my-widget', ['data' => $this->data]);
     }
 }
 ```
 
-Register via plugin:
+The form schema automatically inherits Design (spacing, background) and Advanced (id, class, inline CSS) tabs from `BaseWidget`. You only define the Content tab.
+
+### Register via config
+
+```php
+// config/layup.php
+'widgets' => [
+    // ... built-in widgets ...
+    \App\Layup\MyWidget::class,
+],
+```
+
+### Register via plugin
 
 ```php
 LayupPlugin::make()
     ->widgets([MyWidget::class])
 ```
 
-Or remove defaults:
+### Remove built-in widgets
 
 ```php
 LayupPlugin::make()
-    ->withoutWidgets(['html', 'spacer'])
+    ->withoutWidgets([
+        \Crumbls\Layup\View\HtmlWidget::class,
+        \Crumbls\Layup\View\SpacerWidget::class,
+    ])
+```
+
+## Configuration Reference
+
+```php
+// config/layup.php
+return [
+    // Widget classes available in the page builder
+    'widgets' => [ /* ... */ ],
+
+    // Page model and table name (swap per dashboard)
+    'pages' => [
+        'table' => 'layup_pages',
+        'model' => \Crumbls\Layup\Models\Page::class,
+    ],
+
+    // Frontend rendering
+    'frontend' => [
+        'enabled'    => true,
+        'prefix'     => 'pages',
+        'middleware'  => ['web'],
+        'domain'     => null,
+        'layout'     => 'layouts.app',
+        'view'       => 'layup::frontend.page',
+    ],
+
+    // Tailwind safelist
+    'safelist' => [
+        'enabled'   => true,
+        'auto_sync' => true,
+        'path'      => 'storage/layup-safelist.txt',
+    ],
+
+    // Frontend container class (applied to each row's inner wrapper)
+    // Use 'container' for Tailwind's default, or 'max-w-7xl', etc.
+    'max_width' => 'container',
+
+    // Responsive breakpoints
+    'breakpoints' => [
+        'sm' => ['label' => 'sm', 'width' => 640,  'icon' => 'heroicon-o-device-phone-mobile'],
+        'md' => ['label' => 'md', 'width' => 768,  'icon' => 'heroicon-o-device-tablet'],
+        'lg' => ['label' => 'lg', 'width' => 1024, 'icon' => 'heroicon-o-computer-desktop'],
+        'xl' => ['label' => 'xl', 'width' => 1280, 'icon' => 'heroicon-o-tv'],
+    ],
+
+    'default_breakpoint' => 'lg',
+
+    // Row layout presets (column spans, must sum to 12)
+    'row_templates' => [
+        [12], [6, 6], [4, 4, 4], [3, 3, 3, 3],
+        [8, 4], [4, 8], [3, 6, 3], [2, 8, 2],
+    ],
+];
+```
+
+## Multiple Dashboards
+
+To use Layup across multiple Filament panels with separate page tables:
+
+```php
+// Panel A
+LayupPlugin::make()
+    ->model(PageA::class)    // or set via config
+
+// Panel B — different table
+LayupPlugin::make()
+    ->model(PageB::class)
+```
+
+Your custom model just overrides `getTable()`:
+
+```php
+class PageB extends \Crumbls\Layup\Models\Page
+{
+    public function getTable(): string
+    {
+        return 'my_other_pages_table';
+    }
+}
 ```
 
 ## License

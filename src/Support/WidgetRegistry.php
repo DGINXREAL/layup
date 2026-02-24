@@ -106,31 +106,31 @@ class WidgetRegistry
     /**
      * Run the onCreate callback for a widget type.
      */
-    public function fireOnCreate(string $type, array $data): array
+    public function fireOnCreate(string $type, array $data, ?WidgetContext $context = null): array
     {
         $class = $this->get($type);
 
-        return $class ? $class::onCreate($data) : $data;
+        return $class ? $class::onCreate($data, $context) : $data;
     }
 
     /**
      * Run the onSave callback for a widget type.
      */
-    public function fireOnSave(string $type, array $data): array
+    public function fireOnSave(string $type, array $data, ?WidgetContext $context = null): array
     {
         $class = $this->get($type);
 
-        return $class ? $class::onSave($data) : $data;
+        return $class ? $class::onSave($data, $context) : $data;
     }
 
     /**
      * Run the onDelete callback for a widget type.
      */
-    public function fireOnDelete(string $type, array $data): void
+    public function fireOnDelete(string $type, array $data, ?WidgetContext $context = null): void
     {
         $class = $this->get($type);
         if ($class) {
-            $class::onDelete($data);
+            $class::onDelete($data, $context);
         }
     }
 

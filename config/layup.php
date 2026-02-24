@@ -51,6 +51,64 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Pages Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configurable per-dashboard. If you run multiple Filament panels that
+    | each need their own page table, override these values per panel.
+    |
+    */
+    'pages' => [
+        'table' => 'layup_pages',
+        'model' => \Crumbls\Layup\Models\Page::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Frontend Rendering
+    |--------------------------------------------------------------------------
+    |
+    | Controls the public-facing page routes. Disable to handle routing
+    | yourself, or customize the prefix, middleware, layout, and view.
+    |
+    | Set 'domain' to serve pages on a specific domain (e.g., for a
+    | headless CMS where the frontend lives on a different subdomain).
+    |
+    */
+    'frontend' => [
+        'enabled' => true,
+        'prefix' => 'pages',
+        'middleware' => ['web'],
+        'domain' => null,
+        'layout' => 'latest-layout',
+        'view' => 'layup::frontend.page',
+        'max_width' => 'container',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Tailwind Safelist
+    |--------------------------------------------------------------------------
+    |
+    | Layup generates Tailwind utility classes dynamically (column widths,
+    | gap values, user-defined classes). Since Tailwind can't scan database
+    | content, these classes are written to a safelist file.
+    |
+    | When 'auto_sync' is enabled, saving a page automatically regenerates
+    | the safelist. If new classes are detected, a SafelistChanged event
+    | is dispatched so you can trigger a frontend rebuild.
+    |
+    | Run `php artisan layup:safelist` to manually regenerate.
+    |
+    */
+    'safelist' => [
+        'enabled' => true,
+        'auto_sync' => true,
+        'path' => 'storage/layup-safelist.txt',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Breakpoints
     |--------------------------------------------------------------------------
     |

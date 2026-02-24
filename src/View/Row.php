@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Crumbls\Layup\View;
 
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 use Illuminate\Contracts\View\View;
 
 class Row extends BaseView
@@ -53,18 +54,6 @@ class Row extends BaseView
                     'baseline' => 'Baseline',
                 ])
                 ->default('stretch'),
-            Select::make('gap')
-                ->label('Gap')
-                ->options([
-                    'gap-0' => 'None',
-                    'gap-1' => '0.25rem',
-                    'gap-2' => '0.5rem',
-                    'gap-4' => '1rem',
-                    'gap-6' => '1.5rem',
-                    'gap-8' => '2rem',
-                    'gap-12' => '3rem',
-                ])
-                ->default('gap-4'),
             Select::make('wrap')
                 ->label('Wrap')
                 ->options([
@@ -73,6 +62,10 @@ class Row extends BaseView
                     'wrap-reverse' => 'Wrap Reverse',
                 ])
                 ->default('wrap'),
+            Toggle::make('full_width')
+                ->label('Full Width')
+                ->helperText('Bypass the container max-width for edge-to-edge rows')
+                ->default(false),
         ];
     }
 

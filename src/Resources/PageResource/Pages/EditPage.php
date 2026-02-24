@@ -6,6 +6,7 @@ namespace Crumbls\Layup\Resources\PageResource\Pages;
 
 use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Resources\PageResource;
+use Crumbls\Layup\Support\ContentValidator;
 use Crumbls\Layup\Support\WidgetRegistry;
 use Crumbls\Layup\View\Column;
 use Crumbls\Layup\View\Row;
@@ -66,6 +67,18 @@ class EditPage extends EditRecord
      */
     public function restoreContent(array $content): void
     {
+        $result = (new ContentValidator())->validate($content);
+
+        if (! $result->passes()) {
+            Notification::make()
+                ->title('Invalid content')
+                ->body(implode(' ', $result->errors()))
+                ->danger()
+                ->send();
+
+            return;
+        }
+
         $this->pageContent = $content;
         $this->record->update(['content' => $this->pageContent]);
     }

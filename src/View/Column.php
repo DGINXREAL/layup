@@ -134,6 +134,8 @@ class Column extends BaseView
             'children' => $this->children,
             'span' => $this->span,
             'data' => $this->data,
+            'isFirst' => $this->isFirst,
+            'isLast' => $this->isLast,
         ]);
     }
 }

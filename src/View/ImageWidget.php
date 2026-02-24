@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Crumbls\Layup\View;
 
+use Crumbls\Layup\Support\WidgetContext;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Facades\Storage;
@@ -64,7 +65,7 @@ class ImageWidget extends BaseWidget
         return '(no image)';
     }
 
-    public static function onDelete(array $data): void
+    public static function onDelete(array $data, ?WidgetContext $context = null): void
     {
         if (! empty($data['src']) && is_string($data['src'])) {
             Storage::disk('public')->delete($data['src']);

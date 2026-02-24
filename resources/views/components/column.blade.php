@@ -1,8 +1,41 @@
+@php
+    $widthMap = [
+        1 => '1/12',
+        2 => '2/12',
+        3 => '3/12',
+        4 => '4/12',
+        5 => '5/12',
+        6 => '6/12',
+        7 => '7/12',
+        8 => '8/12',
+        9 => '9/12',
+        10 => '10/12',
+        11 => '11/12',
+        12 => 'full',
+    ];
+
+    $sm = $widthMap[$span['sm'] ?? 12] ?? 'full';
+    $md = $widthMap[$span['md'] ?? 12] ?? 'full';
+    $lg = $widthMap[$span['lg'] ?? 12] ?? 'full';
+    $xl = $widthMap[$span['xl'] ?? 12] ?? 'full';
+
+    // Gutter classes: first=pl, last=pr, middle=px
+    $isOnly = $isFirst && $isLast;
+    if ($isOnly) {
+        $gutter = '';
+    } elseif ($isFirst) {
+        $gutter = 'md:pr-2';
+    } elseif ($isLast) {
+        $gutter = 'md:pl-2';
+    } else {
+        $gutter = 'md:px-2';
+    }
+@endphp
 <div
     @if(!empty($data['id']))id="{{ $data['id'] }}"@endif
-    class="layup-column col-span-{{ $span['sm'] ?? 12 }} md:col-span-{{ $span['md'] ?? 12 }} lg:col-span-{{ $span['lg'] ?? 12 }} xl:col-span-{{ $span['xl'] ?? 12 }} {{ $data['class'] ?? '' }}"
+    class="w-{{ $sm }} md:w-{{ $md }} lg:w-{{ $lg }} xl:w-{{ $xl }} {{ $gutter }} space-y-4 {{ $data['class'] ?? '' }}"
     style="
-        @if(!empty($data['align_self']) && $data['align_self'] !== 'auto')align-self: {{ $data['align_self'] === 'start' ? 'flex-start' : ($data['align_self'] === 'end' ? 'flex-end' : $data['align_self']) }};@endif
+        @if(!empty($data['align_self']) && $data['align_self'] !== 'auto')align-self: {{ match($data['align_self']) { 'start' => 'flex-start', 'end' => 'flex-end', default => $data['align_self'] } }};@endif
         @if(!empty($data['overflow']) && $data['overflow'] !== 'visible')overflow: {{ $data['overflow'] }};@endif
         @if(!empty($data['background_color']))background-color: {{ $data['background_color'] }};@endif
         @if(!empty($data['inline_css'])){{ $data['inline_css'] }}@endif

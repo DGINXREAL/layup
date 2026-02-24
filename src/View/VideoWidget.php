@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Crumbls\Layup\View;
 
+use Crumbls\Layup\Support\WidgetContext;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -89,7 +90,7 @@ class VideoWidget extends BaseWidget
     /**
      * Normalize YouTube URLs to embed format on save.
      */
-    public static function onSave(array $data): array
+    public static function onSave(array $data, ?WidgetContext $context = null): array
     {
         if (! empty($data['url'])) {
             $data['embed_url'] = static::toEmbedUrl($data['url']);

@@ -25,7 +25,12 @@ use UnitEnum;
 
 class PageResource extends Resource
 {
-    protected static ?string $model = Page::class;
+    protected static ?string $model = null;
+
+    public static function getModel(): string
+    {
+        return config('layup.pages.model', Page::class);
+    }
 
     protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-document-duplicate';
 

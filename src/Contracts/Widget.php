@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Crumbls\Layup\Contracts;
 
+use Crumbls\Layup\Support\WidgetContext;
+
 /**
  * Contract for all Layup page builder widgets.
  *
@@ -55,25 +57,25 @@ interface Widget
 
     /**
      * Called after the widget data is saved via the slideover.
-     * Use for validation, transformation, or side effects (e.g., image processing).
+     * Context is provided when available (page, row/column/widget IDs).
      *
      * Return the (possibly modified) data array.
      */
-    public static function onSave(array $data): array;
+    public static function onSave(array $data, ?WidgetContext $context = null): array;
 
     /**
      * Called when the widget is first created (added to a column).
-     * Use for initialization logic beyond default data.
+     * Context is provided when available.
      *
      * Return the initial data array.
      */
-    public static function onCreate(array $data): array;
+    public static function onCreate(array $data, ?WidgetContext $context = null): array;
 
     /**
      * Called when the widget is deleted from a column.
-     * Use for cleanup (e.g., deleting uploaded files).
+     * Context is provided when available.
      */
-    public static function onDelete(array $data): void;
+    public static function onDelete(array $data, ?WidgetContext $context = null): void;
 
     /**
      * Serialize widget metadata for the Alpine.js builder.
