@@ -1,6 +1,15 @@
+@php
+    $hasHover = !empty($data['hover_bg_color']) || !empty($data['hover_text_color']);
+    $baseStyle = \Crumbls\Layup\View\BaseView::buildInlineStyles($data);
+    if (!empty($data['bg_color'])) $baseStyle .= " background-color: {$data['bg_color']};";
+    if (!empty($data['text_color_override'])) $baseStyle .= " color: {$data['text_color_override']};";
+    $hoverStyle = $baseStyle;
+    if (!empty($data['hover_bg_color'])) $hoverStyle = str_replace("background-color: {$data['bg_color']}", "background-color: {$data['hover_bg_color']}", $hoverStyle) ?: $hoverStyle . " background-color: {$data['hover_bg_color']};";
+    if (!empty($data['hover_text_color'])) $hoverStyle .= " color: {$data['hover_text_color']};";
+@endphp
 <a href="{{ $data['url'] ?? '#' }}"
    @if(!empty($data['id']))id="{{ $data['id'] }}"@endif
-   class="inline-block rounded font-medium transition-colors
+   class="inline-block rounded font-medium transition-all duration-200
        {{ match($data['style'] ?? 'primary') {
            'primary'   => 'bg-blue-600 text-white hover:bg-blue-700',
            'secondary' => 'bg-gray-600 text-white hover:bg-gray-700',
@@ -16,7 +25,14 @@
        } }}
        {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}"
    @if(!empty($data['new_tab'])) target="_blank" rel="noopener noreferrer" @endif
-   style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }} @if(!empty($data['bg_color']))background-color: {{ $data['bg_color'] }};@endif @if(!empty($data['text_color_override']))color: {{ $data['text_color_override'] }};@endif"
+   @if($hasHover)
+       x-data="{ hover: false }"
+       @mouseenter="hover = true"
+       @mouseleave="hover = false"
+       :style="hover ? '{{ $hoverStyle }}' : '{{ $baseStyle }}'"
+   @else
+       style="{{ $baseStyle }}"
+   @endif
    {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     {{ $data['label'] ?? 'Click Me' }}

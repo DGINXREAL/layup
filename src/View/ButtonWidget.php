@@ -68,6 +68,14 @@ class ButtonWidget extends BaseWidget
                 ->label('Custom Text Color')
                 ->type('color')
                 ->nullable(),
+            TextInput::make('hover_bg_color')
+                ->label('Hover Background Color')
+                ->type('color')
+                ->nullable(),
+            TextInput::make('hover_text_color')
+                ->label('Hover Text Color')
+                ->type('color')
+                ->nullable(),
         ];
     }
 

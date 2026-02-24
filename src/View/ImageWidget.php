@@ -7,6 +7,7 @@ namespace Crumbls\Layup\View;
 use Crumbls\Layup\Support\WidgetContext;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,6 +52,17 @@ class ImageWidget extends BaseWidget
             Checkbox::make('link_new_tab')
                 ->label('Open in new tab')
                 ->default(false),
+            Select::make('hover_effect')
+                ->label('Hover Effect')
+                ->options([
+                    '' => 'None',
+                    'zoom' => 'Zoom In',
+                    'grayscale' => 'Grayscale → Color',
+                    'brightness' => 'Brighten',
+                    'blur' => 'Blur → Clear',
+                ])
+                ->default('')
+                ->nullable(),
         ];
     }
 
