@@ -57,6 +57,8 @@ return [
         \Crumbls\Layup\View\ContactFormWidget::class,
         \Crumbls\Layup\View\StarRatingWidget::class,
         \Crumbls\Layup\View\LogoGridWidget::class,
+        \Crumbls\Layup\View\BlockquoteWidget::class,
+        \Crumbls\Layup\View\FeatureListWidget::class,
     ],
 
     /*

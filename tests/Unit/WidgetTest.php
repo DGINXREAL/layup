@@ -37,6 +37,8 @@ use Crumbls\Layup\View\SearchWidget;
 use Crumbls\Layup\View\ContactFormWidget;
 use Crumbls\Layup\View\StarRatingWidget;
 use Crumbls\Layup\View\LogoGridWidget;
+use Crumbls\Layup\View\BlockquoteWidget;
+use Crumbls\Layup\View\FeatureListWidget;
 
 $widgets = [
     TextWidget::class,
@@ -74,6 +76,8 @@ $widgets = [
     ContactFormWidget::class,
     StarRatingWidget::class,
     LogoGridWidget::class,
+    BlockquoteWidget::class,
+    FeatureListWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {
