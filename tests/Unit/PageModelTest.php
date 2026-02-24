@@ -274,3 +274,75 @@ it('returns section tree from sections key', function () {
         ->and($sections[0]['rows'])->toHaveCount(1)
         ->and($sections[1]['rows'])->toHaveCount(0);
 });
+
+it('generates WebPage structured data by default', function () {
+    $page = Page::create([
+        'title' => 'SD Test',
+        'slug' => 'sd-test',
+        'content' => ['rows' => []],
+        'status' => 'published',
+    ]);
+
+    $schemas = $page->getStructuredData();
+    expect($schemas)->toHaveCount(2)
+        ->and($schemas[0]['@type'])->toBe('WebPage')
+        ->and($schemas[0]['name'])->toBe('SD Test')
+        ->and($schemas[1]['@type'])->toBe('BreadcrumbList');
+});
+
+it('generates Article structured data with author', function () {
+    $page = Page::create([
+        'title' => 'Blog Post',
+        'slug' => 'blog-post',
+        'content' => ['rows' => []],
+        'status' => 'published',
+        'meta' => ['schema_type' => 'Article', 'author' => 'Jane Doe'],
+    ]);
+
+    $schemas = $page->getStructuredData();
+    expect($schemas[0]['@type'])->toBe('Article')
+        ->and($schemas[0]['author']['name'])->toBe('Jane Doe');
+});
+
+it('generates FAQPage structured data from accordion widgets', function () {
+    $page = Page::create([
+        'title' => 'FAQ',
+        'slug' => 'faq-test',
+        'content' => ['rows' => [[
+            'settings' => [],
+            'columns' => [[
+                'span' => 12,
+                'settings' => [],
+                'widgets' => [[
+                    'type' => 'accordion',
+                    'data' => ['items' => [
+                        ['title' => 'What is Layup?', 'content' => 'A page builder.'],
+                        ['title' => 'Is it free?', 'content' => 'Yes!'],
+                    ]],
+                ]],
+            ]],
+        ]]],
+        'status' => 'published',
+        'meta' => ['schema_type' => 'FAQPage'],
+    ]);
+
+    $schemas = $page->getStructuredData();
+    expect($schemas[0]['@type'])->toBe('FAQPage')
+        ->and($schemas[0]['mainEntity'])->toHaveCount(2)
+        ->and($schemas[0]['mainEntity'][0]['name'])->toBe('What is Layup?');
+});
+
+it('generates breadcrumb with nested slug', function () {
+    $page = Page::create([
+        'title' => 'Sub Page',
+        'slug' => 'docs/getting-started',
+        'content' => ['rows' => []],
+        'status' => 'published',
+    ]);
+
+    $schemas = $page->getStructuredData();
+    $breadcrumbs = $schemas[1];
+    expect($breadcrumbs['itemListElement'])->toHaveCount(3)
+        ->and($breadcrumbs['itemListElement'][1]['name'])->toBe('Docs')
+        ->and($breadcrumbs['itemListElement'][2]['name'])->toBe('Getting-started');
+});

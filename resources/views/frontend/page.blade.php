@@ -16,17 +16,11 @@
         <meta name="twitter:image" content="{{ $page->meta['image'] }}">
         @endif
         <link rel="canonical" href="{{ $page->getUrl() }}">
+        @foreach($page->getStructuredData() as $schema)
         <script type="application/ld+json">
-        {!! json_encode([
-            '@context' => 'https://schema.org',
-            '@type' => 'BreadcrumbList',
-            'itemListElement' => array_filter([
-                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
-                str_contains($page->slug, '/') ? ['@type' => 'ListItem', 'position' => 2, 'name' => ucfirst(explode('/', $page->slug)[0]), 'item' => url(config('layup.frontend.prefix', 'pages') . '/' . explode('/', $page->slug)[0])] : null,
-                ['@type' => 'ListItem', 'position' => str_contains($page->slug, '/') ? 3 : 2, 'name' => $page->title],
-            ]),
-        ], JSON_UNESCAPED_SLASHES) !!}
+        {!! json_encode($schema, JSON_UNESCAPED_SLASHES) !!}
         </script>
+        @endforeach
     </x-slot:meta>
     @endif
 

@@ -112,6 +112,122 @@ class Page extends Model
         ]);
     }
 
+    /**
+     * Get structured data (JSON-LD) for this page.
+     *
+     * Supports WebPage, Article, FAQPage, and BreadcrumbList schemas.
+     * Set `meta.schema_type` to 'Article' or 'FAQPage' to change type.
+     */
+    public function getStructuredData(): array
+    {
+        $schemas = [];
+        $type = $this->meta['schema_type'] ?? 'WebPage';
+
+        // Main page schema
+        $page = array_filter([
+            '@context' => 'https://schema.org',
+            '@type' => $type,
+            'name' => $this->getMetaTitle(),
+            'description' => $this->getMetaDescription(),
+            'url' => $this->getUrl(),
+            'datePublished' => $this->created_at?->toIso8601String(),
+            'dateModified' => $this->updated_at?->toIso8601String(),
+            'image' => $this->meta['image'] ?? null,
+        ]);
+
+        // Article-specific fields
+        if ($type === 'Article' || $type === 'BlogPosting') {
+            if (!empty($this->meta['author'])) {
+                $page['author'] = [
+                    '@type' => 'Person',
+                    'name' => $this->meta['author'],
+                ];
+            }
+        }
+
+        $schemas[] = $page;
+
+        // FAQ schema — auto-detect from accordion/toggle widgets
+        if ($type === 'FAQPage') {
+            $faqs = $this->extractFaqItems();
+            if (!empty($faqs)) {
+                $schemas[0]['mainEntity'] = array_map(fn(array $faq) => [
+                    '@type' => 'Question',
+                    'name' => $faq['question'],
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $faq['answer'],
+                    ],
+                ], $faqs);
+            }
+        }
+
+        // BreadcrumbList
+        $breadcrumbs = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+            ],
+        ];
+
+        $slugParts = explode('/', $this->slug);
+        $pos = 2;
+        $prefix = config('layup.frontend.prefix', 'pages');
+        $path = $prefix;
+        foreach ($slugParts as $i => $part) {
+            $path .= '/' . $part;
+            $item = ['@type' => 'ListItem', 'position' => $pos++, 'name' => ucfirst($part)];
+            if ($i < count($slugParts) - 1) {
+                $item['item'] = url(ltrim($path, '/'));
+            }
+            $breadcrumbs['itemListElement'][] = $item;
+        }
+
+        $schemas[] = $breadcrumbs;
+
+        return $schemas;
+    }
+
+    /**
+     * Extract FAQ items from accordion/toggle widgets in content.
+     */
+    protected function extractFaqItems(): array
+    {
+        $faqs = [];
+        $rows = $this->content['rows'] ?? [];
+
+        // Also check inside sections
+        if (!empty($this->content['sections'])) {
+            $rows = [];
+            foreach ($this->content['sections'] as $section) {
+                foreach ($section['rows'] ?? [] as $row) {
+                    $rows[] = $row;
+                }
+            }
+        }
+
+        foreach ($rows as $row) {
+            foreach ($row['columns'] ?? [] as $col) {
+                foreach ($col['widgets'] ?? [] as $widget) {
+                    $type = $widget['type'] ?? '';
+                    if (in_array($type, ['accordion', 'toggle'])) {
+                        foreach ($widget['data']['items'] ?? [] as $item) {
+                            if (!empty($item['title']) && !empty($item['content'])) {
+                                $faqs[] = [
+                                    'question' => $item['title'],
+                                    'answer' => strip_tags($item['content']),
+                                ];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $faqs;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | URL Generation
