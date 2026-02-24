@@ -52,6 +52,8 @@ use Crumbls\Layup\View\LoginWidget;
 use Crumbls\Layup\View\NewsletterWidget;
 use Crumbls\Layup\View\PostListWidget;
 use Crumbls\Layup\View\SeparatorWidget;
+use Crumbls\Layup\View\BackToTopWidget;
+use Crumbls\Layup\View\CookieConsentWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
 
@@ -108,6 +110,8 @@ $widgets = [
     NewsletterWidget::class,
     PostListWidget::class,
     SeparatorWidget::class,
+    BackToTopWidget::class,
+    CookieConsentWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

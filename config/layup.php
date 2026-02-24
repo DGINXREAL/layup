@@ -72,6 +72,8 @@ return [
         \Crumbls\Layup\View\NewsletterWidget::class,
         \Crumbls\Layup\View\PostListWidget::class,
         \Crumbls\Layup\View\SeparatorWidget::class,
+        \Crumbls\Layup\View\BackToTopWidget::class,
+        \Crumbls\Layup\View\CookieConsentWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],
