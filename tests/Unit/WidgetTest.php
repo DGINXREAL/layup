@@ -56,6 +56,8 @@ use Crumbls\Layup\View\BackToTopWidget;
 use Crumbls\Layup\View\CookieConsentWidget;
 use Crumbls\Layup\View\ShareButtonsWidget;
 use Crumbls\Layup\View\ModalWidget;
+use Crumbls\Layup\View\TypewriterWidget;
+use Crumbls\Layup\View\CardWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
 
@@ -116,6 +118,8 @@ $widgets = [
     CookieConsentWidget::class,
     ShareButtonsWidget::class,
     ModalWidget::class,
+    TypewriterWidget::class,
+    CardWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

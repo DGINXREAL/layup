@@ -76,6 +76,8 @@ return [
         \Crumbls\Layup\View\CookieConsentWidget::class,
         \Crumbls\Layup\View\ShareButtonsWidget::class,
         \Crumbls\Layup\View\ModalWidget::class,
+        \Crumbls\Layup\View\TypewriterWidget::class,
+        \Crumbls\Layup\View\CardWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],
