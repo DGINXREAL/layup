@@ -70,6 +70,8 @@ use Crumbls\Layup\View\RichTextWidget;
 use Crumbls\Layup\View\ListWidget;
 use Crumbls\Layup\View\AnchorWidget;
 use Crumbls\Layup\View\BannerWidget;
+use Crumbls\Layup\View\ContentToggleWidget;
+use Crumbls\Layup\View\LogoSliderWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
 
@@ -144,6 +146,8 @@ $widgets = [
     ListWidget::class,
     AnchorWidget::class,
     BannerWidget::class,
+    ContentToggleWidget::class,
+    LogoSliderWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

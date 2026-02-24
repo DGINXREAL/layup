@@ -90,6 +90,8 @@ return [
         \Crumbls\Layup\View\ListWidget::class,
         \Crumbls\Layup\View\AnchorWidget::class,
         \Crumbls\Layup\View\BannerWidget::class,
+        \Crumbls\Layup\View\ContentToggleWidget::class,
+        \Crumbls\Layup\View\LogoSliderWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],
