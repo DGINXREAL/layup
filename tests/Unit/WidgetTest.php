@@ -43,6 +43,8 @@ use Crumbls\Layup\View\TimelineWidget;
 use Crumbls\Layup\View\StatCardWidget;
 use Crumbls\Layup\View\MarqueeWidget;
 use Crumbls\Layup\View\BeforeAfterWidget;
+use Crumbls\Layup\View\TeamGridWidget;
+use Crumbls\Layup\View\NotificationBarWidget;
 
 $widgets = [
     TextWidget::class,
@@ -86,6 +88,8 @@ $widgets = [
     StatCardWidget::class,
     MarqueeWidget::class,
     BeforeAfterWidget::class,
+    TeamGridWidget::class,
+    NotificationBarWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

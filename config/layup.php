@@ -63,6 +63,8 @@ return [
         \Crumbls\Layup\View\StatCardWidget::class,
         \Crumbls\Layup\View\MarqueeWidget::class,
         \Crumbls\Layup\View\BeforeAfterWidget::class,
+        \Crumbls\Layup\View\TeamGridWidget::class,
+        \Crumbls\Layup\View\NotificationBarWidget::class,
     ],
 
     /*
