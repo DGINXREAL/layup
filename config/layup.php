@@ -84,6 +84,8 @@ return [
         \Crumbls\Layup\View\FlipCardWidget::class,
         \Crumbls\Layup\View\PricingToggleWidget::class,
         \Crumbls\Layup\View\ImageHotspotWidget::class,
+        \Crumbls\Layup\View\LottieWidget::class,
+        \Crumbls\Layup\View\MasonryWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],
