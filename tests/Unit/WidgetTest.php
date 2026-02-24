@@ -85,6 +85,11 @@ use Crumbls\Layup\View\FileDownloadWidget;
 use Crumbls\Layup\View\ChangelogWidget;
 use Crumbls\Layup\View\SkillBarWidget;
 use Crumbls\Layup\View\PriceWidget;
+use Crumbls\Layup\View\HotspotWidget;
+use Crumbls\Layup\View\MetricWidget;
+use Crumbls\Layup\View\FeatureGridWidget;
+use Crumbls\Layup\View\HighlightBoxWidget;
+use Crumbls\Layup\View\SocialProofWidget;
 
 $widgets = [
     TextWidget::class,
@@ -170,6 +175,11 @@ $widgets = [
     ChangelogWidget::class,
     SkillBarWidget::class,
     PriceWidget::class,
+    HotspotWidget::class,
+    MetricWidget::class,
+    FeatureGridWidget::class,
+    HighlightBoxWidget::class,
+    SocialProofWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

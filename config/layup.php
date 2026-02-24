@@ -106,6 +106,11 @@ return [
         \Crumbls\Layup\View\ChangelogWidget::class,
         \Crumbls\Layup\View\SkillBarWidget::class,
         \Crumbls\Layup\View\PriceWidget::class,
+        \Crumbls\Layup\View\HotspotWidget::class,
+        \Crumbls\Layup\View\MetricWidget::class,
+        \Crumbls\Layup\View\FeatureGridWidget::class,
+        \Crumbls\Layup\View\HighlightBoxWidget::class,
+        \Crumbls\Layup\View\SocialProofWidget::class,
     ],
 
     /*
