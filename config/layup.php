@@ -55,6 +55,8 @@ return [
         \Crumbls\Layup\View\MenuWidget::class,
         \Crumbls\Layup\View\SearchWidget::class,
         \Crumbls\Layup\View\ContactFormWidget::class,
+        \Crumbls\Layup\View\StarRatingWidget::class,
+        \Crumbls\Layup\View\LogoGridWidget::class,
     ],
 
     /*
