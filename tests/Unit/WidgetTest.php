@@ -66,6 +66,10 @@ use Crumbls\Layup\View\PricingToggleWidget;
 use Crumbls\Layup\View\ImageHotspotWidget;
 use Crumbls\Layup\View\LottieWidget;
 use Crumbls\Layup\View\MasonryWidget;
+use Crumbls\Layup\View\RichTextWidget;
+use Crumbls\Layup\View\ListWidget;
+use Crumbls\Layup\View\AnchorWidget;
+use Crumbls\Layup\View\BannerWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
 
@@ -136,6 +140,10 @@ $widgets = [
     ImageHotspotWidget::class,
     LottieWidget::class,
     MasonryWidget::class,
+    RichTextWidget::class,
+    ListWidget::class,
+    AnchorWidget::class,
+    BannerWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {
