@@ -46,6 +46,17 @@ class EditPage extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('revisions')
+                ->label('Revision History')
+                ->icon('heroicon-o-clock')
+                ->color('gray')
+                ->slideOver()
+                ->modalWidth('2xl')
+                ->modalHeading('Revision History')
+                ->modalDescription('View and restore previous versions of this page')
+                ->modalContent(fn () => $this->getRevisionHistoryView())
+                ->modalFooterActions([])
+                ->action(fn () => null),
             Action::make('saveAsTemplate')
                 ->label('Save as Template')
                 ->icon('heroicon-o-document-duplicate')
@@ -69,6 +80,36 @@ class EditPage extends EditRecord
                 }),
             Actions\DeleteAction::make(),
         ];
+    }
+    
+    protected function getRevisionHistoryView(): \Illuminate\Contracts\View\View
+    {
+        $revisions = $this->record->revisions()
+            ->orderBy('created_at', 'desc')
+            ->limit(50)
+            ->get();
+            
+        return view('layup::revision-history', [
+            'revisions' => $revisions,
+            'currentPageId' => $this->record->id,
+        ]);
+    }
+    
+    public function restoreRevision(int $revisionId): void
+    {
+        $revision = $this->record->revisions()->findOrFail($revisionId);
+        
+        $this->record->update(['content' => $revision->content]);
+        $this->pageContent = $revision->content;
+        $this->syncContent();
+        
+        Notification::make()
+            ->title('Revision restored')
+            ->body('Page content has been restored to ' . $revision->created_at->diffForHumans())
+            ->success()
+            ->send();
+            
+        $this->dispatch('close-modal', id: 'revisions');
     }
 
     // ─── Row Operations ──────────────────────────────────────

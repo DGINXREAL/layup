@@ -31,7 +31,7 @@
 
 ### Widget Picker
 - [x] Widget icons in picker modal
-- [ ] Recently used widgets
+- [x] Recently used widgets
 - [ ] Drag from picker to canvas
 
 ### Builder Canvas
