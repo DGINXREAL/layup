@@ -142,7 +142,7 @@
                                 <template x-for="(col, colIndex) in row.columns" :key="col.id">
                                     <div
                                         class="lyp-col"
-                                        :class="{ 'lyp-col--drop-target': drag.active && !(drag.sourceRowId === row.id && drag.sourceColId === col.id && col.widgets.length === 1) }"
+                                        :class="{ 'lyp-col--drop-target': drag.active && (drag.fromPicker || !(drag.sourceRowId === row.id && drag.sourceColId === col.id && col.widgets.length === 1)) }"
                                         :style="'grid-column: span ' + getColSpan(col) + ' / span ' + getColSpan(col)"
                                         @click.self="$wire.editColumn(row.id, col.id)"
                                         @dragover.prevent="onDragOverCol($event, row.id, col.id)"
@@ -308,7 +308,13 @@
                                 <div class="lyp-picker-cat-label">Recently Used</div>
                                 <div class="lyp-picker-grid">
                                     <template x-for="w in getRecentWidgets()" :key="w.type">
-                                        <button @click="selectWidget(w.type)" class="lyp-picker-item">
+                                        <button 
+                                            @click="selectWidget(w.type)" 
+                                            class="lyp-picker-item"
+                                            draggable="true"
+                                            @dragstart="onPickerDragStart($event, w.type)"
+                                            @dragend="onPickerDragEnd()"
+                                        >
                                             <span x-html="getIconSvg(w.icon)" class="lyp-picker-item-icon"></span>
                                             <span class="lyp-picker-item-label" x-text="w.label"></span>
                                         </button>
@@ -323,7 +329,13 @@
                                 <div class="lyp-picker-cat-label" x-text="cat.name"></div>
                                 <div class="lyp-picker-grid">
                                     <template x-for="w in cat.widgets" :key="w.type">
-                                        <button @click="selectWidget(w.type)" class="lyp-picker-item">
+                                        <button 
+                                            @click="selectWidget(w.type)" 
+                                            class="lyp-picker-item"
+                                            draggable="true"
+                                            @dragstart="onPickerDragStart($event, w.type)"
+                                            @dragend="onPickerDragEnd()"
+                                        >
                                             <span x-html="getIconSvg(w.icon)" class="lyp-picker-item-icon"></span>
                                             <span class="lyp-picker-item-label" x-text="w.label"></span>
                                         </button>
@@ -482,14 +494,24 @@
             },
 
             // Widget drag
-            drag: { active: false, widgetId: null, sourceRowId: null, sourceColId: null, sourceIndex: null, dropTarget: null },
+            drag: { active: false, widgetId: null, sourceRowId: null, sourceColId: null, sourceIndex: null, dropTarget: null, fromPicker: false, widgetType: null },
 
             onDragStart(e, rowId, colId, widgetId, index) {
-                this.drag = { active: true, widgetId, sourceRowId: rowId, sourceColId: colId, sourceIndex: index, dropTarget: null };
+                this.drag = { active: true, widgetId, sourceRowId: rowId, sourceColId: colId, sourceIndex: index, dropTarget: null, fromPicker: false, widgetType: null };
                 e.dataTransfer.effectAllowed = 'move';
                 e.dataTransfer.setData('text/plain', widgetId);
             },
-            onDragEnd() { this.drag = { active: false, widgetId: null, sourceRowId: null, sourceColId: null, sourceIndex: null, dropTarget: null }; },
+            onDragEnd() { this.drag = { active: false, widgetId: null, sourceRowId: null, sourceColId: null, sourceIndex: null, dropTarget: null, fromPicker: false, widgetType: null }; },
+            
+            // Picker drag
+            onPickerDragStart(e, widgetType) {
+                this.drag = { active: true, widgetId: null, sourceRowId: null, sourceColId: null, sourceIndex: null, dropTarget: null, fromPicker: true, widgetType };
+                e.dataTransfer.effectAllowed = 'copy';
+                e.dataTransfer.setData('text/plain', 'picker:' + widgetType);
+            },
+            onPickerDragEnd() { 
+                this.onDragEnd(); 
+            },
             onDragOverWidget(e, rowId, colId, widgetIndex) {
                 if (!this.drag.active) return;
                 const rect = e.currentTarget.getBoundingClientRect();
@@ -500,17 +522,30 @@
             onDragOverCol(e, rowId, colId) {
                 if (!this.drag.active) return;
                 const col = this.findCol(rowId, colId);
-                if (col && col.widgets.length === 0) this.drag.dropTarget = { rowId, colId, position: 0 };
+                if (col && (col.widgets.length === 0 || this.drag.fromPicker)) {
+                    this.drag.dropTarget = { rowId, colId, position: col.widgets.length };
+                }
             },
             onDragLeaveCol(e) { if (!e.currentTarget.contains(e.relatedTarget)) this.drag.dropTarget = null; },
             onDropCol(e, rowId, colId) {
                 if (!this.drag.active || !this.drag.dropTarget) return;
                 const dt = this.drag.dropTarget;
-                let position = dt.position;
-                if (this.drag.sourceRowId === dt.rowId && this.drag.sourceColId === dt.colId && this.drag.sourceIndex < position) position--;
-                const { sourceRowId, sourceColId, widgetId } = this.drag;
-                this.onDragEnd();
-                $wire.moveWidgetTo(sourceRowId, sourceColId, widgetId, dt.rowId, dt.colId, position);
+                
+                if (this.drag.fromPicker) {
+                    // Adding new widget from picker
+                    const widgetType = this.drag.widgetType;
+                    this.onDragEnd();
+                    this.closePicker();
+                    $wire.addWidgetAt(dt.rowId, dt.colId, widgetType, dt.position);
+                    this.trackRecentWidget(widgetType);
+                } else {
+                    // Moving existing widget
+                    let position = dt.position;
+                    if (this.drag.sourceRowId === dt.rowId && this.drag.sourceColId === dt.colId && this.drag.sourceIndex < position) position--;
+                    const { sourceRowId, sourceColId, widgetId } = this.drag;
+                    this.onDragEnd();
+                    $wire.moveWidgetTo(sourceRowId, sourceColId, widgetId, dt.rowId, dt.colId, position);
+                }
             },
 
             findCol(rowId, colId) {

@@ -39,10 +39,10 @@
 - [ ] Inline text editing
 - [ ] Visual column resize handles
 
-### Page Management ✅ MOSTLY COMPLETE
+### Page Management ✅ COMPLETE
 - [x] Duplicate page, Bulk publish/unpublish, Export/Import JSON
 - [x] Revision history (auto-save, prune, restore)
-- [ ] Revision browser UI in EditPage
+- [x] Revision browser UI in EditPage
 
 ## Priority 4: Portability & DX ✅ COMPLETE
 - [x] Export/Import JSON, Page templates (5 built-in), Save as template

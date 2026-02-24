@@ -591,6 +591,32 @@ class EditPage extends EditRecord
         $this->record->update(['content' => $this->pageContent]);
         $this->syncContent();
     }
+    
+    public function addWidgetAt(string $rowId, string $columnId, string $widgetType, int $position): void
+    {
+        $registry = app(WidgetRegistry::class);
+        $defaults = $registry->getDefaultData($widgetType);
+        $data = $registry->fireOnCreate($widgetType, $defaults);
+
+        $widget = [
+            'id' => 'widget_' . Str::random(8),
+            'type' => $widgetType,
+            'data' => $data,
+        ];
+
+        foreach ($this->pageContent['rows'] as &$row) {
+            if ($row['id'] !== $rowId) continue;
+            foreach ($row['columns'] as &$col) {
+                if ($col['id'] === $columnId) {
+                    array_splice($col['widgets'], $position, 0, [$widget]);
+                    break 2;
+                }
+            }
+        }
+
+        $this->record->update(['content' => $this->pageContent]);
+        $this->syncContent();
+    }
 
     public function editWidget(string $rowId, string $columnId, string $widgetId): void
     {
