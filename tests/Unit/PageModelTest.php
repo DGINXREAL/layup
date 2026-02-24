@@ -169,6 +169,16 @@ it('does not dispatch SafelistChanged when safelist is unchanged', function () {
     Event::assertDispatchedTimes(SafelistChanged::class, 1);
 });
 
+it('sitemapEntries returns published pages', function () {
+    Page::create(['title' => 'Published', 'slug' => 'sitemap-pub', 'content' => ['rows' => []], 'status' => 'published']);
+    Page::create(['title' => 'Draft', 'slug' => 'sitemap-draft', 'content' => ['rows' => []], 'status' => 'draft']);
+
+    $entries = Page::sitemapEntries();
+    $urls = array_column($entries, 'url');
+    expect($urls)->toContain(url('pages/sitemap-pub'));
+    expect($urls)->not->toContain(url('pages/sitemap-draft'));
+});
+
 it('does not sync safelist when auto_sync is disabled', function () {
     Event::fake([SafelistChanged::class]);
 

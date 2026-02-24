@@ -219,4 +219,21 @@ class Page extends Model
     {
         return \Crumbls\Layup\Database\Factories\PageFactory::new();
     }
+
+    /**
+     * Get sitemap entries for all published pages.
+     * Returns an array of [url, lastmod, priority] suitable for sitemap generation.
+     *
+     * @return array<array{url: string, lastmod: string, priority: string}>
+     */
+    public static function sitemapEntries(): array
+    {
+        return static::published()->get()->map(function (self $page) {
+            return [
+                'url' => $page->getUrl(),
+                'lastmod' => $page->updated_at->toDateString(),
+                'priority' => '0.7',
+            ];
+        })->all();
+    }
 }

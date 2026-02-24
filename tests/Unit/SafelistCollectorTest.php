@@ -197,3 +197,13 @@ it('sync writes file to disk', function () {
 it('classesForPages works with empty collection', function () {
     expect(SafelistCollector::classesForPages([]))->toBe([]);
 });
+
+it('includes extra_classes from config', function () {
+    config(['layup.safelist.extra_classes' => ['custom-brand', 'bg-brand-500']]);
+
+    $all = SafelistCollector::classes();
+    expect($all)->toContain('custom-brand')
+        ->and($all)->toContain('bg-brand-500');
+
+    config(['layup.safelist.extra_classes' => []]);
+});

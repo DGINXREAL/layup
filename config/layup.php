@@ -125,6 +125,7 @@ return [
         'enabled' => true,
         'auto_sync' => true,
         'path' => 'storage/layup-safelist.txt',
+        'extra_classes' => [], // Additional classes to always include in the safelist
     ],
 
     /*

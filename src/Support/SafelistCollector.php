@@ -41,6 +41,7 @@ class SafelistCollector
 
         return array_values(array_unique(array_merge(
             static::staticClasses(),
+            config('layup.safelist.extra_classes', []),
             static::classesForPages($modelClass::published()->get()),
         )));
     }
