@@ -220,7 +220,7 @@ class Page extends Model
         $content = $this->content ?? [];
 
         // Support both { sections: [...] } and legacy { rows: [...] }
-        if (!empty($content['sections'])) {
+        if (array_key_exists('sections', $content)) {
             $sections = $content['sections'];
         } else {
             // Legacy: wrap all rows in one default section
@@ -241,7 +241,7 @@ class Page extends Model
         $rows = $content['rows'] ?? [];
 
         // If sections exist, flatten all rows from all sections
-        if (!empty($content['sections'])) {
+        if (array_key_exists('sections', $content)) {
             $rows = [];
             foreach ($content['sections'] as $section) {
                 foreach ($section['rows'] ?? [] as $row) {
