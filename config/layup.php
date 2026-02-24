@@ -61,6 +61,8 @@ return [
         \Crumbls\Layup\View\FeatureListWidget::class,
         \Crumbls\Layup\View\TimelineWidget::class,
         \Crumbls\Layup\View\StatCardWidget::class,
+        \Crumbls\Layup\View\MarqueeWidget::class,
+        \Crumbls\Layup\View\BeforeAfterWidget::class,
     ],
 
     /*

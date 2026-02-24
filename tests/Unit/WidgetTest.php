@@ -41,6 +41,8 @@ use Crumbls\Layup\View\BlockquoteWidget;
 use Crumbls\Layup\View\FeatureListWidget;
 use Crumbls\Layup\View\TimelineWidget;
 use Crumbls\Layup\View\StatCardWidget;
+use Crumbls\Layup\View\MarqueeWidget;
+use Crumbls\Layup\View\BeforeAfterWidget;
 
 $widgets = [
     TextWidget::class,
@@ -82,6 +84,8 @@ $widgets = [
     FeatureListWidget::class,
     TimelineWidget::class,
     StatCardWidget::class,
+    MarqueeWidget::class,
+    BeforeAfterWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

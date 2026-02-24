@@ -1,6 +1,6 @@
 # Layup
 
-A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style editor with rows, columns, and 30 extensible widgets — all using native Filament form components.
+A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style editor with rows, columns, and 39 extensible widgets — all using native Filament form components.
 
 ## Features
 
@@ -22,15 +22,15 @@ A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style
 - **Content validation** — structural + widget type validation
 - **Widget auto-discovery** — scans `App\Layup\Widgets` for custom widgets
 - **Configurable model** — swap the Page model per dashboard
-- **422 tests, 841 assertions**
+- **503 tests, 1003 assertions**
 
-### Built-in Widgets (30)
+### Built-in Widgets (39)
 
 | Category | Widgets |
 |----------|---------|
-| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter, Alert, Table, Progress Circle |
-| **Media** | Image, Gallery (with lightbox), Video, Audio, Slider, Map |
-| **Interactive** | Button, Call to Action, Countdown, Pricing Table, Social Follow |
+| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter, Alert, Table, Progress Circle, Blockquote, Feature List, Timeline, Stat Card, Star Rating, Logo Grid, Menu |
+| **Media** | Image (with hover effects), Gallery (with lightbox), Video, Audio, Slider, Map |
+| **Interactive** | Button (hover colors), Call to Action, Countdown, Pricing Table, Social Follow, Search, Contact Form |
 | **Layout** | Spacer, Divider |
 | **Advanced** | HTML, Code Block, Embed |
 
