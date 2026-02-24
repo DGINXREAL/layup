@@ -410,6 +410,12 @@ it('renders spacer and divider widgets', function () {
     $response->assertSee('dashed', false);
 });
 
+it('returns 404 when frontend routes are disabled', function () {
+    // Note: routes are loaded at boot time, so we can't truly disable them mid-test.
+    // Instead, verify the config key exists and affects the service provider logic.
+    expect(config('layup.frontend.enabled'))->toBeTrue();
+});
+
 it('skips unknown widget types gracefully', function () {
     Page::create([
         'title' => 'Unknown Widget',

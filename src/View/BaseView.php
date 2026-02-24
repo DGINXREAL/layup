@@ -163,6 +163,68 @@ abstract class BaseView extends Component
                 ])
                 ->default('')
                 ->nullable(),
+            Select::make('font_size')
+                ->label('Font Size')
+                ->options([
+                    '' => 'Default',
+                    '0.75rem' => 'XS (12px)',
+                    '0.875rem' => 'SM (14px)',
+                    '1rem' => 'Base (16px)',
+                    '1.125rem' => 'LG (18px)',
+                    '1.25rem' => 'XL (20px)',
+                    '1.5rem' => '2XL (24px)',
+                    '1.875rem' => '3XL (30px)',
+                    '2.25rem' => '4XL (36px)',
+                    '3rem' => '5XL (48px)',
+                ])
+                ->default('')
+                ->nullable(),
+            Select::make('border_radius')
+                ->label('Border Radius')
+                ->options([
+                    '' => 'None',
+                    '0.25rem' => 'Small',
+                    '0.375rem' => 'Medium',
+                    '0.5rem' => 'Large',
+                    '0.75rem' => 'XL',
+                    '1rem' => '2XL',
+                    '1.5rem' => '3XL',
+                    '9999px' => 'Full',
+                ])
+                ->default('')
+                ->nullable(),
+            TextInput::make('border_width')
+                ->label('Border Width')
+                ->placeholder('e.g. 1px')
+                ->nullable(),
+            Select::make('border_style')
+                ->label('Border Style')
+                ->options([
+                    '' => 'None',
+                    'solid' => 'Solid',
+                    'dashed' => 'Dashed',
+                    'dotted' => 'Dotted',
+                    'double' => 'Double',
+                ])
+                ->default('')
+                ->nullable(),
+            TextInput::make('border_color')
+                ->label('Border Color')
+                ->type('color')
+                ->nullable(),
+            Select::make('box_shadow')
+                ->label('Box Shadow')
+                ->options([
+                    '' => 'None',
+                    '0 1px 2px 0 rgb(0 0 0 / 0.05)' => 'XS',
+                    '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' => 'Small',
+                    '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' => 'Medium',
+                    '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)' => 'Large',
+                    '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)' => 'XL',
+                    '0 25px 50px -12px rgb(0 0 0 / 0.25)' => '2XL',
+                ])
+                ->default('')
+                ->nullable(),
             SpacingPicker::advanced('padding', 'Padding'),
             SpacingPicker::advanced('margin', 'Margin'),
             TextInput::make('background_color')
@@ -277,6 +339,19 @@ abstract class BaseView extends Component
         }
         if (!empty($data['text_align'])) {
             $styles[] = "text-align: {$data['text_align']};";
+        }
+        if (!empty($data['font_size'])) {
+            $styles[] = "font-size: {$data['font_size']};";
+        }
+        if (!empty($data['border_radius'])) {
+            $styles[] = "border-radius: {$data['border_radius']};";
+        }
+        if (!empty($data['border_width']) && !empty($data['border_style'])) {
+            $color = $data['border_color'] ?? '#e5e7eb';
+            $styles[] = "border: {$data['border_width']} {$data['border_style']} {$color};";
+        }
+        if (!empty($data['box_shadow'])) {
+            $styles[] = "box-shadow: {$data['box_shadow']};";
         }
         if (!empty($data['background_color'])) {
             $styles[] = "background-color: {$data['background_color']};";

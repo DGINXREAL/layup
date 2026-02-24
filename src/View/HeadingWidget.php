@@ -46,6 +46,11 @@ class HeadingWidget extends BaseWidget
                     'h6' => 'H6',
                 ])
                 ->default('h2'),
+            TextInput::make('link_url')
+                ->label('Link URL')
+                ->url()
+                ->placeholder('https://...')
+                ->nullable(),
         ];
     }
 

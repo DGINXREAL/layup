@@ -11,5 +11,5 @@
     } }} {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }} mb-2"
     style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}" {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
-    {{ $data['content'] ?? '' }}
+    @if(!empty($data['link_url']))<a href="{{ $data['link_url'] }}" class="hover:underline">@endif{{ $data['content'] ?? '' }}@if(!empty($data['link_url']))</a>@endif
 </{{ $data['level'] ?? 'h2' }}>

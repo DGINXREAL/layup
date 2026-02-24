@@ -211,6 +211,26 @@ it('generates slide-up animation attributes', function () {
     expect($attrs)->toContain('translateY(2rem)');
 });
 
+it('builds inline styles with font size and border radius', function () {
+    $styles = \Crumbls\Layup\View\BaseView::buildInlineStyles([
+        'font_size' => '1.5rem',
+        'border_radius' => '0.5rem',
+    ]);
+    expect($styles)->toContain('font-size: 1.5rem;')
+        ->and($styles)->toContain('border-radius: 0.5rem;');
+});
+
+it('builds inline styles with border and box shadow', function () {
+    $styles = \Crumbls\Layup\View\BaseView::buildInlineStyles([
+        'border_width' => '2px',
+        'border_style' => 'solid',
+        'border_color' => '#333',
+        'box_shadow' => '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+    ]);
+    expect($styles)->toContain('border: 2px solid #333;')
+        ->and($styles)->toContain('box-shadow:');
+});
+
 it('renders text widget with animation attributes', function () {
     $widget = TextWidget::make(['content' => 'animated', 'animation' => 'fade-in']);
     $html = $widget->render()->toHtml();

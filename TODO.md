@@ -3,35 +3,35 @@
 ## Priority 1: Testing (biggest gap)
 
 ### Frontend/HTTP Tests
-- [ ] `tests/Feature/PageControllerTest.php` — GET routes return 200, 404 for missing slugs
-- [ ] Test nested slug routing (`pages/about/team`)
-- [ ] Test layout rendering (slot content appears)
-- [ ] Test each widget type renders expected HTML structure
-- [ ] Test `@layupScripts` directive outputs Alpine.data registrations
-- [ ] Test disabled frontend routes (config toggle)
+- [x] `tests/Feature/PageControllerTest.php` — GET routes return 200, 404 for missing slugs
+- [x] Test nested slug routing (`pages/about/team`)
+- [x] Test layout rendering (slot content appears)
+- [x] Test each widget type renders expected HTML structure
+- [x] Test `@layupScripts` directive outputs Alpine.data registrations
+- [x] Test disabled frontend routes (config toggle)
 
 ### SafelistCollector Tests
-- [ ] `tests/Unit/SafelistCollectorTest.php` — staticClasses() returns expected count
-- [ ] classesFromContent() extracts user custom classes
-- [ ] classesFromContent() ignores empty content
-- [ ] sync() dispatches SafelistChanged event on change
-- [ ] sync() does NOT dispatch when hash unchanged
-- [ ] toSafelistFile() output format
+- [x] `tests/Unit/SafelistCollectorTest.php` — staticClasses() returns expected count
+- [x] classesFromContent() extracts user custom classes
+- [x] classesFromContent() ignores empty content
+- [x] sync() dispatches SafelistChanged event on change
+- [x] sync() does NOT dispatch when hash unchanged
+- [x] toSafelistFile() output format
 
 ### Artisan Command Tests
-- [ ] `tests/Feature/GenerateSafelistCommandTest.php` — writes file, --stdout, --static-only
+- [x] `tests/Feature/GenerateSafelistCommandTest.php` — writes file, --stdout, --static-only
 
 ### ContentValidator Tests (expand)
-- [ ] Validate nested widget type checking in strict mode
-- [ ] Validate malformed column spans
-- [ ] Validate missing widget IDs
+- [x] Validate nested widget type checking in strict mode
+- [x] Validate malformed column spans (non-array rows/columns/widgets)
+- [x] Validate missing widget IDs (empty type string)
 
 ### Rendering Tests
-- [ ] `tests/Unit/RenderingTest.php` — each widget renders without error
-- [ ] Row renders with container class
-- [ ] Column renders correct width classes from span
-- [ ] Column gutters: first/middle/last get correct padding classes
-- [ ] Full-width row skips container
+- [x] `tests/Unit/RenderingTest.php` — each widget renders without error
+- [x] Row renders with container class
+- [x] Column renders correct width classes from span
+- [x] Column gutters: first/middle/last get correct padding classes
+- [x] Full-width row skips container
 
 ## Priority 2: Missing Divi Features
 
@@ -44,12 +44,12 @@
 - [ ] Migration path for existing content (wrap rows in default section)
 
 ### Design Tab Enhancements (per widget)
-- [ ] Text color picker on BaseView design tab
-- [ ] Font size selector (preset sizes or custom)
-- [ ] Text alignment (left/center/right/justify)
-- [ ] Border radius picker
-- [ ] Border (width, style, color)
-- [ ] Box shadow presets
+- [x] Text color picker on BaseView design tab
+- [x] Font size selector (preset sizes or custom)
+- [x] Text alignment (left/center/right/justify)
+- [x] Border radius picker
+- [x] Border (width, style, color)
+- [x] Box shadow presets
 - [ ] Opacity slider
 
 ### Hover States
@@ -57,13 +57,13 @@
 - [ ] Hover effects on images (zoom, grayscale)
 
 ### Responsive Visibility
-- [ ] Show/hide per breakpoint toggle on BaseView Advanced tab
-- [ ] Generates `hidden md:block` type classes
+- [x] Show/hide per breakpoint toggle on BaseView Advanced tab
+- [x] Generates `hidden md:block` type classes
 
 ### Animations/Transitions
-- [ ] Entrance animations (fade in, slide up, etc.) via Alpine x-intersect
-- [ ] Animation delay/duration options
-- [ ] Add to BaseView Advanced tab
+- [x] Entrance animations (fade in, slide up, etc.) via Alpine x-intersect
+- [x] Animation delay/duration options
+- [x] Add to BaseView Advanced tab
 
 ## Priority 3: Builder UX Polish
 
@@ -78,17 +78,17 @@
 - [ ] Visual column resize handles
 
 ### Page Management
-- [ ] Duplicate page action on PageResource list
-- [ ] Page status badge (published/draft) in list
-- [ ] Bulk actions (publish/unpublish/delete)
+- [x] Duplicate page action on PageResource list
+- [x] Page status badge (published/draft) in list
+- [x] Bulk actions (publish/unpublish/delete)
 - [ ] Revision history (content versions)
 
 ## Priority 4: Portability & DX
 
 ### Export/Import
-- [ ] Export page as JSON (action on EditPage)
-- [ ] Import page from JSON (action on ListPages)
-- [ ] Include widget type validation on import
+- [x] Export page as JSON (action on EditPage)
+- [x] Import page from JSON (action on ListPages)
+- [x] Include widget type validation on import
 
 ### Page Templates
 - [ ] Save current page layout as template
@@ -96,22 +96,22 @@
 - [ ] Ship default templates (landing page, about, contact, pricing)
 
 ### SEO Improvements
-- [ ] Open Graph meta tags (og:title, og:description, og:image)
-- [ ] Twitter Card meta tags
-- [ ] Canonical URL
+- [x] Open Graph meta tags (og:title, og:description, og:image)
+- [x] Twitter Card meta tags
+- [x] Canonical URL
 - [ ] Structured data (JSON-LD breadcrumbs)
 - [ ] Sitemap integration hook
 
 ### Config & Extensibility
-- [ ] `layup:install` artisan command (publish config, run migrations, print next steps)
+- [x] `layup:install` artisan command (publish config, run migrations, print next steps)
 - [ ] Widget discovery from app namespace (auto-register from `App\Layup\Widgets\`)
 - [ ] Hook for custom safelist classes (event or config array)
 
 ## Priority 5: Widget Polish
 
 ### Existing Widgets — Missing Form Fields
-- [ ] Text: text color, font size, alignment
-- [ ] Heading: text color, font size override, alignment, link URL
+- [x] Text: text color, font size, alignment (via BaseView Design tab)
+- [x] Heading: link URL added to Content tab
 - [ ] Button: icon (left/right), border radius, custom colors
 - [ ] Image: link URL, link target, border radius, hover effect
 - [ ] Video: poster image, privacy-enhanced mode

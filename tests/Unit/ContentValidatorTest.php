@@ -62,3 +62,85 @@ it('non-array content fails', function () {
     $result = $this->validator->validate('not an array');
     expect($result->passes())->toBeFalse();
 });
+
+it('strict mode rejects unknown widget types', function () {
+    $strict = new ContentValidator(strict: true);
+
+    // Register known widgets
+    $registry = app(\Crumbls\Layup\Support\WidgetRegistry::class);
+    foreach (config('layup.widgets', []) as $class) {
+        if (class_exists($class) && !$registry->has($class::getType())) {
+            $registry->register($class);
+        }
+    }
+
+    $content = [
+        'rows' => [['columns' => [['widgets' => [
+            ['type' => 'nonexistent-type-xyz', 'data' => []],
+        ]]]]],
+    ];
+
+    $result = $strict->validate($content);
+    expect($result->passes())->toBeFalse();
+    expect($result->errors()[0])->toContain('unknown widget type');
+});
+
+it('strict mode accepts known widget types', function () {
+    $strict = new ContentValidator(strict: true);
+
+    $registry = app(\Crumbls\Layup\Support\WidgetRegistry::class);
+    foreach (config('layup.widgets', []) as $class) {
+        if (class_exists($class) && !$registry->has($class::getType())) {
+            $registry->register($class);
+        }
+    }
+
+    $content = [
+        'rows' => [['columns' => [['widgets' => [
+            ['type' => 'text', 'data' => ['content' => 'valid']],
+        ]]]]],
+    ];
+
+    expect($strict->validate($content)->passes())->toBeTrue();
+});
+
+it('empty widget type string fails', function () {
+    $result = $this->validator->validate([
+        'rows' => [['columns' => [['widgets' => [
+            ['type' => '', 'data' => []],
+        ]]]]],
+    ]);
+    expect($result->passes())->toBeFalse();
+    expect($result->errors()[0])->toContain('"type" must be a non-empty string');
+});
+
+it('non-array rows fails', function () {
+    $result = $this->validator->validate(['rows' => 'not-array']);
+    expect($result->passes())->toBeFalse();
+    expect($result->errors()[0])->toContain('"rows" must be an array');
+});
+
+it('non-array columns fails', function () {
+    $result = $this->validator->validate(['rows' => [['columns' => 'bad']]]);
+    expect($result->passes())->toBeFalse();
+    expect($result->errors()[0])->toContain('"columns" must be an array');
+});
+
+it('non-array widgets fails', function () {
+    $result = $this->validator->validate(['rows' => [['columns' => [['widgets' => 'bad']]]]]);
+    expect($result->passes())->toBeFalse();
+    expect($result->errors()[0])->toContain('"widgets" must be an array');
+});
+
+it('collects multiple errors across rows and columns', function () {
+    $content = [
+        'rows' => [
+            ['columns' => [['widgets' => [['data' => []]]]]],  // missing type
+            ['id' => 'r2'],  // missing columns
+        ],
+    ];
+
+    $result = $this->validator->validate($content);
+    expect($result->passes())->toBeFalse();
+    expect(count($result->errors()))->toBe(2);
+});
