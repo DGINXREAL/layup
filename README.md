@@ -1,6 +1,6 @@
 # Layup
 
-A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style editor with rows, columns, and 39 extensible widgets — all using native Filament form components.
+A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style editor with rows, columns, and 45 extensible widgets — all using native Filament form components.
 
 ## Features
 
@@ -22,16 +22,16 @@ A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style
 - **Content validation** — structural + widget type validation
 - **Widget auto-discovery** — scans `App\Layup\Widgets` for custom widgets
 - **Configurable model** — swap the Page model per dashboard
-- **503 tests, 1003 assertions**
+- **560 tests, 1119 assertions**
 
-### Built-in Widgets (39)
+### Built-in Widgets (45)
 
 | Category | Widgets |
 |----------|---------|
-| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter, Alert, Table, Progress Circle, Blockquote, Feature List, Timeline, Stat Card, Star Rating, Logo Grid, Menu |
-| **Media** | Image (with hover effects), Gallery (with lightbox), Video, Audio, Slider, Map |
+| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter, Alert, Table, Progress Circle, Blockquote, Feature List, Timeline, Stat Card, Star Rating, Logo Grid, Menu, Testimonial Carousel, Comparison Table, Team Grid, Notification Bar |
+| **Media** | Image (with hover effects), Gallery (with lightbox), Video, Audio, Slider, Map, Before/After |
 | **Interactive** | Button (hover colors), Call to Action, Countdown, Pricing Table, Social Follow, Search, Contact Form |
-| **Layout** | Spacer, Divider |
+| **Layout** | Spacer, Divider, Marquee |
 | **Advanced** | HTML, Code Block, Embed |
 
 ## Requirements
