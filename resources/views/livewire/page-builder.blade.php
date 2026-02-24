@@ -566,10 +566,114 @@
             },
             getWidgetPreview(widget) {
                 const data = widget.data || {};
-                if (data.content) { const tmp = document.createElement('div'); tmp.innerHTML = data.content; const text = tmp.textContent || ''; return text.substring(0, 60) + (text.length > 60 ? '…' : ''); }
-                if (data.label) return data.label;
-                if (data.src) return '🖼 ' + data.src;
+                const type = widget.type || '';
+                
+                // Widget-specific previews
+                switch (type) {
+                    case 'heading':
+                    case 'animated-heading':
+                        const level = data.level || 'h2';
+                        const text = this.stripHtml(data.content || '');
+                        return text ? `${level.toUpperCase()}: ${text.substring(0, 50)}` : '(empty heading)';
+                    
+                    case 'text':
+                    case 'blockquote':
+                        const content = this.stripHtml(data.content || '');
+                        return content ? content.substring(0, 60) + (content.length > 60 ? '…' : '') : '(empty text)';
+                    
+                    case 'image':
+                        const imgSrc = data.src || data.url || '';
+                        const imgAlt = data.alt || '';
+                        return imgSrc ? `🖼 ${imgAlt || imgSrc.split('/').pop()}` : '(no image)';
+                    
+                    case 'video':
+                        const vidSrc = data.src || data.url || '';
+                        return vidSrc ? `🎬 ${vidSrc.split('/').pop()}` : '(no video)';
+                    
+                    case 'button':
+                    case 'cta':
+                        const btnText = data.text || data.label || data.button_text || '';
+                        const btnUrl = data.url || data.link || '';
+                        return btnText ? `🔘 ${btnText}` : btnUrl ? `🔘 ${btnUrl}` : '(empty button)';
+                    
+                    case 'blurb':
+                        const blurbTitle = data.title || '';
+                        const blurbText = this.stripHtml(data.content || data.text || '');
+                        return blurbTitle ? `💡 ${blurbTitle}` : blurbText ? blurbText.substring(0, 50) : '(empty blurb)';
+                    
+                    case 'icon-box':
+                    case 'feature':
+                        const featureTitle = data.title || data.heading || '';
+                        return featureTitle ? `✨ ${featureTitle}` : '(empty feature)';
+                    
+                    case 'testimonial':
+                        const author = data.author || data.name || '';
+                        const quote = this.stripHtml(data.content || data.quote || '');
+                        return author ? `💬 ${author}` : quote ? `💬 ${quote.substring(0, 40)}` : '(empty testimonial)';
+                    
+                    case 'accordion':
+                    case 'tabs':
+                        const items = data.items || [];
+                        return items.length ? `📋 ${items.length} item${items.length !== 1 ? 's' : ''}` : '(no items)';
+                    
+                    case 'gallery':
+                        const images = data.images || [];
+                        return images.length ? `🖼 ${images.length} image${images.length !== 1 ? 's' : ''}` : '(no images)';
+                    
+                    case 'pricing-table':
+                        const planName = data.name || data.title || '';
+                        const price = data.price || '';
+                        return planName ? `💰 ${planName}${price ? ' - ' + price : ''}` : '(empty plan)';
+                    
+                    case 'countdown':
+                        const targetDate = data.target_date || data.date || '';
+                        return targetDate ? `⏱ ${targetDate}` : '(no date set)';
+                    
+                    case 'map':
+                        const address = data.address || data.location || '';
+                        return address ? `📍 ${address}` : '(no location)';
+                    
+                    case 'contact-form':
+                    case 'newsletter':
+                        const action = data.action || '';
+                        return action ? `📧 → ${action}` : '(no action URL)';
+                    
+                    case 'divider':
+                        const dividerStyle = data.style || 'solid';
+                        return `─── ${dividerStyle} ───`;
+                    
+                    case 'spacer':
+                        const height = data.height || '50px';
+                        return `↕ ${height}`;
+                    
+                    case 'code':
+                    case 'html':
+                        const codeSnippet = (data.content || data.code || '').substring(0, 40);
+                        return codeSnippet ? `<> ${codeSnippet}…` : '(empty code)';
+                    
+                    case 'social-follow':
+                        const links = data.links || [];
+                        return links.length ? `🔗 ${links.length} social link${links.length !== 1 ? 's' : ''}` : '(no links)';
+                }
+                
+                // Fallback to generic preview
+                if (data.content) {
+                    const text = this.stripHtml(data.content);
+                    return text.substring(0, 60) + (text.length > 60 ? '…' : '');
+                }
+                if (data.label || data.title || data.heading) {
+                    return data.label || data.title || data.heading;
+                }
+                if (data.src || data.url) {
+                    return '🖼 ' + (data.src || data.url);
+                }
                 return '(empty)';
+            },
+            
+            stripHtml(html) {
+                const tmp = document.createElement('div');
+                tmp.innerHTML = html || '';
+                return (tmp.textContent || tmp.innerText || '').trim();
             },
             
             getIconSvg(iconName) {
