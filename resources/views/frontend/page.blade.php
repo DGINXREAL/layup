@@ -6,4 +6,5 @@
             {!! $row->render() !!}
         @endforeach
     </div>
+    @layupScripts
 </x-dynamic-component>

@@ -8,6 +8,7 @@ use Crumbls\Layup\Console\Commands\GenerateSafelist;
 use Crumbls\Layup\Support\WidgetRegistry;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class LayupServiceProvider extends ServiceProvider
@@ -47,5 +48,15 @@ class LayupServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../routes/web.php' => base_path('routes/layup.php'),
         ], 'layup-routes');
+
+        $this->publishes([
+            __DIR__ . '/../resources/js/layup.js' => resource_path('js/vendor/layup.js'),
+        ], 'layup-scripts');
+
+        Blade::directive('layupScripts', function () {
+            return "<?php if(config('layup.frontend.include_scripts', true)): ?>"
+                . '<script>' . file_get_contents(__DIR__ . '/../resources/js/layup.js') . '</script>'
+                . '<?php endif; ?>';
+        });
     }
 }

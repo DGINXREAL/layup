@@ -260,6 +260,57 @@ php artisan layup:safelist --static-only
 
 Widget-specific classes (like `layup-widget-text`, `layup-accordion-item`) are **not** Tailwind utilities — they're styled by Layup's own CSS and don't need safelisting.
 
+## Frontend Scripts
+
+Layup's interactive widgets (accordion, tabs, toggle, countdown, slider, counters) use Alpine.js components. By default, the required JavaScript is inlined automatically via the `@layupScripts` directive.
+
+### Auto-Include (default)
+
+No setup needed. The scripts are injected inline on any page that uses `@layupScripts` (included in the default page view).
+
+```php
+// config/layup.php
+'frontend' => [
+    'include_scripts' => true,  // default
+],
+```
+
+### Bundle Yourself
+
+If you'd rather include the scripts in your own Vite build (for caching, minification, etc.), disable auto-include and import the file:
+
+```php
+// config/layup.php
+'frontend' => [
+    'include_scripts' => false,
+],
+```
+
+```js
+// resources/js/app.js
+import '../../vendor/crumbls/layup/resources/js/layup.js'
+```
+
+### Publish and Customize
+
+```bash
+php artisan vendor:publish --tag=layup-scripts
+```
+
+This copies `layup.js` to `resources/js/vendor/layup.js` where you can modify it.
+
+### Available Alpine Components
+
+| Component | Widget | Parameters |
+|-----------|--------|------------|
+| `layupAccordion` | Accordion | `(openFirst = true)` |
+| `layupToggle` | Toggle | `(open = false)` |
+| `layupTabs` | Tabs | none |
+| `layupCountdown` | Countdown | `(targetDate)` |
+| `layupSlider` | Slider | `(total, autoplay, speed)` |
+| `layupCounter` | Number Counter | `(target, animate)` |
+| `layupBarCounter` | Bar Counter | `(percent, animate)` |
+
 ## Custom Widgets
 
 Create a widget by extending `Crumbls\Layup\View\BaseWidget`:
