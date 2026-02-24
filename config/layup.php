@@ -69,6 +69,7 @@ return [
         \Crumbls\Layup\View\BreadcrumbsWidget::class,
         \Crumbls\Layup\View\FaqWidget::class,
         \Crumbls\Layup\View\LoginWidget::class,
+        \Crumbls\Layup\View\NewsletterWidget::class,
         \Crumbls\Layup\View\TestimonialCarouselWidget::class,
         \Crumbls\Layup\View\ComparisonTableWidget::class,
     ],

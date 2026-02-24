@@ -49,6 +49,7 @@ use Crumbls\Layup\View\HeroWidget;
 use Crumbls\Layup\View\BreadcrumbsWidget;
 use Crumbls\Layup\View\FaqWidget;
 use Crumbls\Layup\View\LoginWidget;
+use Crumbls\Layup\View\NewsletterWidget;
 use Crumbls\Layup\View\TestimonialCarouselWidget;
 use Crumbls\Layup\View\ComparisonTableWidget;
 
@@ -102,6 +103,7 @@ $widgets = [
     BreadcrumbsWidget::class,
     FaqWidget::class,
     LoginWidget::class,
+    NewsletterWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {
