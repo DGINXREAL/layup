@@ -54,6 +54,10 @@ class LayupServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/js/layup.js' => resource_path('js/vendor/layup.js'),
         ], 'layup-scripts');
 
+        $this->publishes([
+            __DIR__ . '/../resources/templates' => resource_path('layup/templates'),
+        ], 'layup-templates');
+
         Blade::directive('layupScripts', function () {
             return "<?php if(config('layup.frontend.include_scripts', true)): ?>"
                 . '<script>' . file_get_contents(__DIR__ . '/../resources/js/layup.js') . '</script>'

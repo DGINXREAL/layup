@@ -7,6 +7,7 @@ namespace Crumbls\Layup\Resources\PageResource\Pages;
 use Crumbls\Layup\Models\Page;
 use Crumbls\Layup\Resources\PageResource;
 use Crumbls\Layup\Support\ContentValidator;
+use Crumbls\Layup\Support\PageTemplate;
 use Crumbls\Layup\Support\WidgetRegistry;
 use Crumbls\Layup\View\Column;
 use Crumbls\Layup\View\Row;
@@ -45,6 +46,27 @@ class EditPage extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('saveAsTemplate')
+                ->label('Save as Template')
+                ->icon('heroicon-o-document-duplicate')
+                ->color('gray')
+                ->form([
+                    \Filament\Forms\Components\TextInput::make('template_name')
+                        ->label('Template Name')
+                        ->required()
+                        ->default(fn () => $this->record->title . ' Template'),
+                    \Filament\Forms\Components\TextInput::make('template_description')
+                        ->label('Description')
+                        ->nullable(),
+                ])
+                ->action(function (array $data) {
+                    PageTemplate::saveFromPage(
+                        $data['template_name'],
+                        $this->record->content ?? ['rows' => []],
+                        $data['template_description'] ?? null,
+                    );
+                    Notification::make()->success()->title('Template saved')->send();
+                }),
             Actions\DeleteAction::make(),
         ];
     }

@@ -14,6 +14,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Illuminate\Database\Eloquent\Collection;
+use Crumbls\Layup\Support\PageTemplate;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -47,6 +48,25 @@ class PageResource extends Resource
     {
         return $schema
             ->components([
+                Section::make('Template')
+                    ->schema([
+                        Select::make('template')
+                            ->label('Start from template')
+                            ->options(PageTemplate::options())
+                            ->placeholder('Blank page')
+                            ->nullable()
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, \Filament\Schemas\Components\Utilities\Set $set) {
+                                if ($state) {
+                                    $template = PageTemplate::get($state);
+                                    if ($template) {
+                                        $set('content', $template['content']);
+                                    }
+                                }
+                            }),
+                    ])
+                    ->hiddenOn('edit'),
+
                 Section::make('Page Details')
                     ->schema([
                         TextInput::make('title')
