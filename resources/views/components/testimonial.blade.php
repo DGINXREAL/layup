@@ -1,4 +1,4 @@
-<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="border-l-4 border-blue-500 pl-6 py-2 {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}">
+<div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif class="border-l-4 border-blue-500 pl-6 py-2 {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}" style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}" {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}>
     @if(!empty($data['quote']))
         <blockquote class="text-lg italic text-gray-700 mb-4">"{{ $data['quote'] }}"</blockquote>
     @endif

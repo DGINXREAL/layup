@@ -205,6 +205,30 @@ abstract class BaseView extends Component
                 ])
                 ->columns(4)
                 ->nullable(),
+            Select::make('animation')
+                ->label('Entrance Animation')
+                ->options([
+                    '' => 'None',
+                    'fade-in' => 'Fade In',
+                    'slide-up' => 'Slide Up',
+                    'slide-down' => 'Slide Down',
+                    'slide-left' => 'Slide Left',
+                    'slide-right' => 'Slide Right',
+                    'zoom-in' => 'Zoom In',
+                ])
+                ->default('')
+                ->nullable(),
+            Select::make('animation_duration')
+                ->label('Animation Duration')
+                ->options([
+                    '300' => 'Fast (300ms)',
+                    '500' => 'Normal (500ms)',
+                    '700' => 'Slow (700ms)',
+                    '1000' => 'Very Slow (1s)',
+                ])
+                ->default('500')
+                ->visible(fn ($get) => !empty($get('animation')))
+                ->nullable(),
         ];
     }
 
@@ -262,6 +286,51 @@ abstract class BaseView extends Component
         }
 
         return implode(' ', $styles);
+    }
+
+    /**
+     * Build Alpine.js animation attributes for entrance animations.
+     * Returns a string of Alpine directives to add to the element.
+     */
+    public static function animationAttributes(array $data): string
+    {
+        $animation = $data['animation'] ?? '';
+        if (empty($animation)) {
+            return '';
+        }
+
+        $duration = $data['animation_duration'] ?? '500';
+
+        $initial = match ($animation) {
+            'fade-in' => 'opacity: 0',
+            'slide-up' => 'opacity: 0; transform: translateY(2rem)',
+            'slide-down' => 'opacity: 0; transform: translateY(-2rem)',
+            'slide-left' => 'opacity: 0; transform: translateX(2rem)',
+            'slide-right' => 'opacity: 0; transform: translateX(-2rem)',
+            'zoom-in' => 'opacity: 0; transform: scale(0.9)',
+            default => '',
+        };
+
+        $final = match ($animation) {
+            'fade-in' => 'opacity: 1',
+            'slide-up', 'slide-down' => 'opacity: 1; transform: translateY(0)',
+            'slide-left', 'slide-right' => 'opacity: 1; transform: translateX(0)',
+            'zoom-in' => 'opacity: 1; transform: scale(1)',
+            default => '',
+        };
+
+        if (empty($initial)) {
+            return '';
+        }
+
+        return sprintf(
+            'x-data="{ shown: false }" x-intersect.once="shown = true" '
+            . ':style="shown ? \'%s; transition: all %sms ease-out\' : \'%s; transition: all %sms ease-out\'"',
+            $final,
+            $duration,
+            $initial,
+            $duration,
+        );
     }
 
     /**

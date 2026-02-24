@@ -191,6 +191,32 @@ it('renders text widget with text color', function () {
     expect($html)->toContain('color: #ff0000');
 });
 
+// --- Animation attributes ---
+
+it('generates animation attributes for fade-in', function () {
+    $attrs = \Crumbls\Layup\View\BaseView::animationAttributes(['animation' => 'fade-in', 'animation_duration' => '500']);
+    expect($attrs)->toContain('x-data')
+        ->and($attrs)->toContain('x-intersect')
+        ->and($attrs)->toContain('opacity: 0')
+        ->and($attrs)->toContain('500ms');
+});
+
+it('returns empty string for no animation', function () {
+    expect(\Crumbls\Layup\View\BaseView::animationAttributes([]))->toBe('');
+    expect(\Crumbls\Layup\View\BaseView::animationAttributes(['animation' => '']))->toBe('');
+});
+
+it('generates slide-up animation attributes', function () {
+    $attrs = \Crumbls\Layup\View\BaseView::animationAttributes(['animation' => 'slide-up']);
+    expect($attrs)->toContain('translateY(2rem)');
+});
+
+it('renders text widget with animation attributes', function () {
+    $widget = TextWidget::make(['content' => 'animated', 'animation' => 'fade-in']);
+    $html = $widget->render()->toHtml();
+    expect($html)->toContain('x-intersect');
+});
+
 it('renders column with space-y-4 for vertical spacing', function () {
     $col = Column::make(['span' => ['sm' => 12, 'md' => 12, 'lg' => 12, 'xl' => 12]], []);
     $col->setPosition(first: true, last: true);

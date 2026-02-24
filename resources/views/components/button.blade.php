@@ -17,6 +17,7 @@
        {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }}"
    @if(!empty($data['new_tab'])) target="_blank" rel="noopener noreferrer" @endif
    style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}"
+   {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     {{ $data['label'] ?? 'Click Me' }}
 </a>

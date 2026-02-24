@@ -9,7 +9,7 @@
         'h6' => 'text-base font-medium',
         default => 'text-3xl font-bold',
     } }} {{ \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []) }} {{ $data['class'] ?? '' }} mb-2"
-    style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}"
+    style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}" {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     {{ $data['content'] ?? '' }}
 </{{ $data['level'] ?? 'h2' }}>
