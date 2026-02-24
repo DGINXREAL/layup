@@ -53,7 +53,7 @@
 - [x] `layup:make-widget` artisan command (scaffold custom widgets)
 - [x] `layup:audit` command (page health check, widget usage stats)
 
-## Priority 5: Widget Polish ✅ MOSTLY COMPLETE
+## Priority 5: Widget Polish ✅ COMPLETE
 - [x] Heading: link URL
 - [x] Image: link URL, new tab
 - [x] Button: custom bg/text colors, hover colors via Alpine
@@ -66,7 +66,7 @@
 - [x] SocialFollow: icon size
 - [x] Gallery: lightbox + captions
 - [x] Image: hover effects (zoom, grayscale→color, brighten, blur→clear)
-- [ ] Blurb: icon picker UI (nice-to-have)
+- [x] Blurb: icon picker UI (90+ searchable heroicons)
 
 ## Summary (as of ~5:30am MST Feb 24)
 - **852 tests, 1706 assertions** — all passing
@@ -90,6 +90,5 @@
 7. ✅ Visual column resize handles - Drag handles between columns to adjust spans dynamically
 
 ## Future (post-sprint)
-- Blurb: icon picker UI (nice-to-have)
 - More page templates
 - Publish to Packagist
