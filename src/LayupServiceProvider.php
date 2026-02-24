@@ -6,6 +6,7 @@ namespace Crumbls\Layup;
 
 use Crumbls\Layup\Console\Commands\GenerateSafelist;
 use Crumbls\Layup\Console\Commands\InstallCommand;
+use Crumbls\Layup\Console\Commands\AuditCommand;
 use Crumbls\Layup\Console\Commands\MakeWidgetCommand;
 use Crumbls\Layup\Support\WidgetRegistry;
 use Filament\Support\Assets\Css;
@@ -28,7 +29,7 @@ class LayupServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         if ($this->app->runningInConsole()) {
-            $this->commands([GenerateSafelist::class, InstallCommand::class, MakeWidgetCommand::class]);
+            $this->commands([GenerateSafelist::class, InstallCommand::class, MakeWidgetCommand::class, AuditCommand::class]);
         }
 
         if (config('layup.frontend.enabled', true)) {
