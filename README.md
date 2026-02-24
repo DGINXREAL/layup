@@ -22,16 +22,16 @@ A visual page builder plugin for [Filament](https://filamentphp.com). Divi-style
 - **Content validation** — structural + widget type validation
 - **Widget auto-discovery** — scans `App\Layup\Widgets` for custom widgets
 - **Configurable model** — swap the Page model per dashboard
-- **560 tests, 1119 assertions**
+- **614 tests, 1225 assertions**
 
-### Built-in Widgets (45)
+### Built-in Widgets (50)
 
 | Category | Widgets |
 |----------|---------|
-| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter, Alert, Table, Progress Circle, Blockquote, Feature List, Timeline, Stat Card, Star Rating, Logo Grid, Menu, Testimonial Carousel, Comparison Table, Team Grid, Notification Bar |
-| **Media** | Image (with hover effects), Gallery (with lightbox), Video, Audio, Slider, Map, Before/After |
-| **Interactive** | Button (hover colors), Call to Action, Countdown, Pricing Table, Social Follow, Search, Contact Form |
-| **Layout** | Spacer, Divider, Marquee |
+| **Content** | Text, Heading, Blurb, Icon, Accordion, Toggle, Tabs, Person, Testimonial, Number Counter, Bar Counter, Alert, Table, Progress Circle, Blockquote, Feature List, Timeline, Stat Card, Star Rating, Logo Grid, Menu, Testimonial Carousel, Comparison Table, Team Grid, Notification Bar, FAQ (with JSON-LD), Hero Section, Breadcrumbs |
+| **Media** | Image (with hover effects), Gallery (with lightbox + captions), Video, Audio, Slider, Map, Before/After |
+| **Interactive** | Button (hover colors), Call to Action, Countdown, Pricing Table, Social Follow, Search, Contact Form, Login, Newsletter Signup |
+| **Layout** | Spacer, Divider, Marquee, Section (bg image/video/gradient/parallax) |
 | **Advanced** | HTML, Code Block, Embed |
 
 ## Requirements
