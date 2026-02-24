@@ -140,6 +140,17 @@
                             {{-- Columns --}}
                             <div class="lyp-columns" :style="'gap:' + (row.settings.gap ? row.settings.gap.replace('gap-','').replace('0','0px').replace('2','0.5rem').replace('4','1rem').replace('6','1.5rem').replace('8','2rem').replace('12','3rem') : '1rem')">
                                 <template x-for="(col, colIndex) in row.columns" :key="col.id">
+                                <div style="display: contents;">
+                                    {{-- Resize handle before column (except first) --}}
+                                    <template x-if="colIndex > 0">
+                                        <div 
+                                            class="lyp-resize-handle"
+                                            @mousedown.prevent="startColumnResize(row.id, colIndex, $event)"
+                                            title="Drag to resize columns"
+                                        >
+                                            <div class="lyp-resize-handle-bar"></div>
+                                        </div>
+                                    </template>
                                     <div
                                         class="lyp-col"
                                         :class="{ 'lyp-col--drop-target': drag.active && (drag.fromPicker || !(drag.sourceRowId === row.id && drag.sourceColId === col.id && col.widgets.length === 1)) }"
@@ -225,6 +236,7 @@
                                             Add Widget
                                         </button>
                                     </div>
+                                </div>
                                 </template>
                             </div>
                         </div>
@@ -373,6 +385,9 @@
             
             // Inline editing
             inlineEdit: { active: false, rowId: null, colId: null, widgetId: null, widgetType: null, originalData: null },
+            
+            // Column resizing
+            columnResize: { active: false, rowId: null, colIndex: null, startX: 0, startSpans: [] },
 
             openPicker(rowId, colId) {
                 this.picker = { open: true, rowId, colId, search: '' };
@@ -738,6 +753,71 @@
             
             cancelInlineEdit() {
                 this.inlineEdit = { active: false, rowId: null, colId: null, widgetId: null, widgetType: null, originalData: null };
+            },
+            
+            // Column resizing
+            startColumnResize(rowId, colIndex, event) {
+                const row = this.content.rows.find(r => r.id === rowId);
+                if (!row || colIndex <= 0 || colIndex >= row.columns.length) return;
+                
+                this.columnResize = {
+                    active: true,
+                    rowId,
+                    colIndex,
+                    startX: event.clientX,
+                    startSpans: row.columns.map(col => this.getColSpan(col))
+                };
+                
+                document.addEventListener('mousemove', this.onColumnResizeMove.bind(this));
+                document.addEventListener('mouseup', this.onColumnResizeEnd.bind(this));
+                document.body.style.cursor = 'col-resize';
+                document.body.style.userSelect = 'none';
+            },
+            
+            onColumnResizeMove(event) {
+                if (!this.columnResize.active) return;
+                
+                const deltaX = event.clientX - this.columnResize.startX;
+                const gridWidth = 12;
+                const sensitivity = 50; // pixels per grid unit
+                const deltaSpan = Math.round(deltaX / sensitivity);
+                
+                if (deltaSpan === 0) return;
+                
+                const { rowId, colIndex, startSpans } = this.columnResize;
+                const row = this.content.rows.find(r => r.id === rowId);
+                if (!row) return;
+                
+                const leftCol = row.columns[colIndex - 1];
+                const rightCol = row.columns[colIndex];
+                
+                const newLeftSpan = Math.max(1, Math.min(11, startSpans[colIndex - 1] + deltaSpan));
+                const newRightSpan = Math.max(1, Math.min(11, startSpans[colIndex] - deltaSpan));
+                
+                // Ensure total doesn't exceed 12
+                if (newLeftSpan + newRightSpan <= gridWidth) {
+                    const bp = this.currentBreakpoint;
+                    leftCol.span = leftCol.span || {};
+                    rightCol.span = rightCol.span || {};
+                    leftCol.span[bp] = newLeftSpan;
+                    rightCol.span[bp] = newRightSpan;
+                }
+            },
+            
+            onColumnResizeEnd() {
+                if (!this.columnResize.active) return;
+                
+                document.removeEventListener('mousemove', this.onColumnResizeMove.bind(this));
+                document.removeEventListener('mouseup', this.onColumnResizeEnd.bind(this));
+                document.body.style.cursor = '';
+                document.body.style.userSelect = '';
+                
+                // Save changes
+                if (this.columnResize.rowId) {
+                    $wire.updateContent(this.content);
+                }
+                
+                this.columnResize = { active: false, rowId: null, colIndex: null, startX: 0, startSpans: [] };
             },
             
             getIconSvg(iconName) {

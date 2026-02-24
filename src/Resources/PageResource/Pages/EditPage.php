@@ -710,6 +710,25 @@ class EditPage extends EditRecord
         Notification::make()->title('Content updated')->success()->duration(2000)->send();
     }
     
+    public function updateContent(array $content): void
+    {
+        $result = (new ContentValidator())->validate($content);
+
+        if (! $result->passes()) {
+            Notification::make()
+                ->title('Invalid content')
+                ->body(implode(' ', $result->errors()))
+                ->danger()
+                ->send();
+
+            return;
+        }
+
+        $this->pageContent = $content;
+        $this->record->update(['content' => $this->pageContent]);
+        $this->syncContent();
+    }
+    
     public function deleteWidgetAction(): Action
     {
         return Action::make('deleteWidgetAction')
