@@ -39,6 +39,8 @@ use Crumbls\Layup\View\StarRatingWidget;
 use Crumbls\Layup\View\LogoGridWidget;
 use Crumbls\Layup\View\BlockquoteWidget;
 use Crumbls\Layup\View\FeatureListWidget;
+use Crumbls\Layup\View\TimelineWidget;
+use Crumbls\Layup\View\StatCardWidget;
 
 $widgets = [
     TextWidget::class,
@@ -78,6 +80,8 @@ $widgets = [
     LogoGridWidget::class,
     BlockquoteWidget::class,
     FeatureListWidget::class,
+    TimelineWidget::class,
+    StatCardWidget::class,
 ];
 
 foreach ($widgets as $widgetClass) {

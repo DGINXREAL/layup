@@ -59,6 +59,8 @@ return [
         \Crumbls\Layup\View\LogoGridWidget::class,
         \Crumbls\Layup\View\BlockquoteWidget::class,
         \Crumbls\Layup\View\FeatureListWidget::class,
+        \Crumbls\Layup\View\TimelineWidget::class,
+        \Crumbls\Layup\View\StatCardWidget::class,
     ],
 
     /*
