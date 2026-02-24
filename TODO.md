@@ -34,10 +34,10 @@
 - [x] Recently used widgets
 - [x] Drag from picker to canvas
 
-### Builder Canvas
+### Builder Canvas ✅ COMPLETE
 - [x] Live preview of widget content
 - [x] Inline text editing
-- [ ] Visual column resize handles
+- [x] Visual column resize handles
 
 ### Page Management ✅ COMPLETE
 - [x] Duplicate page, Bulk publish/unpublish, Export/Import JSON
@@ -80,16 +80,16 @@
 - **Builder UX enhancements**: Widget icons (65+ heroicons), recently used widgets, drag from picker, improved previews, inline text editing
 - **Revision browser**: Slideover modal with restore functionality, timestamps, author tracking
 
-## Completed Tonight (Priority 3 UX Polish)
+## Completed Tonight (Priority 3 UX Polish) — ALL 7 TASKS ✅
 1. ✅ Widget icons in picker modal - 65+ heroicon SVGs render correctly per widget type
 2. ✅ Recently used widgets - localStorage tracking, shows last 5 widgets at top of picker
 3. ✅ Revision browser UI - Slideover with history, restore buttons, metadata display
 4. ✅ Drag from picker to canvas - Drag widgets directly onto columns from picker
 5. ✅ Live preview improvements - 20+ widget-specific preview formats with icons and context
 6. ✅ Inline text editing - Double-click text/heading widgets to quick-edit content
+7. ✅ Visual column resize handles - Drag handles between columns to adjust spans dynamically
 
 ## Future (post-sprint)
-- Visual column resize handles (drag to adjust spans)
 - Blurb: icon picker UI (nice-to-have)
 - More page templates
 - Publish to Packagist
