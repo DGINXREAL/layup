@@ -480,15 +480,11 @@ LayupPlugin::make()
     ->model(PageB::class)
 ```
 
-Your custom model just overrides `getTable()`:
+Your custom model with your overrides:
 
 ```php
 class PageB extends \Crumbls\Layup\Models\Page
 {
-    public function getTable(): string
-    {
-        return 'my_other_pages_table';
-    }
 }
 ```
 
