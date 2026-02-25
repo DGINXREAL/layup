@@ -10,8 +10,13 @@
      {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     @foreach(($data['images'] ?? []) as $image)
-        @if(!empty($image))
-            <img src="{{ asset('storage/' . $image) }}" alt="" loading="lazy"
+        @php
+            $imgSrc = is_array($image) ? ($image['src'] ?? $image['image'] ?? $image['url'] ?? '') : $image;
+            $imgAlt = is_array($image) ? ($image['alt'] ?? '') : '';
+            $imgUrl = (!empty($imgSrc) && str_starts_with($imgSrc, 'http')) ? $imgSrc : (!empty($imgSrc) ? asset('storage/' . $imgSrc) : '');
+        @endphp
+        @if(!empty($imgSrc))
+            <img src="{{ $imgUrl }}" alt="{{ $imgAlt }}" loading="lazy"
                  class="w-full mb-[{{ $gap }}] {{ $rounded ? 'rounded-lg' : '' }} hover:opacity-90 transition-opacity"
                  style="break-inside: avoid" />
         @endif

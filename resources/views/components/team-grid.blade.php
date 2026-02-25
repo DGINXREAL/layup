@@ -9,8 +9,9 @@
 >
     @foreach(($data['members'] ?? []) as $member)
         <div class="text-center">
-            @if(!empty($member['photo']))
-                <img src="{{ asset('storage/' . $member['photo']) }}" alt="{{ $member['name'] ?? '' }}" class="w-24 h-24 rounded-full object-cover mx-auto mb-3" />
+            @php $photoSrc = $member['photo'] ?? $member['image'] ?? ''; @endphp
+            @if(!empty($photoSrc))
+                <img src="{{ str_starts_with($photoSrc, 'http') ? $photoSrc : asset('storage/' . $photoSrc) }}" alt="{{ $member['name'] ?? '' }}" class="w-24 h-24 rounded-full object-cover mx-auto mb-3" />
             @else
                 <div class="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-3 flex items-center justify-center text-gray-400 text-2xl">👤</div>
             @endif

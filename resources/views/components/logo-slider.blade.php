@@ -14,8 +14,12 @@
     <div class="flex" style="animation: layup-logo-slide {{ $speed }}s linear infinite; width: max-content">
         @for($i = 0; $i < 2; $i++)
             @foreach($logos as $logo)
-                @if(!empty($logo))
-                    <img src="{{ asset('storage/' . $logo) }}" alt="" style="max-height: {{ $maxH }}; width: auto; margin-right: {{ $gap }}" class="shrink-0 opacity-70 hover:opacity-100 transition-opacity" />
+                @php
+                    $logoSrc = is_array($logo) ? ($logo['src'] ?? $logo['image'] ?? '') : $logo;
+                    $logoAlt = is_array($logo) ? ($logo['alt'] ?? $logo['name'] ?? '') : '';
+                @endphp
+                @if(!empty($logoSrc))
+                    <img src="{{ str_starts_with($logoSrc, 'http') ? $logoSrc : asset('storage/' . $logoSrc) }}" alt="{{ $logoAlt }}" style="max-height: {{ $maxH }}; width: auto; margin-right: {{ $gap }}" class="shrink-0 opacity-70 hover:opacity-100 transition-opacity" />
                 @endif
             @endforeach
         @endfor

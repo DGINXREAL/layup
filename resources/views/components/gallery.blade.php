@@ -11,15 +11,20 @@
      @if($lightbox) x-data="layupLightbox()" @endif
 >
     @foreach(($data['images'] ?? []) as $idx => $image)
-        @if(!empty($image))
+        @php
+            $imgSrc = is_array($image) ? ($image['src'] ?? $image['image'] ?? $image['url'] ?? '') : $image;
+            $imgAlt = is_array($image) ? ($image['alt'] ?? $image['caption'] ?? '') : ($captions[$idx] ?? '');
+            $imgUrl = str_starts_with($imgSrc, 'http') ? $imgSrc : asset('storage/' . $imgSrc);
+        @endphp
+        @if(!empty($imgSrc))
             <div class="overflow-hidden rounded">
                 @if($lightbox)
-                    <img src="{{ asset('storage/' . $image) }}" alt="{{ $captions[$idx] ?? '' }}" loading="lazy"
+                    <img src="{{ $imgUrl }}" alt="{{ $imgAlt }}" loading="lazy"
                          class="w-full h-auto block hover:scale-105 transition-transform duration-300 cursor-pointer"
-                         data-lightbox-src="{{ asset('storage/' . $image) }}"
-                         @click="show('{{ asset('storage/' . $image) }}')" />
+                         data-lightbox-src="{{ $imgUrl }}"
+                         @click="show('{{ $imgUrl }}')" />
                 @else
-                    <img src="{{ asset('storage/' . $image) }}" alt="{{ $captions[$idx] ?? '' }}" loading="lazy"
+                    <img src="{{ $imgUrl }}" alt="{{ $imgAlt }}" loading="lazy"
                          class="w-full h-auto block hover:scale-105 transition-transform duration-300" />
                 @endif
                 @if($showCaptions && !empty($captions[$idx]))

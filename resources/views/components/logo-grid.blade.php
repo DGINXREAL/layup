@@ -14,8 +14,12 @@
     @endif
     <div style="display:grid;grid-template-columns:repeat({{ $cols }},1fr);gap:2rem;align-items:center;justify-items:center">
         @foreach(($data['logos'] ?? []) as $logo)
-            @if(!empty($logo))
-                <img src="{{ asset('storage/' . $logo) }}" alt="" style="max-height:{{ $maxH }};width:auto" class="{{ $gray ? 'grayscale hover:grayscale-0 opacity-60 hover:opacity-100' : '' }} transition-all duration-300" />
+            @php
+                $logoSrc = is_array($logo) ? ($logo['src'] ?? $logo['image'] ?? '') : $logo;
+                $logoAlt = is_array($logo) ? ($logo['alt'] ?? $logo['name'] ?? '') : '';
+            @endphp
+            @if(!empty($logoSrc))
+                <img src="{{ str_starts_with($logoSrc, 'http') ? $logoSrc : asset('storage/' . $logoSrc) }}" alt="{{ $logoAlt }}" style="max-height:{{ $maxH }};width:auto" class="{{ $gray ? 'grayscale hover:grayscale-0 opacity-60 hover:opacity-100' : '' }} transition-all duration-300" />
             @endif
         @endforeach
     </div>
