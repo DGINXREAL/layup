@@ -8,7 +8,7 @@
         <div class="text-center p-4">
             <div class="text-3xl mb-3">{{ $f['emoji'] ?? '🚀' }}</div>
             <div class="font-semibold mb-1">{{ $f['title'] ?? '' }}</div>
-            @if(!empty($f['description']))<div class="text-sm text-gray-600">{{ $f['description'] }}</div>@endif
+            @if(!empty($f['description']))<div class="text-sm text-gray-600 dark:text-gray-300">{{ $f['description'] }}</div>@endif
         </div>
     @endforeach
 </div>

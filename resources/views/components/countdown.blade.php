@@ -6,29 +6,29 @@
         @if($data['show_days'] ?? true)
             <div class="flex flex-col items-center">
                 <span class="text-3xl font-bold" x-text="days">0</span>
-                <span class="text-xs text-gray-500 uppercase">Days</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400 uppercase">Days</span>
             </div>
         @endif
         @if($data['show_hours'] ?? true)
             <div class="flex flex-col items-center">
                 <span class="text-3xl font-bold" x-text="hours">0</span>
-                <span class="text-xs text-gray-500 uppercase">Hours</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400 uppercase">Hours</span>
             </div>
         @endif
         @if($data['show_minutes'] ?? true)
             <div class="flex flex-col items-center">
                 <span class="text-3xl font-bold" x-text="minutes">0</span>
-                <span class="text-xs text-gray-500 uppercase">Min</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400 uppercase">Min</span>
             </div>
         @endif
         @if($data['show_seconds'] ?? true)
             <div class="flex flex-col items-center">
                 <span class="text-3xl font-bold" x-text="seconds">0</span>
-                <span class="text-xs text-gray-500 uppercase">Sec</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400 uppercase">Sec</span>
             </div>
         @endif
     </div>
-    <div x-show="expired" class="text-xl font-semibold text-green-600">
+    <div x-show="expired" class="text-xl font-semibold text-green-600 dark:text-green-400">
         {{ $data['expired_message'] ?? 'Time is up!' }}
     </div>
 </div>

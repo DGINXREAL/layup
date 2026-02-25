@@ -9,10 +9,10 @@
     @foreach(($data['points'] ?? []) as $i => $point)
         <div class="absolute" style="left: {{ $point['x'] ?? 50 }}%; top: {{ $point['y'] ?? 50 }}%; transform: translate(-50%, -50%)"
              x-data="{ show: false }">
-            <button @click="show = !show" class="w-6 h-6 bg-blue-600 rounded-full border-2 border-white shadow-lg text-white text-xs flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">{{ $i + 1 }}</button>
-            <div x-show="show" x-transition @click.away="show = false" class="absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white rounded-lg shadow-xl p-3 min-w-48 text-sm">
+            <button @click="show = !show" class="w-6 h-6 bg-blue-600 dark:bg-blue-700 rounded-full border-2 border-white dark:border-gray-300 shadow-lg text-white text-xs flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">{{ $i + 1 }}</button>
+            <div x-show="show" x-transition @click.away="show = false" class="absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-gray-900/50 p-3 min-w-48 text-sm">
                 <div class="font-semibold">{{ $point['label'] ?? '' }}</div>
-                @if(!empty($point['description']))<div class="text-gray-500 mt-1">{{ $point['description'] }}</div>@endif
+                @if(!empty($point['description']))<div class="text-gray-500 dark:text-gray-400 mt-1">{{ $point['description'] }}</div>@endif
             </div>
         </div>
     @endforeach

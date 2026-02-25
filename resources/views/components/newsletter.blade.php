@@ -13,7 +13,7 @@
         <h3 class="text-xl font-bold mb-2">{{ $data['heading'] }}</h3>
     @endif
     @if(!empty($data['description']))
-        <p class="text-gray-600 mb-4">{{ $data['description'] }}</p>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">{{ $data['description'] }}</p>
     @endif
     <template x-if="!submitted">
         <form action="{{ $data['action'] ?? '' }}" method="POST"
@@ -21,7 +21,7 @@
               @submit.prevent="fetch($el.action, { method: 'POST', body: new FormData($el) }).then(() => submitted = true).catch(() => submitted = true)">
             <input type="email" name="email" required
                    placeholder="{{ $data['placeholder'] ?? 'Enter your email' }}"
-                   class="{{ $layout === 'inline' ? 'flex-1' : 'w-full' }} border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" />
+                   class="{{ $layout === 'inline' ? 'flex-1' : 'w-full' }} border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-blue-500 dark:focus:border-blue-600 outline-none" />
             <button type="submit"
                     class="text-white font-medium px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity {{ $layout === 'stacked' ? 'w-full' : '' }}"
                     style="background-color: {{ $btnColor }}">
@@ -29,7 +29,7 @@
             </button>
         </form>
     </template>
-    <div x-show="submitted" x-transition class="text-green-600 font-semibold py-4">
+    <div x-show="submitted" x-transition class="text-green-600 dark:text-green-400 font-semibold py-4">
         ✓ {{ $data['success_message'] ?? 'Subscribed!' }}
     </div>
 </div>

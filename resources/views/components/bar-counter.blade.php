@@ -4,10 +4,10 @@
             <div class="flex justify-between text-sm mb-1">
                 <span class="font-medium">{{ $bar['label'] ?? '' }}</span>
                 @if($data['show_percent'] ?? true)
-                    <span class="text-gray-500">{{ $bar['percent'] ?? 0 }}%</span>
+                    <span class="text-gray-500 dark:text-gray-400">{{ $bar['percent'] ?? 0 }}%</span>
                 @endif
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
                 <div class="h-full rounded-full transition-all duration-1000 ease-out"
                      :style="'width: ' + width + '%; background-color: {{ $bar['color'] ?? '#3b82f6' }}'"
                 ></div>

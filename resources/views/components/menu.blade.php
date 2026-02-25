@@ -3,9 +3,9 @@
     $orientation = ($data['orientation'] ?? 'horizontal') === 'vertical' ? 'flex-col' : 'flex-row flex-wrap';
     $style = $data['style'] ?? 'links';
     $itemClass = match($style) {
-        'pills' => 'px-4 py-2 rounded-full hover:bg-gray-100 transition-colors',
+        'pills' => 'px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors',
         'underline' => 'pb-1 border-b-2 border-transparent hover:border-current transition-colors',
-        default => 'hover:text-blue-600 transition-colors',
+        default => 'hover:text-blue-600 dark:hover:text-blue-400 transition-colors',
     };
 @endphp
 <nav @if(!empty($data['id']))id="{{ $data['id'] }}"@endif

@@ -5,7 +5,7 @@
             <span class="text-lg shrink-0">{{ $item['icon'] ?? '✅' }}</span>
             <div>
                 <div class="font-medium">{{ $item['text'] ?? '' }}</div>
-                @if(!empty($item['description']))<div class="text-sm text-gray-500">{{ $item['description'] }}</div>@endif
+                @if(!empty($item['description']))<div class="text-sm text-gray-500 dark:text-gray-400">{{ $item['description'] }}</div>@endif
             </div>
         </li>
     @endforeach

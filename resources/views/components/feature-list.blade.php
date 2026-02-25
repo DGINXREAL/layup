@@ -29,7 +29,7 @@
                     <div class="font-semibold">{{ $feature['title'] }}</div>
                 @endif
                 @if(!empty($feature['description']))
-                    <div class="text-sm text-gray-600">{{ $feature['description'] }}</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">{{ $feature['description'] }}</div>
                 @endif
             </div>
         </div>

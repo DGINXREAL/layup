@@ -28,7 +28,7 @@
                          class="w-full h-auto block hover:scale-105 transition-transform duration-300" />
                 @endif
                 @if($showCaptions && !empty($captions[$idx]))
-                    <p class="text-sm text-gray-500 mt-1 px-1">{{ $captions[$idx] }}</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 px-1">{{ $captions[$idx] }}</p>
                 @endif
             </div>
         @endif

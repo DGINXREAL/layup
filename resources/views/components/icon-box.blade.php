@@ -16,13 +16,13 @@
     <div>
         @if(!empty($data['title']))
             @if(!empty($data['link_url']))
-                <a href="{{ $data['link_url'] }}" class="font-bold text-lg hover:text-blue-600">{{ $data['title'] }}</a>
+                <a href="{{ $data['link_url'] }}" class="font-bold text-lg hover:text-blue-600 dark:hover:text-blue-400">{{ $data['title'] }}</a>
             @else
                 <h3 class="font-bold text-lg">{{ $data['title'] }}</h3>
             @endif
         @endif
         @if(!empty($data['description']))
-            <p class="text-sm text-gray-600 mt-1">{{ $data['description'] }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">{{ $data['description'] }}</p>
         @endif
     </div>
 </div>

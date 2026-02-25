@@ -4,7 +4,7 @@
     $hover = !empty($data['hover_lift']);
 @endphp
 <div @if(!empty($data['id']))id="{{ $data['id'] }}"@endif
-     class="rounded-xl overflow-hidden {{ $shadow ? 'shadow-md' : 'border' }} {{ $hover ? 'hover:-translate-y-1 hover:shadow-lg transition-all duration-300' : '' }} {{ $vis }} {{ $data['class'] ?? '' }}"
+     class="rounded-xl overflow-hidden {{ $shadow ? 'shadow-md dark:shadow-gray-900/50' : 'border dark:border-gray-700' }} {{ $hover ? 'hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-gray-900/50 transition-all duration-300' : '' }} {{ $vis }} {{ $data['class'] ?? '' }}"
      style="{{ \Crumbls\Layup\View\BaseView::buildInlineStyles($data) }}"
      {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
@@ -16,10 +16,10 @@
             <h3 class="font-bold text-lg mb-2">{{ $data['title'] }}</h3>
         @endif
         @if(!empty($data['body']))
-            <div class="prose prose-sm text-gray-600">{!! $data['body'] !!}</div>
+            <div class="prose prose-sm text-gray-600 dark:text-gray-300">{!! $data['body'] !!}</div>
         @endif
         @if(!empty($data['link_url']))
-            <a href="{{ $data['link_url'] }}" class="inline-block mt-3 text-blue-600 hover:underline text-sm font-medium">{{ $data['link_text'] ?? 'Learn more' }} →</a>
+            <a href="{{ $data['link_url'] }}" class="inline-block mt-3 text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">{{ $data['link_text'] ?? 'Learn more' }} →</a>
         @endif
     </div>
 </div>

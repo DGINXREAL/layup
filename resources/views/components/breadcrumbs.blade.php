@@ -12,13 +12,13 @@
     <ol class="flex flex-wrap items-center gap-1 list-none p-0 m-0">
         @foreach($items as $i => $item)
             @if($i > 0)
-                <li class="text-gray-400 mx-1" aria-hidden="true">{{ $sep }}</li>
+                <li class="text-gray-400 dark:text-gray-500 mx-1" aria-hidden="true">{{ $sep }}</li>
             @endif
             <li>
                 @if(!empty($item['url']) && $i < count($items) - 1)
-                    <a href="{{ $item['url'] }}" class="text-gray-500 hover:text-gray-700 transition-colors">{{ $item['label'] ?? '' }}</a>
+                    <a href="{{ $item['url'] }}" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors">{{ $item['label'] ?? '' }}</a>
                 @else
-                    <span class="text-gray-700 font-medium" aria-current="page">{{ $item['label'] ?? '' }}</span>
+                    <span class="text-gray-700 dark:text-gray-200 font-medium" aria-current="page">{{ $item['label'] ?? '' }}</span>
                 @endif
             </li>
         @endforeach

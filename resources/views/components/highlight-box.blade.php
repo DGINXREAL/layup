@@ -2,11 +2,11 @@
     $vis = \Crumbls\Layup\View\BaseView::visibilityClasses($data['hide_on'] ?? []);
     $v = $data['variant'] ?? 'info';
     $styles = match($v) {
-        'tip' => 'bg-green-50 border-green-300 text-green-800',
-        'warning' => 'bg-yellow-50 border-yellow-300 text-yellow-800',
-        'important' => 'bg-red-50 border-red-300 text-red-800',
-        'note' => 'bg-gray-50 border-gray-300 text-gray-700',
-        default => 'bg-blue-50 border-blue-300 text-blue-800',
+        'tip' => 'bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-600 text-green-800 dark:text-green-200',
+        'warning' => 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-300 dark:border-yellow-600 text-yellow-800 dark:text-yellow-200',
+        'important' => 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-600 text-red-800 dark:text-red-200',
+        'note' => 'bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200',
+        default => 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-600 text-blue-800 dark:text-blue-200',
     };
     $icons = match($v) {
         'tip' => '💚', 'warning' => '⚠️', 'important' => '❗', 'note' => '📝', default => '💡',

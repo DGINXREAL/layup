@@ -5,6 +5,6 @@
         <span>{{ $data['suffix'] ?? '' }}</span>
     </div>
     @if(!empty($data['title']))
-        <div class="text-sm text-gray-500 uppercase tracking-wide">{{ $data['title'] }}</div>
+        <div class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide">{{ $data['title'] }}</div>
     @endif
 </div>

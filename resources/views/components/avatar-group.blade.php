@@ -18,14 +18,14 @@
                 $alt = is_array($avatar) ? ($avatar['name'] ?? $avatar['alt'] ?? '') : '';
             @endphp
             @if(!empty($src))
-                <img src="{{ str_starts_with($src, 'http') ? $src : asset('storage/' . $src) }}" alt="{{ $alt }}" class="{{ $size }} rounded-full border-2 border-white object-cover" />
+                <img src="{{ str_starts_with($src, 'http') ? $src : asset('storage/' . $src) }}" alt="{{ $alt }}" class="{{ $size }} rounded-full border-2 border-white dark:border-gray-900 object-cover" />
             @endif
         @endforeach
         @if(!empty($data['extra_count']))
-            <div class="{{ $size }} rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">{{ $data['extra_count'] }}</div>
+            <div class="{{ $size }} rounded-full border-2 border-white dark:border-gray-900 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs font-semibold text-gray-600 dark:text-gray-300">{{ $data['extra_count'] }}</div>
         @endif
     </div>
     @if(!empty($data['label']))
-        <span class="text-sm text-gray-600">{{ $data['label'] }}</span>
+        <span class="text-sm text-gray-600 dark:text-gray-300">{{ $data['label'] }}</span>
     @endif
 </div>

@@ -13,7 +13,7 @@
             </h3>
         @endif
         @if(!empty($data['content']))
-            <div class="prose max-w-none text-gray-600">
+            <div class="prose max-w-none text-gray-600 dark:text-gray-300">
                 {!! $data['content'] !!}
             </div>
         @endif

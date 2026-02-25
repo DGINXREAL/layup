@@ -12,13 +12,13 @@
     @foreach(($data['hotspots'] ?? []) as $spot)
         <div class="absolute" style="left: {{ $spot['x'] ?? 50 }}%; top: {{ $spot['y'] ?? 50 }}%; transform: translate(-50%, -50%)" x-data="{ open: false }">
             <button @click="open = !open" @click.outside="open = false"
-                    class="w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer animate-pulse hover:animate-none hover:scale-125 transition-transform"
+                    class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-300 shadow-lg cursor-pointer animate-pulse hover:animate-none hover:scale-125 transition-transform"
                     style="background-color: {{ $pinColor }}">
             </button>
-            <div x-show="open" x-transition class="absolute z-10 mt-2 left-1/2 -translate-x-1/2 bg-white rounded-lg shadow-xl p-3 min-w-48 text-sm">
+            <div x-show="open" x-transition class="absolute z-10 mt-2 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-gray-900/50 p-3 min-w-48 text-sm">
                 @if(!empty($spot['title']))<div class="font-semibold mb-1">{{ $spot['title'] }}</div>@endif
-                @if(!empty($spot['description']))<div class="text-gray-600 text-xs">{{ $spot['description'] }}</div>@endif
-                @if(!empty($spot['link_url']))<a href="{{ $spot['link_url'] }}" class="text-blue-600 hover:underline text-xs mt-1 inline-block">Learn more →</a>@endif
+                @if(!empty($spot['description']))<div class="text-gray-600 dark:text-gray-300 text-xs">{{ $spot['description'] }}</div>@endif
+                @if(!empty($spot['link_url']))<a href="{{ $spot['link_url'] }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs mt-1 inline-block">Learn more →</a>@endif
             </div>
         </div>
     @endforeach

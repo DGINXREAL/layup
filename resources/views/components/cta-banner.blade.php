@@ -5,6 +5,6 @@
         @if(!empty($data['subtitle']))<div class="opacity-80 mt-1">{{ $data['subtitle'] }}</div>@endif
     </div>
     @if(!empty($data['button_text']))
-        <a href="{{ $data['button_url'] ?? '#' }}" class="bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors shrink-0">{{ $data['button_text'] }}</a>
+        <a href="{{ $data['button_url'] ?? '#' }}" class="bg-white dark:bg-gray-100 text-gray-900 dark:text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-white transition-colors shrink-0">{{ $data['button_text'] }}</a>
     @endif
 </div>

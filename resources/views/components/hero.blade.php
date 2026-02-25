@@ -26,7 +26,7 @@
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 {{ !empty($data['background_image']) ? 'text-white' : '' }}">{{ $data['heading'] }}</h1>
         @endif
         @if(!empty($data['subheading']))
-            <p class="text-xl md:text-2xl mb-4 {{ !empty($data['background_image']) ? 'text-white/80' : 'text-gray-600' }}">{{ $data['subheading'] }}</p>
+            <p class="text-xl md:text-2xl mb-4 {{ !empty($data['background_image']) ? 'text-white/80' : 'text-gray-600 dark:text-gray-300' }}">{{ $data['subheading'] }}</p>
         @endif
         @if(!empty($data['description']))
             <div class="prose mb-6 {{ !empty($data['background_image']) ? 'text-white/90' : '' }}">{!! $data['description'] !!}</div>
@@ -34,7 +34,7 @@
         @if(!empty($data['primary_button_text']) || !empty($data['secondary_button_text']))
             <div class="flex gap-4 {{ $align === 'center' ? 'justify-center' : ($align === 'right' ? 'justify-end' : '') }}">
                 @if(!empty($data['primary_button_text']))
-                    <a href="{{ $data['primary_button_url'] ?? '#' }}" class="bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">{{ $data['primary_button_text'] }}</a>
+                    <a href="{{ $data['primary_button_url'] ?? '#' }}" class="bg-blue-600 dark:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">{{ $data['primary_button_text'] }}</a>
                 @endif
                 @if(!empty($data['secondary_button_text']))
                     <a href="{{ $data['secondary_button_url'] ?? '#' }}" class="border-2 border-current font-semibold px-8 py-3 rounded-lg hover:opacity-80 transition-opacity {{ !empty($data['background_image']) ? 'text-white' : '' }}">{{ $data['secondary_button_text'] }}</a>

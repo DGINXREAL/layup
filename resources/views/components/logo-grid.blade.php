@@ -10,7 +10,7 @@
      {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     @if(!empty($data['title']))
-        <p class="text-center text-sm text-gray-500 uppercase tracking-wide mb-6">{{ $data['title'] }}</p>
+        <p class="text-center text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-6">{{ $data['title'] }}</p>
     @endif
     <div style="display:grid;grid-template-columns:repeat({{ $cols }},1fr);gap:2rem;align-items:center;justify-items:center">
         @foreach(($data['logos'] ?? []) as $logo)

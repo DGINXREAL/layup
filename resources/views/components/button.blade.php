@@ -11,11 +11,11 @@
    @if(!empty($data['id']))id="{{ $data['id'] }}"@endif
    class="inline-block rounded font-medium transition-all duration-200
        {{ match($data['style'] ?? 'primary') {
-           'primary'   => 'bg-blue-600 text-white hover:bg-blue-700',
-           'secondary' => 'bg-gray-600 text-white hover:bg-gray-700',
-           'outline'   => 'border border-blue-600 text-blue-600 hover:bg-blue-50',
-           'ghost'     => 'text-blue-600 hover:bg-blue-50',
-           default     => 'bg-blue-600 text-white hover:bg-blue-700',
+           'primary'   => 'bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600',
+           'secondary' => 'bg-gray-600 dark:bg-gray-700 text-white hover:bg-gray-700 dark:hover:bg-gray-600',
+           'outline'   => 'border border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20',
+           'ghost'     => 'text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20',
+           default     => 'bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600',
        } }}
        {{ match($data['size'] ?? 'md') {
            'sm' => 'px-3 py-1.5 text-sm',

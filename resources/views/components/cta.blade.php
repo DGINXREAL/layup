@@ -3,16 +3,16 @@
         <h2 class="text-2xl font-bold mb-3">{{ $data['title'] }}</h2>
     @endif
     @if(!empty($data['content']))
-        <div class="prose max-w-2xl mx-auto mb-6 text-gray-600">
+        <div class="prose max-w-2xl mx-auto mb-6 text-gray-600 dark:text-gray-300">
             {!! $data['content'] !!}
         </div>
     @endif
     @if(!empty($data['button_text']))
         @php
             $btnClass = match($data['button_style'] ?? 'primary') {
-                'secondary' => 'bg-gray-600 text-white hover:bg-gray-700',
-                'outline' => 'border-2 border-current hover:bg-white/10',
-                default => 'bg-blue-600 text-white hover:bg-blue-700',
+                'secondary' => 'bg-gray-600 dark:bg-gray-700 text-white hover:bg-gray-700 dark:hover:bg-gray-600',
+                'outline' => 'border-2 border-current hover:bg-white/10 dark:hover:bg-black/10',
+                default => 'bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600',
             };
         @endphp
         <a href="{{ $data['button_url'] ?? '#' }}" class="inline-block font-medium px-6 py-3 rounded transition-colors {{ $btnClass }}" @if(!empty($data['new_tab'])) target="_blank" rel="noopener noreferrer" @endif>
