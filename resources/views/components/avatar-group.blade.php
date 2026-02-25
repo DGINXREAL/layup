@@ -13,8 +13,12 @@
 >
     <div class="flex -space-x-2">
         @foreach(($data['avatars'] ?? []) as $avatar)
-            @if(!empty($avatar))
-                <img src="{{ asset('storage/' . $avatar) }}" alt="" class="{{ $size }} rounded-full border-2 border-white object-cover" />
+            @php
+                $src = is_array($avatar) ? ($avatar['image'] ?? $avatar['src'] ?? '') : $avatar;
+                $alt = is_array($avatar) ? ($avatar['name'] ?? $avatar['alt'] ?? '') : '';
+            @endphp
+            @if(!empty($src))
+                <img src="{{ str_starts_with($src, 'http') ? $src : asset('storage/' . $src) }}" alt="{{ $alt }}" class="{{ $size }} rounded-full border-2 border-white object-cover" />
             @endif
         @endforeach
         @if(!empty($data['extra_count']))
