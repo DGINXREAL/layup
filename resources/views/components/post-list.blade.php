@@ -19,26 +19,26 @@
      {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     @if($posts->isEmpty())
-        <p class="text-gray-500 text-center py-8">{{ $data['empty_message'] ?? 'No posts yet.' }}</p>
+        <p class="text-gray-500 dark:text-gray-400 text-center py-8">{{ $data['empty_message'] ?? 'No posts yet.' }}</p>
     @else
         <div style="display:grid;grid-template-columns:repeat({{ $cols }},1fr);gap:1.5rem">
             @foreach($posts as $post)
-                <article class="border rounded-lg overflow-hidden">
+                <article class="border dark:border-gray-700 rounded-lg overflow-hidden">
                     @if(method_exists($post, 'getFeaturedImageUrl') && $post->getFeaturedImageUrl())
                         <img src="{{ $post->getFeaturedImageUrl() }}" alt="{{ $post->title }}" class="w-full h-48 object-cover" />
                     @endif
                     <div class="p-4">
                         @if(!empty($data['show_date']) && $post->published_at)
-                            <time class="text-xs text-gray-400">{{ $post->published_at->format('M j, Y') }}</time>
+                            <time class="text-xs text-gray-400 dark:text-gray-500">{{ $post->published_at->format('M j, Y') }}</time>
                         @endif
                         <h3 class="font-semibold mt-1">
-                            @if($post->slug)<a href="{{ url($post->slug) }}" class="hover:text-blue-600">{{ $post->title }}</a>@else{{ $post->title }}@endif
+                            @if($post->slug)<a href="{{ url($post->slug) }}" class="hover:text-blue-600 dark:hover:text-blue-400">{{ $post->title }}</a>@else{{ $post->title }}@endif
                         </h3>
                         @if(!empty($data['show_excerpt']) && ($post->excerpt ?? null))
-                            <p class="text-sm text-gray-600 mt-2">{{ \Illuminate\Support\Str::limit($post->excerpt, 120) }}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">{{ \Illuminate\Support\Str::limit($post->excerpt, 120) }}</p>
                         @endif
                         @if(!empty($data['read_more_text']) && $post->slug)
-                            <a href="{{ url($post->slug) }}" class="text-sm text-blue-600 hover:underline mt-2 inline-block">{{ $data['read_more_text'] }}</a>
+                            <a href="{{ url($post->slug) }}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block">{{ $data['read_more_text'] }}</a>
                         @endif
                     </div>
                 </article>

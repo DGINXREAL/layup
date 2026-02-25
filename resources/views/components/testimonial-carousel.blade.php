@@ -15,14 +15,14 @@
             @if(!empty($t['rating']))
                 <div class="text-yellow-400 mb-3">@for($s = 0; $s < (int)$t['rating']; $s++)★@endfor</div>
             @endif
-            <p class="text-lg italic text-gray-700 mb-4 max-w-2xl mx-auto">"{{ $t['quote'] ?? '' }}"</p>
+            <p class="text-lg italic text-gray-700 dark:text-gray-200 mb-4 max-w-2xl mx-auto">"{{ $t['quote'] ?? '' }}"</p>
             <div class="flex items-center justify-center gap-3">
                 @if(!empty($t['photo']))
                     <img src="{{ asset('storage/' . $t['photo']) }}" alt="{{ $t['author'] ?? '' }}" class="w-10 h-10 rounded-full object-cover" />
                 @endif
                 <div class="text-left">
                     <div class="font-semibold text-sm">{{ $t['author'] ?? '' }}</div>
-                    @if(!empty($t['role']))<div class="text-xs text-gray-500">{{ $t['role'] }}</div>@endif
+                    @if(!empty($t['role']))<div class="text-xs text-gray-500 dark:text-gray-400">{{ $t['role'] }}</div>@endif
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
     @if(count($testimonials) > 1)
         <div class="flex justify-center gap-2 mt-4">
             @foreach($testimonials as $i => $t)
-                <button @click="goTo({{ $i }})" :class="isActive({{ $i }}) ? 'bg-blue-600' : 'bg-gray-300'" class="w-2.5 h-2.5 rounded-full transition-colors"></button>
+                <button @click="goTo({{ $i }})" :class="isActive({{ $i }}) ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'" class="w-2.5 h-2.5 rounded-full transition-colors"></button>
             @endforeach
         </div>
     @endif

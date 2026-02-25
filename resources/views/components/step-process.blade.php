@@ -27,7 +27,7 @@
                         <div class="font-semibold">{{ $step['title'] }}</div>
                     @endif
                     @if(!empty($step['description']))
-                        <div class="text-sm text-gray-600 mt-1">{{ $step['description'] }}</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">{{ $step['description'] }}</div>
                     @endif
                 </div>
             </div>

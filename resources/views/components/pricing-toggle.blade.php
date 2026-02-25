@@ -26,7 +26,7 @@
     {{-- Plans --}}
     <div style="display:grid;grid-template-columns:repeat({{ min(count($plans), 4) }},1fr);gap:1.5rem">
         @foreach($plans as $plan)
-            <div class="border rounded-xl p-6 text-center {{ !empty($plan['featured']) ? 'ring-2 relative' : '' }}" @if(!empty($plan['featured'])) style="ring-color: {{ $color }}" @endif>
+            <div class="border dark:border-gray-700 rounded-xl p-6 text-center {{ !empty($plan['featured']) ? 'ring-2 relative' : '' }}" @if(!empty($plan['featured'])) style="ring-color: {{ $color }}" @endif>
                 @if(!empty($plan['featured']))
                     <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs text-white px-3 py-1 rounded-full" style="background-color: {{ $color }}">Popular</span>
                 @endif
@@ -34,10 +34,10 @@
                 <div class="text-3xl font-bold mb-4">
                     <span x-show="!annual">{{ $plan['monthly_price'] ?? '' }}</span>
                     <span x-show="annual" x-cloak>{{ $plan['annual_price'] ?? '' }}</span>
-                    <span class="text-sm font-normal text-gray-500" x-text="annual ? '/year' : '/month'"></span>
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400" x-text="annual ? '/year' : '/month'"></span>
                 </div>
                 @if(!empty($plan['features']))
-                    <ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-2 mb-6 text-left">
                         @foreach(explode(',', $plan['features']) as $feat)
                             <li>✓ {{ trim($feat) }}</li>
                         @endforeach

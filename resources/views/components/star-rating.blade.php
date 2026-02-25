@@ -20,6 +20,6 @@
         @endfor
     </span>
     @if(!empty($data['label']))
-        <span class="text-sm text-gray-600">{{ $data['label'] }}</span>
+        <span class="text-sm text-gray-600 dark:text-gray-300">{{ $data['label'] }}</span>
     @endif
 </div>

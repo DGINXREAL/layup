@@ -8,14 +8,14 @@
      {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     @foreach(($data['testimonials'] ?? []) as $t)
-        <div class="border rounded-xl p-5">
+        <div class="border dark:border-gray-700 rounded-xl p-5">
             @if(!empty($t['rating']))
                 <div class="text-yellow-400 mb-2">@for($i=0;$i<(int)$t['rating'];$i++)★@endfor</div>
             @endif
-            <p class="text-gray-700 mb-4 italic">"{{ $t['quote'] ?? '' }}"</p>
+            <p class="text-gray-700 dark:text-gray-200 mb-4 italic">"{{ $t['quote'] ?? '' }}"</p>
             <div>
                 <div class="font-semibold text-sm">{{ $t['name'] ?? '' }}</div>
-                @if(!empty($t['role']))<div class="text-xs text-gray-500">{{ $t['role'] }}</div>@endif
+                @if(!empty($t['role']))<div class="text-xs text-gray-500 dark:text-gray-400">{{ $t['role'] }}</div>@endif
             </div>
         </div>
     @endforeach

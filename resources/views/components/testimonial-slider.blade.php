@@ -27,14 +27,14 @@
                 @if(!empty($t['rating']))
                     <div class="text-yellow-400 text-xl mb-3">@for($s = 0; $s < (int)$t['rating']; $s++)★@endfor</div>
                 @endif
-                <blockquote class="text-lg italic text-gray-700 mb-4 max-w-2xl mx-auto">"{{ $t['quote'] ?? '' }}"</blockquote>
+                <blockquote class="text-lg italic text-gray-700 dark:text-gray-200 mb-4 max-w-2xl mx-auto">"{{ $t['quote'] ?? '' }}"</blockquote>
                 <div class="flex items-center justify-center gap-3">
                     @if(!empty($t['avatar']))
                         <img src="{{ asset('storage/' . $t['avatar']) }}" alt="" class="w-12 h-12 rounded-full object-cover" />
                     @endif
                     <div class="text-left">
                         <div class="font-semibold">{{ $t['name'] ?? '' }}</div>
-                        @if(!empty($t['title']))<div class="text-sm text-gray-500">{{ $t['title'] }}</div>@endif
+                        @if(!empty($t['title']))<div class="text-sm text-gray-500 dark:text-gray-400">{{ $t['title'] }}</div>@endif
                     </div>
                 </div>
             </div>
@@ -42,11 +42,11 @@
     </div>
     @if(count($testimonials) > 1)
         <div class="flex justify-center gap-2 mt-4">
-            <button @click="prev()" class="text-gray-400 hover:text-gray-600 text-xl">‹</button>
+            <button @click="prev()" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 text-xl">‹</button>
             @foreach($testimonials as $i => $t)
-                <button @click="current = {{ $i }}" class="w-2 h-2 rounded-full transition-colors" :class="current === {{ $i }} ? 'bg-blue-500' : 'bg-gray-300'"></button>
+                <button @click="current = {{ $i }}" class="w-2 h-2 rounded-full transition-colors" :class="current === {{ $i }} ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'"></button>
             @endforeach
-            <button @click="next()" class="text-gray-400 hover:text-gray-600 text-xl">›</button>
+            <button @click="next()" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 text-xl">›</button>
         </div>
     @endif
 </div>

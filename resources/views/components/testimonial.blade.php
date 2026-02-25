@@ -3,7 +3,7 @@
         <div class="text-yellow-400 mb-2">@for($i = 0; $i < (int)$data['rating']; $i++)★@endfor</div>
     @endif
     @if(!empty($data['quote']))
-        <blockquote class="text-lg italic text-gray-700 mb-4">"{{ $data['quote'] }}"</blockquote>
+        <blockquote class="text-lg italic text-gray-700 dark:text-gray-200 mb-4">"{{ $data['quote'] }}"</blockquote>
     @endif
     <div class="flex items-center gap-3">
         @if(!empty($data['photo']))
@@ -18,7 +18,7 @@
                 </p>
             @endif
             @if(!empty($data['role']) || !empty($data['company']))
-                <p class="text-xs text-gray-500">{{ $data['role'] ?? '' }}@if(!empty($data['role']) && !empty($data['company'])), @endif{{ $data['company'] ?? '' }}</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">{{ $data['role'] ?? '' }}@if(!empty($data['role']) && !empty($data['company'])), @endif{{ $data['company'] ?? '' }}</p>
             @endif
         </div>
     </div>
