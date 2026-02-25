@@ -27,16 +27,20 @@
             <button @click="navigator.clipboard.writeText(window.location.href); $el.textContent = '✓ Copied'"
                     class="inline-flex items-center gap-1 px-3 py-2 rounded text-sm text-white transition-colors"
                     style="background-color: #6b7280">
-                @if($style !== 'text')📋@endif
-                @if($style !== 'icon')Copy Link@endif
+                @if($style !== 'text')📋
+                @endif
+                @if($style !== 'icon')Copy Link
+                @endif
             </button>
         @elseif(isset($shareUrls[$network]))
             @php $s = $shareUrls[$network]; @endphp
             <a href="{{ $s['url'] }}" target="{{ $target }}" rel="noopener"
                class="inline-flex items-center gap-1 px-3 py-2 rounded text-sm text-white hover:opacity-90 transition-opacity"
                style="background-color: {{ $s['bg'] }}">
-                @if($style !== 'text')<span class="font-bold">{{ $s['icon'] }}</span>@endif
-                @if($style !== 'icon'){{ $s['label'] }}@endif
+                @if($style !== 'text')<span class="font-bold">{{ $s['icon'] }}</span>
+                @endif
+                @if($style !== 'icon'){{ $s['label'] }}
+                @endif
             </a>
         @endif
     @endforeach
