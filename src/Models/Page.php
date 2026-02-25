@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Crumbls\Layup\Models;
 
+use Crumbls\Layup\Support\ContentValidator;
 use Crumbls\Layup\Support\SafelistCollector;
 use Crumbls\Layup\Support\WidgetRegistry;
 use Crumbls\Layup\View\BaseView;
@@ -20,6 +21,30 @@ class Page extends Model
 
     protected static function booted(): void
     {
+        static::saving(function (Page $page): bool {
+            if (! $page->isDirty('content')) {
+                return true;
+            }
+
+            $content = $page->content;
+            if (! is_array($content)) {
+                return true;
+            }
+
+            $result = (new ContentValidator)->validate($content);
+
+            if (! $result->passes()) {
+                // Log warnings but don't block save — widget data issues are soft errors
+                logger()->warning('Layup page content validation warnings', [
+                    'page_id' => $page->id,
+                    'slug' => $page->slug,
+                    'errors' => $result->errors(),
+                ]);
+            }
+
+            return true;
+        });
+
         static::saved(function (Page $page): void {
             if (config('layup.safelist.enabled') && config('layup.safelist.auto_sync')) {
                 SafelistCollector::sync();

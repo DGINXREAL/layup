@@ -140,7 +140,7 @@
                             </div>
 
                             {{-- Columns --}}
-                            <div class="lyp-columns" :style="'gap:' + (row.settings.gap ? row.settings.gap.replace('gap-','').replace('0','0px').replace('2','0.5rem').replace('4','1rem').replace('6','1.5rem').replace('8','2rem').replace('12','3rem') : '1rem')">
+                            <div class="lyp-columns" :style="'--lyp-col-gap:' + (row.settings.gap ? row.settings.gap.replace('gap-','').replace('0','0px').replace('2','0.5rem').replace('4','1rem').replace('6','1.5rem').replace('8','2rem').replace('12','3rem') : '1rem')">
                                 <template x-for="(col, colIndex) in row.columns" :key="col.id">
                                 <div style="display: contents;">
                                     {{-- Resize handle before column (except first) --}}

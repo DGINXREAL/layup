@@ -111,6 +111,13 @@ return [
         \Crumbls\Layup\View\FeatureGridWidget::class,
         \Crumbls\Layup\View\HighlightBoxWidget::class,
         \Crumbls\Layup\View\SocialProofWidget::class,
+        \Crumbls\Layup\View\CtaBannerWidget::class,
+        \Crumbls\Layup\View\IconListWidget::class,
+        \Crumbls\Layup\View\ImageCardWidget::class,
+        \Crumbls\Layup\View\ImageTextWidget::class,
+        \Crumbls\Layup\View\QuoteCarouselWidget::class,
+        \Crumbls\Layup\View\SectionHeadingWidget::class,
+        \Crumbls\Layup\View\TextColumnsWidget::class,
     ],
 
     /*

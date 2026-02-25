@@ -731,7 +731,18 @@ class EditPage extends EditRecord
                 $this->editingWidgetId = null;
                 $this->editingWidgetType = null;
 
-                Notification::make()->title('Widget updated')->success()->duration(2000)->send();
+                // Validate full content and warn if issues
+                $result = (new ContentValidator)->validate($this->pageContent);
+                if (! $result->passes()) {
+                    Notification::make()
+                        ->title('Widget saved with warnings')
+                        ->body(implode("\n", array_slice($result->errors(), 0, 3)))
+                        ->warning()
+                        ->duration(5000)
+                        ->send();
+                } else {
+                    Notification::make()->title('Widget updated')->success()->duration(2000)->send();
+                }
             });
     }
 
