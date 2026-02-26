@@ -51,27 +51,27 @@ class EditPage extends EditRecord
     {
         return [
             Action::make('revisions')
-                ->label('Revision History')
+                ->label(__('layup::resource.revision_history'))
                 ->icon('heroicon-o-clock')
                 ->color('gray')
                 ->slideOver()
                 ->modalWidth('2xl')
-                ->modalHeading('Revision History')
-                ->modalDescription('View and restore previous versions of this page')
+                ->modalHeading(__('layup::resource.revision_history'))
+                ->modalDescription(__('layup::resource.revision_history_description'))
                 ->modalContent(fn (): \Illuminate\Contracts\View\View => $this->getRevisionHistoryView())
                 ->modalFooterActions([])
                 ->action(fn (): null => null),
             Action::make('saveAsTemplate')
-                ->label('Save as Template')
+                ->label(__('layup::resource.save_as_template'))
                 ->icon('heroicon-o-document-duplicate')
                 ->color('gray')
                 ->form([
                     \Filament\Forms\Components\TextInput::make('template_name')
-                        ->label('Template Name')
+                        ->label(__('layup::resource.template_name'))
                         ->required()
                         ->default(fn (): string => $this->record->title . ' Template'),
                     \Filament\Forms\Components\TextInput::make('template_description')
-                        ->label('Description')
+                        ->label(__('layup::resource.description'))
                         ->nullable(),
                 ])
                 ->action(function (array $data): void {
@@ -80,7 +80,7 @@ class EditPage extends EditRecord
                         $this->record->content ?? ['rows' => []],
                         $data['template_description'] ?? null,
                     );
-                    Notification::make()->success()->title('Template saved')->send();
+                    Notification::make()->success()->title(__('layup::notifications.template_saved'))->send();
                 }),
             Actions\DeleteAction::make(),
         ];
@@ -108,8 +108,8 @@ class EditPage extends EditRecord
         $this->syncContent();
 
         Notification::make()
-            ->title('Revision restored')
-            ->body('Page content has been restored to ' . $revision->created_at->diffForHumans())
+            ->title(__('layup::notifications.revision_restored'))
+            ->body(__('layup::notifications.revision_restored_body', ['time' => $revision->created_at->diffForHumans()]))
             ->success()
             ->send();
 
@@ -138,7 +138,7 @@ class EditPage extends EditRecord
 
         if (! $result->passes()) {
             Notification::make()
-                ->title('Invalid content')
+                ->title(__('layup::notifications.invalid_content'))
                 ->body(implode(' ', $result->errors()))
                 ->danger()
                 ->send();
@@ -203,11 +203,11 @@ class EditPage extends EditRecord
     public function deleteRowAction(): Action
     {
         return Action::make('deleteRowAction')
-            ->label('Delete Row')
+            ->label(__('layup::resource.delete_row'))
             ->color('danger')
             ->requiresConfirmation()
-            ->modalHeading('Delete Row')
-            ->modalDescription('Are you sure you want to delete this row and all its contents?')
+            ->modalHeading(__('layup::resource.delete_row'))
+            ->modalDescription(__('layup::resource.delete_row_description'))
             ->action(function (): void {
                 $this->refreshContent();
                 $this->pageContent['rows'] = collect($this->pageContent['rows'])
@@ -219,7 +219,7 @@ class EditPage extends EditRecord
                 $this->syncContent();
                 $this->editingRowId = null;
 
-                Notification::make()->title('Row deleted')->success()->duration(2000)->send();
+                Notification::make()->title(__('layup::notifications.row_deleted'))->success()->duration(2000)->send();
             });
     }
 
@@ -281,11 +281,11 @@ class EditPage extends EditRecord
     public function deleteColumnAction(): Action
     {
         return Action::make('deleteColumnAction')
-            ->label('Delete Column')
+            ->label(__('layup::resource.delete_column'))
             ->color('danger')
             ->requiresConfirmation()
-            ->modalHeading('Delete Column')
-            ->modalDescription('Are you sure you want to delete this column and all its widgets?')
+            ->modalHeading(__('layup::resource.delete_column'))
+            ->modalDescription(__('layup::resource.delete_column_description'))
             ->action(function (): void {
                 $this->refreshContent();
 
@@ -304,7 +304,7 @@ class EditPage extends EditRecord
                 $this->editingRowId = null;
                 $this->editingColumnId = null;
 
-                Notification::make()->title('Column deleted')->success()->duration(2000)->send();
+                Notification::make()->title(__('layup::notifications.column_deleted'))->success()->duration(2000)->send();
             });
     }
 
@@ -464,7 +464,7 @@ class EditPage extends EditRecord
         $this->record->update(['content' => $this->pageContent]);
         $this->syncContent();
 
-        Notification::make()->title('Row duplicated')->success()->duration(2000)->send();
+        Notification::make()->title(__('layup::notifications.row_duplicated'))->success()->duration(2000)->send();
     }
 
     public function duplicateWidget(string $rowId, string $columnId, string $widgetId): void
@@ -501,7 +501,7 @@ class EditPage extends EditRecord
         $this->record->update(['content' => $this->pageContent]);
         $this->syncContent();
 
-        Notification::make()->title('Widget duplicated')->success()->duration(2000)->send();
+        Notification::make()->title(__('layup::notifications.widget_duplicated'))->success()->duration(2000)->send();
     }
 
     protected function deepCloneRow(array $row): array
@@ -536,7 +536,7 @@ class EditPage extends EditRecord
     public function editRowAction(): Action
     {
         return Action::make('editRowAction')
-            ->label('Row Settings')
+            ->label(__('layup::resource.row_settings'))
             ->slideOver()
             ->fillForm(fn (): array => $this->rowSettings)
             ->form(Row::getFormSchema())
@@ -554,7 +554,7 @@ class EditPage extends EditRecord
                 $this->syncContent();
                 $this->editingRowId = null;
 
-                Notification::make()->title('Row updated')->success()->duration(2000)->send();
+                Notification::make()->title(__('layup::notifications.row_updated'))->success()->duration(2000)->send();
             });
     }
 
@@ -579,7 +579,7 @@ class EditPage extends EditRecord
     public function editColumnAction(): Action
     {
         return Action::make('editColumnAction')
-            ->label('Column Settings')
+            ->label(__('layup::resource.column_settings'))
             ->slideOver()
             ->fillForm(fn (): array => $this->columnSettings)
             ->form(Column::getFormSchema())
@@ -610,7 +610,7 @@ class EditPage extends EditRecord
                 $this->editingRowId = null;
                 $this->editingColumnId = null;
 
-                Notification::make()->title('Column updated')->success()->duration(2000)->send();
+                Notification::make()->title(__('layup::notifications.column_updated'))->success()->duration(2000)->send();
             });
     }
 
@@ -690,7 +690,7 @@ class EditPage extends EditRecord
         $registry = app(WidgetRegistry::class);
 
         return Action::make('editWidgetAction')
-            ->label('Edit Widget')
+            ->label(__('layup::resource.edit_widget'))
             ->slideOver()
             ->fillForm(fn (): array => $this->widgetData)
             ->form(fn () => $registry->getFormSchema($this->editingWidgetType ?? 'text'))
@@ -735,13 +735,13 @@ class EditPage extends EditRecord
                 $result = (new ContentValidator)->validate($this->pageContent);
                 if (! $result->passes()) {
                     Notification::make()
-                        ->title('Widget saved with warnings')
+                        ->title(__('layup::notifications.widget_saved_with_warnings'))
                         ->body(implode("\n", array_slice($result->errors(), 0, 3)))
                         ->warning()
                         ->duration(5000)
                         ->send();
                 } else {
-                    Notification::make()->title('Widget updated')->success()->duration(2000)->send();
+                    Notification::make()->title(__('layup::notifications.widget_updated'))->success()->duration(2000)->send();
                 }
             });
     }
@@ -778,7 +778,7 @@ class EditPage extends EditRecord
         $this->record->update(['content' => $this->pageContent]);
         $this->syncContent();
 
-        Notification::make()->title('Content updated')->success()->duration(2000)->send();
+        Notification::make()->title(__('layup::notifications.content_updated'))->success()->duration(2000)->send();
     }
 
     public function updateContent(array $content): void
@@ -787,7 +787,7 @@ class EditPage extends EditRecord
 
         if (! $result->passes()) {
             Notification::make()
-                ->title('Invalid content')
+                ->title(__('layup::notifications.invalid_content'))
                 ->body(implode(' ', $result->errors()))
                 ->danger()
                 ->send();
@@ -803,11 +803,11 @@ class EditPage extends EditRecord
     public function deleteWidgetAction(): Action
     {
         return Action::make('deleteWidgetAction')
-            ->label('Delete Widget')
+            ->label(__('layup::resource.delete_widget'))
             ->color('danger')
             ->requiresConfirmation()
-            ->modalHeading('Delete Widget')
-            ->modalDescription('Are you sure you want to delete this widget?')
+            ->modalHeading(__('layup::resource.delete_widget'))
+            ->modalDescription(__('layup::resource.delete_widget_description'))
             ->action(function (): void {
                 $this->refreshContent();
                 $registry = app(WidgetRegistry::class);
@@ -834,7 +834,7 @@ class EditPage extends EditRecord
                 $this->editingColumnId = null;
                 $this->editingWidgetId = null;
 
-                Notification::make()->title('Widget deleted')->success()->duration(2000)->send();
+                Notification::make()->title(__('layup::notifications.widget_deleted'))->success()->duration(2000)->send();
             });
     }
 
@@ -858,5 +858,14 @@ class EditPage extends EditRecord
     public function getDefaultBreakpointProperty(): string
     {
         return config('layup.default_breakpoint', 'lg');
+    }
+
+    public function getTranslationsProperty(): array
+    {
+        return [
+            'saving' => __('layup::builder.saving'),
+            'saved' => __('layup::builder.saved'),
+            'row_label' => __('layup::builder.row_label'),
+        ];
     }
 }

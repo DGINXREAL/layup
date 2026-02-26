@@ -18,7 +18,7 @@ class CallToActionWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Call To Action';
+        return __('layup::widgets.labels.cta');
     }
 
     public static function getIcon(): string
@@ -28,41 +28,39 @@ class CallToActionWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.cta.title'))
                 ->required(),
             RichEditor::make('content')
-                ->label('Body Text')
+                ->label(__('layup::widgets.cta.body_text'))
                 ->columnSpanFull(),
             TextInput::make('button_text')
-                ->label('Button Text')
+                ->label(__('layup::widgets.cta.button_text'))
                 ->default('Learn More'),
             TextInput::make('button_url')
-                ->label('Button URL')
+                ->label(__('layup::widgets.cta.button_url'))
                 ->url(),
             Select::make('button_style')
-                ->label('Button Style')
-                ->options([
-                    'primary' => 'Primary',
-                    'secondary' => 'Secondary',
-                    'outline' => 'Outline',
-                ])
+                ->label(__('layup::widgets.cta.button_style'))
+                ->options(['primary' => __('layup::widgets.cta.primary'),
+                    'secondary' => __('layup::widgets.cta.secondary'),
+                    'outline' => __('layup::widgets.cta.outline'),])
                 ->default('primary'),
             Toggle::make('new_tab')
-                ->label('Open in new tab')
+                ->label(__('layup::widgets.cta.open_in_new_tab'))
                 ->default(false),
             TextInput::make('bg_color')
-                ->label('Background Color')
+                ->label(__('layup::widgets.cta.background_color'))
                 ->type('color')
                 ->nullable(),
             TextInput::make('text_color_cta')
-                ->label('Text Color')
+                ->label(__('layup::widgets.cta.text_color'))
                 ->type('color')
                 ->nullable(),
         ];

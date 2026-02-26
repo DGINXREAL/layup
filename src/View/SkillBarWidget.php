@@ -16,7 +16,7 @@ class SkillBarWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Skill Bar';
+        return __('layup::widgets.labels.skill-bar');
     }
 
     public static function getIcon(): string
@@ -26,18 +26,18 @@ class SkillBarWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('skills')
-                ->label('Skills')
+                ->label(__('layup::widgets.skill-bar.skills'))
                 ->schema([
-                    TextInput::make('name')->label('Skill Name')->required(),
-                    TextInput::make('percent')->label('Percentage')->numeric()->minValue(0)->maxValue(100)->required(),
-                    TextInput::make('color')->label('Bar Color')->type('color')->default('#3b82f6'),
+                    TextInput::make('name')->label(__('layup::widgets.skill-bar.skill_name'))->required(),
+                    TextInput::make('percent')->label(__('layup::widgets.skill-bar.percentage'))->numeric()->minValue(0)->maxValue(100)->required(),
+                    TextInput::make('color')->label(__('layup::widgets.skill-bar.bar_color'))->type('color')->default('#3b82f6'),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),

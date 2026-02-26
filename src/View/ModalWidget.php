@@ -17,7 +17,7 @@ class ModalWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Modal / Popup';
+        return __('layup::widgets.labels.modal');
     }
 
     public static function getIcon(): string
@@ -27,34 +27,32 @@ class ModalWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('trigger_text')
-                ->label('Trigger Button Text')
+                ->label(__('layup::widgets.modal.trigger_button_text'))
                 ->default('Open')
                 ->required(),
             TextInput::make('title')
-                ->label('Modal Title')
+                ->label(__('layup::widgets.modal.modal_title'))
                 ->nullable(),
             RichEditor::make('body')
-                ->label('Modal Content')
+                ->label(__('layup::widgets.modal.modal_content'))
                 ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList'])
                 ->columnSpanFull(),
             Select::make('size')
-                ->label('Size')
-                ->options([
-                    'sm' => 'Small (400px)',
-                    'md' => 'Medium (600px)',
-                    'lg' => 'Large (800px)',
-                    'xl' => 'Extra Large (1000px)',
-                ])
+                ->label(__('layup::widgets.modal.size'))
+                ->options(['sm' => __('layup::widgets.modal.small_400px'),
+                    'md' => __('layup::widgets.modal.medium_600px'),
+                    'lg' => __('layup::widgets.modal.large_800px'),
+                    'xl' => __('layup::widgets.modal.extra_large_1000px'),])
                 ->default('md'),
             TextInput::make('trigger_bg_color')
-                ->label('Trigger Button Color')
+                ->label(__('layup::widgets.modal.trigger_button_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

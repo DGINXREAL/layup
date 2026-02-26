@@ -18,7 +18,7 @@ class CardWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Card';
+        return __('layup::widgets.labels.card');
     }
 
     public static function getIcon(): string
@@ -28,36 +28,36 @@ class CardWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             FileUpload::make('image')
-                ->label('Image')
+                ->label(__('layup::widgets.card.image'))
                 ->image()
                 ->directory('layup/cards'),
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.card.title'))
                 ->required(),
             RichEditor::make('body')
-                ->label('Body')
+                ->label(__('layup::widgets.card.body'))
                 ->toolbarButtons(['bold', 'italic', 'link'])
                 ->columnSpanFull(),
             TextInput::make('link_url')
-                ->label('Link URL')
+                ->label(__('layup::widgets.card.link_url'))
                 ->url()
                 ->nullable(),
             TextInput::make('link_text')
-                ->label('Link Text')
+                ->label(__('layup::widgets.card.link_text'))
                 ->default('Learn more')
                 ->nullable(),
             Toggle::make('shadow')
-                ->label('Drop Shadow')
+                ->label(__('layup::widgets.card.drop_shadow'))
                 ->default(true),
             Toggle::make('hover_lift')
-                ->label('Hover Lift Effect')
+                ->label(__('layup::widgets.card.hover_lift_effect'))
                 ->default(true),
         ];
     }

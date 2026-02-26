@@ -17,7 +17,7 @@ class ListWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'List';
+        return __('layup::widgets.labels.list');
     }
 
     public static function getIcon(): string
@@ -27,31 +27,29 @@ class ListWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('items')
-                ->label('List Items')
+                ->label(__('layup::widgets.list.list_items'))
                 ->simple(
                     TextInput::make('text')->required()
                 )
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Select::make('style')
-                ->label('List Style')
-                ->options([
-                    'bullet' => '• Bullets',
-                    'number' => '1. Numbered',
-                    'check' => '✓ Checkmarks',
-                    'arrow' => '→ Arrows',
-                    'none' => 'No markers',
-                ])
+                ->label(__('layup::widgets.list.list_style'))
+                ->options(['bullet' => __('layup::widgets.list.bullets'),
+                    'number' => __('layup::widgets.list.1_numbered'),
+                    'check' => __('layup::widgets.list.checkmarks'),
+                    'arrow' => __('layup::widgets.list.arrows'),
+                    'none' => __('layup::widgets.list.no_markers'),])
                 ->default('bullet'),
             TextInput::make('icon_color')
-                ->label('Marker Color')
+                ->label(__('layup::widgets.list.marker_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

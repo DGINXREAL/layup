@@ -17,7 +17,7 @@ class CountdownWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Countdown Timer';
+        return __('layup::widgets.labels.countdown');
     }
 
     public static function getIcon(): string
@@ -27,32 +27,32 @@ class CountdownWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.countdown.title'))
                 ->nullable(),
             DateTimePicker::make('target_date')
-                ->label('Target Date')
+                ->label(__('layup::widgets.countdown.target_date'))
                 ->required(),
             Toggle::make('show_days')
-                ->label('Show Days')
+                ->label(__('layup::widgets.countdown.show_days'))
                 ->default(true),
             Toggle::make('show_hours')
-                ->label('Show Hours')
+                ->label(__('layup::widgets.countdown.show_hours'))
                 ->default(true),
             Toggle::make('show_minutes')
-                ->label('Show Minutes')
+                ->label(__('layup::widgets.countdown.show_minutes'))
                 ->default(true),
             Toggle::make('show_seconds')
-                ->label('Show Seconds')
+                ->label(__('layup::widgets.countdown.show_seconds'))
                 ->default(true),
             TextInput::make('expired_message')
-                ->label('Expired Message')
+                ->label(__('layup::widgets.countdown.expired_message'))
                 ->default('Time is up!'),
         ];
     }

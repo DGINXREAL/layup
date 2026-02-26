@@ -20,7 +20,7 @@ class ImageWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Image';
+        return __('layup::widgets.labels.image');
     }
 
     public static function getIcon(): string
@@ -30,37 +30,35 @@ class ImageWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             FileUpload::make('src')
-                ->label('Image')
+                ->label(__('layup::widgets.image.image'))
                 ->image()
                 ->directory('layup/images'),
             TextInput::make('alt')
-                ->label('Alt Text'),
+                ->label(__('layup::widgets.image.alt_text')),
             TextInput::make('caption')
-                ->label('Caption'),
+                ->label(__('layup::widgets.image.caption')),
             TextInput::make('link_url')
-                ->label('Link URL')
+                ->label(__('layup::widgets.image.link_url'))
                 ->url()
-                ->placeholder('https://...')
+                ->placeholder(__('layup::widgets.image.https'))
                 ->nullable(),
             Checkbox::make('link_new_tab')
-                ->label('Open in new tab')
+                ->label(__('layup::widgets.image.open_in_new_tab'))
                 ->default(false),
             Select::make('hover_effect')
-                ->label('Hover Effect')
-                ->options([
-                    '' => 'None',
-                    'zoom' => 'Zoom In',
-                    'grayscale' => 'Grayscale → Color',
-                    'brightness' => 'Brighten',
-                    'blur' => 'Blur → Clear',
-                ])
+                ->label(__('layup::widgets.image.hover_effect'))
+                ->options(['' => __('layup::widgets.image.none'),
+                    'zoom' => __('layup::widgets.image.zoom_in'),
+                    'grayscale' => __('layup::widgets.image.grayscale_color'),
+                    'brightness' => __('layup::widgets.image.brighten'),
+                    'blur' => __('layup::widgets.image.blur_clear'),])
                 ->default('')
                 ->nullable(),
         ];

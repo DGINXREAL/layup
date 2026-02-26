@@ -18,7 +18,7 @@ class LogoGridWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Logo Grid';
+        return __('layup::widgets.labels.logo-grid');
     }
 
     public static function getIcon(): string
@@ -28,38 +28,36 @@ class LogoGridWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('title')
-                ->label('Title')
-                ->placeholder('Trusted by leading companies')
+                ->label(__('layup::widgets.logo-grid.title'))
+                ->placeholder(__('layup::widgets.logo-grid.trusted_by_leading_companies'))
                 ->nullable(),
             FileUpload::make('logos')
-                ->label('Logos')
+                ->label(__('layup::widgets.logo-grid.logos'))
                 ->image()
                 ->multiple()
                 ->reorderable()
                 ->directory('layup/logos')
                 ->columnSpanFull(),
             Select::make('columns')
-                ->label('Columns')
-                ->options(['3' => '3', '4' => '4', '5' => '5', '6' => '6'])
+                ->label(__('layup::widgets.logo-grid.columns'))
+                ->options(['3' => __('layup::widgets.logo-grid.3'), '4' => __('layup::widgets.logo-grid.4'), '5' => __('layup::widgets.logo-grid.5'), '6' => __('layup::widgets.logo-grid.6')])
                 ->default('4'),
             Select::make('max_height')
-                ->label('Logo Max Height')
-                ->options([
-                    '2rem' => 'Small',
-                    '3rem' => 'Medium',
-                    '4rem' => 'Large',
-                    '5rem' => 'Extra Large',
-                ])
+                ->label(__('layup::widgets.logo-grid.logo_max_height'))
+                ->options(['2rem' => __('layup::widgets.logo-grid.small'),
+                    '3rem' => __('layup::widgets.logo-grid.medium'),
+                    '4rem' => __('layup::widgets.logo-grid.large'),
+                    '5rem' => __('layup::widgets.logo-grid.extra_large'),])
                 ->default('3rem'),
             Toggle::make('grayscale')
-                ->label('Grayscale (color on hover)')
+                ->label(__('layup::widgets.logo-grid.grayscale_color_on_hover'))
                 ->default(true),
         ];
     }

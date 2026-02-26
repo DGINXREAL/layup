@@ -18,7 +18,7 @@ class ContactFormWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Contact Form';
+        return __('layup::widgets.labels.contact-form');
     }
 
     public static function getIcon(): string
@@ -28,47 +28,45 @@ class ContactFormWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('action')
-                ->label('Form Action URL')
-                ->helperText('Where the form submits (e.g. /contact, Formspree URL, mailto:)')
+                ->label(__('layup::widgets.contact-form.form_action_url'))
+                ->helperText(__('layup::widgets.contact-form.where_the_form_submits_e_g_contact_formspree_url_m'))
                 ->required(),
             TextInput::make('submit_text')
-                ->label('Submit Button Text')
+                ->label(__('layup::widgets.contact-form.submit_button_text'))
                 ->default('Send Message'),
             TextInput::make('success_message')
-                ->label('Success Message')
+                ->label(__('layup::widgets.contact-form.success_message'))
                 ->default('Thank you! Your message has been sent.'),
             Repeater::make('fields')
-                ->label('Form Fields')
+                ->label(__('layup::widgets.contact-form.form_fields'))
                 ->schema([
                     TextInput::make('label')
-                        ->label('Label')
+                        ->label(__('layup::widgets.contact-form.label'))
                         ->required(),
                     TextInput::make('name')
-                        ->label('Field Name')
+                        ->label(__('layup::widgets.contact-form.field_name'))
                         ->required(),
                     Select::make('type')
-                        ->label('Type')
-                        ->options([
-                            'text' => 'Text',
-                            'email' => 'Email',
-                            'tel' => 'Phone',
-                            'textarea' => 'Text Area',
-                            'select' => 'Dropdown',
-                        ])
+                        ->label(__('layup::widgets.contact-form.type'))
+                        ->options(['text' => __('layup::widgets.contact-form.text'),
+                            'email' => __('layup::widgets.contact-form.email'),
+                            'tel' => __('layup::widgets.contact-form.phone'),
+                            'textarea' => __('layup::widgets.contact-form.text_area'),
+                            'select' => __('layup::widgets.contact-form.dropdown'),])
                         ->default('text')
                         ->required(),
                     Toggle::make('required')
-                        ->label('Required')
+                        ->label(__('layup::widgets.contact-form.required'))
                         ->default(false),
                     TextInput::make('placeholder')
-                        ->label('Placeholder')
+                        ->label(__('layup::widgets.contact-form.placeholder'))
                         ->nullable(),
                 ])
                 ->defaultItems(3)

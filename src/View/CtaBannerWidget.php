@@ -15,7 +15,7 @@ class CtaBannerWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'CTA Banner';
+        return __('layup::widgets.labels.cta-banner');
     }
 
     public static function getIcon(): string
@@ -25,18 +25,18 @@ class CtaBannerWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            TextInput::make('heading')->label('Heading')->required(),
-            TextInput::make('subtitle')->label('Subtitle')->nullable(),
-            TextInput::make('button_text')->label('Button Text')->default('Get Started'),
-            TextInput::make('button_url')->label('Button URL')->url()->default('#'),
-            TextInput::make('bg_color')->label('Background Color')->type('color')->default('#3b82f6'),
-            TextInput::make('text_color_banner')->label('Text Color')->type('color')->default('#ffffff'),
+            TextInput::make('heading')->label(__('layup::widgets.cta-banner.heading'))->required(),
+            TextInput::make('subtitle')->label(__('layup::widgets.cta-banner.subtitle'))->nullable(),
+            TextInput::make('button_text')->label(__('layup::widgets.cta-banner.button_text'))->default('Get Started'),
+            TextInput::make('button_url')->label(__('layup::widgets.cta-banner.button_url'))->url()->default('#'),
+            TextInput::make('bg_color')->label(__('layup::widgets.cta-banner.background_color'))->type('color')->default('#3b82f6'),
+            TextInput::make('text_color_banner')->label(__('layup::widgets.cta-banner.text_color'))->type('color')->default('#ffffff'),
         ];
     }
 

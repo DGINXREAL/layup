@@ -19,7 +19,7 @@
      {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
     @if($posts->isEmpty())
-        <p class="text-gray-500 dark:text-gray-400 text-center py-8">{{ $data['empty_message'] ?? 'No posts yet.' }}</p>
+        <p class="text-gray-500 dark:text-gray-400 text-center py-8">{{ $data['empty_message'] ?? __('layup::frontend.post_list.no_posts') }}</p>
     @else
         <div style="display:grid;grid-template-columns:repeat({{ $cols }},1fr);gap:1.5rem">
             @foreach($posts as $post)

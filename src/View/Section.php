@@ -21,13 +21,13 @@ class Section extends BaseView
         return [
             Tabs::make('section_settings')
                 ->tabs([
-                    Tabs\Tab::make('Content')
+                    Tabs\Tab::make(__('layup::widgets.shared.tab_content'))
                         ->schema(static::getContentFormSchema())
                         ->columns(2),
-                    Tabs\Tab::make('Design')
+                    Tabs\Tab::make(__('layup::widgets.shared.tab_design'))
                         ->schema(static::getDesignFormSchema())
                         ->columns(2),
-                    Tabs\Tab::make('Advanced')
+                    Tabs\Tab::make(__('layup::widgets.shared.tab_advanced'))
                         ->schema(static::getAdvancedFormSchema())
                         ->columns(2),
                 ]),
@@ -38,42 +38,42 @@ class Section extends BaseView
     {
         return [
             FileUpload::make('background_image')
-                ->label('Background Image')
+                ->label(__('layup::widgets.section.background_image'))
                 ->image()
                 ->directory('layup/sections'),
             TextInput::make('background_video')
-                ->label('Background Video URL')
+                ->label(__('layup::widgets.section.background_video'))
                 ->url()
-                ->placeholder('https://example.com/video.mp4')
+                ->placeholder(__('layup::widgets.section.background_video_placeholder'))
                 ->nullable(),
             TextInput::make('background_gradient')
-                ->label('Background Gradient')
-                ->placeholder('linear-gradient(135deg, #667eea 0%, #764ba2 100%)')
+                ->label(__('layup::widgets.section.background_gradient'))
+                ->placeholder(__('layup::widgets.section.background_gradient_placeholder'))
                 ->nullable(),
             TextInput::make('overlay_color')
-                ->label('Overlay Color')
+                ->label(__('layup::widgets.section.overlay_color'))
                 ->type('color')
                 ->default('#000000'),
             TextInput::make('overlay_opacity')
-                ->label('Overlay Opacity (0-100)')
+                ->label(__('layup::widgets.section.overlay_opacity'))
                 ->numeric()
                 ->minValue(0)
                 ->maxValue(100)
                 ->default(0),
             Toggle::make('parallax')
-                ->label('Parallax Effect')
+                ->label(__('layup::widgets.section.parallax'))
                 ->default(false),
             Select::make('min_height')
-                ->label('Minimum Height')
+                ->label(__('layup::widgets.section.min_height'))
                 ->options([
-                    '' => 'Auto',
-                    '50vh' => 'Half Screen',
-                    '75vh' => 'Three-Quarter Screen',
-                    '100vh' => 'Full Screen',
+                    '' => __('layup::widgets.section.auto'),
+                    '50vh' => __('layup::widgets.section.half_screen'),
+                    '75vh' => __('layup::widgets.section.three_quarter_screen'),
+                    '100vh' => __('layup::widgets.section.full_screen'),
                 ])
                 ->default(''),
             Toggle::make('full_width')
-                ->label('Full Width (no container)')
+                ->label(__('layup::widgets.section.full_width'))
                 ->default(false),
         ];
     }

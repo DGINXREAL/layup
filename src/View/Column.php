@@ -67,10 +67,10 @@ class Column extends BaseView
         return [
             Tabs::make('settings')
                 ->tabs([
-                    Tab::make('Design')
+                    Tab::make(__('layup::widgets.shared.tab_design'))
                         ->icon('heroicon-o-paint-brush')
                         ->schema(static::getDesignFormSchema()),
-                    Tab::make('Advanced')
+                    Tab::make(__('layup::widgets.shared.tab_advanced'))
                         ->icon('heroicon-o-cog-6-tooth')
                         ->schema(static::getAdvancedFormSchema()),
                 ])
@@ -103,23 +103,23 @@ class Column extends BaseView
         return [
             ...$spanPickers,
             Select::make('align_self')
-                ->label('Align Self')
+                ->label(__('layup::widgets.column.align_self'))
                 ->options([
-                    'auto' => 'Auto',
-                    'start' => 'Start',
-                    'center' => 'Center',
-                    'end' => 'End',
-                    'stretch' => 'Stretch',
-                    'baseline' => 'Baseline',
+                    'auto' => __('layup::widgets.column.auto'),
+                    'start' => __('layup::widgets.column.start'),
+                    'center' => __('layup::widgets.column.center'),
+                    'end' => __('layup::widgets.column.end'),
+                    'stretch' => __('layup::widgets.column.stretch'),
+                    'baseline' => __('layup::widgets.column.baseline'),
                 ])
                 ->default('auto'),
             Select::make('overflow')
-                ->label('Overflow')
+                ->label(__('layup::widgets.column.overflow'))
                 ->options([
-                    'visible' => 'Visible',
-                    'hidden' => 'Hidden',
-                    'auto' => 'Auto',
-                    'scroll' => 'Scroll',
+                    'visible' => __('layup::widgets.column.visible'),
+                    'hidden' => __('layup::widgets.column.hidden'),
+                    'auto' => __('layup::widgets.column.auto'),
+                    'scroll' => __('layup::widgets.column.scroll'),
                 ])
                 ->default('visible'),
             ...parent::getDesignFormSchema(),

@@ -35,5 +35,5 @@
    @endif
    {!! \Crumbls\Layup\View\BaseView::animationAttributes($data) !!}
 >
-    {{ $data['label'] ?? 'Click Me' }}
+    {{ $data['label'] ?? __('layup::frontend.button.click_me') }}
 </a>

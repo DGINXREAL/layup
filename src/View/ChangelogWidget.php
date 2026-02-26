@@ -18,7 +18,7 @@ class ChangelogWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Changelog';
+        return __('layup::widgets.labels.changelog');
     }
 
     public static function getIcon(): string
@@ -28,21 +28,19 @@ class ChangelogWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('releases')
-                ->label('Releases')
+                ->label(__('layup::widgets.changelog.releases'))
                 ->schema([
-                    TextInput::make('version')->label('Version')->required(),
-                    TextInput::make('date')->label('Date')->required(),
-                    Select::make('type')->label('Type')->options([
-                        'major' => 'Major', 'minor' => 'Minor', 'patch' => 'Patch',
-                    ])->default('minor'),
-                    Textarea::make('changes')->label('Changes (one per line)')->rows(4)->required(),
+                    TextInput::make('version')->label(__('layup::widgets.changelog.version'))->required(),
+                    TextInput::make('date')->label(__('layup::widgets.changelog.date'))->required(),
+                    Select::make('type')->label(__('layup::widgets.changelog.type'))->options(['major' => __('layup::widgets.changelog.major'), 'minor' => __('layup::widgets.changelog.minor'), 'patch' => __('layup::widgets.changelog.patch'),])->default('minor'),
+                    Textarea::make('changes')->label(__('layup::widgets.changelog.changes_one_per_line'))->rows(4)->required(),
                 ])
                 ->defaultItems(2)
                 ->columnSpanFull(),

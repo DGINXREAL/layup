@@ -50,24 +50,23 @@ class GenerateSafelist extends Command
         $totalCount = count($classes);
         $dynamicCount = $totalCount - $staticCount;
 
-        $this->info(sprintf(
-            'Wrote %d classes to %s (%d static + %d from content)',
-            $totalCount,
-            $relativePath,
-            $staticCount,
-            max(0, $dynamicCount),
-        ));
+        $this->info(__('layup::commands.safelist_wrote', [
+            'total' => $totalCount,
+            'path' => $relativePath,
+            'static' => $staticCount,
+            'dynamic' => max(0, $dynamicCount),
+        ]));
 
         $this->newLine();
-        $this->comment('Add to your app.css (Tailwind v4):');
+        $this->comment(__('layup::commands.safelist_tailwind_v4'));
         $this->newLine();
         $this->line("  @source \"../../{$relativePath}\";");
         $this->newLine();
-        $this->comment('Or add to tailwind.config.js (Tailwind v3):');
+        $this->comment(__('layup::commands.safelist_tailwind_v3'));
         $this->newLine();
         $this->line("  content: ['./{$relativePath}']");
         $this->newLine();
-        $this->comment('Tip: Run this command as part of your build pipeline:');
+        $this->comment(__('layup::commands.safelist_tip'));
         $this->newLine();
         $this->line('  "build": "php artisan layup:safelist && vite build"');
 

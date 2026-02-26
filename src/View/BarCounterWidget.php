@@ -17,7 +17,7 @@ class BarCounterWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Bar Counters';
+        return __('layup::widgets.labels.bar-counter');
     }
 
     public static function getIcon(): string
@@ -27,20 +27,20 @@ class BarCounterWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('bars')
-                ->label('Bars')
+                ->label(__('layup::widgets.bar-counter.bars'))
                 ->schema([
                     TextInput::make('label')
-                        ->label('Label')
+                        ->label(__('layup::widgets.bar-counter.label'))
                         ->required(),
                     TextInput::make('percent')
-                        ->label('Percentage')
+                        ->label(__('layup::widgets.bar-counter.percentage'))
                         ->numeric()
                         ->minValue(0)
                         ->maxValue(100)
@@ -48,17 +48,17 @@ class BarCounterWidget extends BaseWidget
                         ->required()
                         ->default(50),
                     TextInput::make('color')
-                        ->label('Color')
+                        ->label(__('layup::widgets.bar-counter.color'))
                         ->type('color')
                         ->nullable(),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Toggle::make('animate')
-                ->label('Animate on scroll')
+                ->label(__('layup::widgets.bar-counter.animate_on_scroll'))
                 ->default(true),
             Toggle::make('show_percent')
-                ->label('Show percentage')
+                ->label(__('layup::widgets.bar-counter.show_percentage'))
                 ->default(true),
         ];
     }

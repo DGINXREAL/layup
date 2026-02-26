@@ -16,7 +16,7 @@ class IconListWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Icon List';
+        return __('layup::widgets.labels.icon-list');
     }
 
     public static function getIcon(): string
@@ -26,16 +26,16 @@ class IconListWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            Repeater::make('items')->label('Items')->schema([
-                TextInput::make('icon')->label('Emoji/Icon')->default('✅'),
-                TextInput::make('text')->label('Text')->required(),
-                TextInput::make('description')->label('Description')->nullable(),
+            Repeater::make('items')->label(__('layup::widgets.icon-list.items'))->schema([
+                TextInput::make('icon')->label(__('layup::widgets.icon-list.emoji_icon'))->default('✅'),
+                TextInput::make('text')->label(__('layup::widgets.icon-list.text'))->required(),
+                TextInput::make('description')->label(__('layup::widgets.icon-list.description'))->nullable(),
             ])->defaultItems(4)->columnSpanFull(),
         ];
     }

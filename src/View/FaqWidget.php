@@ -18,7 +18,7 @@ class FaqWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'FAQ';
+        return __('layup::widgets.labels.faq');
     }
 
     public static function getIcon(): string
@@ -28,32 +28,30 @@ class FaqWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('items')
-                ->label('FAQ Items')
+                ->label(__('layup::widgets.faq.faq_items'))
                 ->schema([
                     TextInput::make('question')
-                        ->label('Question')
+                        ->label(__('layup::widgets.faq.question'))
                         ->required(),
                     Textarea::make('answer')
-                        ->label('Answer')
+                        ->label(__('layup::widgets.faq.answer'))
                         ->required()
                         ->rows(3),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Select::make('style')
-                ->label('Style')
-                ->options([
-                    'accordion' => 'Accordion (expand/collapse)',
-                    'list' => 'Plain List (always visible)',
-                    'cards' => 'Cards',
-                ])
+                ->label(__('layup::widgets.faq.style'))
+                ->options(['accordion' => __('layup::widgets.faq.accordion_expand_collapse'),
+                    'list' => __('layup::widgets.faq.plain_list_always_visible'),
+                    'cards' => __('layup::widgets.faq.cards'),])
                 ->default('accordion'),
         ];
     }

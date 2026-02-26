@@ -22,14 +22,14 @@ class ImportCommand extends Command
         $file = $this->argument('file');
 
         if (! file_exists($file)) {
-            $this->error("File not found: {$file}");
+            $this->error(__('layup::commands.file_not_found', ['path' => $file]));
 
             return self::FAILURE;
         }
 
         $data = json_decode(file_get_contents($file), true);
         if (! is_array($data) || ! isset($data['pages'])) {
-            $this->error('Invalid export file — expected { "pages": [...] }');
+            $this->error(__('layup::commands.invalid_export'));
 
             return self::FAILURE;
         }
@@ -43,7 +43,7 @@ class ImportCommand extends Command
         foreach ($data['pages'] as $pageData) {
             $slug = $pageData['slug'] ?? null;
             if (! $slug) {
-                $this->warn('Skipping page without slug');
+                $this->warn(__('layup::commands.skipping_no_slug'));
                 $skipped++;
 
                 continue;
@@ -52,7 +52,7 @@ class ImportCommand extends Command
             // Validate content
             $result = $validator->validate($pageData['content'] ?? ['rows' => []]);
             if (! $result->passes()) {
-                $this->warn("Invalid content for '{$slug}': " . implode(', ', $result->errors()));
+                $this->warn(__('layup::commands.invalid_content', ['slug' => $slug, 'errors' => implode(', ', $result->errors())]));
                 $errors++;
 
                 continue;
@@ -68,7 +68,7 @@ class ImportCommand extends Command
             $existing = $modelClass::withTrashed()->where('slug', $slug)->first();
 
             if ($existing && ! $this->option('overwrite')) {
-                $this->warn("Skipping '{$slug}' (already exists, use --overwrite)");
+                $this->warn(__('layup::commands.skipping_exists', ['slug' => $slug]));
                 $skipped++;
 
                 continue;
@@ -81,7 +81,7 @@ class ImportCommand extends Command
                     'meta' => $pageData['meta'] ?? $existing->meta,
                     'status' => $pageData['status'] ?? $existing->status,
                 ]);
-                $this->info("Updated: {$slug}");
+                $this->info(__('layup::commands.updated_page', ['slug' => $slug]));
             } else {
                 $modelClass::create([
                     'title' => $pageData['title'] ?? ucfirst((string) $slug),
@@ -90,15 +90,15 @@ class ImportCommand extends Command
                     'meta' => $pageData['meta'] ?? [],
                     'status' => $pageData['status'] ?? 'draft',
                 ]);
-                $this->info("Created: {$slug}");
+                $this->info(__('layup::commands.created_page', ['slug' => $slug]));
             }
 
             $imported++;
         }
 
         $this->newLine();
-        $action = $this->option('dry-run') ? 'Validated' : 'Imported';
-        $this->info("{$action}: {$imported} | Skipped: {$skipped} | Errors: {$errors}");
+        $action = $this->option('dry-run') ? __('layup::commands.validated') : __('layup::commands.imported');
+        $this->info(__('layup::commands.import_summary', ['action' => $action, 'imported' => $imported, 'skipped' => $skipped, 'errors' => $errors]));
 
         return $errors > 0 ? self::FAILURE : self::SUCCESS;
     }

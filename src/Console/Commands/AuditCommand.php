@@ -21,14 +21,14 @@ class AuditCommand extends Command
         $modelClass = config('layup.pages.model', Page::class);
         $pages = $modelClass::all();
 
-        $this->info('Layup Audit Report');
+        $this->info(__('layup::commands.audit_report'));
         $this->line(str_repeat('─', 40));
         $this->newLine();
 
         // Page stats
         $published = $pages->where('status', 'published')->count();
         $drafts = $pages->where('status', 'draft')->count();
-        $this->line("📄 Pages: {$pages->count()} total ({$published} published, {$drafts} drafts)");
+        $this->line(__('layup::commands.pages_count', ['total' => $pages->count(), 'published' => $published, 'drafts' => $drafts]));
 
         // Widget registry
         $registry = app(WidgetRegistry::class);
@@ -37,7 +37,7 @@ class AuditCommand extends Command
                 $registry->register($class);
             }
         }
-        $this->line('🧩 Registered widgets: ' . count($registry->all()));
+        $this->line(__('layup::commands.registered_widgets', ['count' => count($registry->all())]));
 
         // Validate all pages
         $validator = new ContentValidator(strict: true);
@@ -63,13 +63,13 @@ class AuditCommand extends Command
             }
         }
 
-        $this->line("🔧 Total widget instances: {$totalWidgets}");
+        $this->line(__('layup::commands.total_widget_instances', ['count' => $totalWidgets]));
 
         // Widget usage breakdown
         if ($widgetUsage !== []) {
             arsort($widgetUsage);
             $this->newLine();
-            $this->line('Widget usage:');
+            $this->line(__('layup::commands.widget_usage'));
             foreach ($widgetUsage as $type => $count) {
                 $registered = $registry->has($type) ? '✓' : '✗';
                 $this->line("  {$registered} {$type}: {$count}");
@@ -79,7 +79,7 @@ class AuditCommand extends Command
         // Validation issues
         if ($issues !== []) {
             $this->newLine();
-            $this->warn('⚠️  Content issues found:');
+            $this->warn(__('layup::commands.content_issues'));
             foreach ($issues as $title => $errors) {
                 $this->line("  {$title}:");
                 foreach ($errors as $error) {
@@ -88,7 +88,7 @@ class AuditCommand extends Command
             }
         } else {
             $this->newLine();
-            $this->info('✅ All pages pass content validation');
+            $this->info(__('layup::commands.all_pages_valid'));
         }
 
         // Safelist status
@@ -96,12 +96,12 @@ class AuditCommand extends Command
         $allCount = count(SafelistCollector::classes());
         $dynamicCount = $allCount - $staticCount;
         $this->newLine();
-        $this->line("🎨 Safelist: {$allCount} classes ({$staticCount} static + {$dynamicCount} dynamic)");
+        $this->line(__('layup::commands.safelist_count', ['total' => $allCount, 'static' => $staticCount, 'dynamic' => $dynamicCount]));
 
         // Revisions
         if (config('layup.revisions.enabled')) {
             $revisionCount = \Crumbls\Layup\Models\PageRevision::count();
-            $this->line("📜 Revisions: {$revisionCount} total");
+            $this->line(__('layup::commands.revisions_count', ['count' => $revisionCount]));
         }
 
         return self::SUCCESS;

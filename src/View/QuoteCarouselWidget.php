@@ -16,7 +16,7 @@ class QuoteCarouselWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Quote Carousel';
+        return __('layup::widgets.labels.quote-carousel');
     }
 
     public static function getIcon(): string
@@ -26,17 +26,17 @@ class QuoteCarouselWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            Repeater::make('quotes')->label('Quotes')->schema([
-                TextInput::make('text')->label('Quote')->required(),
-                TextInput::make('author')->label('Author')->nullable(),
+            Repeater::make('quotes')->label(__('layup::widgets.quote-carousel.quotes'))->schema([
+                TextInput::make('text')->label(__('layup::widgets.quote-carousel.quote'))->required(),
+                TextInput::make('author')->label(__('layup::widgets.quote-carousel.author'))->nullable(),
             ])->defaultItems(3)->columnSpanFull(),
-            TextInput::make('interval')->label('Auto-play Interval (seconds)')->numeric()->default(5),
+            TextInput::make('interval')->label(__('layup::widgets.quote-carousel.auto_play_interval_seconds'))->numeric()->default(5),
         ];
     }
 

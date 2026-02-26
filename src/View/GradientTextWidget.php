@@ -16,7 +16,7 @@ class GradientTextWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Gradient Text';
+        return __('layup::widgets.labels.gradient-text');
     }
 
     public static function getIcon(): string
@@ -26,41 +26,39 @@ class GradientTextWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('text')
-                ->label('Text')
+                ->label(__('layup::widgets.gradient-text.text'))
                 ->required()
                 ->columnSpanFull(),
             Select::make('tag')
-                ->label('HTML Tag')
-                ->options(['h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4', 'p' => 'Paragraph', 'span' => 'Span'])
+                ->label(__('layup::widgets.gradient-text.html_tag'))
+                ->options(['h1' => __('layup::widgets.gradient-text.h1'), 'h2' => __('layup::widgets.gradient-text.h2'), 'h3' => __('layup::widgets.gradient-text.h3'), 'h4' => __('layup::widgets.gradient-text.h4'), 'p' => __('layup::widgets.gradient-text.paragraph'), 'span' => __('layup::widgets.gradient-text.span')])
                 ->default('h2'),
             TextInput::make('from_color')
-                ->label('From Color')
+                ->label(__('layup::widgets.gradient-text.from_color'))
                 ->type('color')
                 ->default('#667eea'),
             TextInput::make('to_color')
-                ->label('To Color')
+                ->label(__('layup::widgets.gradient-text.to_color'))
                 ->type('color')
                 ->default('#764ba2'),
             TextInput::make('via_color')
-                ->label('Via Color (optional)')
+                ->label(__('layup::widgets.gradient-text.via_color_optional'))
                 ->type('color')
                 ->nullable(),
             Select::make('direction')
-                ->label('Direction')
-                ->options([
-                    'to right' => 'Left → Right',
-                    'to left' => 'Right → Left',
-                    'to bottom' => 'Top → Bottom',
-                    'to bottom right' => 'Diagonal ↘',
-                    '135deg' => 'Diagonal ↗',
-                ])
+                ->label(__('layup::widgets.gradient-text.direction'))
+                ->options(['to right' => __('layup::widgets.gradient-text.left_right'),
+                    'to left' => __('layup::widgets.gradient-text.right_left'),
+                    'to bottom' => __('layup::widgets.gradient-text.top_bottom'),
+                    'to bottom right' => __('layup::widgets.gradient-text.diagonal'),
+                    '135deg' => __('layup::widgets.gradient-text.135deg_diagonal'),])
                 ->default('to right'),
         ];
     }

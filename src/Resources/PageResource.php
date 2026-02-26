@@ -37,9 +37,19 @@ class PageResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-duplicate';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Content';
+    protected static string|UnitEnum|null $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Pages';
+    protected static ?string $navigationLabel = null;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('layup::resource.navigation_group');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('layup::resource.navigation_label');
+    }
 
     protected static ?string $slug = 'pages';
 
@@ -47,12 +57,12 @@ class PageResource extends Resource
     {
         return $schema
             ->components([
-                Section::make('Template')
+                Section::make(__('layup::resource.template'))
                     ->schema([
                         Select::make('template')
-                            ->label('Start from template')
+                            ->label(__('layup::resource.start_from_template'))
                             ->options(PageTemplate::options())
-                            ->placeholder('Blank page')
+                            ->placeholder(__('layup::resource.blank_page'))
                             ->nullable()
                             ->reactive()
                             ->afterStateUpdated(function ($state, \Filament\Schemas\Components\Utilities\Set $set): void {
@@ -66,7 +76,7 @@ class PageResource extends Resource
                     ])
                     ->hiddenOn('edit'),
 
-                Section::make('Page Details')
+                Section::make(__('layup::resource.page_details'))
                     ->schema([
                         TextInput::make('title')
                             ->required()
@@ -80,21 +90,21 @@ class PageResource extends Resource
                             ->unique(Page::class, 'slug', ignoreRecord: true),
                         Select::make('status')
                             ->options([
-                                'draft' => 'Draft',
-                                'published' => 'Published',
+                                'draft' => __('layup::resource.draft'),
+                                'published' => __('layup::resource.published'),
                             ])
                             ->default('draft')
                             ->required(),
                     ])
                     ->columns(3),
 
-                Section::make('SEO')
+                Section::make(__('layup::resource.seo'))
                     ->schema([
                         TextInput::make('meta.description')
-                            ->label('Meta Description')
+                            ->label(__('layup::resource.meta_description'))
                             ->maxLength(160),
                         TextInput::make('meta.keywords')
-                            ->label('Meta Keywords'),
+                            ->label(__('layup::resource.meta_keywords')),
                     ])
                     ->collapsed(),
             ]);
@@ -123,21 +133,21 @@ class PageResource extends Resource
             ->filters([
                 SelectFilter::make('status')
                     ->options([
-                        'draft' => 'Draft',
-                        'published' => 'Published',
+                        'draft' => __('layup::resource.draft'),
+                        'published' => __('layup::resource.published'),
                     ]),
             ])
             ->recordActions([
                 EditAction::make(),
                 Action::make('duplicate')
-                    ->label('Duplicate')
+                    ->label(__('layup::resource.duplicate'))
                     ->icon('heroicon-o-document-duplicate')
                     ->color('gray')
                     ->requiresConfirmation()
                     ->action(function (Page $record): void {
                         $modelClass = config('layup.pages.model', Page::class);
                         $modelClass::create([
-                            'title' => $record->title . ' (Copy)',
+                            'title' => $record->title . ' ' . __('layup::resource.copy_suffix'),
                             'slug' => $record->slug . '-copy-' . Str::random(4),
                             'content' => $record->content,
                             'meta' => $record->meta,
@@ -145,7 +155,7 @@ class PageResource extends Resource
                         ]);
                     }),
                 Action::make('export')
-                    ->label('Export')
+                    ->label(__('layup::resource.export'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->color('gray')
                     ->action(function (Page $record) {
@@ -169,12 +179,12 @@ class PageResource extends Resource
             ->toolbarActions([
                 BulkActionGroup::make([
                     BulkAction::make('publish')
-                        ->label('Publish')
+                        ->label(__('layup::resource.publish'))
                         ->icon('heroicon-o-check-circle')
                         ->requiresConfirmation()
                         ->action(fn (Collection $records) => $records->each->update(['status' => 'published'])),
                     BulkAction::make('unpublish')
-                        ->label('Unpublish')
+                        ->label(__('layup::resource.unpublish'))
                         ->icon('heroicon-o-x-circle')
                         ->requiresConfirmation()
                         ->action(fn (Collection $records) => $records->each->update(['status' => 'draft'])),

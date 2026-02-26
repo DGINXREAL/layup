@@ -18,7 +18,7 @@ class TestimonialWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Testimonial';
+        return __('layup::widgets.labels.testimonial');
     }
 
     public static function getIcon(): string
@@ -28,54 +28,50 @@ class TestimonialWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Textarea::make('quote')
-                ->label('Quote')
+                ->label(__('layup::widgets.testimonial.quote'))
                 ->required()
                 ->rows(4)
                 ->columnSpanFull(),
             TextInput::make('author')
-                ->label('Author Name')
+                ->label(__('layup::widgets.testimonial.author_name'))
                 ->required(),
             TextInput::make('role')
-                ->label('Role / Company')
+                ->label(__('layup::widgets.testimonial.role_company'))
                 ->nullable(),
             FileUpload::make('photo')
-                ->label('Author Photo')
+                ->label(__('layup::widgets.testimonial.author_photo'))
                 ->image()
                 ->avatar()
                 ->directory('layup/testimonials'),
             TextInput::make('url')
-                ->label('Link URL')
+                ->label(__('layup::widgets.testimonial.link_url'))
                 ->url()
                 ->nullable(),
             Select::make('style')
-                ->label('Style')
-                ->options([
-                    'default' => 'Default',
-                    'card' => 'Card',
-                    'minimal' => 'Minimal',
-                    'centered' => 'Centered',
-                ])
+                ->label(__('layup::widgets.testimonial.style'))
+                ->options(['default' => __('layup::widgets.testimonial.default'),
+                    'card' => __('layup::widgets.testimonial.card'),
+                    'minimal' => __('layup::widgets.testimonial.minimal'),
+                    'centered' => __('layup::widgets.testimonial.centered'),])
                 ->default('default'),
             TextInput::make('company')
-                ->label('Company Name')
+                ->label(__('layup::widgets.testimonial.company_name'))
                 ->nullable(),
             Select::make('rating')
-                ->label('Star Rating')
-                ->options([
-                    '' => 'None',
-                    '1' => '★',
-                    '2' => '★★',
-                    '3' => '★★★',
-                    '4' => '★★★★',
-                    '5' => '★★★★★',
-                ])
+                ->label(__('layup::widgets.testimonial.star_rating'))
+                ->options(['' => __('layup::widgets.testimonial.none'),
+                    '1' => __('layup::widgets.testimonial.'),
+                    '2' => __('layup::widgets.testimonial.2_'),
+                    '3' => __('layup::widgets.testimonial.3_'),
+                    '4' => __('layup::widgets.testimonial.4_'),
+                    '5' => __('layup::widgets.testimonial.5_'),])
                 ->default('')
                 ->nullable(),
         ];

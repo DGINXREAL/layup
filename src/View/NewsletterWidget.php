@@ -16,7 +16,7 @@ class NewsletterWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Newsletter Signup';
+        return __('layup::widgets.labels.newsletter');
     }
 
     public static function getIcon(): string
@@ -26,41 +26,39 @@ class NewsletterWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('heading')
-                ->label('Heading')
+                ->label(__('layup::widgets.newsletter.heading'))
                 ->default('Stay in the loop'),
             TextInput::make('description')
-                ->label('Description')
+                ->label(__('layup::widgets.newsletter.description'))
                 ->default('Get the latest updates delivered to your inbox.')
                 ->nullable(),
             TextInput::make('action')
-                ->label('Form Action URL')
-                ->helperText('Mailchimp, ConvertKit, or custom endpoint')
+                ->label(__('layup::widgets.newsletter.form_action_url'))
+                ->helperText(__('layup::widgets.newsletter.mailchimp_convertkit_or_custom_endpoint'))
                 ->required(),
             TextInput::make('placeholder')
-                ->label('Email Placeholder')
+                ->label(__('layup::widgets.newsletter.email_placeholder'))
                 ->default('Enter your email'),
             TextInput::make('submit_text')
-                ->label('Button Text')
+                ->label(__('layup::widgets.newsletter.button_text'))
                 ->default('Subscribe'),
             TextInput::make('success_message')
-                ->label('Success Message')
+                ->label(__('layup::widgets.newsletter.success_message'))
                 ->default("You're in! Check your inbox."),
             Select::make('layout')
-                ->label('Layout')
-                ->options([
-                    'inline' => 'Inline (side by side)',
-                    'stacked' => 'Stacked',
-                ])
+                ->label(__('layup::widgets.newsletter.layout'))
+                ->options(['inline' => __('layup::widgets.newsletter.inline_side_by_side'),
+                    'stacked' => __('layup::widgets.newsletter.stacked'),])
                 ->default('inline'),
             TextInput::make('button_color')
-                ->label('Button Color')
+                ->label(__('layup::widgets.newsletter.button_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

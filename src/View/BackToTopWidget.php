@@ -16,7 +16,7 @@ class BackToTopWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Back to Top';
+        return __('layup::widgets.labels.back-to-top');
     }
 
     public static function getIcon(): string
@@ -26,33 +26,31 @@ class BackToTopWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('bg_color')
-                ->label('Background Color')
+                ->label(__('layup::widgets.back-to-top.background_color'))
                 ->type('color')
                 ->default('#3b82f6'),
             TextInput::make('text_color_btn')
-                ->label('Icon Color')
+                ->label(__('layup::widgets.back-to-top.icon_color'))
                 ->type('color')
                 ->default('#ffffff'),
             Select::make('position')
-                ->label('Position')
-                ->options([
-                    'right' => 'Bottom Right',
-                    'left' => 'Bottom Left',
-                ])
+                ->label(__('layup::widgets.back-to-top.position'))
+                ->options(['right' => __('layup::widgets.back-to-top.bottom_right'),
+                    'left' => __('layup::widgets.back-to-top.bottom_left'),])
                 ->default('right'),
             Select::make('size')
-                ->label('Size')
-                ->options(['sm' => 'Small', 'md' => 'Medium', 'lg' => 'Large'])
+                ->label(__('layup::widgets.back-to-top.size'))
+                ->options(['sm' => __('layup::widgets.back-to-top.small'), 'md' => __('layup::widgets.back-to-top.medium'), 'lg' => __('layup::widgets.back-to-top.large')])
                 ->default('md'),
             TextInput::make('show_after')
-                ->label('Show After Scroll (px)')
+                ->label(__('layup::widgets.back-to-top.show_after_scroll_px'))
                 ->numeric()
                 ->default(300),
         ];

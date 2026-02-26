@@ -16,7 +16,7 @@ class DividerWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Divider';
+        return __('layup::widgets.labels.divider');
     }
 
     public static function getIcon(): string
@@ -26,51 +26,43 @@ class DividerWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'layout';
+        return __('layup::widgets.categories.layout');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Select::make('style')
-                ->label('Style')
-                ->options([
-                    'solid' => 'Solid',
-                    'dashed' => 'Dashed',
-                    'dotted' => 'Dotted',
-                    'double' => 'Double',
-                ])
+                ->label(__('layup::widgets.divider.style'))
+                ->options(['solid' => __('layup::widgets.divider.solid'),
+                    'dashed' => __('layup::widgets.divider.dashed'),
+                    'dotted' => __('layup::widgets.divider.dotted'),
+                    'double' => __('layup::widgets.divider.double'),])
                 ->default('solid'),
             Select::make('weight')
-                ->label('Weight')
-                ->options([
-                    '1px' => 'Thin (1px)',
-                    '2px' => 'Medium (2px)',
-                    '3px' => 'Thick (3px)',
-                    '4px' => 'Heavy (4px)',
-                ])
+                ->label(__('layup::widgets.divider.weight'))
+                ->options(['1px' => __('layup::widgets.divider.thin_1px'),
+                    '2px' => __('layup::widgets.divider.medium_2px'),
+                    '3px' => __('layup::widgets.divider.thick_3px'),
+                    '4px' => __('layup::widgets.divider.heavy_4px'),])
                 ->default('1px'),
             TextInput::make('color')
-                ->label('Color')
+                ->label(__('layup::widgets.divider.color'))
                 ->default('#e5e7eb')
                 ->type('color'),
             Select::make('width')
-                ->label('Width')
-                ->options([
-                    '100%' => 'Full',
-                    '75%' => '75%',
-                    '50%' => '50%',
-                    '25%' => '25%',
-                ])
+                ->label(__('layup::widgets.divider.width'))
+                ->options(['100%' => __('layup::widgets.divider.full'),
+                    '75%' => __('layup::widgets.divider.75'),
+                    '50%' => __('layup::widgets.divider.50'),
+                    '25%' => __('layup::widgets.divider.25'),])
                 ->default('100%'),
             Select::make('spacing')
-                ->label('Vertical Spacing')
-                ->options([
-                    '0.5rem' => 'Compact',
-                    '1rem' => 'Normal',
-                    '1.5rem' => 'Relaxed',
-                    '2rem' => 'Spacious',
-                ])
+                ->label(__('layup::widgets.divider.vertical_spacing'))
+                ->options(['0.5rem' => __('layup::widgets.divider.compact'),
+                    '1rem' => __('layup::widgets.divider.normal'),
+                    '1.5rem' => __('layup::widgets.divider.relaxed'),
+                    '2rem' => __('layup::widgets.divider.spacious'),])
                 ->default('1rem'),
         ];
     }

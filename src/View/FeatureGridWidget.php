@@ -17,7 +17,7 @@ class FeatureGridWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Feature Grid';
+        return __('layup::widgets.labels.feature-grid');
     }
 
     public static function getIcon(): string
@@ -27,24 +27,24 @@ class FeatureGridWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('features')
-                ->label('Features')
+                ->label(__('layup::widgets.feature-grid.features'))
                 ->schema([
-                    TextInput::make('emoji')->label('Emoji/Icon')->default('🚀'),
-                    TextInput::make('title')->label('Title')->required(),
-                    TextInput::make('description')->label('Description')->nullable(),
+                    TextInput::make('emoji')->label(__('layup::widgets.feature-grid.emoji_icon'))->default('🚀'),
+                    TextInput::make('title')->label(__('layup::widgets.feature-grid.title'))->required(),
+                    TextInput::make('description')->label(__('layup::widgets.feature-grid.description'))->nullable(),
                 ])
                 ->defaultItems(6)
                 ->columnSpanFull(),
             Select::make('columns')
-                ->label('Columns')
-                ->options(['2' => '2', '3' => '3', '4' => '4'])
+                ->label(__('layup::widgets.feature-grid.columns'))
+                ->options(['2' => __('layup::widgets.feature-grid.2'), '3' => __('layup::widgets.feature-grid.3'), '4' => __('layup::widgets.feature-grid.4')])
                 ->default('3'),
         ];
     }

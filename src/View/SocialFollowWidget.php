@@ -18,7 +18,7 @@ class SocialFollowWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Social Follow';
+        return __('layup::widgets.labels.social-follow');
     }
 
     public static function getIcon(): string
@@ -28,54 +28,48 @@ class SocialFollowWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('links')
-                ->label('Social Links')
+                ->label(__('layup::widgets.social-follow.social_links'))
                 ->schema([
                     Select::make('network')
-                        ->label('Network')
-                        ->options([
-                            'facebook' => 'Facebook',
-                            'twitter' => 'X / Twitter',
-                            'instagram' => 'Instagram',
-                            'linkedin' => 'LinkedIn',
-                            'youtube' => 'YouTube',
-                            'tiktok' => 'TikTok',
-                            'pinterest' => 'Pinterest',
-                            'github' => 'GitHub',
-                            'dribbble' => 'Dribbble',
-                            'email' => 'Email',
-                        ])
+                        ->label(__('layup::widgets.social-follow.network'))
+                        ->options(['facebook' => __('layup::widgets.social-follow.facebook'),
+                            'twitter' => __('layup::widgets.social-follow.x_twitter'),
+                            'instagram' => __('layup::widgets.social-follow.instagram'),
+                            'linkedin' => __('layup::widgets.social-follow.linkedin'),
+                            'youtube' => __('layup::widgets.social-follow.youtube'),
+                            'tiktok' => __('layup::widgets.social-follow.tiktok'),
+                            'pinterest' => __('layup::widgets.social-follow.pinterest'),
+                            'github' => __('layup::widgets.social-follow.github'),
+                            'dribbble' => __('layup::widgets.social-follow.dribbble'),
+                            'email' => __('layup::widgets.social-follow.email'),])
                         ->required(),
                     TextInput::make('url')
-                        ->label('URL')
+                        ->label(__('layup::widgets.social-follow.url'))
                         ->required(),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Select::make('style')
-                ->label('Style')
-                ->options([
-                    'icon' => 'Icon Only',
-                    'icon-text' => 'Icon + Text',
-                    'text' => 'Text Only',
-                ])
+                ->label(__('layup::widgets.social-follow.style'))
+                ->options(['icon' => __('layup::widgets.social-follow.icon_only'),
+                    'icon-text' => __('layup::widgets.social-follow.icon_text'),
+                    'text' => __('layup::widgets.social-follow.text_only'),])
                 ->default('icon'),
             Toggle::make('new_tab')
-                ->label('Open in new tab')
+                ->label(__('layup::widgets.social-follow.open_in_new_tab'))
                 ->default(true),
             Select::make('icon_size')
-                ->label('Icon Size')
-                ->options([
-                    'sm' => 'Small',
-                    'md' => 'Medium',
-                    'lg' => 'Large',
-                ])
+                ->label(__('layup::widgets.social-follow.icon_size'))
+                ->options(['sm' => __('layup::widgets.social-follow.small'),
+                    'md' => __('layup::widgets.social-follow.medium'),
+                    'lg' => __('layup::widgets.social-follow.large'),])
                 ->default('md'),
         ];
     }

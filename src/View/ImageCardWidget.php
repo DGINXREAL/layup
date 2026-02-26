@@ -16,7 +16,7 @@ class ImageCardWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Image Card';
+        return __('layup::widgets.labels.image-card');
     }
 
     public static function getIcon(): string
@@ -26,17 +26,17 @@ class ImageCardWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            FileUpload::make('image')->label('Image')->image()->directory('layup/cards'),
-            TextInput::make('title')->label('Title')->required(),
-            TextInput::make('description')->label('Description')->nullable(),
-            TextInput::make('link_url')->label('Link URL')->url()->nullable(),
-            TextInput::make('link_text')->label('Link Text')->default('Read more →')->nullable(),
+            FileUpload::make('image')->label(__('layup::widgets.image-card.image'))->image()->directory('layup/cards'),
+            TextInput::make('title')->label(__('layup::widgets.image-card.title'))->required(),
+            TextInput::make('description')->label(__('layup::widgets.image-card.description'))->nullable(),
+            TextInput::make('link_url')->label(__('layup::widgets.image-card.link_url'))->url()->nullable(),
+            TextInput::make('link_text')->label(__('layup::widgets.image-card.link_text'))->default('Read more →')->nullable(),
         ];
     }
 

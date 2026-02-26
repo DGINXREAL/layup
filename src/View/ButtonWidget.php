@@ -17,7 +17,7 @@ class ButtonWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Button';
+        return __('layup::widgets.labels.button');
     }
 
     public static function getIcon(): string
@@ -27,53 +27,49 @@ class ButtonWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('label')
-                ->label('Button Text')
+                ->label(__('layup::widgets.button.button_text'))
                 ->required()
                 ->default('Click Me'),
             TextInput::make('url')
-                ->label('URL')
+                ->label(__('layup::widgets.button.url'))
                 ->url(),
             Select::make('style')
-                ->label('Style')
-                ->options([
-                    'primary' => 'Primary',
-                    'secondary' => 'Secondary',
-                    'outline' => 'Outline',
-                    'ghost' => 'Ghost',
-                ])
+                ->label(__('layup::widgets.button.style'))
+                ->options(['primary' => __('layup::widgets.button.primary'),
+                    'secondary' => __('layup::widgets.button.secondary'),
+                    'outline' => __('layup::widgets.button.outline'),
+                    'ghost' => __('layup::widgets.button.ghost'),])
                 ->default('primary'),
             Select::make('size')
-                ->label('Size')
-                ->options([
-                    'sm' => 'Small',
-                    'md' => 'Medium',
-                    'lg' => 'Large',
-                ])
+                ->label(__('layup::widgets.button.size'))
+                ->options(['sm' => __('layup::widgets.button.small'),
+                    'md' => __('layup::widgets.button.medium'),
+                    'lg' => __('layup::widgets.button.large'),])
                 ->default('md'),
             Toggle::make('new_tab')
-                ->label('Open in new tab')
+                ->label(__('layup::widgets.button.open_in_new_tab'))
                 ->default(false),
             TextInput::make('bg_color')
-                ->label('Custom Background Color')
+                ->label(__('layup::widgets.button.custom_background_color'))
                 ->type('color')
                 ->nullable(),
             TextInput::make('text_color_override')
-                ->label('Custom Text Color')
+                ->label(__('layup::widgets.button.custom_text_color'))
                 ->type('color')
                 ->nullable(),
             TextInput::make('hover_bg_color')
-                ->label('Hover Background Color')
+                ->label(__('layup::widgets.button.hover_background_color'))
                 ->type('color')
                 ->nullable(),
             TextInput::make('hover_text_color')
-                ->label('Hover Text Color')
+                ->label(__('layup::widgets.button.hover_text_color'))
                 ->type('color')
                 ->nullable(),
         ];

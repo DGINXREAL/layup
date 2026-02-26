@@ -17,7 +17,7 @@ class LogoSliderWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Logo Slider';
+        return __('layup::widgets.labels.logo-slider');
     }
 
     public static function getIcon(): string
@@ -27,28 +27,28 @@ class LogoSliderWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             FileUpload::make('logos')
-                ->label('Logos')
+                ->label(__('layup::widgets.logo-slider.logos'))
                 ->image()
                 ->multiple()
                 ->reorderable()
                 ->directory('layup/logo-slider')
                 ->columnSpanFull(),
             Select::make('speed')
-                ->label('Speed')
-                ->options(['40' => 'Slow', '25' => 'Normal', '15' => 'Fast'])
+                ->label(__('layup::widgets.logo-slider.speed'))
+                ->options(['40' => __('layup::widgets.logo-slider.slow'), '25' => __('layup::widgets.logo-slider.normal'), '15' => __('layup::widgets.logo-slider.fast')])
                 ->default('25'),
             TextInput::make('max_height')
-                ->label('Logo Max Height')
+                ->label(__('layup::widgets.logo-slider.logo_max_height'))
                 ->default('3rem'),
             TextInput::make('gap')
-                ->label('Gap Between Logos')
+                ->label(__('layup::widgets.logo-slider.gap_between_logos'))
                 ->default('4rem'),
         ];
     }

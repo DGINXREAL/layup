@@ -17,7 +17,7 @@ class CodeWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Code Block';
+        return __('layup::widgets.labels.code');
     }
 
     public static function getIcon(): string
@@ -27,37 +27,35 @@ class CodeWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'advanced';
+        return __('layup::widgets.categories.advanced');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Textarea::make('code')
-                ->label('Code')
+                ->label(__('layup::widgets.code.code'))
                 ->rows(10)
                 ->columnSpanFull()
                 ->required(),
             Select::make('language')
-                ->label('Language')
-                ->options([
-                    'plaintext' => 'Plain Text',
-                    'html' => 'HTML',
-                    'css' => 'CSS',
-                    'javascript' => 'JavaScript',
-                    'php' => 'PHP',
-                    'python' => 'Python',
-                    'ruby' => 'Ruby',
-                    'json' => 'JSON',
-                    'yaml' => 'YAML',
-                    'bash' => 'Bash',
-                    'sql' => 'SQL',
-                    'markdown' => 'Markdown',
-                ])
+                ->label(__('layup::widgets.code.language'))
+                ->options(['plaintext' => __('layup::widgets.code.plain_text'),
+                    'html' => __('layup::widgets.code.html'),
+                    'css' => __('layup::widgets.code.css'),
+                    'javascript' => __('layup::widgets.code.javascript'),
+                    'php' => __('layup::widgets.code.php'),
+                    'python' => __('layup::widgets.code.python'),
+                    'ruby' => __('layup::widgets.code.ruby'),
+                    'json' => __('layup::widgets.code.json'),
+                    'yaml' => __('layup::widgets.code.yaml'),
+                    'bash' => __('layup::widgets.code.bash'),
+                    'sql' => __('layup::widgets.code.sql'),
+                    'markdown' => __('layup::widgets.code.markdown'),])
                 ->default('plaintext'),
             TextInput::make('filename')
-                ->label('Filename')
-                ->placeholder('e.g. example.php')
+                ->label(__('layup::widgets.code.filename'))
+                ->placeholder(__('layup::widgets.code.e_g_example_php'))
                 ->nullable(),
         ];
     }

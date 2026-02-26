@@ -17,7 +17,7 @@ class ToggleWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Toggle';
+        return __('layup::widgets.labels.toggle');
     }
 
     public static function getIcon(): string
@@ -27,20 +27,20 @@ class ToggleWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.toggle.title'))
                 ->required(),
             RichEditor::make('content')
-                ->label('Content')
+                ->label(__('layup::widgets.toggle.content'))
                 ->columnSpanFull(),
             Toggle::make('open')
-                ->label('Open by default')
+                ->label(__('layup::widgets.toggle.open_by_default'))
                 ->default(false),
         ];
     }

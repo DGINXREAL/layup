@@ -18,7 +18,7 @@ class HeroWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Hero Section';
+        return __('layup::widgets.labels.hero');
     }
 
     public static function getIcon(): string
@@ -28,61 +28,59 @@ class HeroWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('heading')
-                ->label('Heading')
+                ->label(__('layup::widgets.hero.heading'))
                 ->required()
                 ->columnSpanFull(),
             TextInput::make('subheading')
-                ->label('Subheading')
+                ->label(__('layup::widgets.hero.subheading'))
                 ->nullable()
                 ->columnSpanFull(),
             RichEditor::make('description')
-                ->label('Description')
+                ->label(__('layup::widgets.hero.description'))
                 ->toolbarButtons(['bold', 'italic', 'link'])
                 ->columnSpanFull(),
             TextInput::make('primary_button_text')
-                ->label('Primary Button Text')
+                ->label(__('layup::widgets.hero.primary_button_text'))
                 ->nullable(),
             TextInput::make('primary_button_url')
-                ->label('Primary Button URL')
+                ->label(__('layup::widgets.hero.primary_button_url'))
                 ->url()
                 ->nullable(),
             TextInput::make('secondary_button_text')
-                ->label('Secondary Button Text')
+                ->label(__('layup::widgets.hero.secondary_button_text'))
                 ->nullable(),
             TextInput::make('secondary_button_url')
-                ->label('Secondary Button URL')
+                ->label(__('layup::widgets.hero.secondary_button_url'))
                 ->url()
                 ->nullable(),
             FileUpload::make('background_image')
-                ->label('Background Image')
+                ->label(__('layup::widgets.hero.background_image'))
                 ->image()
                 ->directory('layup/heroes'),
             Select::make('alignment')
-                ->label('Content Alignment')
-                ->options(['left' => 'Left', 'center' => 'Center', 'right' => 'Right'])
+                ->label(__('layup::widgets.hero.content_alignment'))
+                ->options(['left' => __('layup::widgets.hero.left'), 'center' => __('layup::widgets.hero.center'), 'right' => __('layup::widgets.hero.right')])
                 ->default('center'),
             Select::make('height')
-                ->label('Height')
-                ->options([
-                    'auto' => 'Auto',
-                    '50vh' => 'Half Screen',
-                    '75vh' => 'Three-Quarter Screen',
-                    '100vh' => 'Full Screen',
-                ])
+                ->label(__('layup::widgets.hero.height'))
+                ->options(['auto' => __('layup::widgets.hero.auto'),
+                    '50vh' => __('layup::widgets.hero.half_screen'),
+                    '75vh' => __('layup::widgets.hero.three_quarter_screen'),
+                    '100vh' => __('layup::widgets.hero.full_screen'),])
                 ->default('auto'),
             TextInput::make('overlay_color')
-                ->label('Overlay Color')
+                ->label(__('layup::widgets.hero.overlay_color'))
                 ->type('color')
                 ->default('#000000'),
             TextInput::make('overlay_opacity')
-                ->label('Overlay Opacity (0-100)')
+                ->label(__('layup::widgets.hero.overlay_opacity_0_100'))
                 ->numeric()
                 ->minValue(0)
                 ->maxValue(100)

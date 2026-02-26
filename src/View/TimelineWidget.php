@@ -16,7 +16,7 @@ class TimelineWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Timeline';
+        return __('layup::widgets.labels.timeline');
     }
 
     public static function getIcon(): string
@@ -26,29 +26,29 @@ class TimelineWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('events')
-                ->label('Timeline Events')
+                ->label(__('layup::widgets.timeline.timeline_events'))
                 ->schema([
                     TextInput::make('date')
-                        ->label('Date / Label')
+                        ->label(__('layup::widgets.timeline.date_label'))
                         ->required(),
                     TextInput::make('title')
-                        ->label('Title')
+                        ->label(__('layup::widgets.timeline.title'))
                         ->required(),
                     TextInput::make('description')
-                        ->label('Description')
+                        ->label(__('layup::widgets.timeline.description'))
                         ->nullable(),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             TextInput::make('line_color')
-                ->label('Line Color')
+                ->label(__('layup::widgets.timeline.line_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

@@ -18,7 +18,7 @@ class VideoWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Video Embed';
+        return __('layup::widgets.labels.video');
     }
 
     public static function getIcon(): string
@@ -28,37 +28,35 @@ class VideoWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('url')
-                ->label('Video URL')
-                ->helperText('YouTube, Vimeo, or direct video URL')
+                ->label(__('layup::widgets.video.video_url'))
+                ->helperText(__('layup::widgets.video.youtube_vimeo_or_direct_video_url'))
                 ->required()
                 ->url(),
             Select::make('aspect')
-                ->label('Aspect Ratio')
-                ->options([
-                    '16/9' => '16:9 (Widescreen)',
-                    '4/3' => '4:3 (Standard)',
-                    '1/1' => '1:1 (Square)',
-                    '21/9' => '21:9 (Ultra-wide)',
-                ])
+                ->label(__('layup::widgets.video.aspect_ratio'))
+                ->options(['16/9' => __('layup::widgets.video.16_9_widescreen'),
+                    '4/3' => __('layup::widgets.video.4_3_standard'),
+                    '1/1' => __('layup::widgets.video.1_1_square'),
+                    '21/9' => __('layup::widgets.video.21_9_ultra_wide'),])
                 ->default('16/9'),
             TextInput::make('title')
-                ->label('Title / Caption'),
+                ->label(__('layup::widgets.video.title_caption')),
             Toggle::make('autoplay')
-                ->label('Autoplay')
+                ->label(__('layup::widgets.video.autoplay'))
                 ->default(false),
             Toggle::make('loop')
-                ->label('Loop')
+                ->label(__('layup::widgets.video.loop'))
                 ->default(false),
             Toggle::make('privacy_enhanced')
-                ->label('Privacy-enhanced mode (YouTube)')
-                ->helperText('Uses youtube-nocookie.com domain')
+                ->label(__('layup::widgets.video.privacy_enhanced_mode_youtube'))
+                ->helperText(__('layup::widgets.video.uses_youtube_nocookie_com_domain'))
                 ->default(false),
         ];
     }

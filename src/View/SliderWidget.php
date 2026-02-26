@@ -20,7 +20,7 @@ class SliderWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Slider';
+        return __('layup::widgets.labels.slider');
     }
 
     public static function getIcon(): string
@@ -30,30 +30,30 @@ class SliderWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('slides')
-                ->label('Slides')
+                ->label(__('layup::widgets.slider.slides'))
                 ->schema([
                     TextInput::make('heading')
-                        ->label('Heading')
+                        ->label(__('layup::widgets.slider.heading'))
                         ->nullable(),
                     RichEditor::make('content')
-                        ->label('Content')
+                        ->label(__('layup::widgets.slider.content'))
                         ->columnSpanFull(),
                     FileUpload::make('image')
-                        ->label('Background Image')
+                        ->label(__('layup::widgets.slider.background_image'))
                         ->image()
                         ->directory('layup/slider'),
                     TextInput::make('button_text')
-                        ->label('Button Text')
+                        ->label(__('layup::widgets.slider.button_text'))
                         ->nullable(),
                     TextInput::make('button_url')
-                        ->label('Button URL')
+                        ->label(__('layup::widgets.slider.button_url'))
                         ->url()
                         ->nullable(),
                 ])
@@ -61,22 +61,20 @@ class SliderWidget extends BaseWidget
                 ->collapsible()
                 ->columnSpanFull(),
             Toggle::make('autoplay')
-                ->label('Autoplay')
+                ->label(__('layup::widgets.slider.autoplay'))
                 ->default(true),
             Select::make('speed')
-                ->label('Slide Duration')
-                ->options([
-                    '3000' => '3 seconds',
-                    '5000' => '5 seconds',
-                    '7000' => '7 seconds',
-                    '10000' => '10 seconds',
-                ])
+                ->label(__('layup::widgets.slider.slide_duration'))
+                ->options(['3000' => __('layup::widgets.slider.3_seconds'),
+                    '5000' => __('layup::widgets.slider.5_seconds'),
+                    '7000' => __('layup::widgets.slider.7_seconds'),
+                    '10000' => __('layup::widgets.slider.10_seconds'),])
                 ->default('5000'),
             Toggle::make('arrows')
-                ->label('Show Arrows')
+                ->label(__('layup::widgets.slider.show_arrows'))
                 ->default(true),
             Toggle::make('dots')
-                ->label('Show Dots')
+                ->label(__('layup::widgets.slider.show_dots'))
                 ->default(true),
         ];
     }

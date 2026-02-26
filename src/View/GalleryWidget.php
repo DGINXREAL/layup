@@ -17,7 +17,7 @@ class GalleryWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Gallery';
+        return __('layup::widgets.labels.gallery');
     }
 
     public static function getIcon(): string
@@ -27,48 +27,44 @@ class GalleryWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             FileUpload::make('images')
-                ->label('Images')
+                ->label(__('layup::widgets.gallery.images'))
                 ->image()
                 ->multiple()
                 ->reorderable()
                 ->directory('layup/gallery')
                 ->columnSpanFull(),
             Select::make('columns')
-                ->label('Columns')
-                ->options([
-                    '2' => '2 Columns',
-                    '3' => '3 Columns',
-                    '4' => '4 Columns',
-                    '5' => '5 Columns',
-                    '6' => '6 Columns',
-                ])
+                ->label(__('layup::widgets.gallery.columns'))
+                ->options(['2' => __('layup::widgets.gallery.2_columns'),
+                    '3' => __('layup::widgets.gallery.3_columns'),
+                    '4' => __('layup::widgets.gallery.4_columns'),
+                    '5' => __('layup::widgets.gallery.5_columns'),
+                    '6' => __('layup::widgets.gallery.6_columns'),])
                 ->default('3'),
             Select::make('gap')
-                ->label('Gap')
-                ->options([
-                    '0' => 'None',
-                    '0.25rem' => 'Extra Small',
-                    '0.5rem' => 'Small',
-                    '1rem' => 'Medium',
-                    '1.5rem' => 'Large',
-                ])
+                ->label(__('layup::widgets.gallery.gap'))
+                ->options(['0' => __('layup::widgets.gallery.none'),
+                    '0.25rem' => __('layup::widgets.gallery.extra_small'),
+                    '0.5rem' => __('layup::widgets.gallery.small'),
+                    '1rem' => __('layup::widgets.gallery.medium'),
+                    '1.5rem' => __('layup::widgets.gallery.large'),])
                 ->default('0.5rem'),
             Toggle::make('lightbox')
-                ->label('Enable Lightbox')
+                ->label(__('layup::widgets.gallery.enable_lightbox'))
                 ->default(true),
             Toggle::make('show_captions')
-                ->label('Show Captions')
+                ->label(__('layup::widgets.gallery.show_captions'))
                 ->default(false),
             \Filament\Forms\Components\Textarea::make('captions_text')
-                ->label('Captions (one per line, matching image order)')
-                ->helperText('Enter one caption per line. Line 1 = first image, etc.')
+                ->label(__('layup::widgets.gallery.captions_one_per_line_matching_image_order'))
+                ->helperText(__('layup::widgets.gallery.enter_one_caption_per_line_line_1_first_image_etc'))
                 ->rows(4)
                 ->nullable()
                 ->columnSpanFull(),

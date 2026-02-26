@@ -16,7 +16,7 @@ class BadgeWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Badge';
+        return __('layup::widgets.labels.badge');
     }
 
     public static function getIcon(): string
@@ -26,21 +26,17 @@ class BadgeWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            TextInput::make('text')->label('Text')->required(),
-            Select::make('variant')->label('Variant')->options([
-                'default' => 'Default', 'success' => 'Success', 'warning' => 'Warning',
-                'danger' => 'Danger', 'info' => 'Info', 'dark' => 'Dark',
-            ])->default('default'),
-            Select::make('size')->label('Size')->options([
-                'sm' => 'Small', 'md' => 'Medium', 'lg' => 'Large',
-            ])->default('md'),
-            TextInput::make('link_url')->label('Link URL')->url()->nullable(),
+            TextInput::make('text')->label(__('layup::widgets.badge.text'))->required(),
+            Select::make('variant')->label(__('layup::widgets.badge.variant'))->options(['default' => __('layup::widgets.badge.default'), 'success' => __('layup::widgets.badge.success'), 'warning' => __('layup::widgets.badge.warning'),
+                'danger' => __('layup::widgets.badge.danger'), 'info' => __('layup::widgets.badge.info'), 'dark' => __('layup::widgets.badge.dark'),])->default('default'),
+            Select::make('size')->label(__('layup::widgets.badge.size'))->options(['sm' => __('layup::widgets.badge.small'), 'md' => __('layup::widgets.badge.medium'), 'lg' => __('layup::widgets.badge.large'),])->default('md'),
+            TextInput::make('link_url')->label(__('layup::widgets.badge.link_url'))->url()->nullable(),
         ];
     }
 

@@ -17,7 +17,7 @@ class TableWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Table';
+        return __('layup::widgets.labels.table');
     }
 
     public static function getIcon(): string
@@ -27,32 +27,32 @@ class TableWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('caption')
-                ->label('Caption')
+                ->label(__('layup::widgets.table.caption'))
                 ->nullable(),
             Repeater::make('headers')
-                ->label('Headers')
+                ->label(__('layup::widgets.table.headers'))
                 ->simple(
                     TextInput::make('text')
-                        ->label('Header')
+                        ->label(__('layup::widgets.table.header'))
                         ->required(),
                 )
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Repeater::make('rows')
-                ->label('Rows')
+                ->label(__('layup::widgets.table.rows'))
                 ->schema([
                     Repeater::make('cells')
-                        ->label('Cells')
+                        ->label(__('layup::widgets.table.cells'))
                         ->simple(
                             TextInput::make('text')
-                                ->label('Cell')
+                                ->label(__('layup::widgets.table.cell'))
                                 ->required(),
                         )
                         ->defaultItems(3)
@@ -61,7 +61,7 @@ class TableWidget extends BaseWidget
                 ->defaultItems(2)
                 ->columnSpanFull(),
             Toggle::make('striped')
-                ->label('Striped rows')
+                ->label(__('layup::widgets.table.striped_rows'))
                 ->default(true),
         ];
     }

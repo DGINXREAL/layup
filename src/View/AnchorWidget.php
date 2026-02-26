@@ -16,7 +16,7 @@ class AnchorWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Anchor / Jump Link';
+        return __('layup::widgets.labels.anchor');
     }
 
     public static function getIcon(): string
@@ -26,23 +26,23 @@ class AnchorWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'layout';
+        return __('layup::widgets.categories.layout');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('anchor_id')
-                ->label('Anchor ID')
-                ->helperText('Use #this-id in URLs or links to jump here')
+                ->label(__('layup::widgets.anchor.anchor_id'))
+                ->helperText(__('layup::widgets.anchor.use_this_id_in_urls_or_links_to_jump_here'))
                 ->required(),
             TextInput::make('offset')
-                ->label('Scroll Offset (px)')
-                ->helperText('Negative value scrolls above this point (useful for sticky headers)')
+                ->label(__('layup::widgets.anchor.scroll_offset_px'))
+                ->helperText(__('layup::widgets.anchor.negative_value_scrolls_above_this_point_useful_for'))
                 ->numeric()
                 ->default(0),
             Toggle::make('invisible')
-                ->label('Invisible (no visual output)')
+                ->label(__('layup::widgets.anchor.invisible_no_visual_output'))
                 ->default(true),
         ];
     }

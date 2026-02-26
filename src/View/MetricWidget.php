@@ -17,7 +17,7 @@ class MetricWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Metrics Row';
+        return __('layup::widgets.labels.metric');
     }
 
     public static function getIcon(): string
@@ -27,29 +27,29 @@ class MetricWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('metrics')
-                ->label('Metrics')
+                ->label(__('layup::widgets.metric.metrics'))
                 ->schema([
-                    TextInput::make('value')->label('Value')->required()->placeholder('10K+'),
-                    TextInput::make('label')->label('Label')->required()->placeholder('Users'),
-                    TextInput::make('prefix')->label('Prefix')->nullable(),
-                    TextInput::make('suffix')->label('Suffix')->nullable(),
+                    TextInput::make('value')->label(__('layup::widgets.metric.value'))->required()->placeholder(__('layup::widgets.metric.10k')),
+                    TextInput::make('label')->label(__('layup::widgets.metric.label'))->required()->placeholder(__('layup::widgets.metric.users')),
+                    TextInput::make('prefix')->label(__('layup::widgets.metric.prefix'))->nullable(),
+                    TextInput::make('suffix')->label(__('layup::widgets.metric.suffix'))->nullable(),
                 ])
                 ->defaultItems(4)
                 ->columnSpanFull(),
             Select::make('columns')
-                ->label('Columns')
-                ->options(['2' => '2', '3' => '3', '4' => '4', '5' => '5'])
+                ->label(__('layup::widgets.metric.columns'))
+                ->options(['2' => __('layup::widgets.metric.2'), '3' => __('layup::widgets.metric.3'), '4' => __('layup::widgets.metric.4'), '5' => __('layup::widgets.metric.5')])
                 ->default('4'),
             Select::make('style')
-                ->label('Style')
-                ->options(['plain' => 'Plain', 'bordered' => 'Bordered', 'cards' => 'Cards'])
+                ->label(__('layup::widgets.metric.style'))
+                ->options(['plain' => __('layup::widgets.metric.plain'), 'bordered' => __('layup::widgets.metric.bordered'), 'cards' => __('layup::widgets.metric.cards')])
                 ->default('plain'),
         ];
     }

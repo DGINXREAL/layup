@@ -16,7 +16,7 @@ class HeadingWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Heading';
+        return __('layup::widgets.labels.heading');
     }
 
     public static function getIcon(): string
@@ -26,30 +26,28 @@ class HeadingWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('content')
-                ->label('Heading Text')
+                ->label(__('layup::widgets.heading.heading_text'))
                 ->required(),
             Select::make('level')
-                ->label('Level')
-                ->options([
-                    'h1' => 'H1',
-                    'h2' => 'H2',
-                    'h3' => 'H3',
-                    'h4' => 'H4',
-                    'h5' => 'H5',
-                    'h6' => 'H6',
-                ])
+                ->label(__('layup::widgets.heading.level'))
+                ->options(['h1' => __('layup::widgets.heading.h1'),
+                    'h2' => __('layup::widgets.heading.h2'),
+                    'h3' => __('layup::widgets.heading.h3'),
+                    'h4' => __('layup::widgets.heading.h4'),
+                    'h5' => __('layup::widgets.heading.h5'),
+                    'h6' => __('layup::widgets.heading.h6'),])
                 ->default('h2'),
             TextInput::make('link_url')
-                ->label('Link URL')
+                ->label(__('layup::widgets.heading.link_url'))
                 ->url()
-                ->placeholder('https://...')
+                ->placeholder(__('layup::widgets.heading.https'))
                 ->nullable(),
         ];
     }

@@ -16,7 +16,7 @@ class IconBoxWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Icon Box';
+        return __('layup::widgets.labels.icon-box');
     }
 
     public static function getIcon(): string
@@ -26,37 +26,37 @@ class IconBoxWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('icon')
-                ->label('Icon (emoji or text)')
+                ->label(__('layup::widgets.icon-box.icon_emoji_or_text'))
                 ->default('⚡')
                 ->required(),
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.icon-box.title'))
                 ->required(),
             TextInput::make('description')
-                ->label('Description')
+                ->label(__('layup::widgets.icon-box.description'))
                 ->nullable(),
             TextInput::make('link_url')
-                ->label('Link URL')
+                ->label(__('layup::widgets.icon-box.link_url'))
                 ->url()
                 ->nullable(),
             TextInput::make('icon_bg')
-                ->label('Icon Background Color')
+                ->label(__('layup::widgets.icon-box.icon_background_color'))
                 ->type('color')
                 ->default('#eff6ff'),
             TextInput::make('icon_color')
-                ->label('Icon Color')
+                ->label(__('layup::widgets.icon-box.icon_color'))
                 ->type('color')
                 ->default('#3b82f6'),
             Select::make('alignment')
-                ->label('Alignment')
-                ->options(['left' => 'Left', 'center' => 'Center', 'top' => 'Top (icon above)'])
+                ->label(__('layup::widgets.icon-box.alignment'))
+                ->options(['left' => __('layup::widgets.icon-box.left'), 'center' => __('layup::widgets.icon-box.center'), 'top' => __('layup::widgets.icon-box.top_icon_above')])
                 ->default('top'),
         ];
     }

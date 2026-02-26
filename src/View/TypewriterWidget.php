@@ -17,7 +17,7 @@ class TypewriterWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Typewriter Text';
+        return __('layup::widgets.labels.typewriter');
     }
 
     public static function getIcon(): string
@@ -27,18 +27,18 @@ class TypewriterWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('prefix')
-                ->label('Static Prefix')
-                ->placeholder('We build ')
+                ->label(__('layup::widgets.typewriter.static_prefix'))
+                ->placeholder(__('layup::widgets.typewriter.we_build'))
                 ->nullable(),
             Repeater::make('words')
-                ->label('Rotating Words')
+                ->label(__('layup::widgets.typewriter.rotating_words'))
                 ->simple(
                     TextInput::make('word')
                         ->required()
@@ -46,21 +46,21 @@ class TypewriterWidget extends BaseWidget
                 ->defaultItems(3)
                 ->columnSpanFull(),
             TextInput::make('suffix')
-                ->label('Static Suffix')
+                ->label(__('layup::widgets.typewriter.static_suffix'))
                 ->nullable(),
             TextInput::make('speed')
-                ->label('Typing Speed (ms per char)')
+                ->label(__('layup::widgets.typewriter.typing_speed_ms_per_char'))
                 ->numeric()
                 ->default(100),
             TextInput::make('pause')
-                ->label('Pause Between Words (ms)')
+                ->label(__('layup::widgets.typewriter.pause_between_words_ms'))
                 ->numeric()
                 ->default(2000),
             Toggle::make('loop')
-                ->label('Loop')
+                ->label(__('layup::widgets.typewriter.loop'))
                 ->default(true),
             TextInput::make('cursor_color')
-                ->label('Cursor Color')
+                ->label(__('layup::widgets.typewriter.cursor_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

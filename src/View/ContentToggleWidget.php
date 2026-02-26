@@ -17,7 +17,7 @@ class ContentToggleWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Content Toggle';
+        return __('layup::widgets.labels.content-toggle');
     }
 
     public static function getIcon(): string
@@ -27,24 +27,24 @@ class ContentToggleWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('show_text')
-                ->label('Show Button Text')
+                ->label(__('layup::widgets.content-toggle.show_button_text'))
                 ->default('Show more'),
             TextInput::make('hide_text')
-                ->label('Hide Button Text')
+                ->label(__('layup::widgets.content-toggle.hide_button_text'))
                 ->default('Show less'),
             RichEditor::make('content')
-                ->label('Hidden Content')
+                ->label(__('layup::widgets.content-toggle.hidden_content'))
                 ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList'])
                 ->columnSpanFull(),
             Toggle::make('start_open')
-                ->label('Start Expanded')
+                ->label(__('layup::widgets.content-toggle.start_expanded'))
                 ->default(false),
         ];
     }

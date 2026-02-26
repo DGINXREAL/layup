@@ -18,7 +18,7 @@ class PricingTableWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Pricing Table';
+        return __('layup::widgets.labels.pricing-table');
     }
 
     public static function getIcon(): string
@@ -28,62 +28,60 @@ class PricingTableWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('title')
-                ->label('Plan Name')
+                ->label(__('layup::widgets.pricing-table.plan_name'))
                 ->required(),
             TextInput::make('subtitle')
-                ->label('Subtitle')
+                ->label(__('layup::widgets.pricing-table.subtitle'))
                 ->nullable(),
             TextInput::make('price')
-                ->label('Price')
+                ->label(__('layup::widgets.pricing-table.price'))
                 ->required()
-                ->placeholder('49'),
+                ->placeholder(__('layup::widgets.pricing-table.49')),
             TextInput::make('currency')
-                ->label('Currency Symbol')
+                ->label(__('layup::widgets.pricing-table.currency_symbol'))
                 ->default('$'),
             Select::make('period')
-                ->label('Billing Period')
-                ->options([
-                    'month' => 'Per Month',
-                    'year' => 'Per Year',
-                    'once' => 'One-Time',
-                    'custom' => 'Custom',
-                ])
+                ->label(__('layup::widgets.pricing-table.billing_period'))
+                ->options(['month' => __('layup::widgets.pricing-table.per_month'),
+                    'year' => __('layup::widgets.pricing-table.per_year'),
+                    'once' => __('layup::widgets.pricing-table.one_time'),
+                    'custom' => __('layup::widgets.pricing-table.custom'),])
                 ->default('month'),
             TextInput::make('period_custom')
-                ->label('Custom Period Text')
+                ->label(__('layup::widgets.pricing-table.custom_period_text'))
                 ->visible(fn (callable $get): bool => $get('period') === 'custom')
                 ->nullable(),
             Repeater::make('features')
-                ->label('Features')
+                ->label(__('layup::widgets.pricing-table.features'))
                 ->schema([
                     TextInput::make('text')
-                        ->label('Feature')
+                        ->label(__('layup::widgets.pricing-table.feature'))
                         ->required(),
                     Toggle::make('included')
-                        ->label('Included')
+                        ->label(__('layup::widgets.pricing-table.included'))
                         ->default(true),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             TextInput::make('button_text')
-                ->label('Button Text')
+                ->label(__('layup::widgets.pricing-table.button_text'))
                 ->default('Get Started'),
             TextInput::make('button_url')
-                ->label('Button URL')
+                ->label(__('layup::widgets.pricing-table.button_url'))
                 ->url(),
             Toggle::make('featured')
-                ->label('Featured / Highlighted')
+                ->label(__('layup::widgets.pricing-table.featured_highlighted'))
                 ->default(false),
             TextInput::make('badge_text')
-                ->label('Badge Text')
-                ->placeholder('Popular')
+                ->label(__('layup::widgets.pricing-table.badge_text'))
+                ->placeholder(__('layup::widgets.pricing-table.popular'))
                 ->default('Popular')
                 ->nullable(),
         ];

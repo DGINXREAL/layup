@@ -19,7 +19,7 @@ class TestimonialCarouselWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Testimonial Carousel';
+        return __('layup::widgets.labels.testimonial-carousel');
     }
 
     public static function getIcon(): string
@@ -29,41 +29,41 @@ class TestimonialCarouselWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('testimonials')
-                ->label('Testimonials')
+                ->label(__('layup::widgets.testimonial-carousel.testimonials'))
                 ->schema([
                     TextInput::make('quote')
-                        ->label('Quote')
+                        ->label(__('layup::widgets.testimonial-carousel.quote'))
                         ->required(),
                     TextInput::make('author')
-                        ->label('Author')
+                        ->label(__('layup::widgets.testimonial-carousel.author'))
                         ->required(),
                     TextInput::make('role')
-                        ->label('Role / Company')
+                        ->label(__('layup::widgets.testimonial-carousel.role_company'))
                         ->nullable(),
                     FileUpload::make('photo')
-                        ->label('Photo')
+                        ->label(__('layup::widgets.testimonial-carousel.photo'))
                         ->image()
                         ->avatar()
                         ->directory('layup/testimonials'),
                     Select::make('rating')
-                        ->label('Rating')
-                        ->options(['1' => '★', '2' => '★★', '3' => '★★★', '4' => '★★★★', '5' => '★★★★★'])
+                        ->label(__('layup::widgets.testimonial-carousel.rating'))
+                        ->options(['1' => __('layup::widgets.testimonial-carousel.'), '2' => __('layup::widgets.testimonial-carousel.2_'), '3' => __('layup::widgets.testimonial-carousel.3_'), '4' => __('layup::widgets.testimonial-carousel.4_'), '5' => __('layup::widgets.testimonial-carousel.5_')])
                         ->default('5'),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Toggle::make('autoplay')
-                ->label('Autoplay')
+                ->label(__('layup::widgets.testimonial-carousel.autoplay'))
                 ->default(true),
             TextInput::make('speed')
-                ->label('Interval (ms)')
+                ->label(__('layup::widgets.testimonial-carousel.interval_ms'))
                 ->numeric()
                 ->default(5000),
         ];

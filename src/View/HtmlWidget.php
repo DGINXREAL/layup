@@ -15,7 +15,7 @@ class HtmlWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Custom HTML';
+        return __('layup::widgets.labels.html');
     }
 
     public static function getIcon(): string
@@ -25,14 +25,14 @@ class HtmlWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'advanced';
+        return __('layup::widgets.categories.advanced');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Textarea::make('content')
-                ->label('HTML')
+                ->label(__('layup::widgets.html.html'))
                 ->rows(10)
                 ->columnSpanFull(),
         ];

@@ -17,7 +17,7 @@ class PostListWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Post List';
+        return __('layup::widgets.labels.post-list');
     }
 
     public static function getIcon(): string
@@ -27,46 +27,44 @@ class PostListWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('model')
-                ->label('Model Class')
-                ->placeholder('App\\Models\\Post')
-                ->helperText('Eloquent model with title, slug, excerpt, published_at')
+                ->label(__('layup::widgets.post-list.model_class'))
+                ->placeholder(__('layup::widgets.post-list.app_models_post'))
+                ->helperText(__('layup::widgets.post-list.eloquent_model_with_title_slug_excerpt_published_a'))
                 ->nullable(),
             TextInput::make('limit')
-                ->label('Number of Posts')
+                ->label(__('layup::widgets.post-list.number_of_posts'))
                 ->numeric()
                 ->default(6)
                 ->minValue(1)
                 ->maxValue(50),
             Select::make('columns')
-                ->label('Columns')
-                ->options(['1' => '1', '2' => '2', '3' => '3'])
+                ->label(__('layup::widgets.post-list.columns'))
+                ->options(['1' => __('layup::widgets.post-list.1'), '2' => __('layup::widgets.post-list.2'), '3' => __('layup::widgets.post-list.3')])
                 ->default('3'),
             Select::make('order')
-                ->label('Order By')
-                ->options([
-                    'latest' => 'Newest First',
-                    'oldest' => 'Oldest First',
-                    'title' => 'Title A-Z',
-                ])
+                ->label(__('layup::widgets.post-list.order_by'))
+                ->options(['latest' => __('layup::widgets.post-list.newest_first'),
+                    'oldest' => __('layup::widgets.post-list.oldest_first'),
+                    'title' => __('layup::widgets.post-list.title_a_z'),])
                 ->default('latest'),
             Toggle::make('show_excerpt')
-                ->label('Show Excerpt')
+                ->label(__('layup::widgets.post-list.show_excerpt'))
                 ->default(true),
             Toggle::make('show_date')
-                ->label('Show Date')
+                ->label(__('layup::widgets.post-list.show_date'))
                 ->default(true),
             TextInput::make('read_more_text')
-                ->label('Read More Text')
+                ->label(__('layup::widgets.post-list.read_more_text'))
                 ->default('Read more →'),
             TextInput::make('empty_message')
-                ->label('Empty State Message')
+                ->label(__('layup::widgets.post-list.empty_state_message'))
                 ->default('No posts yet.'),
         ];
     }

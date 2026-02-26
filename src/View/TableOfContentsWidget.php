@@ -17,7 +17,7 @@ class TableOfContentsWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Table of Contents';
+        return __('layup::widgets.labels.table-of-contents');
     }
 
     public static function getIcon(): string
@@ -27,28 +27,28 @@ class TableOfContentsWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.table-of-contents.title'))
                 ->default('Table of Contents'),
             Select::make('heading_levels')
-                ->label('Heading Levels to Include')
+                ->label(__('layup::widgets.table-of-contents.heading_levels_to_include'))
                 ->multiple()
-                ->options(['h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4'])
+                ->options(['h2' => __('layup::widgets.table-of-contents.h2'), 'h3' => __('layup::widgets.table-of-contents.h3'), 'h4' => __('layup::widgets.table-of-contents.h4')])
                 ->default(['h2', 'h3']),
             Toggle::make('numbered')
-                ->label('Numbered List')
+                ->label(__('layup::widgets.table-of-contents.numbered_list'))
                 ->default(true),
             Toggle::make('collapsible')
-                ->label('Collapsible')
+                ->label(__('layup::widgets.table-of-contents.collapsible'))
                 ->default(false),
             Toggle::make('sticky')
-                ->label('Sticky Position')
+                ->label(__('layup::widgets.table-of-contents.sticky_position'))
                 ->default(false),
         ];
     }

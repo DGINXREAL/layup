@@ -17,7 +17,7 @@ class TabsWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Tabs';
+        return __('layup::widgets.labels.tabs');
     }
 
     public static function getIcon(): string
@@ -27,20 +27,20 @@ class TabsWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('tabs')
-                ->label('Tabs')
+                ->label(__('layup::widgets.tabs.tabs'))
                 ->schema([
                     TextInput::make('title')
-                        ->label('Tab Title')
+                        ->label(__('layup::widgets.tabs.tab_title'))
                         ->required(),
                     RichEditor::make('content')
-                        ->label('Content')
+                        ->label(__('layup::widgets.tabs.content'))
                         ->columnSpanFull(),
                 ])
                 ->defaultItems(2)

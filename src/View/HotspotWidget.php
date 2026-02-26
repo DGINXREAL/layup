@@ -17,7 +17,7 @@ class HotspotWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Hotspot Image';
+        return __('layup::widgets.labels.hotspot');
     }
 
     public static function getIcon(): string
@@ -27,20 +27,20 @@ class HotspotWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            FileUpload::make('image')->label('Background Image')->image()->directory('layup/hotspots')->required(),
+            FileUpload::make('image')->label(__('layup::widgets.hotspot.background_image'))->image()->directory('layup/hotspots')->required(),
             Repeater::make('points')
-                ->label('Hotspot Points')
+                ->label(__('layup::widgets.hotspot.hotspot_points'))
                 ->schema([
-                    TextInput::make('x')->label('X Position (%)')->numeric()->minValue(0)->maxValue(100)->required(),
-                    TextInput::make('y')->label('Y Position (%)')->numeric()->minValue(0)->maxValue(100)->required(),
-                    TextInput::make('label')->label('Label')->required(),
-                    TextInput::make('description')->label('Description')->nullable(),
+                    TextInput::make('x')->label(__('layup::widgets.hotspot.x_position'))->numeric()->minValue(0)->maxValue(100)->required(),
+                    TextInput::make('y')->label(__('layup::widgets.hotspot.y_position'))->numeric()->minValue(0)->maxValue(100)->required(),
+                    TextInput::make('label')->label(__('layup::widgets.hotspot.label'))->required(),
+                    TextInput::make('description')->label(__('layup::widgets.hotspot.description'))->nullable(),
                 ])
                 ->defaultItems(1)
                 ->columnSpanFull(),

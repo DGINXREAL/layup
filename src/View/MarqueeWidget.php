@@ -17,7 +17,7 @@ class MarqueeWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Marquee';
+        return __('layup::widgets.labels.marquee');
     }
 
     public static function getIcon(): string
@@ -27,34 +27,30 @@ class MarqueeWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('text')
-                ->label('Text')
+                ->label(__('layup::widgets.marquee.text'))
                 ->required()
                 ->columnSpanFull(),
             Select::make('speed')
-                ->label('Speed')
-                ->options([
-                    '30' => 'Slow',
-                    '20' => 'Normal',
-                    '10' => 'Fast',
-                    '5' => 'Very Fast',
-                ])
+                ->label(__('layup::widgets.marquee.speed'))
+                ->options(['30' => __('layup::widgets.marquee.slow'),
+                    '20' => __('layup::widgets.marquee.normal'),
+                    '10' => __('layup::widgets.marquee.fast'),
+                    '5' => __('layup::widgets.marquee.very_fast'),])
                 ->default('20'),
             Select::make('direction')
-                ->label('Direction')
-                ->options([
-                    'left' => 'Left',
-                    'right' => 'Right',
-                ])
+                ->label(__('layup::widgets.marquee.direction'))
+                ->options(['left' => __('layup::widgets.marquee.left'),
+                    'right' => __('layup::widgets.marquee.right'),])
                 ->default('left'),
             Toggle::make('pause_on_hover')
-                ->label('Pause on hover')
+                ->label(__('layup::widgets.marquee.pause_on_hover'))
                 ->default(true),
         ];
     }

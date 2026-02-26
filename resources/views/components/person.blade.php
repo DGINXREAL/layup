@@ -14,11 +14,11 @@
     @php $socials = array_filter([$data['email'] ?? '', $data['website'] ?? '', $data['twitter'] ?? '', $data['linkedin'] ?? '', $data['facebook'] ?? '']); @endphp
     @if(count($socials))
         <div class="flex justify-center gap-3 text-sm">
-            @if(!empty($data['email']))<a href="mailto:{{ $data['email'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">Email</a>@endif
-            @if(!empty($data['website']))<a href="{{ $data['website'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" target="_blank" rel="noopener">Web</a>@endif
-            @if(!empty($data['twitter']))<a href="{{ $data['twitter'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" target="_blank" rel="noopener">Twitter</a>@endif
-            @if(!empty($data['linkedin']))<a href="{{ $data['linkedin'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" target="_blank" rel="noopener">LinkedIn</a>@endif
-            @if(!empty($data['facebook']))<a href="{{ $data['facebook'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" target="_blank" rel="noopener">Facebook</a>@endif
+            @if(!empty($data['email']))<a href="mailto:{{ $data['email'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">{{ __('layup::frontend.person.email') }}</a>@endif
+            @if(!empty($data['website']))<a href="{{ $data['website'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" target="_blank" rel="noopener">{{ __('layup::frontend.person.web') }}</a>@endif
+            @if(!empty($data['twitter']))<a href="{{ $data['twitter'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" target="_blank" rel="noopener">{{ __('layup::frontend.person.twitter') }}</a>@endif
+            @if(!empty($data['linkedin']))<a href="{{ $data['linkedin'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" target="_blank" rel="noopener">{{ __('layup::frontend.person.linkedin') }}</a>@endif
+            @if(!empty($data['facebook']))<a href="{{ $data['facebook'] }}" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" target="_blank" rel="noopener">{{ __('layup::frontend.person.facebook') }}</a>@endif
         </div>
     @endif
 </div>

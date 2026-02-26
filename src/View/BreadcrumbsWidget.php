@@ -16,7 +16,7 @@ class BreadcrumbsWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Breadcrumbs';
+        return __('layup::widgets.labels.breadcrumbs');
     }
 
     public static function getIcon(): string
@@ -26,26 +26,26 @@ class BreadcrumbsWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('items')
-                ->label('Breadcrumb Items')
+                ->label(__('layup::widgets.breadcrumbs.breadcrumb_items'))
                 ->schema([
                     TextInput::make('label')
-                        ->label('Label')
+                        ->label(__('layup::widgets.breadcrumbs.label'))
                         ->required(),
                     TextInput::make('url')
-                        ->label('URL')
+                        ->label(__('layup::widgets.breadcrumbs.url'))
                         ->nullable(),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             TextInput::make('separator')
-                ->label('Separator')
+                ->label(__('layup::widgets.breadcrumbs.separator'))
                 ->default('/')
                 ->maxLength(3),
         ];

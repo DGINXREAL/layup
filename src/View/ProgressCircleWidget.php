@@ -16,7 +16,7 @@ class ProgressCircleWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Progress Circle';
+        return __('layup::widgets.labels.progress-circle');
     }
 
     public static function getIcon(): string
@@ -26,36 +26,36 @@ class ProgressCircleWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('percent')
-                ->label('Percentage')
+                ->label(__('layup::widgets.progress-circle.percentage'))
                 ->numeric()
                 ->minValue(0)
                 ->maxValue(100)
                 ->default(75)
                 ->required(),
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.progress-circle.title'))
                 ->nullable(),
             TextInput::make('color')
-                ->label('Circle Color')
+                ->label(__('layup::widgets.progress-circle.circle_color'))
                 ->type('color')
                 ->default('#3b82f6'),
             TextInput::make('size')
-                ->label('Size (px)')
+                ->label(__('layup::widgets.progress-circle.size_px'))
                 ->numeric()
                 ->default(120),
             TextInput::make('stroke_width')
-                ->label('Stroke Width (px)')
+                ->label(__('layup::widgets.progress-circle.stroke_width_px'))
                 ->numeric()
                 ->default(8),
             Toggle::make('animate')
-                ->label('Animate on scroll')
+                ->label(__('layup::widgets.progress-circle.animate_on_scroll'))
                 ->default(true),
         ];
     }

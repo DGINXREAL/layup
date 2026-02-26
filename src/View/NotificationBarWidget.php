@@ -16,7 +16,7 @@ class NotificationBarWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Notification Bar';
+        return __('layup::widgets.labels.notification-bar');
     }
 
     public static function getIcon(): string
@@ -26,34 +26,34 @@ class NotificationBarWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('text')
-                ->label('Message')
+                ->label(__('layup::widgets.notification-bar.message'))
                 ->required()
                 ->columnSpanFull(),
             TextInput::make('link_text')
-                ->label('Link Text')
-                ->placeholder('Learn more →')
+                ->label(__('layup::widgets.notification-bar.link_text'))
+                ->placeholder(__('layup::widgets.notification-bar.learn_more'))
                 ->nullable(),
             TextInput::make('link_url')
-                ->label('Link URL')
+                ->label(__('layup::widgets.notification-bar.link_url'))
                 ->url()
                 ->nullable(),
             TextInput::make('bg_color')
-                ->label('Background Color')
+                ->label(__('layup::widgets.notification-bar.background_color'))
                 ->type('color')
                 ->default('#3b82f6'),
             TextInput::make('text_color_bar')
-                ->label('Text Color')
+                ->label(__('layup::widgets.notification-bar.text_color'))
                 ->type('color')
                 ->default('#ffffff'),
             Toggle::make('dismissible')
-                ->label('Dismissible')
+                ->label(__('layup::widgets.notification-bar.dismissible'))
                 ->default(true),
         ];
     }

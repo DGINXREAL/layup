@@ -17,7 +17,7 @@ class FeatureListWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Feature List';
+        return __('layup::widgets.labels.feature-list');
     }
 
     public static function getIcon(): string
@@ -27,44 +27,40 @@ class FeatureListWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('features')
-                ->label('Features')
+                ->label(__('layup::widgets.feature-list.features'))
                 ->schema([
                     TextInput::make('title')
-                        ->label('Title')
+                        ->label(__('layup::widgets.feature-list.title'))
                         ->required(),
                     TextInput::make('description')
-                        ->label('Description')
+                        ->label(__('layup::widgets.feature-list.description'))
                         ->nullable(),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Select::make('icon_style')
-                ->label('Icon Style')
-                ->options([
-                    'check' => '✓ Checkmark',
-                    'arrow' => '→ Arrow',
-                    'dot' => '● Dot',
-                    'number' => '1. Numbered',
-                ])
+                ->label(__('layup::widgets.feature-list.icon_style'))
+                ->options(['check' => __('layup::widgets.feature-list.checkmark'),
+                    'arrow' => __('layup::widgets.feature-list.arrow'),
+                    'dot' => __('layup::widgets.feature-list.dot'),
+                    'number' => __('layup::widgets.feature-list.1_numbered'),])
                 ->default('check'),
             TextInput::make('icon_color')
-                ->label('Icon Color')
+                ->label(__('layup::widgets.feature-list.icon_color'))
                 ->type('color')
                 ->default('#22c55e'),
             Select::make('layout')
-                ->label('Layout')
-                ->options([
-                    'list' => 'Vertical List',
-                    'grid-2' => '2-Column Grid',
-                    'grid-3' => '3-Column Grid',
-                ])
+                ->label(__('layup::widgets.feature-list.layout'))
+                ->options(['list' => __('layup::widgets.feature-list.vertical_list'),
+                    'grid-2' => __('layup::widgets.feature-list.2_column_grid'),
+                    'grid-3' => __('layup::widgets.feature-list.3_column_grid'),])
                 ->default('list'),
         ];
     }

@@ -27,7 +27,7 @@ class MakeWidgetCommand extends Command
         $bladePath = resource_path("views/components/layup/{$type}.blade.php");
 
         if (file_exists($phpPath)) {
-            $this->error("Widget class already exists: {$phpPath}");
+            $this->error(__('layup::commands.widget_exists', ['path' => $phpPath]));
 
             return self::FAILURE;
         }
@@ -40,7 +40,7 @@ class MakeWidgetCommand extends Command
 
         $stub = $this->generatePhpStub($namespace, $className, $type);
         file_put_contents($phpPath, $stub);
-        $this->info("Created widget class: {$phpPath}");
+        $this->info(__('layup::commands.widget_created', ['path' => $phpPath]));
 
         // Create Blade view
         $bladeDir = dirname($bladePath);
@@ -50,10 +50,10 @@ class MakeWidgetCommand extends Command
 
         $bladeStub = $this->generateBladeStub($type);
         file_put_contents($bladePath, $bladeStub);
-        $this->info("Created blade view: {$bladePath}");
+        $this->info(__('layup::commands.blade_created', ['path' => $bladePath]));
 
         $this->newLine();
-        $this->comment('Next steps:');
+        $this->comment(__('layup::commands.next_steps'));
         $this->line("  1. Edit {$phpPath} to add your form fields");
         $this->line("  2. Edit {$bladePath} to customize the frontend HTML");
         $this->line('  3. The widget will be auto-discovered from App\\Layup\\Widgets');
@@ -84,7 +84,7 @@ class {$className} extends BaseWidget
 
     public static function getLabel(): string
     {
-        return '{$this->humanize($type)}';
+        return __('layup::widgets.labels.{$type}');
     }
 
     public static function getIcon(): string
@@ -94,7 +94,7 @@ class {$className} extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array

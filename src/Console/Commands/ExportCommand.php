@@ -42,7 +42,7 @@ class ExportCommand extends Command
 
         if ($output = $this->option('output')) {
             file_put_contents($output, $json);
-            $this->info('Exported ' . count($pages) . " pages to {$output}");
+            $this->info(__('layup::commands.exported', ['count' => count($pages), 'path' => $output]));
         } else {
             $this->line($json);
         }

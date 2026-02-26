@@ -17,7 +17,7 @@ class AvatarGroupWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Avatar Group';
+        return __('layup::widgets.labels.avatar-group');
     }
 
     public static function getIcon(): string
@@ -27,14 +27,14 @@ class AvatarGroupWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             FileUpload::make('avatars')
-                ->label('Avatars')
+                ->label(__('layup::widgets.avatar-group.avatars'))
                 ->image()
                 ->avatar()
                 ->multiple()
@@ -42,16 +42,16 @@ class AvatarGroupWidget extends BaseWidget
                 ->directory('layup/avatars')
                 ->columnSpanFull(),
             TextInput::make('extra_count')
-                ->label('Extra Count (e.g. "+12")')
-                ->placeholder('+12')
+                ->label(__('layup::widgets.avatar-group.extra_count_e_g_12'))
+                ->placeholder(__('layup::widgets.avatar-group.12'))
                 ->nullable(),
             TextInput::make('label')
-                ->label('Label')
-                ->placeholder('Join 1,200+ users')
+                ->label(__('layup::widgets.avatar-group.label'))
+                ->placeholder(__('layup::widgets.avatar-group.join_1_200_users'))
                 ->nullable(),
             Select::make('size')
-                ->label('Size')
-                ->options(['sm' => 'Small (32px)', 'md' => 'Medium (40px)', 'lg' => 'Large (48px)'])
+                ->label(__('layup::widgets.avatar-group.size'))
+                ->options(['sm' => __('layup::widgets.avatar-group.small_32px'), 'md' => __('layup::widgets.avatar-group.medium_40px'), 'lg' => __('layup::widgets.avatar-group.large_48px')])
                 ->default('md'),
         ];
     }

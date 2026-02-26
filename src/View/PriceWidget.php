@@ -16,7 +16,7 @@ class PriceWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Price Display';
+        return __('layup::widgets.labels.price');
     }
 
     public static function getIcon(): string
@@ -26,20 +26,18 @@ class PriceWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            TextInput::make('amount')->label('Amount')->required()->placeholder('49'),
-            TextInput::make('currency_symbol')->label('Currency Symbol')->default('$'),
-            TextInput::make('period')->label('Period')->placeholder('/month')->nullable(),
-            TextInput::make('original_amount')->label('Original Price (strikethrough)')->nullable(),
-            TextInput::make('label')->label('Label')->placeholder('Starting at')->nullable(),
-            Select::make('size')->label('Size')->options([
-                'sm' => 'Small', 'md' => 'Medium', 'lg' => 'Large', 'xl' => 'Extra Large',
-            ])->default('lg'),
+            TextInput::make('amount')->label(__('layup::widgets.price.amount'))->required()->placeholder(__('layup::widgets.price.49')),
+            TextInput::make('currency_symbol')->label(__('layup::widgets.price.currency_symbol'))->default('$'),
+            TextInput::make('period')->label(__('layup::widgets.price.period'))->placeholder(__('layup::widgets.price.month'))->nullable(),
+            TextInput::make('original_amount')->label(__('layup::widgets.price.original_price_strikethrough'))->nullable(),
+            TextInput::make('label')->label(__('layup::widgets.price.label'))->placeholder(__('layup::widgets.price.starting_at'))->nullable(),
+            Select::make('size')->label(__('layup::widgets.price.size'))->options(['sm' => __('layup::widgets.price.small'), 'md' => __('layup::widgets.price.medium'), 'lg' => __('layup::widgets.price.large'), 'xl' => __('layup::widgets.price.extra_large'),])->default('lg'),
         ];
     }
 

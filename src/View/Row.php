@@ -25,46 +25,46 @@ class Row extends BaseView
     {
         return [
             Select::make('direction')
-                ->label('Direction')
+                ->label(__('layup::widgets.row.direction'))
                 ->options([
-                    'row' => 'Row (Horizontal)',
-                    'column' => 'Column (Vertical)',
-                    'row-reverse' => 'Row Reverse',
-                    'column-reverse' => 'Column Reverse',
+                    'row' => __('layup::widgets.row.row_horizontal'),
+                    'column' => __('layup::widgets.row.column_vertical'),
+                    'row-reverse' => __('layup::widgets.row.row_reverse'),
+                    'column-reverse' => __('layup::widgets.row.column_reverse'),
                 ])
                 ->default('row'),
             Select::make('justify')
-                ->label('Justify Content')
+                ->label(__('layup::widgets.row.justify_content'))
                 ->options([
-                    'start' => 'Start',
-                    'center' => 'Center',
-                    'end' => 'End',
-                    'between' => 'Space Between',
-                    'around' => 'Space Around',
-                    'evenly' => 'Space Evenly',
+                    'start' => __('layup::widgets.row.start'),
+                    'center' => __('layup::widgets.row.center'),
+                    'end' => __('layup::widgets.row.end'),
+                    'between' => __('layup::widgets.row.space_between'),
+                    'around' => __('layup::widgets.row.space_around'),
+                    'evenly' => __('layup::widgets.row.space_evenly'),
                 ])
                 ->default('start'),
             Select::make('align')
-                ->label('Align Items')
+                ->label(__('layup::widgets.row.align_items'))
                 ->options([
-                    'start' => 'Start',
-                    'center' => 'Center',
-                    'end' => 'End',
-                    'stretch' => 'Stretch',
-                    'baseline' => 'Baseline',
+                    'start' => __('layup::widgets.row.start'),
+                    'center' => __('layup::widgets.row.center'),
+                    'end' => __('layup::widgets.row.end'),
+                    'stretch' => __('layup::widgets.row.stretch'),
+                    'baseline' => __('layup::widgets.row.baseline'),
                 ])
                 ->default('stretch'),
             Select::make('wrap')
-                ->label('Wrap')
+                ->label(__('layup::widgets.row.wrap'))
                 ->options([
-                    'nowrap' => 'No Wrap',
-                    'wrap' => 'Wrap',
-                    'wrap-reverse' => 'Wrap Reverse',
+                    'nowrap' => __('layup::widgets.row.no_wrap'),
+                    'wrap' => __('layup::widgets.row.wrap_option'),
+                    'wrap-reverse' => __('layup::widgets.row.wrap_reverse'),
                 ])
                 ->default('wrap'),
             Toggle::make('full_width')
-                ->label('Full Width')
-                ->helperText('Bypass the container max-width for edge-to-edge rows')
+                ->label(__('layup::widgets.row.full_width'))
+                ->helperText(__('layup::widgets.row.full_width_helper'))
                 ->default(false),
         ];
     }

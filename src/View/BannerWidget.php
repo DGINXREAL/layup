@@ -17,7 +17,7 @@ class BannerWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Banner';
+        return __('layup::widgets.labels.banner');
     }
 
     public static function getIcon(): string
@@ -27,40 +27,40 @@ class BannerWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('heading')
-                ->label('Heading')
+                ->label(__('layup::widgets.banner.heading'))
                 ->required(),
             TextInput::make('subtext')
-                ->label('Subtext')
+                ->label(__('layup::widgets.banner.subtext'))
                 ->nullable(),
             TextInput::make('cta_text')
-                ->label('CTA Text')
+                ->label(__('layup::widgets.banner.cta_text'))
                 ->nullable(),
             TextInput::make('cta_url')
-                ->label('CTA URL')
+                ->label(__('layup::widgets.banner.cta_url'))
                 ->url()
                 ->nullable(),
             FileUpload::make('bg_image')
-                ->label('Background Image')
+                ->label(__('layup::widgets.banner.background_image'))
                 ->image()
                 ->directory('layup/banners'),
             TextInput::make('bg_color')
-                ->label('Background Color')
+                ->label(__('layup::widgets.banner.background_color'))
                 ->type('color')
                 ->default('#1e40af'),
             TextInput::make('text_color_banner')
-                ->label('Text Color')
+                ->label(__('layup::widgets.banner.text_color'))
                 ->type('color')
                 ->default('#ffffff'),
             Select::make('height')
-                ->label('Height')
-                ->options(['auto' => 'Auto', '200px' => 'Small', '300px' => 'Medium', '400px' => 'Large'])
+                ->label(__('layup::widgets.banner.height'))
+                ->options(['auto' => __('layup::widgets.banner.auto'), '200px' => __('layup::widgets.banner.small'), '300px' => __('layup::widgets.banner.medium'), '400px' => __('layup::widgets.banner.large')])
                 ->default('auto'),
         ];
     }

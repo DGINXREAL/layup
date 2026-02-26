@@ -28,6 +28,7 @@ class LayupServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'layup');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'layup');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         if ($this->app->runningInConsole()) {
@@ -61,6 +62,10 @@ class LayupServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/templates' => resource_path('layup/templates'),
         ], 'layup-templates');
+
+        $this->publishes([
+            __DIR__ . '/../resources/lang' => $this->app->langPath('vendor/layup'),
+        ], 'layup-translations');
 
         Blade::directive('layupScripts', fn (): string => "<?php if(config('layup.frontend.include_scripts', true)): ?>"
             . '<script>' . file_get_contents(__DIR__ . '/../resources/js/layup.js') . '</script>'

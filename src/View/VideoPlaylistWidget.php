@@ -17,7 +17,7 @@ class VideoPlaylistWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Video Playlist';
+        return __('layup::widgets.labels.video-playlist');
     }
 
     public static function getIcon(): string
@@ -27,27 +27,25 @@ class VideoPlaylistWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('videos')
-                ->label('Videos')
+                ->label(__('layup::widgets.video-playlist.videos'))
                 ->schema([
-                    TextInput::make('title')->label('Title')->required(),
-                    TextInput::make('url')->label('YouTube/Vimeo URL')->url()->required(),
-                    TextInput::make('duration')->label('Duration')->placeholder('3:45')->nullable(),
+                    TextInput::make('title')->label(__('layup::widgets.video-playlist.title'))->required(),
+                    TextInput::make('url')->label(__('layup::widgets.video-playlist.youtube_vimeo_url'))->url()->required(),
+                    TextInput::make('duration')->label(__('layup::widgets.video-playlist.duration'))->placeholder(__('layup::widgets.video-playlist.3_45'))->nullable(),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Select::make('layout')
-                ->label('Layout')
-                ->options([
-                    'list' => 'List with player',
-                    'grid' => '3-Column Grid',
-                ])
+                ->label(__('layup::widgets.video-playlist.layout'))
+                ->options(['list' => __('layup::widgets.video-playlist.list_with_player'),
+                    'grid' => __('layup::widgets.video-playlist.3_column_grid'),])
                 ->default('list'),
         ];
     }

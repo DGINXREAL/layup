@@ -16,7 +16,7 @@ class LoginWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Login Form';
+        return __('layup::widgets.labels.login');
     }
 
     public static function getIcon(): string
@@ -26,36 +26,36 @@ class LoginWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('action')
-                ->label('Form Action URL')
+                ->label(__('layup::widgets.login.form_action_url'))
                 ->default('/login')
                 ->required(),
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.login.title'))
                 ->default('Sign In'),
             TextInput::make('email_label')
-                ->label('Email Field Label')
+                ->label(__('layup::widgets.login.email_field_label'))
                 ->default('Email'),
             TextInput::make('password_label')
-                ->label('Password Field Label')
+                ->label(__('layup::widgets.login.password_field_label'))
                 ->default('Password'),
             TextInput::make('submit_text')
-                ->label('Submit Button Text')
+                ->label(__('layup::widgets.login.submit_button_text'))
                 ->default('Sign In'),
             TextInput::make('forgot_url')
-                ->label('Forgot Password URL')
+                ->label(__('layup::widgets.login.forgot_password_url'))
                 ->nullable(),
             TextInput::make('register_url')
-                ->label('Register URL')
+                ->label(__('layup::widgets.login.register_url'))
                 ->nullable(),
             Toggle::make('remember_me')
-                ->label('Show Remember Me')
+                ->label(__('layup::widgets.login.show_remember_me'))
                 ->default(true),
         ];
     }

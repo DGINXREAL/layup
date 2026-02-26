@@ -17,7 +17,7 @@ class HighlightBoxWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Highlight Box';
+        return __('layup::widgets.labels.highlight-box');
     }
 
     public static function getIcon(): string
@@ -27,19 +27,17 @@ class HighlightBoxWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            TextInput::make('title')->label('Title')->nullable(),
-            RichEditor::make('content')->label('Content')->toolbarButtons(['bold', 'italic', 'link', 'bulletList'])->columnSpanFull(),
-            Select::make('variant')->label('Variant')->options([
-                'info' => '💡 Info (blue)', 'tip' => '💚 Tip (green)', 'warning' => '⚠️ Warning (yellow)',
-                'important' => '❗ Important (red)', 'note' => '📝 Note (gray)',
-            ])->default('info'),
-            TextInput::make('icon')->label('Custom Icon/Emoji')->nullable(),
+            TextInput::make('title')->label(__('layup::widgets.highlight-box.title'))->nullable(),
+            RichEditor::make('content')->label(__('layup::widgets.highlight-box.content'))->toolbarButtons(['bold', 'italic', 'link', 'bulletList'])->columnSpanFull(),
+            Select::make('variant')->label(__('layup::widgets.highlight-box.variant'))->options(['info' => __('layup::widgets.highlight-box.info_blue'), 'tip' => __('layup::widgets.highlight-box.tip_green'), 'warning' => __('layup::widgets.highlight-box.warning_yellow'),
+                'important' => __('layup::widgets.highlight-box.important_red'), 'note' => __('layup::widgets.highlight-box.note_gray'),])->default('info'),
+            TextInput::make('icon')->label(__('layup::widgets.highlight-box.custom_icon_emoji'))->nullable(),
         ];
     }
 

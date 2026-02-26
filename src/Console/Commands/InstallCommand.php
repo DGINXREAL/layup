@@ -14,28 +14,28 @@ class InstallCommand extends Command
 
     public function handle(): int
     {
-        $this->info('Installing Layup...');
+        $this->info(__('layup::commands.installing'));
         $this->newLine();
 
         // Publish config
         $this->call('vendor:publish', [
             '--tag' => 'layup-config',
         ]);
-        $this->info('✓ Config published');
+        $this->info(__('layup::commands.config_published'));
 
         // Run migrations
         $this->call('migrate');
-        $this->info('✓ Migrations completed');
+        $this->info(__('layup::commands.migrations_completed'));
 
         // Generate safelist
         $this->callSilent('layup:safelist');
-        $this->info('✓ Tailwind safelist generated');
+        $this->info(__('layup::commands.safelist_generated'));
 
         $this->newLine();
-        $this->components->info('Layup installed successfully!');
+        $this->components->info(__('layup::commands.installed'));
         $this->newLine();
 
-        $this->comment('Next steps:');
+        $this->comment(__('layup::commands.next_steps'));
         $this->newLine();
         $this->line('  1. Register the plugin in your Filament panel:');
         $this->newLine();

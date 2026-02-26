@@ -18,7 +18,7 @@
             @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
             class="{{ $sizeClass }} rounded-full shadow-lg flex items-center justify-center hover:opacity-90 transition-opacity"
             style="background-color: {{ $bg }}; color: {{ $tc }}"
-            aria-label="Back to top">
+            aria-label="{{ __('layup::frontend.back_to_top.label') }}">
         ↑
     </button>
 </div>

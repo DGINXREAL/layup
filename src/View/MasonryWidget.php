@@ -17,7 +17,7 @@ class MasonryWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Masonry Gallery';
+        return __('layup::widgets.labels.masonry');
     }
 
     public static function getIcon(): string
@@ -27,34 +27,32 @@ class MasonryWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             FileUpload::make('images')
-                ->label('Images')
+                ->label(__('layup::widgets.masonry.images'))
                 ->image()
                 ->multiple()
                 ->reorderable()
                 ->directory('layup/masonry')
                 ->columnSpanFull(),
             Select::make('columns')
-                ->label('Columns')
-                ->options(['2' => '2', '3' => '3', '4' => '4', '5' => '5'])
+                ->label(__('layup::widgets.masonry.columns'))
+                ->options(['2' => __('layup::widgets.masonry.2'), '3' => __('layup::widgets.masonry.3'), '4' => __('layup::widgets.masonry.4'), '5' => __('layup::widgets.masonry.5')])
                 ->default('3'),
             Select::make('gap')
-                ->label('Gap')
-                ->options([
-                    '0.25rem' => 'Extra Small',
-                    '0.5rem' => 'Small',
-                    '1rem' => 'Medium',
-                    '1.5rem' => 'Large',
-                ])
+                ->label(__('layup::widgets.masonry.gap'))
+                ->options(['0.25rem' => __('layup::widgets.masonry.extra_small'),
+                    '0.5rem' => __('layup::widgets.masonry.small'),
+                    '1rem' => __('layup::widgets.masonry.medium'),
+                    '1.5rem' => __('layup::widgets.masonry.large'),])
                 ->default('0.5rem'),
             Toggle::make('rounded')
-                ->label('Rounded Corners')
+                ->label(__('layup::widgets.masonry.rounded_corners'))
                 ->default(true),
         ];
     }

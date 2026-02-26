@@ -16,7 +16,7 @@ class AudioWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Audio';
+        return __('layup::widgets.labels.audio');
     }
 
     public static function getIcon(): string
@@ -26,29 +26,29 @@ class AudioWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.audio.title'))
                 ->nullable(),
             TextInput::make('artist')
-                ->label('Artist')
+                ->label(__('layup::widgets.audio.artist'))
                 ->nullable(),
             FileUpload::make('file')
-                ->label('Audio File')
+                ->label(__('layup::widgets.audio.audio_file'))
                 ->acceptedFileTypes(['audio/*'])
                 ->directory('layup/audio'),
             TextInput::make('url')
-                ->label('Or Audio URL')
+                ->label(__('layup::widgets.audio.or_audio_url'))
                 ->url()
                 ->nullable()
-                ->helperText('Direct link to an audio file. Used if no file is uploaded.'),
+                ->helperText(__('layup::widgets.audio.direct_link_to_an_audio_file_used_if_no_file_is_up')),
             FileUpload::make('cover')
-                ->label('Cover Art')
+                ->label(__('layup::widgets.audio.cover_art'))
                 ->image()
                 ->directory('layup/audio'),
         ];

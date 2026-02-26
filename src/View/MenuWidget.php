@@ -18,7 +18,7 @@ class MenuWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Menu';
+        return __('layup::widgets.labels.menu');
     }
 
     public static function getIcon(): string
@@ -28,41 +28,37 @@ class MenuWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('items')
-                ->label('Menu Items')
+                ->label(__('layup::widgets.menu.menu_items'))
                 ->schema([
                     TextInput::make('label')
-                        ->label('Label')
+                        ->label(__('layup::widgets.menu.label'))
                         ->required(),
                     TextInput::make('url')
-                        ->label('URL')
+                        ->label(__('layup::widgets.menu.url'))
                         ->required(),
                     Toggle::make('new_tab')
-                        ->label('New tab')
+                        ->label(__('layup::widgets.menu.new_tab'))
                         ->default(false),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Select::make('orientation')
-                ->label('Orientation')
-                ->options([
-                    'horizontal' => 'Horizontal',
-                    'vertical' => 'Vertical',
-                ])
+                ->label(__('layup::widgets.menu.orientation'))
+                ->options(['horizontal' => __('layup::widgets.menu.horizontal'),
+                    'vertical' => __('layup::widgets.menu.vertical'),])
                 ->default('horizontal'),
             Select::make('style')
-                ->label('Style')
-                ->options([
-                    'links' => 'Plain Links',
-                    'pills' => 'Pills',
-                    'underline' => 'Underline',
-                ])
+                ->label(__('layup::widgets.menu.style'))
+                ->options(['links' => __('layup::widgets.menu.plain_links'),
+                    'pills' => __('layup::widgets.menu.pills'),
+                    'underline' => __('layup::widgets.menu.underline'),])
                 ->default('links'),
         ];
     }

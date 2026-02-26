@@ -16,7 +16,7 @@ class ComparisonTableWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Comparison Table';
+        return __('layup::widgets.labels.comparison-table');
     }
 
     public static function getIcon(): string
@@ -26,37 +26,37 @@ class ComparisonTableWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('column_a')
-                ->label('Column A Header')
+                ->label(__('layup::widgets.comparison-table.column_a_header'))
                 ->default('Us')
                 ->required(),
             TextInput::make('column_b')
-                ->label('Column B Header')
+                ->label(__('layup::widgets.comparison-table.column_b_header'))
                 ->default('Them')
                 ->required(),
             Repeater::make('rows')
-                ->label('Comparison Rows')
+                ->label(__('layup::widgets.comparison-table.comparison_rows'))
                 ->schema([
                     TextInput::make('feature')
-                        ->label('Feature')
+                        ->label(__('layup::widgets.comparison-table.feature'))
                         ->required(),
                     TextInput::make('value_a')
-                        ->label('Column A Value')
+                        ->label(__('layup::widgets.comparison-table.column_a_value'))
                         ->default('✓'),
                     TextInput::make('value_b')
-                        ->label('Column B Value')
+                        ->label(__('layup::widgets.comparison-table.column_b_value'))
                         ->default('✗'),
                 ])
                 ->defaultItems(5)
                 ->columnSpanFull(),
             TextInput::make('highlight_color')
-                ->label('Highlight Color (Column A)')
+                ->label(__('layup::widgets.comparison-table.highlight_color_column_a'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

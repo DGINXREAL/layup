@@ -16,7 +16,7 @@ class IconWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Icon';
+        return __('layup::widgets.labels.icon');
     }
 
     public static function getIcon(): string
@@ -26,32 +26,30 @@ class IconWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('icon')
-                ->label('Icon Name')
+                ->label(__('layup::widgets.icon.icon_name'))
                 ->required()
-                ->placeholder('e.g. heroicon-o-heart'),
+                ->placeholder(__('layup::widgets.icon.e_g_heroicon_o_heart')),
             TextInput::make('color')
-                ->label('Color')
+                ->label(__('layup::widgets.icon.color'))
                 ->type('color')
                 ->nullable(),
             Select::make('size')
-                ->label('Size')
-                ->options([
-                    '1.5rem' => 'Small',
-                    '2.5rem' => 'Medium',
-                    '4rem' => 'Large',
-                    '6rem' => 'Extra Large',
-                    '8rem' => 'Huge',
-                ])
+                ->label(__('layup::widgets.icon.size'))
+                ->options(['1.5rem' => __('layup::widgets.icon.small'),
+                    '2.5rem' => __('layup::widgets.icon.medium'),
+                    '4rem' => __('layup::widgets.icon.large'),
+                    '6rem' => __('layup::widgets.icon.extra_large'),
+                    '8rem' => __('layup::widgets.icon.huge'),])
                 ->default('2.5rem'),
             TextInput::make('url')
-                ->label('Link URL')
+                ->label(__('layup::widgets.icon.link_url'))
                 ->url()
                 ->nullable(),
         ];

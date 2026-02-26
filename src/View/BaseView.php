@@ -111,13 +111,13 @@ abstract class BaseView extends Component
         return [
             Tabs::make('settings')
                 ->tabs([
-                    Tab::make('Content')
+                    Tab::make(__('layup::widgets.shared.tab_content'))
                         ->icon('heroicon-o-document-text')
                         ->schema(static::getContentFormSchema()),
-                    Tab::make('Design')
+                    Tab::make(__('layup::widgets.shared.tab_design'))
                         ->icon('heroicon-o-paint-brush')
                         ->schema(static::getDesignFormSchema()),
-                    Tab::make('Advanced')
+                    Tab::make(__('layup::widgets.shared.tab_advanced'))
                         ->icon('heroicon-o-cog-6-tooth')
                         ->schema(static::getAdvancedFormSchema()),
                 ])
@@ -144,86 +144,86 @@ abstract class BaseView extends Component
     {
         return [
             TextInput::make('text_color')
-                ->label('Text Color')
+                ->label(__('layup::widgets.shared.text_color'))
                 ->type('color')
                 ->nullable(),
             Select::make('text_align')
-                ->label('Text Alignment')
+                ->label(__('layup::widgets.shared.text_alignment'))
                 ->options([
-                    '' => 'Default',
-                    'left' => 'Left',
-                    'center' => 'Center',
-                    'right' => 'Right',
-                    'justify' => 'Justify',
+                    '' => __('layup::widgets.shared.default'),
+                    'left' => __('layup::widgets.shared.left_option'),
+                    'center' => __('layup::widgets.shared.center'),
+                    'right' => __('layup::widgets.shared.right_option'),
+                    'justify' => __('layup::widgets.shared.justify'),
                 ])
                 ->default('')
                 ->nullable(),
             Select::make('font_size')
-                ->label('Font Size')
+                ->label(__('layup::widgets.shared.font_size'))
                 ->options([
-                    '' => 'Default',
-                    '0.75rem' => 'XS (12px)',
-                    '0.875rem' => 'SM (14px)',
-                    '1rem' => 'Base (16px)',
-                    '1.125rem' => 'LG (18px)',
-                    '1.25rem' => 'XL (20px)',
-                    '1.5rem' => '2XL (24px)',
-                    '1.875rem' => '3XL (30px)',
-                    '2.25rem' => '4XL (36px)',
-                    '3rem' => '5XL (48px)',
+                    '' => __('layup::widgets.shared.default'),
+                    '0.75rem' => __('layup::widgets.shared.font_xs'),
+                    '0.875rem' => __('layup::widgets.shared.font_sm'),
+                    '1rem' => __('layup::widgets.shared.font_base'),
+                    '1.125rem' => __('layup::widgets.shared.font_lg'),
+                    '1.25rem' => __('layup::widgets.shared.font_xl'),
+                    '1.5rem' => __('layup::widgets.shared.font_2xl'),
+                    '1.875rem' => __('layup::widgets.shared.font_3xl'),
+                    '2.25rem' => __('layup::widgets.shared.font_4xl'),
+                    '3rem' => __('layup::widgets.shared.font_5xl'),
                 ])
                 ->default('')
                 ->nullable(),
             Select::make('border_radius')
-                ->label('Border Radius')
+                ->label(__('layup::widgets.shared.border_radius'))
                 ->options([
-                    '' => 'None',
-                    '0.25rem' => 'Small',
-                    '0.375rem' => 'Medium',
-                    '0.5rem' => 'Large',
+                    '' => __('layup::widgets.shared.none'),
+                    '0.25rem' => __('layup::widgets.shared.small'),
+                    '0.375rem' => __('layup::widgets.shared.medium'),
+                    '0.5rem' => __('layup::widgets.shared.large'),
                     '0.75rem' => 'XL',
                     '1rem' => '2XL',
                     '1.5rem' => '3XL',
-                    '9999px' => 'Full',
+                    '9999px' => __('layup::widgets.shared.full'),
                 ])
                 ->default('')
                 ->nullable(),
             TextInput::make('border_width')
-                ->label('Border Width')
+                ->label(__('layup::widgets.shared.border_width'))
                 ->placeholder('e.g. 1px')
                 ->nullable(),
             Select::make('border_style')
-                ->label('Border Style')
+                ->label(__('layup::widgets.shared.border_style'))
                 ->options([
-                    '' => 'None',
-                    'solid' => 'Solid',
-                    'dashed' => 'Dashed',
-                    'dotted' => 'Dotted',
-                    'double' => 'Double',
+                    '' => __('layup::widgets.shared.none'),
+                    'solid' => __('layup::widgets.shared.solid'),
+                    'dashed' => __('layup::widgets.shared.dashed'),
+                    'dotted' => __('layup::widgets.shared.dotted'),
+                    'double' => __('layup::widgets.shared.double'),
                 ])
                 ->default('')
                 ->nullable(),
             TextInput::make('border_color')
-                ->label('Border Color')
+                ->label(__('layup::widgets.shared.border_color'))
                 ->type('color')
                 ->nullable(),
             Select::make('box_shadow')
-                ->label('Box Shadow')
+                ->label(__('layup::widgets.shared.box_shadow'))
                 ->options([
-                    '' => 'None',
-                    '0 1px 2px 0 rgb(0 0 0 / 0.05)' => 'XS',
-                    '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' => 'Small',
-                    '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' => 'Medium',
-                    '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)' => 'Large',
-                    '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)' => 'XL',
-                    '0 25px 50px -12px rgb(0 0 0 / 0.25)' => '2XL',
+                    '' => __('layup::widgets.shared.none'),
+                    '0 1px 2px 0 rgb(0 0 0 / 0.05)' => __('layup::widgets.shared.shadow_xs'),
+                    '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' => __('layup::widgets.shared.shadow_small'),
+                    '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' => __('layup::widgets.shared.shadow_medium'),
+                    '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)' => __('layup::widgets.shared.shadow_large'),
+                    '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)' => __('layup::widgets.shared.shadow_xl'),
+                    '0 25px 50px -12px rgb(0 0 0 / 0.25)' => __('layup::widgets.shared.shadow_2xl'),
                 ])
                 ->default('')
                 ->nullable(),
             Select::make('opacity')
-                ->label('Opacity')
+                ->label(__('layup::widgets.shared.opacity'))
                 ->options([
-                    '' => 'Default (100%)',
+                    '' => __('layup::widgets.shared.opacity_default'),
                     '0.9' => '90%',
                     '0.8' => '80%',
                     '0.7' => '70%',
@@ -236,10 +236,10 @@ abstract class BaseView extends Component
                 ])
                 ->default('')
                 ->nullable(),
-            SpacingPicker::advanced('padding', 'Padding'),
-            SpacingPicker::advanced('margin', 'Margin'),
+            SpacingPicker::advanced('padding', __('layup::widgets.shared.padding')),
+            SpacingPicker::advanced('margin', __('layup::widgets.shared.margin')),
             TextInput::make('background_color')
-                ->label('Background Color')
+                ->label(__('layup::widgets.shared.background_color'))
                 ->type('color')
                 ->nullable(),
         ];
@@ -254,50 +254,50 @@ abstract class BaseView extends Component
     {
         return [
             TextInput::make('id')
-                ->label('ID')
-                ->helperText('Optional unique identifier for this element')
+                ->label(__('layup::widgets.shared.id'))
+                ->helperText(__('layup::widgets.shared.id_helper'))
                 ->nullable()
                 ->unique(ignoreRecord: true),
             TextInput::make('class')
-                ->label('CSS Classes')
-                ->helperText('Space-separated CSS classes')
+                ->label(__('layup::widgets.shared.css_classes'))
+                ->helperText(__('layup::widgets.shared.css_classes_helper'))
                 ->nullable(),
             Textarea::make('inline_css')
-                ->label('Inline CSS')
+                ->label(__('layup::widgets.shared.inline_css'))
                 ->rows(4)
-                ->placeholder('e.g. border: 1px solid red;')
+                ->placeholder(__('layup::widgets.shared.inline_css_placeholder'))
                 ->nullable(),
             CheckboxList::make('hide_on')
-                ->label('Hide On')
-                ->helperText('Hide this element on selected breakpoints')
+                ->label(__('layup::widgets.shared.hide_on'))
+                ->helperText(__('layup::widgets.shared.hide_on_helper'))
                 ->options([
-                    'sm' => 'Mobile',
-                    'md' => 'Tablet',
-                    'lg' => 'Desktop',
-                    'xl' => 'Large Desktop',
+                    'sm' => __('layup::widgets.shared.mobile'),
+                    'md' => __('layup::widgets.shared.tablet'),
+                    'lg' => __('layup::widgets.shared.desktop'),
+                    'xl' => __('layup::widgets.shared.large_desktop'),
                 ])
                 ->columns(4)
                 ->nullable(),
             Select::make('animation')
-                ->label('Entrance Animation')
+                ->label(__('layup::widgets.shared.entrance_animation'))
                 ->options([
-                    '' => 'None',
-                    'fade-in' => 'Fade In',
-                    'slide-up' => 'Slide Up',
-                    'slide-down' => 'Slide Down',
-                    'slide-left' => 'Slide Left',
-                    'slide-right' => 'Slide Right',
-                    'zoom-in' => 'Zoom In',
+                    '' => __('layup::widgets.shared.none'),
+                    'fade-in' => __('layup::widgets.shared.fade_in'),
+                    'slide-up' => __('layup::widgets.shared.slide_up'),
+                    'slide-down' => __('layup::widgets.shared.slide_down'),
+                    'slide-left' => __('layup::widgets.shared.slide_left'),
+                    'slide-right' => __('layup::widgets.shared.slide_right'),
+                    'zoom-in' => __('layup::widgets.shared.zoom_in'),
                 ])
                 ->default('')
                 ->nullable(),
             Select::make('animation_duration')
-                ->label('Animation Duration')
+                ->label(__('layup::widgets.shared.animation_duration'))
                 ->options([
-                    '300' => 'Fast (300ms)',
-                    '500' => 'Normal (500ms)',
-                    '700' => 'Slow (700ms)',
-                    '1000' => 'Very Slow (1s)',
+                    '300' => __('layup::widgets.shared.fast'),
+                    '500' => __('layup::widgets.shared.normal'),
+                    '700' => __('layup::widgets.shared.slow'),
+                    '1000' => __('layup::widgets.shared.very_slow'),
                 ])
                 ->default('500')
                 ->visible(fn ($get): bool => ! empty($get('animation')))

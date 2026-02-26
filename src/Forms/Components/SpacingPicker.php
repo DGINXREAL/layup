@@ -32,7 +32,7 @@ class SpacingPicker
         return Section::make($label)
             ->schema([
                 Select::make("{$name}.unit")
-                    ->label('Unit')
+                    ->label(__('layup::widgets.shared.unit'))
                     ->options([
                         'px' => 'px',
                         'rem' => 'rem',
@@ -46,7 +46,7 @@ class SpacingPicker
                 Grid::make(1)
                     ->schema([
                         TextInput::make("{$name}.top")
-                            ->label('Top')
+                            ->label(__('layup::widgets.shared.top'))
                             ->numeric()
                             ->nullable()
                             ->placeholder('0'),
@@ -57,7 +57,7 @@ class SpacingPicker
                 Grid::make(3)
                     ->schema([
                         TextInput::make("{$name}.left")
-                            ->label('Left')
+                            ->label(__('layup::widgets.shared.left'))
                             ->numeric()
                             ->nullable()
                             ->placeholder('0'),
@@ -67,7 +67,7 @@ class SpacingPicker
                             ->placeholder('—')
                             ->extraInputAttributes(['class' => 'text-center']),
                         TextInput::make("{$name}.right")
-                            ->label('Right')
+                            ->label(__('layup::widgets.shared.right'))
                             ->numeric()
                             ->nullable()
                             ->placeholder('0'),
@@ -78,7 +78,7 @@ class SpacingPicker
                 Grid::make(1)
                     ->schema([
                         TextInput::make("{$name}.bottom")
-                            ->label('Bottom')
+                            ->label(__('layup::widgets.shared.bottom'))
                             ->numeric()
                             ->nullable()
                             ->placeholder('0'),

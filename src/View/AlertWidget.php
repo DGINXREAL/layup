@@ -18,7 +18,7 @@ class AlertWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Alert';
+        return __('layup::widgets.labels.alert');
     }
 
     public static function getIcon(): string
@@ -28,30 +28,28 @@ class AlertWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Select::make('type')
-                ->label('Type')
-                ->options([
-                    'info' => 'Info',
-                    'success' => 'Success',
-                    'warning' => 'Warning',
-                    'danger' => 'Danger',
-                ])
+                ->label(__('layup::widgets.alert.type'))
+                ->options(['info' => __('layup::widgets.alert.info'),
+                    'success' => __('layup::widgets.alert.success'),
+                    'warning' => __('layup::widgets.alert.warning'),
+                    'danger' => __('layup::widgets.alert.danger'),])
                 ->default('info'),
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.alert.title'))
                 ->nullable(),
             RichEditor::make('content')
-                ->label('Content')
+                ->label(__('layup::widgets.alert.content'))
                 ->toolbarButtons(['bold', 'italic', 'link', 'bulletList'])
                 ->columnSpanFull(),
             Toggle::make('dismissible')
-                ->label('Dismissible')
+                ->label(__('layup::widgets.alert.dismissible'))
                 ->default(false),
         ];
     }

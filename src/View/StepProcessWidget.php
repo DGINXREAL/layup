@@ -17,7 +17,7 @@ class StepProcessWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Step Process';
+        return __('layup::widgets.labels.step-process');
     }
 
     public static function getIcon(): string
@@ -27,33 +27,31 @@ class StepProcessWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('steps')
-                ->label('Steps')
+                ->label(__('layup::widgets.step-process.steps'))
                 ->schema([
                     TextInput::make('title')
-                        ->label('Title')
+                        ->label(__('layup::widgets.step-process.title'))
                         ->required(),
                     TextInput::make('description')
-                        ->label('Description')
+                        ->label(__('layup::widgets.step-process.description'))
                         ->nullable(),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Select::make('layout')
-                ->label('Layout')
-                ->options([
-                    'vertical' => 'Vertical',
-                    'horizontal' => 'Horizontal',
-                ])
+                ->label(__('layup::widgets.step-process.layout'))
+                ->options(['vertical' => __('layup::widgets.step-process.vertical'),
+                    'horizontal' => __('layup::widgets.step-process.horizontal'),])
                 ->default('horizontal'),
             TextInput::make('accent_color')
-                ->label('Accent Color')
+                ->label(__('layup::widgets.step-process.accent_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

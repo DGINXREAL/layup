@@ -16,7 +16,7 @@ class FileDownloadWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'File Download';
+        return __('layup::widgets.labels.file-download');
     }
 
     public static function getIcon(): string
@@ -26,17 +26,17 @@ class FileDownloadWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            TextInput::make('title')->label('Title')->required(),
-            TextInput::make('description')->label('Description')->nullable(),
-            FileUpload::make('file')->label('File')->directory('layup/downloads')->required(),
-            TextInput::make('button_text')->label('Button Text')->default('Download'),
-            TextInput::make('file_size')->label('File Size (display)')->placeholder('2.4 MB')->nullable(),
+            TextInput::make('title')->label(__('layup::widgets.file-download.title'))->required(),
+            TextInput::make('description')->label(__('layup::widgets.file-download.description'))->nullable(),
+            FileUpload::make('file')->label(__('layup::widgets.file-download.file'))->directory('layup/downloads')->required(),
+            TextInput::make('button_text')->label(__('layup::widgets.file-download.button_text'))->default('Download'),
+            TextInput::make('file_size')->label(__('layup::widgets.file-download.file_size_display'))->placeholder(__('layup::widgets.file-download.2_4_mb'))->nullable(),
         ];
     }
 

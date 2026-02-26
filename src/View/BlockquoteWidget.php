@@ -17,7 +17,7 @@ class BlockquoteWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Blockquote';
+        return __('layup::widgets.labels.blockquote');
     }
 
     public static function getIcon(): string
@@ -27,35 +27,33 @@ class BlockquoteWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Textarea::make('quote')
-                ->label('Quote Text')
+                ->label(__('layup::widgets.blockquote.quote_text'))
                 ->required()
                 ->rows(4)
                 ->columnSpanFull(),
             TextInput::make('attribution')
-                ->label('Attribution')
-                ->placeholder('— Author Name')
+                ->label(__('layup::widgets.blockquote.attribution'))
+                ->placeholder(__('layup::widgets.blockquote.author_name'))
                 ->nullable(),
             TextInput::make('source')
-                ->label('Source')
-                ->placeholder('Book, article, speech...')
+                ->label(__('layup::widgets.blockquote.source'))
+                ->placeholder(__('layup::widgets.blockquote.book_article_speech'))
                 ->nullable(),
             Select::make('style')
-                ->label('Style')
-                ->options([
-                    'border-left' => 'Left Border',
-                    'large' => 'Large Quote',
-                    'centered' => 'Centered',
-                ])
+                ->label(__('layup::widgets.blockquote.style'))
+                ->options(['border-left' => __('layup::widgets.blockquote.left_border'),
+                    'large' => __('layup::widgets.blockquote.large_quote'),
+                    'centered' => __('layup::widgets.blockquote.centered'),])
                 ->default('border-left'),
             TextInput::make('accent_color')
-                ->label('Accent Color')
+                ->label(__('layup::widgets.blockquote.accent_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

@@ -16,7 +16,7 @@ class AnimatedHeadingWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Animated Heading';
+        return __('layup::widgets.labels.animated-heading');
     }
 
     public static function getIcon(): string
@@ -26,36 +26,34 @@ class AnimatedHeadingWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('before_text')
-                ->label('Before Text')
+                ->label(__('layup::widgets.animated-heading.before_text'))
                 ->nullable(),
             TextInput::make('animated_text')
-                ->label('Animated Text')
+                ->label(__('layup::widgets.animated-heading.animated_text'))
                 ->required(),
             TextInput::make('after_text')
-                ->label('After Text')
+                ->label(__('layup::widgets.animated-heading.after_text'))
                 ->nullable(),
             Select::make('tag')
-                ->label('Tag')
-                ->options(['h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4'])
+                ->label(__('layup::widgets.animated-heading.tag'))
+                ->options(['h1' => __('layup::widgets.animated-heading.h1'), 'h2' => __('layup::widgets.animated-heading.h2'), 'h3' => __('layup::widgets.animated-heading.h3'), 'h4' => __('layup::widgets.animated-heading.h4')])
                 ->default('h2'),
             Select::make('effect')
-                ->label('Effect')
-                ->options([
-                    'highlight' => 'Highlight',
-                    'underline' => 'Underline',
-                    'circle' => 'Circle',
-                    'strikethrough' => 'Strikethrough',
-                ])
+                ->label(__('layup::widgets.animated-heading.effect'))
+                ->options(['highlight' => __('layup::widgets.animated-heading.highlight'),
+                    'underline' => __('layup::widgets.animated-heading.underline'),
+                    'circle' => __('layup::widgets.animated-heading.circle'),
+                    'strikethrough' => __('layup::widgets.animated-heading.strikethrough'),])
                 ->default('highlight'),
             TextInput::make('accent_color')
-                ->label('Accent Color')
+                ->label(__('layup::widgets.animated-heading.accent_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

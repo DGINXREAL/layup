@@ -16,7 +16,7 @@ class FlipCardWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Flip Card';
+        return __('layup::widgets.labels.flip-card');
     }
 
     public static function getIcon(): string
@@ -26,50 +26,48 @@ class FlipCardWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('front_title')
-                ->label('Front Title')
+                ->label(__('layup::widgets.flip-card.front_title'))
                 ->required(),
             TextInput::make('front_description')
-                ->label('Front Description')
+                ->label(__('layup::widgets.flip-card.front_description'))
                 ->nullable(),
             TextInput::make('front_bg')
-                ->label('Front Background')
+                ->label(__('layup::widgets.flip-card.front_background'))
                 ->type('color')
                 ->default('#3b82f6'),
             TextInput::make('back_title')
-                ->label('Back Title')
+                ->label(__('layup::widgets.flip-card.back_title'))
                 ->required(),
             TextInput::make('back_description')
-                ->label('Back Description')
+                ->label(__('layup::widgets.flip-card.back_description'))
                 ->nullable(),
             TextInput::make('back_bg')
-                ->label('Back Background')
+                ->label(__('layup::widgets.flip-card.back_background'))
                 ->type('color')
                 ->default('#1e40af'),
             TextInput::make('link_url')
-                ->label('Link URL (back)')
+                ->label(__('layup::widgets.flip-card.link_url_back'))
                 ->url()
                 ->nullable(),
             TextInput::make('link_text')
-                ->label('Link Text')
+                ->label(__('layup::widgets.flip-card.link_text'))
                 ->default('Learn more'),
             Select::make('direction')
-                ->label('Flip Direction')
-                ->options(['horizontal' => 'Horizontal', 'vertical' => 'Vertical'])
+                ->label(__('layup::widgets.flip-card.flip_direction'))
+                ->options(['horizontal' => __('layup::widgets.flip-card.horizontal'), 'vertical' => __('layup::widgets.flip-card.vertical')])
                 ->default('horizontal'),
             Select::make('height')
-                ->label('Card Height')
-                ->options([
-                    '200px' => 'Small',
-                    '300px' => 'Medium',
-                    '400px' => 'Large',
-                ])
+                ->label(__('layup::widgets.flip-card.card_height'))
+                ->options(['200px' => __('layup::widgets.flip-card.small'),
+                    '300px' => __('layup::widgets.flip-card.medium'),
+                    '400px' => __('layup::widgets.flip-card.large'),])
                 ->default('300px'),
         ];
     }

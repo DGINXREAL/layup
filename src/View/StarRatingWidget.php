@@ -16,7 +16,7 @@ class StarRatingWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Star Rating';
+        return __('layup::widgets.labels.star-rating');
     }
 
     public static function getIcon(): string
@@ -26,34 +26,32 @@ class StarRatingWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Select::make('rating')
-                ->label('Rating')
-                ->options([
-                    '0.5' => '½', '1' => '1', '1.5' => '1½', '2' => '2', '2.5' => '2½',
-                    '3' => '3', '3.5' => '3½', '4' => '4', '4.5' => '4½', '5' => '5',
-                ])
+                ->label(__('layup::widgets.star-rating.rating'))
+                ->options(['0.5' => __('layup::widgets.star-rating.'), '1' => __('layup::widgets.star-rating.1'), '1.5' => __('layup::widgets.star-rating.1_5_1'), '2' => __('layup::widgets.star-rating.2'), '2.5' => __('layup::widgets.star-rating.2_5_2'),
+                    '3' => __('layup::widgets.star-rating.3'), '3.5' => __('layup::widgets.star-rating.3_5_3'), '4' => __('layup::widgets.star-rating.4'), '4.5' => __('layup::widgets.star-rating.4_5_4'), '5' => __('layup::widgets.star-rating.5'),])
                 ->default('5')
                 ->required(),
             Select::make('max')
-                ->label('Max Stars')
-                ->options(['5' => '5', '10' => '10'])
+                ->label(__('layup::widgets.star-rating.max_stars'))
+                ->options(['5' => __('layup::widgets.star-rating.5'), '10' => __('layup::widgets.star-rating.10')])
                 ->default('5'),
             TextInput::make('label')
-                ->label('Label')
-                ->placeholder('e.g. 4.8 out of 5')
+                ->label(__('layup::widgets.star-rating.label'))
+                ->placeholder(__('layup::widgets.star-rating.e_g_4_8_out_of_5'))
                 ->nullable(),
             Select::make('size')
-                ->label('Size')
-                ->options(['sm' => 'Small', 'md' => 'Medium', 'lg' => 'Large'])
+                ->label(__('layup::widgets.star-rating.size'))
+                ->options(['sm' => __('layup::widgets.star-rating.small'), 'md' => __('layup::widgets.star-rating.medium'), 'lg' => __('layup::widgets.star-rating.large')])
                 ->default('md'),
             TextInput::make('color')
-                ->label('Star Color')
+                ->label(__('layup::widgets.star-rating.star_color'))
                 ->type('color')
                 ->default('#facc15'),
         ];

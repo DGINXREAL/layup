@@ -16,7 +16,7 @@ class StatCardWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Stat Card';
+        return __('layup::widgets.labels.stat-card');
     }
 
     public static function getIcon(): string
@@ -26,36 +26,34 @@ class StatCardWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('value')
-                ->label('Value')
-                ->placeholder('$1.2M')
+                ->label(__('layup::widgets.stat-card.value'))
+                ->placeholder(__('layup::widgets.stat-card.1_2m'))
                 ->required(),
             TextInput::make('label')
-                ->label('Label')
-                ->placeholder('Revenue')
+                ->label(__('layup::widgets.stat-card.label'))
+                ->placeholder(__('layup::widgets.stat-card.revenue'))
                 ->required(),
             TextInput::make('description')
-                ->label('Description / Change')
-                ->placeholder('+12% from last month')
+                ->label(__('layup::widgets.stat-card.description_change'))
+                ->placeholder(__('layup::widgets.stat-card.12_from_last_month'))
                 ->nullable(),
             Select::make('trend')
-                ->label('Trend')
-                ->options([
-                    '' => 'None',
-                    'up' => '↑ Up (green)',
-                    'down' => '↓ Down (red)',
-                    'neutral' => '→ Neutral (gray)',
-                ])
+                ->label(__('layup::widgets.stat-card.trend'))
+                ->options(['' => __('layup::widgets.stat-card.none'),
+                    'up' => __('layup::widgets.stat-card.up_green'),
+                    'down' => __('layup::widgets.stat-card.down_red'),
+                    'neutral' => __('layup::widgets.stat-card.neutral_gray'),])
                 ->default('')
                 ->nullable(),
             TextInput::make('accent_color')
-                ->label('Accent Color')
+                ->label(__('layup::widgets.stat-card.accent_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

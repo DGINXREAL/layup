@@ -16,7 +16,7 @@ class TextColumnsWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Text Columns';
+        return __('layup::widgets.labels.text-columns');
     }
 
     public static function getIcon(): string
@@ -26,15 +26,15 @@ class TextColumnsWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            RichEditor::make('content')->label('Content')->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'h2', 'h3'])->columnSpanFull(),
-            Select::make('columns')->label('Columns')->options(['2' => '2', '3' => '3', '4' => '4'])->default('2'),
-            Select::make('gap')->label('Gap')->options(['1rem' => 'Small', '2rem' => 'Medium', '3rem' => 'Large'])->default('2rem'),
+            RichEditor::make('content')->label(__('layup::widgets.text-columns.content'))->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'h2', 'h3'])->columnSpanFull(),
+            Select::make('columns')->label(__('layup::widgets.text-columns.columns'))->options(['2' => __('layup::widgets.text-columns.2'), '3' => __('layup::widgets.text-columns.3'), '4' => __('layup::widgets.text-columns.4')])->default('2'),
+            Select::make('gap')->label(__('layup::widgets.text-columns.gap'))->options(['1rem' => __('layup::widgets.text-columns.small'), '2rem' => __('layup::widgets.text-columns.medium'), '3rem' => __('layup::widgets.text-columns.large')])->default('2rem'),
         ];
     }
 

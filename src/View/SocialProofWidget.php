@@ -15,7 +15,7 @@ class SocialProofWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Social Proof Bar';
+        return __('layup::widgets.labels.social-proof');
     }
 
     public static function getIcon(): string
@@ -25,17 +25,17 @@ class SocialProofWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            TextInput::make('rating')->label('Rating')->default('4.9')->required(),
-            TextInput::make('review_count')->label('Review Count')->default('2,300+')->required(),
-            TextInput::make('platform')->label('Platform')->default('Trustpilot')->required(),
-            TextInput::make('badge_text')->label('Badge Text')->default('Excellent')->nullable(),
-            TextInput::make('link_url')->label('Link URL')->url()->nullable(),
+            TextInput::make('rating')->label(__('layup::widgets.social-proof.rating'))->default('4.9')->required(),
+            TextInput::make('review_count')->label(__('layup::widgets.social-proof.review_count'))->default('2,300+')->required(),
+            TextInput::make('platform')->label(__('layup::widgets.social-proof.platform'))->default('Trustpilot')->required(),
+            TextInput::make('badge_text')->label(__('layup::widgets.social-proof.badge_text'))->default('Excellent')->nullable(),
+            TextInput::make('link_url')->label(__('layup::widgets.social-proof.link_url'))->url()->nullable(),
         ];
     }
 

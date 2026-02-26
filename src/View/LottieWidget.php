@@ -17,7 +17,7 @@ class LottieWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Lottie Animation';
+        return __('layup::widgets.labels.lottie');
     }
 
     public static function getIcon(): string
@@ -27,33 +27,31 @@ class LottieWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('src')
-                ->label('Lottie JSON URL')
+                ->label(__('layup::widgets.lottie.lottie_json_url'))
                 ->url()
-                ->helperText('URL to a .json Lottie file (from LottieFiles, etc.)')
+                ->helperText(__('layup::widgets.lottie.url_to_a_json_lottie_file_from_lottiefiles_etc'))
                 ->required()
                 ->columnSpanFull(),
             Toggle::make('autoplay')
-                ->label('Autoplay')
+                ->label(__('layup::widgets.lottie.autoplay'))
                 ->default(true),
             Toggle::make('loop')
-                ->label('Loop')
+                ->label(__('layup::widgets.lottie.loop'))
                 ->default(true),
             Select::make('width')
-                ->label('Width')
-                ->options([
-                    '100px' => 'Tiny',
-                    '200px' => 'Small',
-                    '300px' => 'Medium',
-                    '400px' => 'Large',
-                    '100%' => 'Full Width',
-                ])
+                ->label(__('layup::widgets.lottie.width'))
+                ->options(['100px' => __('layup::widgets.lottie.tiny'),
+                    '200px' => __('layup::widgets.lottie.small'),
+                    '300px' => __('layup::widgets.lottie.medium'),
+                    '400px' => __('layup::widgets.lottie.large'),
+                    '100%' => __('layup::widgets.lottie.full_width'),])
                 ->default('300px'),
         ];
     }

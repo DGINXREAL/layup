@@ -25,11 +25,11 @@
                 </div>
             @endforeach
             <button type="submit" class="bg-blue-600 dark:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">
-                {{ $data['submit_text'] ?? 'Send Message' }}
+                {{ $data['submit_text'] ?? __('layup::frontend.contact_form.send_message') }}
             </button>
         </div>
     </template>
     <div x-show="submitted" x-transition class="text-center py-8">
-        <div class="text-green-600 dark:text-green-400 text-lg font-semibold">✓ {{ $data['success_message'] ?? 'Message sent!' }}</div>
+        <div class="text-green-600 dark:text-green-400 text-lg font-semibold">✓ {{ $data['success_message'] ?? __('layup::frontend.contact_form.message_sent') }}</div>
     </div>
 </form>

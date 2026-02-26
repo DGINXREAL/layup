@@ -18,7 +18,7 @@
         <div class="absolute inset-0 rounded-xl flex flex-col items-center justify-center p-6 text-white dark:text-white text-center" style="backface-visibility: hidden; transform: {{ $dir }}; background-color: {{ $data['back_bg'] ?? '#1e40af' }}">
             @if(!empty($data['back_title']))<h3 class="text-xl font-bold mb-2">{{ $data['back_title'] }}</h3>@endif
             @if(!empty($data['back_description']))<p class="text-white/80 dark:text-white/80 mb-4">{{ $data['back_description'] }}</p>@endif
-            @if(!empty($data['link_url']))<a href="{{ $data['link_url'] }}" class="bg-white/20 dark:bg-white/20 hover:bg-white/30 dark:hover:bg-white/30 px-4 py-2 rounded-lg text-sm transition-colors">{{ $data['link_text'] ?? 'Learn more' }}</a>@endif
+            @if(!empty($data['link_url']))<a href="{{ $data['link_url'] }}" class="bg-white/20 dark:bg-white/20 hover:bg-white/30 dark:hover:bg-white/30 px-4 py-2 rounded-lg text-sm transition-colors">{{ $data['link_text'] ?? __('layup::frontend.flip_card.learn_more') }}</a>@endif
         </div>
     </div>
 </div>

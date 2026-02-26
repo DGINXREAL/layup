@@ -15,7 +15,7 @@ class RichTextWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Rich Text';
+        return __('layup::widgets.labels.rich-text');
     }
 
     public static function getIcon(): string
@@ -25,14 +25,14 @@ class RichTextWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             RichEditor::make('content')
-                ->label('Content')
+                ->label(__('layup::widgets.rich-text.content'))
                 ->toolbarButtons([
                     'bold', 'italic', 'underline', 'strike',
                     'h2', 'h3',

@@ -17,7 +17,7 @@ class BeforeAfterWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Before / After';
+        return __('layup::widgets.labels.before-after');
     }
 
     public static function getIcon(): string
@@ -27,35 +27,33 @@ class BeforeAfterWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             FileUpload::make('before_image')
-                ->label('Before Image')
+                ->label(__('layup::widgets.before-after.before_image'))
                 ->image()
                 ->directory('layup/before-after')
                 ->required(),
             FileUpload::make('after_image')
-                ->label('After Image')
+                ->label(__('layup::widgets.before-after.after_image'))
                 ->image()
                 ->directory('layup/before-after')
                 ->required(),
             TextInput::make('before_label')
-                ->label('Before Label')
+                ->label(__('layup::widgets.before-after.before_label'))
                 ->default('Before'),
             TextInput::make('after_label')
-                ->label('After Label')
+                ->label(__('layup::widgets.before-after.after_label'))
                 ->default('After'),
             Select::make('initial_position')
-                ->label('Initial Slider Position')
-                ->options([
-                    '25' => '25%',
-                    '50' => '50%',
-                    '75' => '75%',
-                ])
+                ->label(__('layup::widgets.before-after.initial_slider_position'))
+                ->options(['25' => __('layup::widgets.before-after.25'),
+                    '50' => __('layup::widgets.before-after.50'),
+                    '75' => __('layup::widgets.before-after.75'),])
                 ->default('50'),
         ];
     }

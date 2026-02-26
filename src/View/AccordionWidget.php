@@ -18,7 +18,7 @@ class AccordionWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Accordion';
+        return __('layup::widgets.labels.accordion');
     }
 
     public static function getIcon(): string
@@ -28,27 +28,27 @@ class AccordionWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('items')
-                ->label('Items')
+                ->label(__('layup::widgets.accordion.items'))
                 ->schema([
                     TextInput::make('title')
-                        ->label('Title')
+                        ->label(__('layup::widgets.accordion.title'))
                         ->required(),
                     RichEditor::make('content')
-                        ->label('Content')
+                        ->label(__('layup::widgets.accordion.content'))
                         ->columnSpanFull(),
                 ])
                 ->defaultItems(2)
                 ->collapsible()
                 ->columnSpanFull(),
             Toggle::make('open_first')
-                ->label('Open first item by default')
+                ->label(__('layup::widgets.accordion.open_first_item_by_default'))
                 ->default(true),
         ];
     }

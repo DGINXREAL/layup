@@ -22,12 +22,12 @@ class ListPages extends ListRecords
         return [
             Actions\CreateAction::make(),
             Actions\Action::make('import')
-                ->label('Import')
+                ->label(__('layup::resource.import'))
                 ->icon('heroicon-o-arrow-up-tray')
                 ->color('gray')
                 ->form([
                     FileUpload::make('file')
-                        ->label('JSON File')
+                        ->label(__('layup::resource.json_file'))
                         ->acceptedFileTypes(['application/json'])
                         ->required(),
                 ])
@@ -35,7 +35,7 @@ class ListPages extends ListRecords
                     $path = storage_path('app/' . $data['file']);
 
                     if (! file_exists($path)) {
-                        Notification::make()->danger()->title('File not found')->send();
+                        Notification::make()->danger()->title(__('layup::notifications.file_not_found'))->send();
 
                         return;
                     }
@@ -44,14 +44,14 @@ class ListPages extends ListRecords
                     @unlink($path);
 
                     if (! $json || ! isset($json['content'])) {
-                        Notification::make()->danger()->title('Invalid Layup JSON file')->send();
+                        Notification::make()->danger()->title(__('layup::notifications.invalid_json'))->send();
 
                         return;
                     }
 
                     $validator = new ContentValidator;
                     if (! $validator->validate($json['content'])) {
-                        Notification::make()->danger()->title('Invalid page content structure')->send();
+                        Notification::make()->danger()->title(__('layup::notifications.invalid_content_structure'))->send();
 
                         return;
                     }
@@ -72,7 +72,7 @@ class ListPages extends ListRecords
                         'status' => 'draft',
                     ]);
 
-                    Notification::make()->success()->title('Page imported successfully')->send();
+                    Notification::make()->success()->title(__('layup::notifications.page_imported'))->send();
                 }),
         ];
     }

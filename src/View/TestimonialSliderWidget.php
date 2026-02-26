@@ -19,7 +19,7 @@ class TestimonialSliderWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Testimonial Slider';
+        return __('layup::widgets.labels.testimonial-slider');
     }
 
     public static function getIcon(): string
@@ -29,32 +29,32 @@ class TestimonialSliderWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Repeater::make('testimonials')
-                ->label('Testimonials')
+                ->label(__('layup::widgets.testimonial-slider.testimonials'))
                 ->schema([
                     Textarea::make('quote')
-                        ->label('Quote')
+                        ->label(__('layup::widgets.testimonial-slider.quote'))
                         ->required()
                         ->rows(3),
                     TextInput::make('name')
-                        ->label('Name')
+                        ->label(__('layup::widgets.testimonial-slider.name'))
                         ->required(),
                     TextInput::make('title')
-                        ->label('Title / Company')
+                        ->label(__('layup::widgets.testimonial-slider.title_company'))
                         ->nullable(),
                     FileUpload::make('avatar')
-                        ->label('Avatar')
+                        ->label(__('layup::widgets.testimonial-slider.avatar'))
                         ->image()
                         ->avatar()
                         ->directory('layup/testimonials'),
                     TextInput::make('rating')
-                        ->label('Rating (1-5)')
+                        ->label(__('layup::widgets.testimonial-slider.rating_1_5'))
                         ->numeric()
                         ->minValue(1)
                         ->maxValue(5)
@@ -63,13 +63,11 @@ class TestimonialSliderWidget extends BaseWidget
                 ->defaultItems(3)
                 ->columnSpanFull(),
             Select::make('autoplay_speed')
-                ->label('Autoplay Speed')
-                ->options([
-                    '0' => 'No Autoplay',
-                    '3000' => '3 seconds',
-                    '5000' => '5 seconds',
-                    '8000' => '8 seconds',
-                ])
+                ->label(__('layup::widgets.testimonial-slider.autoplay_speed'))
+                ->options(['0' => __('layup::widgets.testimonial-slider.no_autoplay'),
+                    '3000' => __('layup::widgets.testimonial-slider.3_seconds'),
+                    '5000' => __('layup::widgets.testimonial-slider.5_seconds'),
+                    '8000' => __('layup::widgets.testimonial-slider.8_seconds'),])
                 ->default('5000'),
         ];
     }

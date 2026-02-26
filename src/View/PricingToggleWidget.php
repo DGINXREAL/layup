@@ -17,7 +17,7 @@ class PricingToggleWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Pricing Toggle';
+        return __('layup::widgets.labels.pricing-toggle');
     }
 
     public static function getIcon(): string
@@ -27,52 +27,52 @@ class PricingToggleWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('monthly_label')
-                ->label('Monthly Label')
+                ->label(__('layup::widgets.pricing-toggle.monthly_label'))
                 ->default('Monthly'),
             TextInput::make('annual_label')
-                ->label('Annual Label')
+                ->label(__('layup::widgets.pricing-toggle.annual_label'))
                 ->default('Annual'),
             TextInput::make('discount_badge')
-                ->label('Discount Badge')
-                ->placeholder('Save 20%')
+                ->label(__('layup::widgets.pricing-toggle.discount_badge'))
+                ->placeholder(__('layup::widgets.pricing-toggle.save_20'))
                 ->nullable(),
             Repeater::make('plans')
-                ->label('Plans')
+                ->label(__('layup::widgets.pricing-toggle.plans'))
                 ->schema([
                     TextInput::make('name')
-                        ->label('Plan Name')
+                        ->label(__('layup::widgets.pricing-toggle.plan_name'))
                         ->required(),
                     TextInput::make('monthly_price')
-                        ->label('Monthly Price')
+                        ->label(__('layup::widgets.pricing-toggle.monthly_price'))
                         ->required(),
                     TextInput::make('annual_price')
-                        ->label('Annual Price')
+                        ->label(__('layup::widgets.pricing-toggle.annual_price'))
                         ->required(),
                     TextInput::make('features')
-                        ->label('Features (comma-separated)')
+                        ->label(__('layup::widgets.pricing-toggle.features_comma_separated'))
                         ->nullable(),
                     TextInput::make('cta_text')
-                        ->label('CTA Text')
+                        ->label(__('layup::widgets.pricing-toggle.cta_text'))
                         ->default('Get Started'),
                     TextInput::make('cta_url')
-                        ->label('CTA URL')
+                        ->label(__('layup::widgets.pricing-toggle.cta_url'))
                         ->url()
                         ->nullable(),
                     Toggle::make('featured')
-                        ->label('Featured / Popular')
+                        ->label(__('layup::widgets.pricing-toggle.featured_popular'))
                         ->default(false),
                 ])
                 ->defaultItems(3)
                 ->columnSpanFull(),
             TextInput::make('accent_color')
-                ->label('Accent Color')
+                ->label(__('layup::widgets.pricing-toggle.accent_color'))
                 ->type('color')
                 ->default('#3b82f6'),
         ];

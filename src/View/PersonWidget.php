@@ -17,7 +17,7 @@ class PersonWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Person';
+        return __('layup::widgets.labels.person');
     }
 
     public static function getIcon(): string
@@ -27,43 +27,43 @@ class PersonWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('name')
-                ->label('Name')
+                ->label(__('layup::widgets.person.name'))
                 ->required(),
             TextInput::make('role')
-                ->label('Role / Position')
+                ->label(__('layup::widgets.person.role_position'))
                 ->nullable(),
             FileUpload::make('photo')
-                ->label('Photo')
+                ->label(__('layup::widgets.person.photo'))
                 ->image()
                 ->directory('layup/people'),
             RichEditor::make('bio')
-                ->label('Bio')
+                ->label(__('layup::widgets.person.bio'))
                 ->columnSpanFull(),
             TextInput::make('email')
-                ->label('Email')
+                ->label(__('layup::widgets.person.email'))
                 ->email()
                 ->nullable(),
             TextInput::make('website')
-                ->label('Website')
+                ->label(__('layup::widgets.person.website'))
                 ->url()
                 ->nullable(),
             TextInput::make('facebook')
-                ->label('Facebook URL')
+                ->label(__('layup::widgets.person.facebook_url'))
                 ->url()
                 ->nullable(),
             TextInput::make('twitter')
-                ->label('X / Twitter URL')
+                ->label(__('layup::widgets.person.x_twitter_url'))
                 ->url()
                 ->nullable(),
             TextInput::make('linkedin')
-                ->label('LinkedIn URL')
+                ->label(__('layup::widgets.person.linkedin_url'))
                 ->url()
                 ->nullable(),
         ];

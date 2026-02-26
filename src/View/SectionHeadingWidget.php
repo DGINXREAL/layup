@@ -17,7 +17,7 @@ class SectionHeadingWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Section Heading';
+        return __('layup::widgets.labels.section-heading');
     }
 
     public static function getIcon(): string
@@ -27,18 +27,18 @@ class SectionHeadingWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
-            TextInput::make('heading')->label('Heading')->required(),
-            TextInput::make('subtitle')->label('Subtitle')->nullable(),
-            Select::make('alignment')->label('Alignment')->options(['left' => 'Left', 'center' => 'Center', 'right' => 'Right'])->default('center'),
-            Toggle::make('show_divider')->label('Show Divider')->default(true),
-            TextInput::make('divider_color')->label('Divider Color')->type('color')->default('#3b82f6'),
-            Select::make('heading_tag')->label('Heading Tag')->options(['h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3'])->default('h2'),
+            TextInput::make('heading')->label(__('layup::widgets.section-heading.heading'))->required(),
+            TextInput::make('subtitle')->label(__('layup::widgets.section-heading.subtitle'))->nullable(),
+            Select::make('alignment')->label(__('layup::widgets.section-heading.alignment'))->options(['left' => __('layup::widgets.section-heading.left'), 'center' => __('layup::widgets.section-heading.center'), 'right' => __('layup::widgets.section-heading.right')])->default('center'),
+            Toggle::make('show_divider')->label(__('layup::widgets.section-heading.show_divider'))->default(true),
+            TextInput::make('divider_color')->label(__('layup::widgets.section-heading.divider_color'))->type('color')->default('#3b82f6'),
+            Select::make('heading_tag')->label(__('layup::widgets.section-heading.heading_tag'))->options(['h1' => __('layup::widgets.section-heading.h1'), 'h2' => __('layup::widgets.section-heading.h2'), 'h3' => __('layup::widgets.section-heading.h3')])->default('h2'),
         ];
     }
 

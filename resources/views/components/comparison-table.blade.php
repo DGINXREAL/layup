@@ -10,7 +10,7 @@
     <table class="w-full text-sm border-collapse">
         <thead>
             <tr>
-                <th class="text-left p-3 border-b-2 border-gray-200 dark:border-gray-700">Feature</th>
+                <th class="text-left p-3 border-b-2 border-gray-200 dark:border-gray-700">{{ __('layup::frontend.comparison_table.feature') }}</th>
                 <th class="text-center p-3 border-b-2 font-bold" style="border-color: {{ $color }}; color: {{ $color }}">{{ $data['column_a'] ?? 'Us' }}</th>
                 <th class="text-center p-3 border-b-2 border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">{{ $data['column_b'] ?? 'Them' }}</th>
             </tr>

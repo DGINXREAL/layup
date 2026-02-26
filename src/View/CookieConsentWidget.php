@@ -16,7 +16,7 @@ class CookieConsentWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Cookie Consent';
+        return __('layup::widgets.labels.cookie-consent');
     }
 
     public static function getIcon(): string
@@ -26,40 +26,38 @@ class CookieConsentWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('message')
-                ->label('Message')
+                ->label(__('layup::widgets.cookie-consent.message'))
                 ->default('We use cookies to enhance your experience. By continuing, you agree to our use of cookies.')
                 ->required()
                 ->columnSpanFull(),
             TextInput::make('accept_text')
-                ->label('Accept Button Text')
+                ->label(__('layup::widgets.cookie-consent.accept_button_text'))
                 ->default('Accept'),
             TextInput::make('decline_text')
-                ->label('Decline Button Text')
+                ->label(__('layup::widgets.cookie-consent.decline_button_text'))
                 ->default('Decline'),
             TextInput::make('policy_url')
-                ->label('Privacy Policy URL')
+                ->label(__('layup::widgets.cookie-consent.privacy_policy_url'))
                 ->url()
                 ->nullable(),
             TextInput::make('policy_text')
-                ->label('Policy Link Text')
+                ->label(__('layup::widgets.cookie-consent.policy_link_text'))
                 ->default('Privacy Policy'),
             TextInput::make('bg_color')
-                ->label('Background Color')
+                ->label(__('layup::widgets.cookie-consent.background_color'))
                 ->type('color')
                 ->default('#1f2937'),
             Select::make('position')
-                ->label('Position')
-                ->options([
-                    'bottom' => 'Bottom',
-                    'top' => 'Top',
-                ])
+                ->label(__('layup::widgets.cookie-consent.position'))
+                ->options(['bottom' => __('layup::widgets.cookie-consent.bottom'),
+                    'top' => __('layup::widgets.cookie-consent.top'),])
                 ->default('bottom'),
         ];
     }

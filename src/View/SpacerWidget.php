@@ -15,7 +15,7 @@ class SpacerWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Spacer';
+        return __('layup::widgets.labels.spacer');
     }
 
     public static function getIcon(): string
@@ -25,22 +25,20 @@ class SpacerWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'layout';
+        return __('layup::widgets.categories.layout');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             Select::make('height')
-                ->label('Height')
-                ->options([
-                    '1rem' => 'Extra Small (1rem)',
-                    '2rem' => 'Small (2rem)',
-                    '3rem' => 'Medium (3rem)',
-                    '4rem' => 'Large (4rem)',
-                    '6rem' => 'Extra Large (6rem)',
-                    '8rem' => 'Huge (8rem)',
-                ])
+                ->label(__('layup::widgets.spacer.height'))
+                ->options(['1rem' => __('layup::widgets.spacer.extra_small_1rem'),
+                    '2rem' => __('layup::widgets.spacer.small_2rem'),
+                    '3rem' => __('layup::widgets.spacer.medium_3rem'),
+                    '4rem' => __('layup::widgets.spacer.large_4rem'),
+                    '6rem' => __('layup::widgets.spacer.extra_large_6rem'),
+                    '8rem' => __('layup::widgets.spacer.huge_8rem'),])
                 ->default('2rem'),
         ];
     }

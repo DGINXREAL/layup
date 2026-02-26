@@ -17,7 +17,7 @@ class MapWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Map';
+        return __('layup::widgets.labels.map');
     }
 
     public static function getIcon(): string
@@ -27,48 +27,42 @@ class MapWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'media';
+        return __('layup::widgets.categories.media');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('address')
-                ->label('Address')
-                ->helperText('Enter an address or place name')
+                ->label(__('layup::widgets.map.address'))
+                ->helperText(__('layup::widgets.map.enter_an_address_or_place_name'))
                 ->nullable(),
             Textarea::make('embed')
-                ->label('Embed Code')
-                ->helperText('Paste a Google Maps or other embed iframe. Overrides address if set.')
+                ->label(__('layup::widgets.map.embed_code'))
+                ->helperText(__('layup::widgets.map.paste_a_google_maps_or_other_embed_iframe_override'))
                 ->rows(4)
                 ->nullable()
                 ->columnSpanFull(),
             Select::make('height')
-                ->label('Height')
-                ->options([
-                    '200px' => 'Small (200px)',
-                    '300px' => 'Medium (300px)',
-                    '400px' => 'Large (400px)',
-                    '500px' => 'Extra Large (500px)',
-                ])
+                ->label(__('layup::widgets.map.height'))
+                ->options(['200px' => __('layup::widgets.map.small_200px'),
+                    '300px' => __('layup::widgets.map.medium_300px'),
+                    '400px' => __('layup::widgets.map.large_400px'),
+                    '500px' => __('layup::widgets.map.extra_large_500px'),])
                 ->default('300px'),
             Select::make('zoom')
-                ->label('Zoom Level')
-                ->options([
-                    '10' => 'City',
-                    '13' => 'Neighborhood',
-                    '15' => 'Street',
-                    '18' => 'Building',
-                ])
+                ->label(__('layup::widgets.map.zoom_level'))
+                ->options(['10' => __('layup::widgets.map.city'),
+                    '13' => __('layup::widgets.map.neighborhood'),
+                    '15' => __('layup::widgets.map.street'),
+                    '18' => __('layup::widgets.map.building'),])
                 ->default('13'),
             Select::make('map_type')
-                ->label('Map Type')
-                ->options([
-                    'roadmap' => 'Roadmap',
-                    'satellite' => 'Satellite',
-                    'terrain' => 'Terrain',
-                    'hybrid' => 'Hybrid',
-                ])
+                ->label(__('layup::widgets.map.map_type'))
+                ->options(['roadmap' => __('layup::widgets.map.roadmap'),
+                    'satellite' => __('layup::widgets.map.satellite'),
+                    'terrain' => __('layup::widgets.map.terrain'),
+                    'hybrid' => __('layup::widgets.map.hybrid'),])
                 ->default('roadmap'),
         ];
     }

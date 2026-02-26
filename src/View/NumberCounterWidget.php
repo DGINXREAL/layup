@@ -16,7 +16,7 @@ class NumberCounterWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Number Counter';
+        return __('layup::widgets.labels.number-counter');
     }
 
     public static function getIcon(): string
@@ -26,30 +26,30 @@ class NumberCounterWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'content';
+        return __('layup::widgets.categories.content');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('number')
-                ->label('Number')
+                ->label(__('layup::widgets.number-counter.number'))
                 ->numeric()
                 ->required()
                 ->default(100),
             TextInput::make('prefix')
-                ->label('Prefix')
-                ->placeholder('e.g. $')
+                ->label(__('layup::widgets.number-counter.prefix'))
+                ->placeholder(__('layup::widgets.number-counter.e_g'))
                 ->nullable(),
             TextInput::make('suffix')
-                ->label('Suffix')
-                ->placeholder('e.g. % or +')
+                ->label(__('layup::widgets.number-counter.suffix'))
+                ->placeholder(__('layup::widgets.number-counter.e_g_or'))
                 ->nullable(),
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('layup::widgets.number-counter.title'))
                 ->nullable(),
             Toggle::make('animate')
-                ->label('Animate on scroll')
+                ->label(__('layup::widgets.number-counter.animate_on_scroll'))
                 ->default(true),
         ];
     }

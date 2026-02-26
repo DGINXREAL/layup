@@ -16,7 +16,7 @@ class SearchWidget extends BaseWidget
 
     public static function getLabel(): string
     {
-        return 'Search';
+        return __('layup::widgets.labels.search');
     }
 
     public static function getIcon(): string
@@ -26,32 +26,30 @@ class SearchWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return 'interactive';
+        return __('layup::widgets.categories.interactive');
     }
 
     public static function getContentFormSchema(): array
     {
         return [
             TextInput::make('placeholder')
-                ->label('Placeholder Text')
+                ->label(__('layup::widgets.search.placeholder_text'))
                 ->default('Search...')
                 ->nullable(),
             TextInput::make('action')
-                ->label('Form Action URL')
-                ->helperText('Where the search form submits to')
+                ->label(__('layup::widgets.search.form_action_url'))
+                ->helperText(__('layup::widgets.search.where_the_search_form_submits_to'))
                 ->default('/search')
                 ->nullable(),
             TextInput::make('param')
-                ->label('Query Parameter')
+                ->label(__('layup::widgets.search.query_parameter'))
                 ->default('q')
                 ->nullable(),
             Select::make('size')
-                ->label('Size')
-                ->options([
-                    'sm' => 'Small',
-                    'md' => 'Medium',
-                    'lg' => 'Large',
-                ])
+                ->label(__('layup::widgets.search.size'))
+                ->options(['sm' => __('layup::widgets.search.small'),
+                    'md' => __('layup::widgets.search.medium'),
+                    'lg' => __('layup::widgets.search.large'),])
                 ->default('md'),
         ];
     }

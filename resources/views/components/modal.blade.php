@@ -17,7 +17,7 @@
     <button @click="open = true"
             class="text-white font-medium px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
             style="background-color: {{ $btnBg }}">
-        {{ $data['trigger_text'] ?? 'Open' }}
+        {{ $data['trigger_text'] ?? __('layup::frontend.modal.open') }}
     </button>
 
     <template x-teleport="body">
