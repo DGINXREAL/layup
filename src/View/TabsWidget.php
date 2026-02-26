@@ -27,7 +27,7 @@ class TabsWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return __('layup::widgets.categories.content');
+        return 'content';
     }
 
     public static function getContentFormSchema(): array

@@ -27,7 +27,7 @@ class CodeWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return __('layup::widgets.categories.advanced');
+        return 'advanced';
     }
 
     public static function getContentFormSchema(): array

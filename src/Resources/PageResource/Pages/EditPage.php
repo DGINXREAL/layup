@@ -866,6 +866,13 @@ class EditPage extends EditRecord
             'saving' => __('layup::builder.saving'),
             'saved' => __('layup::builder.saved'),
             'row_label' => __('layup::builder.row_label'),
+            'categories' => [
+                'content' => __('layup::widgets.categories.content'),
+                'media' => __('layup::widgets.categories.media'),
+                'interactive' => __('layup::widgets.categories.interactive'),
+                'layout' => __('layup::widgets.categories.layout'),
+                'advanced' => __('layup::widgets.categories.advanced'),
+            ],
         ];
     }
 }

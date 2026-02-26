@@ -28,7 +28,7 @@ class ContactFormWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return __('layup::widgets.categories.interactive');
+        return 'interactive';
     }
 
     public static function getContentFormSchema(): array

@@ -32,7 +32,7 @@ abstract class BaseWidget extends BaseView implements Widget
 
     public static function getCategory(): string
     {
-        return __('layup::widgets.categories.content');
+        return 'content';
     }
 
     public static function getDefaultData(): array

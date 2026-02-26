@@ -587,7 +587,7 @@
                 const order = ['content', 'media', 'interactive', 'layout', 'advanced'];
                 this.widgetRegistry.forEach(w => {
                     const cat = w.category || 'content';
-                    if (!cats[cat]) cats[cat] = { name: cat, widgets: [] };
+                    if (!cats[cat]) cats[cat] = { name: (this.translations.categories && this.translations.categories[cat]) || cat, widgets: [] };
                     cats[cat].widgets.push(w);
                 });
                 return order.filter(c => cats[c]).map(c => cats[c]).concat(Object.keys(cats).filter(c => !order.includes(c)).map(c => cats[c]));

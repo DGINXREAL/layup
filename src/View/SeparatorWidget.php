@@ -26,7 +26,7 @@ class SeparatorWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return __('layup::widgets.categories.layout');
+        return 'layout';
     }
 
     public static function getContentFormSchema(): array

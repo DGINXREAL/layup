@@ -30,7 +30,7 @@ class SliderWidget extends BaseWidget
 
     public static function getCategory(): string
     {
-        return __('layup::widgets.categories.media');
+        return 'media';
     }
 
     public static function getContentFormSchema(): array
