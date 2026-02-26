@@ -209,7 +209,6 @@
 /* ── Canvas ── */
 .lyp-canvas {
     flex: 1;
-    overflow: auto;
     background: var(--gray-50);
     padding: 1.5rem;
 }
