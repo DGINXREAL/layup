@@ -52,7 +52,7 @@ class PricingTableWidget extends BaseWidget
                 ->options(['month' => __('layup::widgets.pricing-table.per_month'),
                     'year' => __('layup::widgets.pricing-table.per_year'),
                     'once' => __('layup::widgets.pricing-table.one_time'),
-                    'custom' => __('layup::widgets.pricing-table.custom'),])
+                    'custom' => __('layup::widgets.pricing-table.custom'), ])
                 ->default('month'),
             TextInput::make('period_custom')
                 ->label(__('layup::widgets.pricing-table.custom_period_text'))

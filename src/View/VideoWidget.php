@@ -44,7 +44,7 @@ class VideoWidget extends BaseWidget
                 ->options(['16/9' => __('layup::widgets.video.16_9_widescreen'),
                     '4/3' => __('layup::widgets.video.4_3_standard'),
                     '1/1' => __('layup::widgets.video.1_1_square'),
-                    '21/9' => __('layup::widgets.video.21_9_ultra_wide'),])
+                    '21/9' => __('layup::widgets.video.21_9_ultra_wide'), ])
                 ->default('16/9'),
             TextInput::make('title')
                 ->label(__('layup::widgets.video.title_caption')),

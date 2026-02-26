@@ -48,21 +48,21 @@ class MapWidget extends BaseWidget
                 ->options(['200px' => __('layup::widgets.map.small_200px'),
                     '300px' => __('layup::widgets.map.medium_300px'),
                     '400px' => __('layup::widgets.map.large_400px'),
-                    '500px' => __('layup::widgets.map.extra_large_500px'),])
+                    '500px' => __('layup::widgets.map.extra_large_500px'), ])
                 ->default('300px'),
             Select::make('zoom')
                 ->label(__('layup::widgets.map.zoom_level'))
                 ->options(['10' => __('layup::widgets.map.city'),
                     '13' => __('layup::widgets.map.neighborhood'),
                     '15' => __('layup::widgets.map.street'),
-                    '18' => __('layup::widgets.map.building'),])
+                    '18' => __('layup::widgets.map.building'), ])
                 ->default('13'),
             Select::make('map_type')
                 ->label(__('layup::widgets.map.map_type'))
                 ->options(['roadmap' => __('layup::widgets.map.roadmap'),
                     'satellite' => __('layup::widgets.map.satellite'),
                     'terrain' => __('layup::widgets.map.terrain'),
-                    'hybrid' => __('layup::widgets.map.hybrid'),])
+                    'hybrid' => __('layup::widgets.map.hybrid'), ])
                 ->default('roadmap'),
         ];
     }

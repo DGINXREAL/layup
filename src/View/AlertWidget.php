@@ -39,7 +39,7 @@ class AlertWidget extends BaseWidget
                 ->options(['info' => __('layup::widgets.alert.info'),
                     'success' => __('layup::widgets.alert.success'),
                     'warning' => __('layup::widgets.alert.warning'),
-                    'danger' => __('layup::widgets.alert.danger'),])
+                    'danger' => __('layup::widgets.alert.danger'), ])
                 ->default('info'),
             TextInput::make('title')
                 ->label(__('layup::widgets.alert.title'))

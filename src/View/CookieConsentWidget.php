@@ -57,7 +57,7 @@ class CookieConsentWidget extends BaseWidget
             Select::make('position')
                 ->label(__('layup::widgets.cookie-consent.position'))
                 ->options(['bottom' => __('layup::widgets.cookie-consent.bottom'),
-                    'top' => __('layup::widgets.cookie-consent.top'),])
+                    'top' => __('layup::widgets.cookie-consent.top'), ])
                 ->default('bottom'),
         ];
     }

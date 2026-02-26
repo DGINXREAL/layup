@@ -58,7 +58,7 @@ class ImageWidget extends BaseWidget
                     'zoom' => __('layup::widgets.image.zoom_in'),
                     'grayscale' => __('layup::widgets.image.grayscale_color'),
                     'brightness' => __('layup::widgets.image.brighten'),
-                    'blur' => __('layup::widgets.image.blur_clear'),])
+                    'blur' => __('layup::widgets.image.blur_clear'), ])
                 ->default('')
                 ->nullable(),
         ];

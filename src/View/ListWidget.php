@@ -46,7 +46,7 @@ class ListWidget extends BaseWidget
                     'number' => __('layup::widgets.list.1_numbered'),
                     'check' => __('layup::widgets.list.checkmarks'),
                     'arrow' => __('layup::widgets.list.arrows'),
-                    'none' => __('layup::widgets.list.no_markers'),])
+                    'none' => __('layup::widgets.list.no_markers'), ])
                 ->default('bullet'),
             TextInput::make('icon_color')
                 ->label(__('layup::widgets.list.marker_color'))

@@ -49,7 +49,7 @@ class MasonryWidget extends BaseWidget
                 ->options(['0.25rem' => __('layup::widgets.masonry.extra_small'),
                     '0.5rem' => __('layup::widgets.masonry.small'),
                     '1rem' => __('layup::widgets.masonry.medium'),
-                    '1.5rem' => __('layup::widgets.masonry.large'),])
+                    '1.5rem' => __('layup::widgets.masonry.large'), ])
                 ->default('0.5rem'),
             Toggle::make('rounded')
                 ->label(__('layup::widgets.masonry.rounded_corners'))

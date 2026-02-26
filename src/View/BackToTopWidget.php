@@ -43,7 +43,7 @@ class BackToTopWidget extends BaseWidget
             Select::make('position')
                 ->label(__('layup::widgets.back-to-top.position'))
                 ->options(['right' => __('layup::widgets.back-to-top.bottom_right'),
-                    'left' => __('layup::widgets.back-to-top.bottom_left'),])
+                    'left' => __('layup::widgets.back-to-top.bottom_left'), ])
                 ->default('right'),
             Select::make('size')
                 ->label(__('layup::widgets.back-to-top.size'))

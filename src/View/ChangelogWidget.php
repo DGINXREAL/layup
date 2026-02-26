@@ -39,7 +39,7 @@ class ChangelogWidget extends BaseWidget
                 ->schema([
                     TextInput::make('version')->label(__('layup::widgets.changelog.version'))->required(),
                     TextInput::make('date')->label(__('layup::widgets.changelog.date'))->required(),
-                    Select::make('type')->label(__('layup::widgets.changelog.type'))->options(['major' => __('layup::widgets.changelog.major'), 'minor' => __('layup::widgets.changelog.minor'), 'patch' => __('layup::widgets.changelog.patch'),])->default('minor'),
+                    Select::make('type')->label(__('layup::widgets.changelog.type'))->options(['major' => __('layup::widgets.changelog.major'), 'minor' => __('layup::widgets.changelog.minor'), 'patch' => __('layup::widgets.changelog.patch')])->default('minor'),
                     Textarea::make('changes')->label(__('layup::widgets.changelog.changes_one_per_line'))->rows(4)->required(),
                 ])
                 ->defaultItems(2)

@@ -49,7 +49,7 @@ class ModalWidget extends BaseWidget
                 ->options(['sm' => __('layup::widgets.modal.small_400px'),
                     'md' => __('layup::widgets.modal.medium_600px'),
                     'lg' => __('layup::widgets.modal.large_800px'),
-                    'xl' => __('layup::widgets.modal.extra_large_1000px'),])
+                    'xl' => __('layup::widgets.modal.extra_large_1000px'), ])
                 ->default('md'),
             TextInput::make('trigger_bg_color')
                 ->label(__('layup::widgets.modal.trigger_button_color'))

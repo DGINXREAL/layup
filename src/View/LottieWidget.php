@@ -51,7 +51,7 @@ class LottieWidget extends BaseWidget
                     '200px' => __('layup::widgets.lottie.small'),
                     '300px' => __('layup::widgets.lottie.medium'),
                     '400px' => __('layup::widgets.lottie.large'),
-                    '100%' => __('layup::widgets.lottie.full_width'),])
+                    '100%' => __('layup::widgets.lottie.full_width'), ])
                 ->default('300px'),
         ];
     }

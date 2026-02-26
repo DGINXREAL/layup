@@ -53,7 +53,7 @@ class BeforeAfterWidget extends BaseWidget
                 ->label(__('layup::widgets.before-after.initial_slider_position'))
                 ->options(['25' => __('layup::widgets.before-after.25'),
                     '50' => __('layup::widgets.before-after.50'),
-                    '75' => __('layup::widgets.before-after.75'),])
+                    '75' => __('layup::widgets.before-after.75'), ])
                 ->default('50'),
         ];
     }

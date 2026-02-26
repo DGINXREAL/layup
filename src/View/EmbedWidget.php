@@ -44,7 +44,7 @@ class EmbedWidget extends BaseWidget
                     '16/9' => __('layup::widgets.embed.16_9'),
                     '4/3' => __('layup::widgets.embed.4_3'),
                     '1/1' => __('layup::widgets.embed.1_1'),
-                    '21/9' => __('layup::widgets.embed.21_9'),])
+                    '21/9' => __('layup::widgets.embed.21_9'), ])
                 ->default('')
                 ->nullable(),
             TextInput::make('max_width')

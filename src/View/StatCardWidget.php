@@ -49,7 +49,7 @@ class StatCardWidget extends BaseWidget
                 ->options(['' => __('layup::widgets.stat-card.none'),
                     'up' => __('layup::widgets.stat-card.up_green'),
                     'down' => __('layup::widgets.stat-card.down_red'),
-                    'neutral' => __('layup::widgets.stat-card.neutral_gray'),])
+                    'neutral' => __('layup::widgets.stat-card.neutral_gray'), ])
                 ->default('')
                 ->nullable(),
             TextInput::make('accent_color')

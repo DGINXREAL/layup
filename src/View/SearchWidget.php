@@ -49,7 +49,7 @@ class SearchWidget extends BaseWidget
                 ->label(__('layup::widgets.search.size'))
                 ->options(['sm' => __('layup::widgets.search.small'),
                     'md' => __('layup::widgets.search.medium'),
-                    'lg' => __('layup::widgets.search.large'),])
+                    'lg' => __('layup::widgets.search.large'), ])
                 ->default('md'),
         ];
     }

@@ -42,12 +42,12 @@ class MarqueeWidget extends BaseWidget
                 ->options(['30' => __('layup::widgets.marquee.slow'),
                     '20' => __('layup::widgets.marquee.normal'),
                     '10' => __('layup::widgets.marquee.fast'),
-                    '5' => __('layup::widgets.marquee.very_fast'),])
+                    '5' => __('layup::widgets.marquee.very_fast'), ])
                 ->default('20'),
             Select::make('direction')
                 ->label(__('layup::widgets.marquee.direction'))
                 ->options(['left' => __('layup::widgets.marquee.left'),
-                    'right' => __('layup::widgets.marquee.right'),])
+                    'right' => __('layup::widgets.marquee.right'), ])
                 ->default('left'),
             Toggle::make('pause_on_hover')
                 ->label(__('layup::widgets.marquee.pause_on_hover'))

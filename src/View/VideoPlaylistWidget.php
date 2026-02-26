@@ -45,7 +45,7 @@ class VideoPlaylistWidget extends BaseWidget
             Select::make('layout')
                 ->label(__('layup::widgets.video-playlist.layout'))
                 ->options(['list' => __('layup::widgets.video-playlist.list_with_player'),
-                    'grid' => __('layup::widgets.video-playlist.3_column_grid'),])
+                    'grid' => __('layup::widgets.video-playlist.3_column_grid'), ])
                 ->default('list'),
         ];
     }

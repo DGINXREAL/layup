@@ -48,7 +48,7 @@ class StepProcessWidget extends BaseWidget
             Select::make('layout')
                 ->label(__('layup::widgets.step-process.layout'))
                 ->options(['vertical' => __('layup::widgets.step-process.vertical'),
-                    'horizontal' => __('layup::widgets.step-process.horizontal'),])
+                    'horizontal' => __('layup::widgets.step-process.horizontal'), ])
                 ->default('horizontal'),
             TextInput::make('accent_color')
                 ->label(__('layup::widgets.step-process.accent_color'))

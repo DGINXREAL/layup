@@ -38,7 +38,7 @@ class SpacerWidget extends BaseWidget
                     '3rem' => __('layup::widgets.spacer.medium_3rem'),
                     '4rem' => __('layup::widgets.spacer.large_4rem'),
                     '6rem' => __('layup::widgets.spacer.extra_large_6rem'),
-                    '8rem' => __('layup::widgets.spacer.huge_8rem'),])
+                    '8rem' => __('layup::widgets.spacer.huge_8rem'), ])
                 ->default('2rem'),
         ];
     }

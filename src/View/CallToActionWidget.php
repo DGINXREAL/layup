@@ -50,7 +50,7 @@ class CallToActionWidget extends BaseWidget
                 ->label(__('layup::widgets.cta.button_style'))
                 ->options(['primary' => __('layup::widgets.cta.primary'),
                     'secondary' => __('layup::widgets.cta.secondary'),
-                    'outline' => __('layup::widgets.cta.outline'),])
+                    'outline' => __('layup::widgets.cta.outline'), ])
                 ->default('primary'),
             Toggle::make('new_tab')
                 ->label(__('layup::widgets.cta.open_in_new_tab'))

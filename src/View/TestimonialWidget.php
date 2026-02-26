@@ -59,7 +59,7 @@ class TestimonialWidget extends BaseWidget
                 ->options(['default' => __('layup::widgets.testimonial.default'),
                     'card' => __('layup::widgets.testimonial.card'),
                     'minimal' => __('layup::widgets.testimonial.minimal'),
-                    'centered' => __('layup::widgets.testimonial.centered'),])
+                    'centered' => __('layup::widgets.testimonial.centered'), ])
                 ->default('default'),
             TextInput::make('company')
                 ->label(__('layup::widgets.testimonial.company_name'))
@@ -71,7 +71,7 @@ class TestimonialWidget extends BaseWidget
                     '2' => __('layup::widgets.testimonial.2_'),
                     '3' => __('layup::widgets.testimonial.3_'),
                     '4' => __('layup::widgets.testimonial.4_'),
-                    '5' => __('layup::widgets.testimonial.5_'),])
+                    '5' => __('layup::widgets.testimonial.5_'), ])
                 ->default('')
                 ->nullable(),
         ];

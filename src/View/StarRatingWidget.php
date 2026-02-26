@@ -35,7 +35,7 @@ class StarRatingWidget extends BaseWidget
             Select::make('rating')
                 ->label(__('layup::widgets.star-rating.rating'))
                 ->options(['0.5' => __('layup::widgets.star-rating.'), '1' => __('layup::widgets.star-rating.1'), '1.5' => __('layup::widgets.star-rating.1_5_1'), '2' => __('layup::widgets.star-rating.2'), '2.5' => __('layup::widgets.star-rating.2_5_2'),
-                    '3' => __('layup::widgets.star-rating.3'), '3.5' => __('layup::widgets.star-rating.3_5_3'), '4' => __('layup::widgets.star-rating.4'), '4.5' => __('layup::widgets.star-rating.4_5_4'), '5' => __('layup::widgets.star-rating.5'),])
+                    '3' => __('layup::widgets.star-rating.3'), '3.5' => __('layup::widgets.star-rating.3_5_3'), '4' => __('layup::widgets.star-rating.4'), '4.5' => __('layup::widgets.star-rating.4_5_4'), '5' => __('layup::widgets.star-rating.5'), ])
                 ->default('5')
                 ->required(),
             Select::make('max')

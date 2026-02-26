@@ -44,7 +44,7 @@ class BlurbWidget extends BaseWidget
                 ->label(__('layup::widgets.blurb.media_type'))
                 ->options(['icon' => __('layup::widgets.blurb.icon'),
                     'image' => __('layup::widgets.blurb.image'),
-                    'none' => __('layup::widgets.blurb.none'),])
+                    'none' => __('layup::widgets.blurb.none'), ])
                 ->default('icon')
                 ->reactive(),
             Select::make('icon')
@@ -159,7 +159,7 @@ class BlurbWidget extends BaseWidget
                     'heroicon-o-exclamation-triangle' => __('layup::widgets.blurb.warning'),
                     'heroicon-o-exclamation-circle' => __('layup::widgets.blurb.error'),
                     'heroicon-o-question-mark-circle' => __('layup::widgets.blurb.question'),
-                    'heroicon-o-no-symbol' => __('layup::widgets.blurb.no_symbol'),])
+                    'heroicon-o-no-symbol' => __('layup::widgets.blurb.no_symbol'), ])
                 ->placeholder(__('layup::widgets.blurb.choose_an_icon'))
                 ->visible(fn (callable $get): bool => $get('media_type') === 'icon'),
             FileUpload::make('image')
@@ -171,7 +171,7 @@ class BlurbWidget extends BaseWidget
                 ->label(__('layup::widgets.blurb.layout'))
                 ->options(['top' => __('layup::widgets.blurb.icon_image_top'),
                     'left' => __('layup::widgets.blurb.icon_image_left'),
-                    'right' => __('layup::widgets.blurb.icon_image_right'),])
+                    'right' => __('layup::widgets.blurb.icon_image_right'), ])
                 ->default('top'),
             TextInput::make('url')
                 ->label(__('layup::widgets.blurb.link_url'))
@@ -182,7 +182,7 @@ class BlurbWidget extends BaseWidget
                 ->options(['' => __('layup::widgets.blurb.default'),
                     'left' => __('layup::widgets.blurb.left'),
                     'center' => __('layup::widgets.blurb.center'),
-                    'right' => __('layup::widgets.blurb.right'),])
+                    'right' => __('layup::widgets.blurb.right'), ])
                 ->default('')
                 ->nullable(),
         ];

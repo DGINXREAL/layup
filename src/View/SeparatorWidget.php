@@ -39,7 +39,7 @@ class SeparatorWidget extends BaseWidget
                     'stars' => __('layup::widgets.separator.stars'),
                     'diamond' => __('layup::widgets.separator.diamond'),
                     'wave' => __('layup::widgets.separator.wave'),
-                    'fade' => __('layup::widgets.separator.fade_gradient'),])
+                    'fade' => __('layup::widgets.separator.fade_gradient'), ])
                 ->default('line'),
             TextInput::make('color')
                 ->label(__('layup::widgets.separator.color'))
@@ -50,14 +50,14 @@ class SeparatorWidget extends BaseWidget
                 ->options(['25%' => __('layup::widgets.separator.25'),
                     '50%' => __('layup::widgets.separator.50'),
                     '75%' => __('layup::widgets.separator.75'),
-                    '100%' => __('layup::widgets.separator.100'),])
+                    '100%' => __('layup::widgets.separator.100'), ])
                 ->default('50%'),
             Select::make('spacing')
                 ->label(__('layup::widgets.separator.vertical_spacing'))
                 ->options(['1rem' => __('layup::widgets.separator.small'),
                     '2rem' => __('layup::widgets.separator.medium'),
                     '3rem' => __('layup::widgets.separator.large'),
-                    '4rem' => __('layup::widgets.separator.extra_large'),])
+                    '4rem' => __('layup::widgets.separator.extra_large'), ])
                 ->default('2rem'),
         ];
     }

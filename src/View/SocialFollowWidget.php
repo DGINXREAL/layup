@@ -48,7 +48,7 @@ class SocialFollowWidget extends BaseWidget
                             'pinterest' => __('layup::widgets.social-follow.pinterest'),
                             'github' => __('layup::widgets.social-follow.github'),
                             'dribbble' => __('layup::widgets.social-follow.dribbble'),
-                            'email' => __('layup::widgets.social-follow.email'),])
+                            'email' => __('layup::widgets.social-follow.email'), ])
                         ->required(),
                     TextInput::make('url')
                         ->label(__('layup::widgets.social-follow.url'))
@@ -60,7 +60,7 @@ class SocialFollowWidget extends BaseWidget
                 ->label(__('layup::widgets.social-follow.style'))
                 ->options(['icon' => __('layup::widgets.social-follow.icon_only'),
                     'icon-text' => __('layup::widgets.social-follow.icon_text'),
-                    'text' => __('layup::widgets.social-follow.text_only'),])
+                    'text' => __('layup::widgets.social-follow.text_only'), ])
                 ->default('icon'),
             Toggle::make('new_tab')
                 ->label(__('layup::widgets.social-follow.open_in_new_tab'))
@@ -69,7 +69,7 @@ class SocialFollowWidget extends BaseWidget
                 ->label(__('layup::widgets.social-follow.icon_size'))
                 ->options(['sm' => __('layup::widgets.social-follow.small'),
                     'md' => __('layup::widgets.social-follow.medium'),
-                    'lg' => __('layup::widgets.social-follow.large'),])
+                    'lg' => __('layup::widgets.social-follow.large'), ])
                 ->default('md'),
         ];
     }

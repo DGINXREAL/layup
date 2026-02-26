@@ -50,7 +50,7 @@ class AnimatedHeadingWidget extends BaseWidget
                 ->options(['highlight' => __('layup::widgets.animated-heading.highlight'),
                     'underline' => __('layup::widgets.animated-heading.underline'),
                     'circle' => __('layup::widgets.animated-heading.circle'),
-                    'strikethrough' => __('layup::widgets.animated-heading.strikethrough'),])
+                    'strikethrough' => __('layup::widgets.animated-heading.strikethrough'), ])
                 ->default('highlight'),
             TextInput::make('accent_color')
                 ->label(__('layup::widgets.animated-heading.accent_color'))

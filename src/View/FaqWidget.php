@@ -51,7 +51,7 @@ class FaqWidget extends BaseWidget
                 ->label(__('layup::widgets.faq.style'))
                 ->options(['accordion' => __('layup::widgets.faq.accordion_expand_collapse'),
                     'list' => __('layup::widgets.faq.plain_list_always_visible'),
-                    'cards' => __('layup::widgets.faq.cards'),])
+                    'cards' => __('layup::widgets.faq.cards'), ])
                 ->default('accordion'),
         ];
     }

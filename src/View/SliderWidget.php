@@ -68,7 +68,7 @@ class SliderWidget extends BaseWidget
                 ->options(['3000' => __('layup::widgets.slider.3_seconds'),
                     '5000' => __('layup::widgets.slider.5_seconds'),
                     '7000' => __('layup::widgets.slider.7_seconds'),
-                    '10000' => __('layup::widgets.slider.10_seconds'),])
+                    '10000' => __('layup::widgets.slider.10_seconds'), ])
                 ->default('5000'),
             Toggle::make('arrows')
                 ->label(__('layup::widgets.slider.show_arrows'))

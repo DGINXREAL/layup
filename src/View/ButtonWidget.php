@@ -45,13 +45,13 @@ class ButtonWidget extends BaseWidget
                 ->options(['primary' => __('layup::widgets.button.primary'),
                     'secondary' => __('layup::widgets.button.secondary'),
                     'outline' => __('layup::widgets.button.outline'),
-                    'ghost' => __('layup::widgets.button.ghost'),])
+                    'ghost' => __('layup::widgets.button.ghost'), ])
                 ->default('primary'),
             Select::make('size')
                 ->label(__('layup::widgets.button.size'))
                 ->options(['sm' => __('layup::widgets.button.small'),
                     'md' => __('layup::widgets.button.medium'),
-                    'lg' => __('layup::widgets.button.large'),])
+                    'lg' => __('layup::widgets.button.large'), ])
                 ->default('md'),
             Toggle::make('new_tab')
                 ->label(__('layup::widgets.button.open_in_new_tab'))

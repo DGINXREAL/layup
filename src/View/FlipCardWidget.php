@@ -67,7 +67,7 @@ class FlipCardWidget extends BaseWidget
                 ->label(__('layup::widgets.flip-card.card_height'))
                 ->options(['200px' => __('layup::widgets.flip-card.small'),
                     '300px' => __('layup::widgets.flip-card.medium'),
-                    '400px' => __('layup::widgets.flip-card.large'),])
+                    '400px' => __('layup::widgets.flip-card.large'), ])
                 ->default('300px'),
         ];
     }

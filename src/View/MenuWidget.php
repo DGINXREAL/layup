@@ -52,13 +52,13 @@ class MenuWidget extends BaseWidget
             Select::make('orientation')
                 ->label(__('layup::widgets.menu.orientation'))
                 ->options(['horizontal' => __('layup::widgets.menu.horizontal'),
-                    'vertical' => __('layup::widgets.menu.vertical'),])
+                    'vertical' => __('layup::widgets.menu.vertical'), ])
                 ->default('horizontal'),
             Select::make('style')
                 ->label(__('layup::widgets.menu.style'))
                 ->options(['links' => __('layup::widgets.menu.plain_links'),
                     'pills' => __('layup::widgets.menu.pills'),
-                    'underline' => __('layup::widgets.menu.underline'),])
+                    'underline' => __('layup::widgets.menu.underline'), ])
                 ->default('links'),
         ];
     }

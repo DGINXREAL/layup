@@ -50,7 +50,7 @@ class FeatureListWidget extends BaseWidget
                 ->options(['check' => __('layup::widgets.feature-list.checkmark'),
                     'arrow' => __('layup::widgets.feature-list.arrow'),
                     'dot' => __('layup::widgets.feature-list.dot'),
-                    'number' => __('layup::widgets.feature-list.1_numbered'),])
+                    'number' => __('layup::widgets.feature-list.1_numbered'), ])
                 ->default('check'),
             TextInput::make('icon_color')
                 ->label(__('layup::widgets.feature-list.icon_color'))
@@ -60,7 +60,7 @@ class FeatureListWidget extends BaseWidget
                 ->label(__('layup::widgets.feature-list.layout'))
                 ->options(['list' => __('layup::widgets.feature-list.vertical_list'),
                     'grid-2' => __('layup::widgets.feature-list.2_column_grid'),
-                    'grid-3' => __('layup::widgets.feature-list.3_column_grid'),])
+                    'grid-3' => __('layup::widgets.feature-list.3_column_grid'), ])
                 ->default('list'),
         ];
     }

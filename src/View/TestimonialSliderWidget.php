@@ -67,7 +67,7 @@ class TestimonialSliderWidget extends BaseWidget
                 ->options(['0' => __('layup::widgets.testimonial-slider.no_autoplay'),
                     '3000' => __('layup::widgets.testimonial-slider.3_seconds'),
                     '5000' => __('layup::widgets.testimonial-slider.5_seconds'),
-                    '8000' => __('layup::widgets.testimonial-slider.8_seconds'),])
+                    '8000' => __('layup::widgets.testimonial-slider.8_seconds'), ])
                 ->default('5000'),
         ];
     }

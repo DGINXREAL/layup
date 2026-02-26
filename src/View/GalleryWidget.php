@@ -46,7 +46,7 @@ class GalleryWidget extends BaseWidget
                     '3' => __('layup::widgets.gallery.3_columns'),
                     '4' => __('layup::widgets.gallery.4_columns'),
                     '5' => __('layup::widgets.gallery.5_columns'),
-                    '6' => __('layup::widgets.gallery.6_columns'),])
+                    '6' => __('layup::widgets.gallery.6_columns'), ])
                 ->default('3'),
             Select::make('gap')
                 ->label(__('layup::widgets.gallery.gap'))
@@ -54,7 +54,7 @@ class GalleryWidget extends BaseWidget
                     '0.25rem' => __('layup::widgets.gallery.extra_small'),
                     '0.5rem' => __('layup::widgets.gallery.small'),
                     '1rem' => __('layup::widgets.gallery.medium'),
-                    '1.5rem' => __('layup::widgets.gallery.large'),])
+                    '1.5rem' => __('layup::widgets.gallery.large'), ])
                 ->default('0.5rem'),
             Toggle::make('lightbox')
                 ->label(__('layup::widgets.gallery.enable_lightbox'))

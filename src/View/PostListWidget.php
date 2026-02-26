@@ -52,7 +52,7 @@ class PostListWidget extends BaseWidget
                 ->label(__('layup::widgets.post-list.order_by'))
                 ->options(['latest' => __('layup::widgets.post-list.newest_first'),
                     'oldest' => __('layup::widgets.post-list.oldest_first'),
-                    'title' => __('layup::widgets.post-list.title_a_z'),])
+                    'title' => __('layup::widgets.post-list.title_a_z'), ])
                 ->default('latest'),
             Toggle::make('show_excerpt')
                 ->label(__('layup::widgets.post-list.show_excerpt'))

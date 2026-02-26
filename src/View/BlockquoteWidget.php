@@ -50,7 +50,7 @@ class BlockquoteWidget extends BaseWidget
                 ->label(__('layup::widgets.blockquote.style'))
                 ->options(['border-left' => __('layup::widgets.blockquote.left_border'),
                     'large' => __('layup::widgets.blockquote.large_quote'),
-                    'centered' => __('layup::widgets.blockquote.centered'),])
+                    'centered' => __('layup::widgets.blockquote.centered'), ])
                 ->default('border-left'),
             TextInput::make('accent_color')
                 ->label(__('layup::widgets.blockquote.accent_color'))

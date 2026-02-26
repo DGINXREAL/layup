@@ -37,14 +37,14 @@ class DividerWidget extends BaseWidget
                 ->options(['solid' => __('layup::widgets.divider.solid'),
                     'dashed' => __('layup::widgets.divider.dashed'),
                     'dotted' => __('layup::widgets.divider.dotted'),
-                    'double' => __('layup::widgets.divider.double'),])
+                    'double' => __('layup::widgets.divider.double'), ])
                 ->default('solid'),
             Select::make('weight')
                 ->label(__('layup::widgets.divider.weight'))
                 ->options(['1px' => __('layup::widgets.divider.thin_1px'),
                     '2px' => __('layup::widgets.divider.medium_2px'),
                     '3px' => __('layup::widgets.divider.thick_3px'),
-                    '4px' => __('layup::widgets.divider.heavy_4px'),])
+                    '4px' => __('layup::widgets.divider.heavy_4px'), ])
                 ->default('1px'),
             TextInput::make('color')
                 ->label(__('layup::widgets.divider.color'))
@@ -55,14 +55,14 @@ class DividerWidget extends BaseWidget
                 ->options(['100%' => __('layup::widgets.divider.full'),
                     '75%' => __('layup::widgets.divider.75'),
                     '50%' => __('layup::widgets.divider.50'),
-                    '25%' => __('layup::widgets.divider.25'),])
+                    '25%' => __('layup::widgets.divider.25'), ])
                 ->default('100%'),
             Select::make('spacing')
                 ->label(__('layup::widgets.divider.vertical_spacing'))
                 ->options(['0.5rem' => __('layup::widgets.divider.compact'),
                     '1rem' => __('layup::widgets.divider.normal'),
                     '1.5rem' => __('layup::widgets.divider.relaxed'),
-                    '2rem' => __('layup::widgets.divider.spacious'),])
+                    '2rem' => __('layup::widgets.divider.spacious'), ])
                 ->default('1rem'),
         ];
     }

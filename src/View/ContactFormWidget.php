@@ -59,7 +59,7 @@ class ContactFormWidget extends BaseWidget
                             'email' => __('layup::widgets.contact-form.email'),
                             'tel' => __('layup::widgets.contact-form.phone'),
                             'textarea' => __('layup::widgets.contact-form.text_area'),
-                            'select' => __('layup::widgets.contact-form.dropdown'),])
+                            'select' => __('layup::widgets.contact-form.dropdown'), ])
                         ->default('text')
                         ->required(),
                     Toggle::make('required')

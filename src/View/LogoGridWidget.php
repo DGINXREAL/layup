@@ -54,7 +54,7 @@ class LogoGridWidget extends BaseWidget
                 ->options(['2rem' => __('layup::widgets.logo-grid.small'),
                     '3rem' => __('layup::widgets.logo-grid.medium'),
                     '4rem' => __('layup::widgets.logo-grid.large'),
-                    '5rem' => __('layup::widgets.logo-grid.extra_large'),])
+                    '5rem' => __('layup::widgets.logo-grid.extra_large'), ])
                 ->default('3rem'),
             Toggle::make('grayscale')
                 ->label(__('layup::widgets.logo-grid.grayscale_color_on_hover'))

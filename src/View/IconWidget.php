@@ -46,7 +46,7 @@ class IconWidget extends BaseWidget
                     '2.5rem' => __('layup::widgets.icon.medium'),
                     '4rem' => __('layup::widgets.icon.large'),
                     '6rem' => __('layup::widgets.icon.extra_large'),
-                    '8rem' => __('layup::widgets.icon.huge'),])
+                    '8rem' => __('layup::widgets.icon.huge'), ])
                 ->default('2.5rem'),
             TextInput::make('url')
                 ->label(__('layup::widgets.icon.link_url'))

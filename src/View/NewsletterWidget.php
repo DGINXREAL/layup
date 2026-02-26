@@ -55,7 +55,7 @@ class NewsletterWidget extends BaseWidget
             Select::make('layout')
                 ->label(__('layup::widgets.newsletter.layout'))
                 ->options(['inline' => __('layup::widgets.newsletter.inline_side_by_side'),
-                    'stacked' => __('layup::widgets.newsletter.stacked'),])
+                    'stacked' => __('layup::widgets.newsletter.stacked'), ])
                 ->default('inline'),
             TextInput::make('button_color')
                 ->label(__('layup::widgets.newsletter.button_color'))

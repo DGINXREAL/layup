@@ -58,7 +58,7 @@ class GradientTextWidget extends BaseWidget
                     'to left' => __('layup::widgets.gradient-text.right_left'),
                     'to bottom' => __('layup::widgets.gradient-text.top_bottom'),
                     'to bottom right' => __('layup::widgets.gradient-text.diagonal'),
-                    '135deg' => __('layup::widgets.gradient-text.135deg_diagonal'),])
+                    '135deg' => __('layup::widgets.gradient-text.135deg_diagonal'), ])
                 ->default('to right'),
         ];
     }

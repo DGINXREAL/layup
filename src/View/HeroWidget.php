@@ -73,7 +73,7 @@ class HeroWidget extends BaseWidget
                 ->options(['auto' => __('layup::widgets.hero.auto'),
                     '50vh' => __('layup::widgets.hero.half_screen'),
                     '75vh' => __('layup::widgets.hero.three_quarter_screen'),
-                    '100vh' => __('layup::widgets.hero.full_screen'),])
+                    '100vh' => __('layup::widgets.hero.full_screen'), ])
                 ->default('auto'),
             TextInput::make('overlay_color')
                 ->label(__('layup::widgets.hero.overlay_color'))

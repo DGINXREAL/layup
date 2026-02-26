@@ -37,7 +37,7 @@ class PriceWidget extends BaseWidget
             TextInput::make('period')->label(__('layup::widgets.price.period'))->placeholder(__('layup::widgets.price.month'))->nullable(),
             TextInput::make('original_amount')->label(__('layup::widgets.price.original_price_strikethrough'))->nullable(),
             TextInput::make('label')->label(__('layup::widgets.price.label'))->placeholder(__('layup::widgets.price.starting_at'))->nullable(),
-            Select::make('size')->label(__('layup::widgets.price.size'))->options(['sm' => __('layup::widgets.price.small'), 'md' => __('layup::widgets.price.medium'), 'lg' => __('layup::widgets.price.large'), 'xl' => __('layup::widgets.price.extra_large'),])->default('lg'),
+            Select::make('size')->label(__('layup::widgets.price.size'))->options(['sm' => __('layup::widgets.price.small'), 'md' => __('layup::widgets.price.medium'), 'lg' => __('layup::widgets.price.large'), 'xl' => __('layup::widgets.price.extra_large')])->default('lg'),
         ];
     }
 

@@ -51,7 +51,7 @@ class CodeWidget extends BaseWidget
                     'yaml' => __('layup::widgets.code.yaml'),
                     'bash' => __('layup::widgets.code.bash'),
                     'sql' => __('layup::widgets.code.sql'),
-                    'markdown' => __('layup::widgets.code.markdown'),])
+                    'markdown' => __('layup::widgets.code.markdown'), ])
                 ->default('plaintext'),
             TextInput::make('filename')
                 ->label(__('layup::widgets.code.filename'))

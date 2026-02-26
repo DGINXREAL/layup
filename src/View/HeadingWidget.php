@@ -42,7 +42,7 @@ class HeadingWidget extends BaseWidget
                     'h3' => __('layup::widgets.heading.h3'),
                     'h4' => __('layup::widgets.heading.h4'),
                     'h5' => __('layup::widgets.heading.h5'),
-                    'h6' => __('layup::widgets.heading.h6'),])
+                    'h6' => __('layup::widgets.heading.h6'), ])
                 ->default('h2'),
             TextInput::make('link_url')
                 ->label(__('layup::widgets.heading.link_url'))
